@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# # Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="view_tax_form_inherit_ecofi_buchungsschluessel_datev" model="ir.ui.view">
+    <field name="name">account.tax.form.inherit.ecofi.skonto.datev</field>
+    <field name="model">account.tax</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="account.view_tax_form"/>
+    <field name="arch" type="xml">
+      <field name="name" select="1" position="after">
+        <field name="datev_cashback_account_id"/>
+      </field>
+    </field>
+  </record>
+
+</odoo>

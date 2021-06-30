@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="purchase_rfq_text" model="text.template.config">
+    <field name="name">RFQ (Top)</field>
+    <field name="model" ref="purchase.model_purchase_order"/>
+  </record>
+
+  <record id="purchase_order_text" model="text.template.config">
+    <field name="name">Purchase Order (Top)</field>
+    <field name="model" ref="purchase.model_purchase_order"/>
+  </record>
+
+  <record id="purchase_rfq_text_bottom" model="text.template.config">
+    <field name="name">RFQ (Bottom)</field>
+    <field name="model" ref="purchase.model_purchase_order"/>
+  </record>
+
+  <record id="purchase_order_text_bottom" model="text.template.config">
+    <field name="name">Purchase Order (Bottom)</field>
+    <field name="model" ref="purchase.model_purchase_order"/>
+  </record>
+
+</odoo>

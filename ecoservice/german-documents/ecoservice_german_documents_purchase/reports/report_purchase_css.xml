@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  Docs & GitHub: CSS inline or layout. Not over CSS file, it will go wrong.
+  https://www.odoo.com/documentation/10.0/reference/reports.html#useful-remarks
+  https://github.com/odoo/odoo/issues/4359
+
+  Always use report_css_* so that it's easily understandable what you do call.
+-->
+<odoo>
+
+  <template id="report_css_body_purchase">
+    <style>
+      div#note, div#payment_terms { font-size:11px; }
+      table.default { margin-bottom: 50px; }
+    </style>
+  </template>
+
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_saleorder_document" inherit_id="ecoservice_german_documents_sale.report_table_base_sale">
+
+    <xpath expr="//table//thead//tr//th[2]" position="after">
+<!--        class="text-left"-->
+        <th class="text-left" name="th_image" >Produktbild</th>
+      </xpath>
+      <xpath expr="//table//tbody//tr/t/td[@id='description']" position="after">
+        <style>
+          .mh128{
+              max-height:128px;
+          }
+      </style>
+
+          <td style="max-height: 128px;width: 200px;" class="text-left">
+
+            <!-- <span t-esc="line.product_id.image_1920"/> -->
+             <span t-field="line.product_id.image_1920" t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'img-fluid mh128','style':'max-width: 256px !important;max-height: 90px;'}" style="max-width: 256px !important;max-height: 128px;"/>
+            <!-- <img t-att-src="line.product_id.image_1920" alt="line.product_id.image_1920"/> -->
+        </td>
+
+
+<!--          <td style="max-height: 128px;max-width: 240px;" class="text-right">-->
+<!--            <span t-field="line.product_id.image_1920"   t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'img-fluid mh128'}" style="max-width: 256px !important; max-height: 128px;" />-->
+<!--            &lt;!&ndash; <img src="line.product_id.image" alt="line.product_id.image"/> &ndash;&gt;-->
+<!--          </td>-->
+      </xpath>
+</template>
+
+
+
+</odoo>

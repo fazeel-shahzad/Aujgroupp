@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="report_sale_document">
+    <t t-call="web.external_layout">
+      <div class="page">
+
+        <!-- Letterhead -->
+        <div class="row address_row">
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_base.letterhead_sender_address"/>
+            <t t-call="ecoservice_german_documents_base.letterhead_receiver_address"/>
+          </div>
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_sale.letterhead_reference"/>
+          </div>
+        </div>
+
+        <div id="custom_title"
+             t-if="'sale_order_title' in o and o.sale_order_title">
+          <h1 style="font-size: 14pt; font-weight: bold;">
+            <span t-field="o.sale_order_title" name="sale_title"/>
+          </h1>
+        </div>
+
+        <!-- Salutation & Introduction -->
+        <div id="letterhead_introduction" class="row mt16">
+          <div t-if="doc_text" class="col-12" align="left">
+            <t t-call="ecoservice_german_documents_base.letter_salutation"/>
+            <div style="margin-top:5px;">
+              <!-- Render the HTML fields as a mako template to evaluate variables -->
+              <t t-raw="o.env['mail.template']._render_template(doc_text, o._name, o.id)"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="row">
+          <div class="col-12">
+            <t t-call="ecoservice_german_documents_sale.report_table_base_sale"/>
+          </div>
+        </div>
+        <!-- Summary of all tables -->
+        <div id="tables_summary" class="row">
+          <t t-call="ecoservice_german_documents_base.final_amount_template"/>
+        </div>
+
+        <!-- Custom Text (Bottom) -->
+        <div t-if="doc_text_bottom" class="row mt16">
+          <div class="col-12" align="left">
+            <!-- Render the HTML fields as a mako template to evaluate variables -->
+            <t t-raw="o.env['mail.template']._render_template(doc_text_bottom, o._name, o.id)"/>
+          </div>
+        </div>
+
+        <!-- Differing delivery- and invoice addresses -->
+        <div id="delivery_and_invoice_address">
+          <t t-set="delivery_address" t-value="o.partner_invoice_id"/>
+          <t t-set="differing_invoice_address" t-value="o.partner_id != o.partner_invoice_id"/>
+          <t t-set="differing_shipping_address" t-value="o.partner_id != o.partner_shipping_id"/>
+          <t t-if="differing_invoice_address or differing_shipping_address">
+            <t t-if="o.partner_shipping_id == o.partner_invoice_id">
+              <div class="row mt16">
+                <div class="col-4 font-weight-bold">
+                  Invoicing and shipping address:
+                </div>
+                <div class="col-8">
+                  <t t-call="ecoservice_german_documents_base.delivery_address_snippet"/>
+                </div>
+              </div>
+            </t>
+            <t t-else="">
+              <div class="row mt16" t-if="differing_invoice_address">
+                <div class="col-4 font-weight-bold">
+                  Invoicing address:
+                </div>
+                <div class="col-8">
+                  <t t-call="ecoservice_german_documents_base.delivery_address_snippet"/>
+                </div>
+              </div>
+
+              <div class="row mt16" t-if="differing_shipping_address">
+                <div class="col-4 font-weight-bold">
+                  Shipping address:
+                </div>
+                <div class="col-8">
+                  <t t-set="delivery_address" t-value="o.partner_shipping_id"/>
+                  <t t-call="ecoservice_german_documents_base.delivery_address_snippet"/>
+                </div>
+              </div>
+            </t>
+          </t>
+        </div>
+
+        <!--Suggested Products-->
+        <div id="suggested_products"
+             t-if="'sale_order_option_ids' in o and o.sale_order_option_ids and o.state in ['draft', 'sent']"
+             class="row mt16">
+          <div class="col-12" style="page-break-inside: avoid;">
+            <t t-call="ecoservice_german_documents_sale.report_saleorder_suggested_products"/>
+          </div>
+        </div>
+
+        <!--Expiration Date:-->
+        <div id="validity_date" t-if="'validity_date' in o" class="row mt16">
+          <t t-if="o.validity_date and o.state in ['draft', 'sent']">
+            <div class="col-4" style="font-weight: bold">
+              Expiration Date:
+            </div>
+            <div class="col-8">
+              <span t-field="o.validity_date"/>
+            </div>
+          </t>
+        </div>
+
+        <!-- Other customly needed fields -->
+        <div id="note" t-if="o.note" class="row mt16">
+          <div class="col-12">
+            <span t-field="o.note"/>
+          </div>
+        </div>
+
+        <!--Payment term-->
+        <t t-call="ecoservice_german_documents_base.payment_terms">
+          <t t-set="show_payment_terms_name" t-value="True"/>
+        </t>
+
+        <!--Incoterms-->
+        <t t-call="ecoservice_german_documents_base.incoterms"
+           groups="sale_stock.group_display_incoterm">
+          <t t-set="incoterms_id" t-value="o.incoterm"/>
+        </t>
+
+        <div class="row mt16" id="fiscal_position_remark"
+             t-if="o.fiscal_position_id and o.fiscal_position_id.sudo().note">
+          <div class="col-4" style="font-weight:bold">
+            Fiscal Position Remark:
+          </div>
+          <div class="col-8">
+            <span t-field="o.fiscal_position_id.sudo().note"/>
+          </div>
+        </div>
+
+        <div t-if="o.signature" class="row mt32 ml16 mr16" name="signature">
+          <div class="offset-8">
+            <strong>Signature</strong>
+          </div>
+          <div class="offset-8">
+            <img t-att-src="image_data_uri(o.signature)"
+                 style="max-height: 4cm; max-width: 8cm;"/>
+          </div>
+          <div class="offset-8 text-center">
+            <p t-field="o.signed_by"/>
+          </div>
+        </div>
+
+      </div>
+    </t>
+  </template>
+
+</odoo>

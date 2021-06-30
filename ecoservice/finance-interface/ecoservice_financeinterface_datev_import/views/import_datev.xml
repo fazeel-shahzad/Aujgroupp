@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Part of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record model="ir.ui.view" id="import_datev_form_view">
+    <field name="name">import.datev.form</field>
+    <field name="model">import.datev</field>
+    <field name="arch" type="xml">
+      <form string="Datev Import">
+        <header>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <notebook>
+          <page string="Datev Import">
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+            </group>
+
+            <group>
+              <group>
+                <field name="datev_ascii_file" filename="datev_ascii_filename" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                <field name="datev_ascii_filename" invisible="1"/>
+                <field name="start_date" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                <field name="end_date" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+              </group>
+              <group>
+                <field name="company_id" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                <field name="journal_id" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                <field name="one_move"/>
+              </group>
+            </group>
+
+            <group>
+              <field name="config_delimiter" class="oe_inline" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+              <field name="config_quotechar" class="oe_inline" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+              <field name="config_extended_datev_header" class="oe_inline" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+              <field name="config_encoding" class="oe_inline" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+            </group>
+
+            <button icon="fa-check-square" class="btn-primary" string="Import" name="do_import" type="object" states="draft,error"/>
+            <button icon="fa-check-square" class="btn-primary" string="Confirm" name="confirm_booking" type="object" states="imported,booking_error"/>
+            <button icon="fa-minus-square" string="Reset" name="reset_import" type="object"/>
+
+            <group name="log" string="LOG">
+              <field name="log_line" nolabel="1" readonly="1">
+                <tree string="Lines"
+                      decoration-danger="state == 'error'"
+                      decoration-info="state == 'info'"
+                      decoration-bf="state in ['error', 'info']"
+                      decoration-success="state == 'standard'">
+                  <field name="date"/>
+                  <field name="name"/>
+                  <field name="state"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+
+          <page string="Moves">
+            <field colspan="4" name="account_moves" readonly="1"/>
+          </page>
+        </notebook>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="import_datev_tree_view">
+    <field name="name">import.datev.tree</field>
+    <field name="model">import.datev</field>
+    <field name="arch" type="xml">
+      <tree string="Datev Import">
+        <field name="name"/>
+        <field name="description"/>
+        <field name="company_id"/>
+        <field name="start_date"/>
+        <field name="end_date"/>
+        <field name="journal_id"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

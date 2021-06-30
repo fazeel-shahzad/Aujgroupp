@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <menuitem id="menu_finance_interface"
+            parent="account.menu_finance"
+            name="Finance Interface"
+            groups="ecoservice_financeinterface.group_ecofi_financeinterface"
+            sequence="9"/>
+
+  <menuitem id="ecoservice_ecofi_wizard_menu"
+            parent="menu_finance_interface"
+            name="Create Finance Export"
+            action="ecoservice_ecofi_export_wizard"
+            groups="ecoservice_financeinterface.group_ecofi_financeinterface"
+            icon="STOCK_EXECUTE"
+            sequence="10"/>
+
+  <menuitem id="menu_eco_ecofi"
+            parent="menu_finance_interface"
+            name="Finance Exports"
+            action="eco_ecofi_action"
+            groups="group_ecofi_financeinterface"
+            sequence="20"/>
+
+  <menuitem id="menu_financeinterface_configuration"
+            parent="ecoservice_financeinterface.menu_finance_interface"
+            name="Settings"
+            action="action_financeinterface_configuration"
+            sequence="30"/>
+
+</odoo>

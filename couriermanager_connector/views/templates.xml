@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="couriermanager_connector_list">
+            <field name="name">CourierManager Client List</field>
+            <field name="model">couriermanager.connector</field>
+            <field name="arch" type="xml">
+                <tree string="CourierManager Client List">
+                    <field name="name"/>
+                    <field name="api_key"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="couriermanager_connector_form">
+            <field name="name">CourierManager Form</field>
+            <field name="model">couriermanager.connector</field>
+            <field name="arch" type="xml">
+                <form string="CourierManager">
+                    <header>
+                        <button name="button_disconnect" string="Disconnect Client"  type="object" states="connected"  class="btn btn-primary" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="api_key"/>
+                                <button name="test_connection" string="Test Client" type="object" class="btn btn-primary" icon="fa-plug"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="couriermanager_connector_action_window">
+        <field name="name">CourierManager</field>
+        <field name="res_model">couriermanager.connector</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the Client</p>
+        </field>
+    </record>
+
+    <menuitem name="CourierManager" id="couriermanager_menu_root" web_icon="couriermanager_connector,static/description/icon.png"/>
+    <menuitem name="CourierManager Client" id="couriermanager_menu_child" parent="couriermanager_menu_root" action="couriermanager_connector_action_window"
+    sequence="1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo>
+
+  <record id="datev_export_view" model="ir.ui.view">
+    <field name="name">Create Reference Data Export</field>
+    <field name="model">datev.reference.data.export</field>
+    <field name="arch" type="xml">
+      <form string="Reference Export">
+        <field name="export_format_id" colspan="4"/>
+        <field name="file_export_log" colspan="4"/>
+        <div>
+          <p>
+            Exportfile:
+            <field name="file_export" readonly="1" filename="file_export_name"/>
+          </p>
+          <field name="file_export_name" invisible="1"/>
+        </div>
+        <footer>
+          <button icon="fa-check-square" string="Start Export" name="startexport" type="object" class="btn-primary"/>
+          <button icon="fa-minus-square" special="cancel" string="Cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="datev_export_wizard" model="ir.actions.act_window">
+    <field name="name">Create Reference Data Export</field>
+    <field name="res_model">datev.reference.data.export</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="datev_export_view"/>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem
+    name="Create Reference Data Export"
+    action="datev_export_wizard"
+    id="datev_export_wizard_menu"
+    parent="ecoservice_financeinterface.menu_finance_interface"
+    groups="ecoservice_financeinterface.group_ecofi_financeinterface"/>
+
+</odoo>

@@ -1,0 +1,294 @@
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api,_
+from datetime import datetime, timezone
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    parent_sku = fields.Char(string='Parent SKU' ,related='product_tmpl_id.parent_sku')
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    store_name1 = fields.Char(string='Testing' ,related='product_variant_id.instance_id.name')
+    store_name = fields.Char(string='Store Name')
+    multi_sku = fields.Many2many('multi.sku', string='Child SKUs')
+    parent_sku = fields.Char(string='Parent SKU')
+    entrepreneur = fields.Char(string='Entrepreneur')
+    sub_account = fields.Char(string='Sub Account')
+
+
+    def Compute_the_parent_sku(self):
+
+        saleOrder = self.env['product.template'].search([])
+        for i in saleOrder:
+           if not i.parent_sku i.parent_sku=":
+               # print(i.parent_sku)
+                k=i.default_code
+                p= str(k)
+                i.parent_sku=p[:5]
+
+
+
+    def Compute_the_entrepreneur_name(self):
+        saleOrder = self.env['product.template'].search([])
+        for i in saleOrder:
+            print("Hello", i.store_name)
+            obj = self.env['daraz.connector'].search([('name', '=', i.store_name1)], limit=1)
+
+            if not i.entrepreneur and i.store_name:
+                #print("obj", obj.entrepreneur)
+                i.write({'entrepreneur': obj.entrepreneur})
+                i.write({'store_name': obj.name})
+                i.store_name = obj.name
+                i.sub_account = obj.sub_account
+                i.entrepreneur = obj.entrepreneur
+
+    def write(self, vals):
+
+        if 'entrepreneur' not in vals and not self.entrepreneur:
+            vals['entrepreneur'] = self.product_variant_id.instance_id.entrepreneur or ''
+        if 'sub_account' not in vals and not self.sub_account:
+            vals['sub_account'] = self.product_variant_id.instance_id.sub_account or ''
+
+
+        return super(ProductTemplate, self).write(vals)
+
+    @api.model_create_multi
+    def create(self, vals):
+        res = super(ProductTemplate, self).create(vals)
+        if not self.entrepreneur:
+            res['entrepreneur'] = self.product_variant_id.instance_id.entrepreneur or ''
+        if not self.sub_account:
+            res['sub_account'] = self.product_variant_id.instance_id.sub_account or ''
+
+        res.Compute_the_parent_sku()
+        res.Compute_the_entrepreneur_name()
+        return res
+
+
+class PurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
+
+    product_brand = fields.Many2one("product.brand", string="Market",compute="Compute_the_market_name")
+    sku_related = fields.Char(string='Parent SKU', related="order_line.product_id.parent_sku")
+
+
+    def Compute_the_market_name(self):
+        c=0
+
+        for i in self:
+            obj= self.env['product.brand'].search([('sku_name', '=',i.sku_related)], limit=1)
+            # if not i.product_brand:
+            i.write({'product_brand': obj.id})
+            i.product_brand = obj.id
+            c=c+1
+        print("Hello purchase order",c)
+
+
+
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    product_brand = fields.Many2one("product.brand", string="Market")
+    sku_related = fields.Char(string='SKU', related="order_line.product_id.default_code")
+    parent_sku = fields.Char(string='Parent SKU')
+    entrepreneur = fields.Char(string='Entrepreneur')
+    sub_account = fields.Char(string='Sub Account')
+    attachment = fields.Many2many('ir.attachment', String="Video Attachment")
+    shipped_status = fields.Selection([('not shipped', 'Not Shipped'), ('shipped', 'Shipped'),('ask', 'Product not Received'), ('not_deliverd', 'Product not delivered'),('returned', 'Physically Returned'),('damage', 'Received Damaged Product ask for Claim'), ('claimed', 'Claimed'),  ('received', 'Claimed Received')], 'Shipped Status', readonly=True, default='not shipped')
+    # claimed_status = fields.Selection(
+    #     [('ask', 'Product not Received'), ('not_deliverd', 'Product not delivered'),('returned', 'Physically Returned'),('damage', 'Received Damaged Product'), ('claimed', 'Claimed'),  ('received', 'Claimed Received')], 'Claimed Status', readonly=True)
+
+    def action_create_claimed(self):
+        self.order_status='claimed'
+        self.shipped_status = 'claimed'
+
+    def action_create_claimed_received(self):
+        self.order_status = 'received'
+        self.shipped_status = 'received'
+
+
+    def auto_check_claimed_orders(self):
+        print("hello")
+
+        orders = self.env['sale.order'].search([('order_status', '=', 'returned')])
+        print("orders",orders)
+        today = datetime.now()
+        for i in orders:
+            no_day = (today - i.date_order).days
+            if  datetime.now().year == (i.date_order).year:
+                if no_day >=30:
+                    print(i.name)
+                    # print(no_day)
+
+                    i.shipped_status ='ask'
+
+        shipObj = self.env['sale.order'].search([('order_status', '=', 'shipped')])
+        print("shipObj",shipObj)
+        today = datetime.now()
+        for k in shipObj:
+            no_day = (today - k.date_order).days
+            if datetime.now().year == (k.date_order).year:
+                if no_day >= 30:
+                    # print(k.name)
+                    # print(no_day)
+
+                    k.shipped_status = 'not_deliverd'
+
+
+    def action_confirm(self):
+
+        res = super(SaleOrder, self).action_confirm()
+        for order in self:
+            order.shipped_status='shipped'
+
+            warehouse = order.warehouse_id
+            for picking in self.picking_ids:
+                picking.action_assign()
+                picking.action_confirm()
+                for mv in picking.move_ids_without_package:
+                    mv.quantity_done = mv.product_uom_qty
+                picking.button_validate()
+                print("Pakistan")
+        return res
+
+
+    def Compute_the_parent_sku(self):
+        c=0
+        saleOrder = self.env['sale.order'].search([])
+        for i in saleOrder:
+
+            if not i.parent_sku:
+                probj = self.env['product.product'].search([('default_code', '=', i.sku_related)], limit=1)
+                i.parent_sku=str(probj.default_code)[:5]
+                print(i.parent_sku)
+
+    def Compute_the_market_name(self):
+
+        saleOrder = self.env['sale.order'].search([])
+        for i in saleOrder:
+            if not i.product_brand:
+                print(i.product_brand )
+
+                obj= self.env['product.brand'].search([('sku_name', '=',i.parent_sku)], limit=1)
+                i.write({'product_brand': obj.id})
+                i.product_brand = obj.id
+
+
+    def Compute_the_entrepreneur_name(self):
+        saleOrder = self.env['sale.order'].search([])
+
+        for i in saleOrder:
+
+                obj = self.env['daraz.connector'].search([('name', '=', i.instance_id.name)], limit=1)
+                if obj:
+                    if not i.entrepreneur or i.sub_account:
+                        print("obj", obj.entrepreneur)
+                        i.write({'entrepreneur': obj.entrepreneur})
+                        i.write({'sub_account': obj.sub_account})
+                        i.sub_account = obj.sub_account
+                        print("i.sub_account",i.sub_account)
+                        i.entrepreneur = obj.entrepreneur
+
+    def write(self, vals):
+        if 'entrepreneur' not in vals and not self.entrepreneur:
+            vals['entrepreneur'] = self.instance_id.entrepreneur or ''
+        if 'sub_account' not in vals and not self.sub_account:
+            vals['sub_account'] = self.instance_id.sub_account or ''
+            vals['sub_account'] = self.instance_id.sub_account or ''
+        return super(SaleOrder, self).write(vals)
+
+    @api.model_create_multi
+    def create(self, vals):
+        res = super(SaleOrder, self).create(vals)
+        if not self.entrepreneur:
+            res['entrepreneur'] = self.instance_id.entrepreneur or ''
+        if not self.sub_account:
+            res['sub_account'] = self.instance_id.sub_account or ''
+        res.Compute_the_market_name()
+        res.Compute_the_entrepreneur_name()
+        res.Compute_the_parent_sku()
+        return res
+
+
+class ProductBrand(models.Model):
+    _name = 'product.brand'
+    _description = 'Product Brand'
+
+    name = fields.Char(string='Market Name')
+    sku_name = fields.Char(string='Parent SKU')
+
+class DarazConnector(models.Model):
+    _inherit = 'daraz.connector'
+
+    entrepreneur = fields.Char(string='Entrepreneur')
+    sub_account = fields.Char(string='Sub Account')
+
+
+class MultiSKU(models.Model):
+    _name = 'multi.sku'
+    _description = 'Multi.SKU'
+
+    sku_name = fields.Char(string=' SKU')
+
+
+class Return(models.TransientModel):
+    _inherit = 'stock.return.picking'
+
+    qc_name = fields.Char(string='Return Reason',required=True)
+    store_name = fields.Char(string='Store Name',required=True)
+    enterpreneur = fields.Char(string='Enterpreneur',required=True)
+    subaccount = fields.Char(string='Sub Account')
+    order_name = fields.Char(string='Order No',required=True)
+    received_date = fields.Datetime(string='Return Received date',required=True)
+    reason = fields.Text(string='What kind of Damage')
+    order_state = fields.Selection([('yes', 'Yes'),('no', 'No')], string='Quality Check',required=True)
+    product_status = fields.Selection([('yes', 'Yes'), ('no', 'No')], string='Damage ?',required=True)
+
+    def create_physically_returns(self):
+        for i in self:
+            obj = self.env['sale.order'].search([('orderid', '=', i.order_name )], limit=1)
+            obj.order_status = 'physical'
+            if i.product_status == 'yes':
+                obj.shipped_status = 'damage'
+
+            else:
+                obj.shipped_status ='returned'
+
+
+
+    def create_returns(self):
+
+        for wizard in self:
+            wizard.create_physically_returns()
+            new_picking_id, pick_type_id = wizard._create_returns()
+        # Override the context to disable all the potential filters that could have been set previously
+        ctx = dict(self.env.context)
+        ctx.update({
+            'search_default_picking_type_id': pick_type_id,
+            'search_default_draft': False,
+            'search_default_assigned': False,
+            'search_default_confirmed': False,
+            'search_default_ready': False,
+            'search_default_late': False,
+            'search_default_available': False,
+        })
+        return {
+            'name': _('Returned Picking'),
+            'view_mode': 'form,tree,calendar',
+            'res_model': 'stock.picking',
+            'res_id': new_picking_id,
+            'type': 'ir.actions.act_window',
+            'context': ctx,
+        }
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,480 @@
+<odoo>
+    <data>
+        <report file="sales_tax_invoice.invoice_tax_report"
+                id="report_sales_tax_id" model="account.move"
+                name="sales_tax_invoice.invoice_tax_report"
+                report_type="qweb-pdf" string="Sales Tax Invoice"
+        />
+        <template id="invoice_tax_report">
+            <t t-call="web.html_container">
+
+                <t t-call="web.external_layout">
+                    <t t-foreach="account" t-as="o">
+                        <div class="page">
+                            <style>
+                                .alt_col:nth-child(odd) {
+                                background-color: #ece4f9;
+                                }
+                            </style>
+                            <div class="text-center" style="margin-bottom:25px;font-size:38px;">
+                                <strong style="color:#000080;">Sales Tax Invoice</strong>
+                            </div>
+                            <div class="col-xs-6 offset-6">
+                                <table class="table table-sm o_main_table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left"
+                                                colspan="4" style="padding-right:16px;">
+                                                <strong>
+                                                    <span>Invoice No:</span>
+                                                </strong>
+                                                <strong>
+                                                    <!-- <span t-esc="o.amount" t-options='{"widget": "float", "precision": 0}'/> -->
+                                                </strong>
+                                            </td>
+                                            <td class="text-left"
+                                                colspan="1" style="border: 1px solid black;">
+                                                <span t-field="o.name"/>
+                                                <!-- <span t-esc="o.payment_date.strftime('%d-%m-%Y')"/> -->
+                                                <!-- <span t-esc="datetime.date.strptime(str(datetime.date.date(o.payment_date)),'%Y-%m-%d').strftime('%d-%m-%Y')"/> -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"
+                                                colspan="4" style="">
+                                                <strong>
+                                                    <span>Customer ID:</span>
+                                                </strong>
+                                                <strong/>
+                                            </td>
+                                            <td class="text-left"
+                                                colspan="1" style="border: 1px solid black;">
+                                                 <span t-field="o.partner_id.cnic_no"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"
+                                                colspan="4" style="">
+                                                <strong>
+                                                    <span>Order Date:</span>
+                                                </strong>
+                                                <strong/>
+                                            </td>
+                                            <td class="text-left"
+                                                colspan="1" style="border: 1px solid black;">
+                                                <span t-esc="o.invoice_date"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left"
+                                                colspan="4" style="">
+                                                <strong>
+                                                    <span>Sales Person:</span>
+                                                </strong>
+                                                <strong/>
+                                            </td>
+                                            <td class="text-left"
+                                                colspan="1" style="border: 1px solid black;">
+                                                <span t-esc="o.invoice_user_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3" style="width:130px; display:table-cell;">
+                                        <strong style="font-size: 16px;">Bill to:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style=" width:390px; display:table-cell; margin-left:30px;">
+                                        <strong style="display: table-cell;font-size: 16px;">
+                                            <span t-esc="o.partner_id.name"/>
+                                        </strong>
+                                        <div style="border:1px solid black;"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="margin-left:172px;">
+                                    <div class="col-xs-3" style="display:table-cell; width:130px; ">
+                                        <strong style="font-size: 16px;">Ship To:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style=" width:550px; display:table-cell; margin-left:30px;">
+                                        <strong style="display: table-cell;font-size: 16px;">
+                                            <span t-esc="o.partner_id.name"/>
+                                        </strong>
+                                        <div style="border:1px solid black;"/>
+                                    </div>
+                                    <!-- <div class="col-xs-3" style=" width:390px; display:table-cell; padding-left:15px;">
+                                        <strong style="display: table-cell; font-size: 16px;">
+                                            <span t-esc="account.partner_id.name"/>
+                                        </strong>
+                                        <div style="border:1px solid black;"/>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3" style="width:130px; display:table-cell;">
+                                        <strong style="font-size: 16px;">Phone:</strong><br></br>
+                                        <strong>Jolta Electric</strong>
+                                    </div>
+                                    <div class="col-xs-3" style=" width:390px; display:table-cell; margin-left:30px;">
+                                        <strong style="display: table-cell;font-size: 16px;">
+                                                  <span t-field="o.company_id.phone"/>
+                                        </strong>
+<!--                                        <div style="border:1px solid black;"/>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="margin-left:172px;">
+                                    <div class="col-xs-3" style="display:table-cell; width:130px; ">
+                                        <strong style="font-size: 16px;">Customer:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style=" width:600px; display:table-cell; margin-left:30px;">
+                                        <strong style="display: table-cell;font-size: 16px;">
+                                            <span t-esc="o.partner_id.name"/>
+                                        </strong>
+<!--                                        <div style="border:1px solid black;"/>-->
+                                    </div>
+                                    <!-- <div class="col-xs-3" style=" width:390px; display:table-cell; padding-left:15px;">
+                                        <strong style="display: table-cell; font-size: 16px;">
+                                            <span t-esc="account.partner_id.name"/>
+                                        </strong>
+                                        <div style="border:1px solid black;"/>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <br/>
+
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3" style="width:130px; display:table-cell;">
+                                        <strong style="font-size: 16px;">Address:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style="width:390px; display:table-cell;">
+                                        <strong style="padding-left:3px;">
+                                            <t t-if="o.company_id[0].street">
+                                                <span t-esc="account.company_id[0].street"/>
+                                                ,
+                                            </t>
+                                            <t t-if="not o.company_id[0].street">
+                                                <span/>
+                                            </t>
+                                            <t t-if="o.company_id[0].street2">
+                                                <span t-esc="account.company_id[0].street2"/>
+                                            </t>
+                                            <t t-if="not o.company_id[0].street2">
+                                                <span/>
+                                            </t>
+                                        </strong>
+                                        <!-- <div style="border-bottom:1px solid black;"/>-->
+                                        <div style=""/>
+                                        <strong>
+                                            <t t-if="o.company_id[0].city">
+                                                <span t-esc="o.company_id[0].city"/>
+                                                ,
+                                            </t>
+                                            <t t-if="not o.company_id[0].city">
+                                                <span/>
+                                            </t>
+                                            <t t-if="o.company_id[0].country_id">
+                                                <span/>
+                                                <span t-esc="o.company_id[0].country_id.name"/>
+                                                <!--                                            <div style="border-bottom:1px solid black;"/>-->
+                                            </t>
+                                            <t t-if="not account.company_id[0].country_id">
+
+                                                <span/>
+
+                                            </t>
+                                        </strong>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="margin-left:172px;">
+                                    <div class="col-xs-3" style="display:table-cell; width:130px; ">
+                                        <strong style="font-size: 16px;">Address:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style="width:600px; display:table-cell;">
+                                        <t t-if="o.partner_id.street">
+                                            <strong>
+
+                                                <span t-esc="o.partner_id.street"/>
+
+                                            </strong>
+                                            <br/>
+                                        </t>
+                                        <t t-if="o.partner_id.street2">
+                                            <strong>
+                                                <span t-esc="o.partner_id.street2"/>
+                                            </strong>
+                                        </t>
+                                        <t t-if="o.partner_id.city">
+                                            <strong>
+                                                <span t-esc="o.partner_id.city"/>
+                                            </strong>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3" style="width:130px; display:table-cell;">
+                                        <strong style="font-size: 16px;">Sales Tax No:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style="width:390px; display:table-cell; margin-left:30px;">
+                                            <span t-field="o.company_id.vat"/>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="margin-left:172px;">
+                                    <div class="col-xs-3" style="display:table-cell; width:130px;">
+                                        <strong style="font-size: 16px;">CNIC:</strong>
+                                    </div>
+                                    <!--  done  -->
+                                    <div class="col-xs-3" style=" width:600px; display:table-cell;">
+
+                                         <span t-field="o.partner_id.cnic_no"/>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  div end  -->
+                            <br/>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-3" style="width:130px; display:table-cell;">
+                                        <strong style="font-size: 16px;">National Tax No:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style="width:390px; display:table-cell; margin-left:30px;">
+                                         <span t-field="o.company_id.company_registry"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="margin-left:172px;">
+                                    <div class="col-xs-3" style="display:table-cell; width:130px;">
+                                        <strong style="font-size: 16px;">Phone:</strong>
+                                    </div>
+                                    <div class="col-xs-3" style=" width:600px; display:table-cell;">
+                                         <span t-field="o.company_id.phone"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top:50px;margin-bottom:250px;">
+                                <table style="margin-left:-10px;" class="table table-sm o_main_table">
+                                    <thead>
+                                        <th style="border:1px solid black;" class="text-center">
+                                            <strong>Item #</strong>
+                                        </th>
+                                        <th style="border:1px solid black;" class="text-center">
+                                            <strong>Description</strong>
+                                        </th>
+                                        <th style="border:1px solid black;" class="text-center">
+                                            <strong>&#160;&#160;Qty&#160;&#160;</strong>
+                                        </th>
+                                        <th style="border:1px solid black; white-space:nowrap;" class="text-center">
+                                            <strong>Unit Price</strong>
+                                        </th>
+                                        <th style="border:1px solid black; white-space:nowrap;" class="text-center">
+                                            <strong>Excl Sales Tax</strong>
+                                        </th>
+                                        <th style="border:1px solid black; white-space:nowrap;" class="text-center">
+                                            <strong>Sales Tax Rate 1%</strong>
+                                        </th>
+                                        <th style="border:1px solid black;  white-space:nowrap; " class="text-center">
+                                            <strong>Including Sales Tax</strong>
+                                        </th>
+
+                                    </thead>
+                                    <t t-set="total_excl_tax" t-value="0.0"/>
+                                    <t t-set="total_tax_rate1" t-value="0.0"/>
+                                    <t t-set="total_includ_tax" t-value="0.0"/>
+                                      <t t-set="tax_amount" t-value="0.0"/>
+                                    <tbody>
+                                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                                            <tr class="alt_col">
+                                                <td style="border:1px solid black;white-space:nowrap;"
+                                                    class="text-left">
+                                                    <span t-esc="line.product_id.default_code"/>
+                                                </td>
+                                                <td style="border:1px solid black; white-space:nowrap;"
+                                                    class="text-left">
+                                                    <span t-esc="line.name"/>
+                                                </td>
+                                                <td style="border:1px solid black;" class="text-center">
+                                                    <span t-esc="line.quantity"/>
+                                                </td>
+                                                <td style="border:1px solid black;" class="text-center">
+                                                    <span t-esc="line.price_unit"/>
+                                                </td>
+                                                <td style="border:1px solid black;" class="text-center">
+                                                     <span t-esc="line.price_subtotal"/>
+                                                    <t t-set="total_excl_tax" t-value="(total_excl_tax+line.price_subtotal)"/>
+                                                </td>
+                                                <td style="border:1px solid black;" class="text-center">
+                                                    <t t-set="tax_amount" t-value="(line.price_unit*line.quantity)*(1/100)"/>
+                                                    <span t-esc="tax_amount"/>
+                                                     <t t-set="total_tax_rate1" t-value="total_tax_rate1+tax_amount"/>
+                                                </td>
+                                                <td style="border:1px solid black;" class="text-center">
+                                                    <t t-set="total_includ_tax" t-value="total_includ_tax+line.price_total"/>
+                                                    <span t-esc="line.price_total"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td colspan="1" style="border:1px solid black;border-right:none;">
+                                                <span>&#160;</span>
+                                            </td>
+                                            <td colspan="1"
+                                                style="border:1px solid black;border-right:none;border-left:none; ">
+                                                <span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                </span>
+                                            </td>
+                                            <td colspan="5" style="border:1px solid black; border-left:none;">
+                                                <span>&#160;</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid black;" class="text-center" colspan="2">
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td style="border:1px solid black;">&#160;</td>
+                                            <td style="border:1px solid black;">&#160;</td>
+                                            <td style="border:1px solid black;" class="text-center">
+                                                <span t-esc="total_excl_tax"/>
+                                            </td>
+                                            <td style="border:1px solid black;" class="text-center">
+                                                <span t-esc="total_tax_rate1"/>
+                                            </td>
+                                            <td style="border:1px solid black;" class="text-center">
+                                                <span t-esc="total_includ_tax"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="table-borderless">
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                        </tr>
+
+                                        <tr class="table-borderless">
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                            <td>&#160;</td>
+                                        </tr>
+                                        <tr class="table-borderless">
+                                            <td colspan="2"
+                                                style="border:1px solid black !important; padding-left:10px; color:#000080;">
+                                                Special Notes and Instructions
+                                            </td>
+                                            <td colspan="4" class="text-right" style="">Discount %:</td>
+                                            <td class="text-right" style=""><span style="margin-right:5px;" t-esc="o.currency_id.symbol"/>  <span t-field="o.total_discount"/></td>
+                                        </tr>
+
+                                        <tr class="table-borderless">
+                                            <td colspan="2"
+                                                style="border-left:1px solid black; border-right:1px solid black;  padding-left:10px;">
+                                                Funds Deposit at Bank.
+                                            </td>
+                                            <td colspan="4" class="text-right" style="">Total :</td>
+                                              <t t-set="total_disc" t-value="total_includ_tax-o.total_discount"/>
+                                            <td class="text-right" style=""><span style="margin-right:5px;" t-esc="o.currency_id.symbol"/><span t-esc="total_disc"/></td>
+                                        </tr>
+
+
+                                        <tr class="table-borderless">
+                                            <td colspan="2"
+                                                style="border-left:1px solid black; border-right:1px solid black; padding-left:10px; font-size:18px;">
+                                                Tittle Name : Jolta Electric (Pvt) Ltd.
+                                            </td>
+                                            <td colspan="4" class="text-right" style="">Extra Tax Unregistered 3%:</td>
+                                            <td class="text-right" style=""><span style="margin-right:5px;" t-esc="o.currency_id.symbol"/><span t-field="o.ks_amount_global_tax"/></td>
+                                        </tr>
+
+
+                                        <tr class="table-borderless">
+                                            <td colspan="2"
+                                                style="border-left:1px solid black; border-right:1px solid black; padding-left:10px; font-size:18px;">
+                                                A/c 5508005001239665
+                                            </td>
+                                            <td colspan="3" class="text-right"></td>
+                                            <td colspan="1" class="text-right"
+                                                style="background-color:black;color:white;">
+                                                <b>G Total :</b>
+                                            </td>
+                                            <td class="text-right" style="background-color:black;color:white;">
+                                               <span style="margin-right:5px;" t-esc="o.currency_id.symbol"/><span t-field="o.amount_total"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="table-borderless">
+                                            <td rowspan="2" colspan="2"
+                                                style="border-left:1px solid black; border-right:1px solid black;  border-bottom:1px solid black;">
+                                                &#160;
+                                            </td>
+                                            <td colspan="4" class="text-right" style="">Advance :</td>
+                                            <td class="text-right" style=""><span style="margin-right:5px;" t-esc="o.currency_id.symbol"/><span>4455560</span></td>
+                                        </tr>
+
+                                        <tr class="table-borderless">
+
+                                            <td colspan="4" class="text-right" style="">
+                                                <strong>Balance:</strong>
+                                            </td>
+                                            <td class="text-right" style=""><span style="margin-right:5px;" t-esc="o.currency_id.symbol"/><span>4455560</span></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <div class="text-center" style="margin-bottom:45px;font-size:22px; margin-top:45px;">
+                                <strong style="">Thank you for your business!</strong>
+                            </div>
+
+                            <div class="text-center" style="font-size:18px;">
+                                <strong style=" ">Should you have any enquiries concerning this invoice, please contact
+                                    Abdul Wajid on 0-301-117-1203
+                                </strong>
+                            </div>
+
+
+                        </div>
+                        <p style="page-break-after: always;"></p>
+                    </t>
+                </t>
+            </t>
+        </template>
+        
+        
+        <!-- <template id="report_sales_taxes_doc">
+            <t t-call="web.html_container">
+               <t t-foreach="acc" t-as="o">
+                  <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
+              </t>
+            </t>
+       </template>  -->
+        
+        
+        
+    </data>
+</odoo>

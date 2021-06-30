@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <act_window id="ecoservice_partner_account_action"
+              name="Automatic Account Generation"
+              res_model="partner.account.configuration"
+              view_mode="tree,form"/>
+  <menuitem id="ecoservice_partner_account_menu"
+            parent="account.account_account_menu"
+            action="ecoservice_partner_account_action"/>
+
+</odoo>

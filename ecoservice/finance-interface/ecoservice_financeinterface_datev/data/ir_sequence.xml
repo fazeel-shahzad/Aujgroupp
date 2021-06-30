@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# # Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="ecoservice_financeinterface.seq_eco_ecofi_vorlauf" model="ir.sequence">
+    <field name="prefix">EXTF_</field>
+  </record>
+
+</odoo>

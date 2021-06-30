@@ -1,0 +1,195 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_german_documents_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-09 18:47+0000\n"
+"PO-Revision-Date: 2020-12-09 18:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "&amp;nbsp;"
+msgstr ""
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.actions.report,print_report_name:ecoservice_german_documents_invoice.report_invoice_without_logo
+#: model:ir.actions.report,print_report_name:ecoservice_german_documents_invoice.report_invoice_without_payment_without_logo
+msgid "'Invoice'"
+msgstr ""
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr "<strong class=\"mr16\">Zwischensumme</strong>"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_document
+msgid ""
+"<strong class=\"text-center\">Scan me with your banking app.</strong>\n"
+"            <br/>\n"
+"            <br/>"
+msgstr "Scanne mich mit Ihrem Banking App."
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_document
+msgid ""
+"<strong class=\"text-center\">The SEPA QR Code informations are not set correctly.</strong>\n"
+"            <br/>"
+msgstr ""
+"<strong class=\"text-center\">The SEPA QR Code informationen sind nicht richtig konfiguriert.</strong>\n"
+"            <br/>"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Discount"
+msgstr "Rabatt"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.actions.report,name:ecoservice_german_documents_invoice.report_invoice_duplicate_report
+msgid "Duplicate"
+msgstr "Duplikat"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.actions.report,name:ecoservice_german_documents_invoice.report_invoice_duplicate_without_logo
+msgid "Duplicate Letter Paper"
+msgstr "Duplikat (Briefpapier)"
+
+#. module: ecoservice_german_documents_invoice
+#: code:addons/ecoservice_german_documents_invoice/models/account_move.py:0
+#: model:ir.actions.report,name:ecoservice_german_documents_invoice.report_invoice_report
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_translator_invoice
+#: model:text.template.config,name:ecoservice_german_documents_invoice.account_invoice_text
+#, python-format
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model.fields,field_description:ecoservice_german_documents_invoice.field_account_move__account_invoice_bottom
+#: model:text.template.config,name:ecoservice_german_documents_invoice.account_invoice_text_bottom
+msgid "Invoice (Bottom)"
+msgstr "Rechnung (Unten)"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_translator_invoice_duplicate
+msgid "Invoice (Duplicate)"
+msgstr "Rechnung (Duplikat)"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model.fields,field_description:ecoservice_german_documents_invoice.field_account_move__account_invoice
+msgid "Invoice (Top)"
+msgstr "Rechnung (Oben)"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.actions.report,name:ecoservice_german_documents_invoice.report_invoice_without_logo
+msgid "Invoice Letter Paper"
+msgstr "Rechnung (Briefpapier)"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.actions.report,name:ecoservice_german_documents_invoice.report_invoice_without_payment_without_logo
+msgid "Invoice without Payment Letter Paper"
+msgstr "Rechnung ohne Zahlung (Briefpapier)"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model,name:ecoservice_german_documents_invoice.model_account_move
+msgid "Journal Entries"
+msgstr "Buchungssätze"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model,name:ecoservice_german_documents_invoice.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_document
+msgid "Please use the following communication for your payment :"
+msgstr "Bitte diese Zahlungsrefenez bei der Kommunikation immer angeben :"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Pos"
+msgstr ""
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.invoice_letterhead_reference_case
+msgid "Reference:"
+msgstr "Referenz:"
+
+#. module: ecoservice_german_documents_invoice
+#: code:addons/ecoservice_german_documents_invoice/models/account_move.py:0
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_translator_invoice
+#: model:text.template.config,name:ecoservice_german_documents_invoice.account_refund_text
+#, python-format
+msgid "Refund"
+msgstr "Rechnungskorrektur"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model.fields,field_description:ecoservice_german_documents_invoice.field_account_move__account_refund_bottom
+#: model:text.template.config,name:ecoservice_german_documents_invoice.account_refund_text_bottom
+msgid "Refund (Bottom)"
+msgstr "Rechnungskorrektur (Unten)"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_translator_invoice_duplicate
+msgid "Refund (Duplicate)"
+msgstr "Rechnungskorrektur (Duplikat)"
+
+#. module: ecoservice_german_documents_invoice
+#: model:ir.model.fields,field_description:ecoservice_german_documents_invoice.field_account_move__account_refund
+msgid "Refund (Top)"
+msgstr "Rechnungskorrektur (Oben)"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.invoice_letterhead_reference_case
+msgid "Source Document:"
+msgstr "Referenzbeleg:"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.invoice_form_inherited_text_template
+msgid "Text Template"
+msgstr "Textvorlage"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Total Price"
+msgstr "Gesamtpreis"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_duplicate_template_without_logo
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_template_without_logo
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_invoice_template_without_payment_without_logo
+msgid "True"
+msgstr "Wahr"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "Unit Price"
+msgstr "Preis pro ME"
+
+#. module: ecoservice_german_documents_invoice
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_invoice.report_table_base_invoice
+msgid "UoM"
+msgstr "ME"

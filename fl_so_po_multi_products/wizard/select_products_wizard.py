@@ -4,13 +4,8 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from odoo import models, fields, api
 
 
-class AccountMove(models.Model):
-    _inherit = "product.template"
-
-    quantity = fields.Integer(string='Qty')
-
-
 class SelectProducts(models.TransientModel):
+
     _name = 'select.products'
     _description = 'Select Products'
 
@@ -25,7 +20,6 @@ class SelectProducts(models.TransientModel):
                     'product_id': product.id,
                     'product_uom': product.uom_id.id,
                     'price_unit': product.lst_price,
-                    'product_uom_qty': product.quantity,
                     'order_id': order_id.id
                 })
         elif self.flag_order == 'po':

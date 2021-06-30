@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_import_export_process_form" model="ir.ui.view">
+            <field name="name">Import/Export Process</field>
+            <field name="model">import.export.process</field>
+            <field name="arch" type="xml">
+                <form string="Import/Export" style="height: 200px">
+                   
+                    <group>
+                        <field name='instance_ids' widget="many2many_tags"
+                               options="{'no_create':True,'no_create_edit': True,'no_quick_create': True}"
+                               required="1"/>
+                        <field name="is_import_pending_orders" />
+                        <field name="is_import_order" />
+<!--                         <field name="export_order_status" />
+ -->                        <field name="is_import_category" />
+                        <field name="is_import_attribute" />
+                        <field name="is_import_product"/>
+                        <field name="is_import_docs" />
+                      <field name="is_import_transaction" />
+            <!--               <field name="import_order_status" />
+ -->                    </group>
+                    <footer>
+                        
+                        <button name="import_pending_orders"
+                                attrs="{'invisible':[('is_import_pending_orders','=',False)]}"
+                                string="Import Pending Orders" type="object" class="oe_highlight"/>
+                        <button name="import_sale_orders"
+                                attrs="{'invisible':[('is_import_order','=',False)]}"
+                                string="Import Orders" type="object" class="oe_highlight"/>
+
+                        <button name="action_import_transactions"
+                                attrs="{'invisible':[('is_import_transaction','=',False)]}"
+                                string="Import Transactions" type="object" class="oe_highlight"/>
+
+                        <button name="action_import_docs"
+                                attrs="{'invisible':[('is_import_docs','=',False)]}"
+                                string="Import Documents" type="object" class="oe_highlight"/>
+
+                        <!-- <button name="import_sale_orders_status"
+                                attrs="{'invisible':[('import_order_status','=',False)]}"
+                                string="Import Order Status" type="object" class="oe_highlight"/>  -->
+
+                        <!-- <button name="export_sale_orders_status"
+                                attrs="{'invisible':[('export_order_status','=',False)]}"
+                                string="Export Order Status" type="object" class="oe_highlight"/> -->
+
+
+                        <button name="import_attribute"
+                                attrs="{'invisible':[('is_import_attribute','=',False)]}"
+                                string="Import Attributes" type="object" class="oe_highlight"/>
+                                
+                        <button name="import_categories" attrs="{'invisible':[('is_import_category','=',False)]}" string="Get Categories" type="object" class="btn-primary"/>
+                        <button name="import_product" attrs="{'invisible':[('is_import_product','=',False)]}" string="Get Product" type="object" class="btn-primary"/>
+
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Import Export"
+            res_model="import.export.process"
+            view_mode="form"
+            target="new"
+            id="action_wizard_prepare_imp_expor"
+            view_id="view_import_export_process_form"/>
+
+            <menuitem name="Import Export" id="import_export_wizard" parent="daraz_connector_menu_root"
+            action="action_wizard_prepare_imp_expor"  />
+    </data>
+</odoo>

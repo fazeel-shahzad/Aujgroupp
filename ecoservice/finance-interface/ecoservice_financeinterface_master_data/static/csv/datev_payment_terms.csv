@@ -1,0 +1,50 @@
+Mako,Nr.,Feldname,Typ,Länge,NKS,Max. Länge,Muss-Feld,Beschreibung
+${paymentterm['number']},1,Nummer,Zahl,3,,3,Ja,Wert: 10 - 999
+${paymentterm['name']},2,Bezeichnung,Text,40,,40,,Bezeichnung der Zahlungsbedingung
+${paymentterm['typ']},3,Fälligkeitstyp,Text,1,,1,,"Typ der Zahlungsbedingung:
+1 = Fälligkeit in Tagen (Angaben als Tagewerte)
+2 = Fälligkeit als Datum (Angaben als Tagesdatum)"
+${paymentterm['skonto1percent']},4,Skonto 1 %,Betrag,2,2,5,,Wird bei beiden Fälligkeitstypen genutzt.
+${paymentterm['skonto1days']},5,Skonto 1 Tage,Zahl,3,,3,,Zeitdauer in Tagen
+${paymentterm['skonto2percent']},6,Skonto 2 %,Betrag,2,2,5,,Wird bei beiden Fälligkeitstypen genutzt.
+${paymentterm['skonto2days']},7,Skonto 2 Tage,Zahl,3,,3,,Zeitdauer in Tagen
+${paymentterm['netdays']},8,Fällig Tage,Zahl,3,,3,,Zeitdauer in Tagen
+,9,Rechnung bis / Zeitraum 1,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,10,Skonto1 Datum / Zeitraum 1,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,11,Skonto 1 Monat / Zeitraum 1,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,12,Skonto 2 Datum / Zeitraum 1,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,13,Skonto 2 Monat / Zeitraum 1,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,14,Fällig Datum / Zeitraum 1,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,15,Fällig Monat / Zeitraum 1,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,16,Rechnung bis / Zeitraum 2,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,17,Skonto 1 Datum / Zeitraum 2,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,18,Skonto 1 Monat / Zeitraum 2,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,19,Skonto 2 Datum / Zeitraum 2,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,20,Skonto 2 Monat / Zeitraum 2,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,21,Fällig Datum / Zeitraum 2,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,22,Fällig Monat / Zeitraum 2,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,23,Rechnung bis / Zeitraum 3,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,24,Skonto 1 Datum / Zeitraum 3,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,25,Skonto 1 Monat / Zeitraum 3,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,26,Skonto 2 Datum / Zeitraum 3,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,27,Skonto 2 Monat / Zeitraum 3,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"
+,28,Fällig Datum / Zeitraum 3,Zahl,2,,2,,Wert: 1 - 31 (= Datum innerhalb eines Monats)
+,29,Fällig Monat / Zeitraum 3,Text,1,,1,,"0 = Aktueller Monat
+1 = Nächster Monat
+2 = Übernächster Monat"

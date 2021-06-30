@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="view_ecofi_move_migration_form" model="ir.ui.view">
+    <field name="name">Migraton of Account Moves</field>
+    <field name="model">ecofi.move.migration</field>
+    <field name="arch" type="xml">
+      <form>
+        <p>
+          To ensure that all moves can be migrated correctly please make sure that you have set the correct tax key in the taxes and also the correct taxes and automatic configurations in the accounts where applicable.
+        </p>
+        <p>
+          Note: Only account moves for companies that use either SKR03 or SKR04 will be migrated!
+        </p>
+
+        <group>
+          <field name="migrate_all_companies"/>
+          <field name="taxes_are_configured"/>
+          <field name="accounts_are_configured"/>
+        </group>
+
+        <footer>
+          <button name="action_migrate"
+                  type="object"
+                  class="btn-primary"
+                  string="Migrate Moves"/>
+          <button string="Cancel"
+                  class="btn-secondary"
+                  special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_ecofi_move_migration" model="ir.actions.act_window">
+    <field name="name">Migraton of Account Moves</field>
+    <field name="res_model">ecofi.move.migration</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_ecofi_move_migration_form"/>
+    <field name="target">new</field>
+  </record>
+
+    <record id="view_ecofi_move_migration_result_form" model="ir.ui.view">
+    <field name="name">Migraton of Account Moves Result</field>
+    <field name="model">ecofi.move.migration</field>
+    <field name="arch" type="xml">
+      <form>
+        <p>
+          The migration has been completed successfully for these companies: <field name="companies" readonly="1" class="oe_inline"/>
+        </p>
+        <div attrs="{'invisible': [('to_check_counter', '=', 0)]}">
+          <p>
+            In <field name="to_check_counter" readonly="1" class="oe_inline"/> moves the counter account could not be set automatically.
+            Please set it manually where needed.
+          </p>
+          <p>You can easily filter for account moves by selecting the according filter in the account moves list view.</p>
+          <p class="mt64">Please note: After setting the counter accounts manually you do NOT need to start the migration again.</p>
+        </div>
+
+        <footer>
+          <button name="action_migrate"
+                  class="btn-primary"
+                  string="OK"
+                  special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_ecofi_move_migration_result" model="ir.actions.act_window">
+    <field name="name">Migraton of Account Moves Result</field>
+    <field name="res_model">ecofi.move.migration</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_ecofi_move_migration_result_form"/>
+    <field name="target">new</field>
+  </record>
+
+</odoo>

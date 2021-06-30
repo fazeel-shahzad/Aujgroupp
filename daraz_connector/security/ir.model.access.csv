@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_daraz_connector,daraz.connector,model_daraz_connector,,1,1,1,1
+access_process_job,process.job,model_process_job,,1,1,1,1
+access_process_job_line,process.job.line,model_process_job_line,,1,1,1,1
+access_transaction_detail,transaction.detail,model_transaction_detail,,1,1,1,1

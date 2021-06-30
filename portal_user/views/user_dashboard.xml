@@ -1,0 +1,243 @@
+<odoo>
+	<template id="dashboard" name="User-Dashboard">
+		<t t-call="website.layout">
+			<div class="wrapper">
+				<!--  Sidebar   -->
+				<nav id="sidebar">
+					<ul class="list-unstyled components">
+						<li>
+							<a href="/dashboard">Dashboard</a>
+						</li>
+						<li>
+							<a href="/attendance">Attendance</a>
+						</li>
+						<li class="active">
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Leave Request</a>
+							<ul class="collapse list-unstyled" id="homeSubmenu">
+								<li>
+									<a href="/my-time-off-request">My Time Off Request</a>
+								</li>
+								<li>
+									<a href="/my-allocation">My Allocation Request</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="active">
+							<a href="#home1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Loan Request</a>
+							<ul class="collapse list-unstyled" id="home1Submenu">
+								<li>
+									<a href="/loan-request">Request for Loan</a>
+								</li>
+								<li>
+									<a href="/advance-salary">Request for Advance Salary</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<!--  Page Content   -->
+				<div id="content">
+					<div class="container-fluid">
+						<div class="row 2row" style="margin-top:20px;">
+							<!-- first-card -->
+							<div class="col-3">
+								<a href="/attendance-view">
+									<div class="card">
+										<div class="card-header text-white" style="background-color:#71eb61;">
+											<div class="row ">
+												<div class="col-8">
+													<h2 class="h2" style="padding-top:10px;">
+														<t t-foreach="val_dict" t-as="att">
+															<t t-esc="att"/>
+														</t>
+													</h2>
+													<p>Attendance</p>
+												</div>
+												<div class="col-4 align-items-center">
+													<br/>
+													<br/>
+													<i class="fa fa-rss fa-4x"/>
+												</div>
+											</div>
+										</div>
+										<!-- 									<div class="card-footer"> -->
+										<!-- 										<h5> -->
+										<!-- 											<a href="/latter-request-view" role="button" class="text-primary" style="text-decoration: none;">Latter Request<i class="fa fa-arrow-right"  style="margin-left: 8px;"></i></a> -->
+										<!-- 										</h5> -->
+										<!-- 									</div> -->
+									</div>
+								</a>
+							</div>
+							<!-- 2nd-card -->
+							<div class="col-3">
+								<a href="/loan-request-view">
+									<div class="card">
+										<div class="card-header text-white" style="background-color:#63646f;">
+											<div class="row ">
+												<div class="col-8">
+													<h2 class="h2" style="padding-top:10px;">
+														<t t-foreach="loan_count" t-as="empr">
+															<t t-esc="empr"/>
+														</t>
+													</h2>
+													<p>Loan Request</p>
+												</div>
+												<div class="col-4 align-items-center">
+													<br/>
+													<br/>
+													<i class="fa fa-pagelines fa-4x"/>
+												</div>
+											</div>
+										</div>
+										<!-- 									<div class="card-footer"> -->
+										<!-- 										<h5> -->
+										<!-- 											<a href="/loan-request-view" class="text-primary" role="button" style="text-decoration: none;">loan Request<i class="fa fa-arrow-right"  style="margin-left: 8px;"></i> </a>										</h5> -->
+										<!-- 									</div> -->
+									</div>
+								</a>
+							</div>
+							<!-- 3rd-card -->
+							<div class="col-3">
+								<a class="cardtag" href="/advance-salary-view">
+									<div class="card ">
+										<div class="card-header text-white" style="background-color:#fbcd3d">
+											<div class="row ">
+												<div class="col-8">
+													<h2 class="h2" style="padding-top:10px;">
+														<t t-foreach="salary_count" t-as="abc">
+															<t t-esc="abc"/>
+														</t>
+													</h2>
+													<p>Advance Salary</p>
+												</div>
+												<div class="col-4 align-items-right">
+													<br/>
+													<br/>
+													<i class="fa fa-address-book-o fa-4x"/>
+												</div>
+											</div>
+										</div>
+										<!-- 									<div class="card-footer text-center"> -->
+										<!-- 										<h6> -->
+										<!-- 											<a href="/advance-salary-view" class="text-primary" style="text-decoration:none;">Advance Salary Request<i class="fa fa-arrow-right"  style="margin-left: 8px;"></i> </a> -->
+										<!-- 										</h6> -->
+										<!-- 									</div> -->
+									</div>
+								</a>
+							</div>
+							<!-- 4rth-card -->
+							<div class="col-3">
+								<div class="card ">
+									<div class="card-header text-white" style="background-color:#fd0046">
+										<div class="row">
+											<div class="col-8">
+												<h2 class="h2" style="padding-top:10px;">08</h2>
+												<p>Time Off</p>
+											</div>
+											<div class="col-4 align-items-center">
+												<br/>
+												<br/>
+												<i class="fa fa-id-card fa-4x"/>
+											</div>
+										</div>
+									</div>
+									<!-- 									<div class="card-footer text-center"> -->
+									<!-- 										<h5> -->
+									<!-- 											<a href="#" class="text-primary" style="text-decoration: none;">Loan Request<i class="fa fa-arrow-right"></i> </a> -->
+									<!-- 										</h5> -->
+									<!-- 									</div> -->
+								</div>
+							</div>
+						</div>
+						<!-- -2nd Row -->
+						<div class="row" style="margin-top:10px;">
+							<div class="col-3">
+								<div class="card text-center">
+									<div class="card-header" style="background-color:#ffffff;">
+										<div class="row ">
+											<div class="col">
+												<br/>
+												<i class="fa fa-id-card fa-3x"/>
+											</div>
+										</div>
+										<br/>
+										<div class="row">
+											<div class="col text-black">
+												<br/>
+												<h3 class="h3">Odoo ERP</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Second row card -->
+							<div class="col-3">
+								<div class="card text-center">
+									<div class="card-header" style="background-color:#ffffff;">
+										<div class="row ">
+											<div class="col">
+												<br/>
+												<i class="fa fa-graduation-cap fa-3x"/>
+											</div>
+										</div>
+										<br/>
+										<div class="row">
+											<div class="col text-black">
+												<br/>
+												<h3 class="h3">HR Services</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 2nd row 3rd card -->
+							<div class="col-3">
+								<div class="card text-center">
+									<div class="card-header" style="background-color:#ffffff;">
+										<div class="row ">
+											<div class="col">
+												<br/>
+												<i class="fa fa-users fa-3x"/>
+											</div>
+										</div>
+										<br/>
+										<div class="row text-black">
+											<div class="col">
+												<br/>
+												<h3 class="h3">Iqama</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 2nd row 4rth card -->
+							<div class="col-3">
+								<div class="card text-center">
+									<div class="card-header " style="background-color:#ffffff;">
+										<div class="row ">
+											<div class="col">
+												<br/>
+												<i class="fa fa-opera fa-3x"/>
+											</div>
+										</div>
+										<br/>
+										<div class="row">
+											<div class="col text-black">
+												<br/>
+												<h3 class="h3">Letter Request</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" type="text/css" href="/portal_user/static/src/css/style.css"/>
+			</xpath>
+		</t>
+	</template>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_stock_report" model="report.paperformat">
+        <field name="name">Stock Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">25</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_sale_pdf_report" model="ir.actions.report">
+        <field name="name">Sale Product Wise Report</field>
+        <field name="model">sale.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale_report_pdf.report_sale_document</field>
+
+    </record>
+
+    <template id="report_sale_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center"><h2>Sale Product Wise Report</h2></div>
+                <div class="row mt32 mb32" id="informations">
+						<strong>Date From:</strong>
+						<span class="m-0" t-esc="date_from"/>
+				</div>
+                <div class="row mt32 mb32" id="informations">
+						<strong>Date to:</strong>
+						<span class="m-0" t-esc="date_to"/>
+				</div>
+                    <br/>
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th name="th_name" class="text-left"><strong>Product Name</strong></th>
+                                <th name="th_qty" class="text-center"><strong>Qty</strong></th>
+                                <th name="th_value" class="text-center"><strong>Value(<span t-esc="currency.name"/>)</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="products" t-as="product">
+                                <t t-set="sales_qty" t-value="0" />
+                                <t t-set="total_value" t-value="0" />
+                                <tr>
+                                    <td class="text-left">
+<!--                                        <t t-set="name" t-value="product_name(product)" />-->
+                                        <span t-esc="product.display_name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-set="sales_qty" t-value="sales(product)" />
+                                        <span t-esc="sales_qty"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-set="total_value" t-value="values(product)" />
+                                        <span t-esc="total_value" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+    </t>
+    </template>
+
+</odoo>

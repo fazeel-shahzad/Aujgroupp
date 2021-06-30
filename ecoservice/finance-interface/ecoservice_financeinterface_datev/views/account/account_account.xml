@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# # Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="view_account_form_inherit_ecofi_datev" model="ir.ui.view">
+    <field name="name">account.account.form.inherit.ecofi.datev</field>
+    <field name="model">account.account</field>
+    <field name="inherit_id" ref="account.view_account_form"/>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <field name="deprecated" position="after">
+        <br/>
+        <br/>
+        <p style="font-weight: bold;">Datev</p>
+        <br/>
+        <field name="datev_vat_handover"/>
+        <field name="datev_automatic_account"/>
+        <field name="datev_tax_ids" widget="many2many_tags" attrs="{'required': [('datev_automatic_account', '=', True)]}"/>
+        <field name="datev_tax_required"/>
+      </field>
+    </field>
+  </record>
+
+</odoo>

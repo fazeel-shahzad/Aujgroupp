@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+
+      <record id="add_allowances_and_deductions" model="ir.ui.view">
+      <field name="name">all_allowances_and_deductions</field>
+      <field name="model">hr.contract</field>
+      <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//group[@name='salary_and_advantages']" position="after">
+              <group name="allownaces" string="Allownces">
+          <field name="conveyance"/>
+          <field name="mobile_allowance"/>
+          <field name="meal_allowance"/>
+              <field name="other"/>
+          </group>
+
+              <group name="deductions" string="Deductions">
+                  <field name="income_tax"/>
+                  <field name="advances"/>
+                  <field name="eobi"/>
+                  <field name="provident_fund"/>
+                  <field name="pessi"/>
+                  <field name="other_deductions"/>
+              </group>
+          </xpath>
+      </field>
+      </record>
+
+
+      <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.account</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="date_start"/>
+                <field name="month" invisible="1"/>
+                <field name="year" invisible="1"/>
+                <field name="dept" invisible="1"/>
+
+            </xpath>
+            <xpath expr="//field[@name='date_from']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_to']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+      </field>
+    </record>
+
+      <record id="view_company_form_view" model="ir.ui.view">
+          <field name="name">amount in word</field>
+          <field name="model">hr.payslip</field>
+          <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='name']" position="after">
+                  <field name="amount_in_word" invisible="1"/>
+              </xpath>
+              <xpath expr="//button[@name='compute_sheet']" position="after">
+                  <button name="allowance_deduction_compute"
+                          string="Compute Allowance Deduction"
+                          type="object"/>
+              </xpath>
+          </field>
+      </record>
+
+
+          <record id="employee_form_inherit_field" model="ir.ui.view">
+            <field name="name">add selection field</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pin']" position="after">
+                    <field name="payment_mode"/>
+                </xpath>
+            </field>
+          </record>
+  </data>
+</odoo>

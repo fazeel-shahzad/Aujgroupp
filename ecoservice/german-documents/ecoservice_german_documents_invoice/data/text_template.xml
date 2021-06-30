@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="account_invoice_text" model="text.template.config">
+    <field name="name">Invoice (Top)</field>
+    <field name="model" ref="account.model_account_move"/>
+  </record>
+
+  <record id="account_refund_text" model="text.template.config">
+    <field name="name">Refund (Top)</field>
+    <field name="model" ref="account.model_account_move"/>
+  </record>
+
+  <record id="account_invoice_text_bottom" model="text.template.config">
+    <field name="name">Invoice (Bottom)</field>
+    <field name="model" ref="account.model_account_move"/>
+  </record>
+
+  <record id="account_refund_text_bottom" model="text.template.config">
+    <field name="name">Refund (Bottom)</field>
+    <field name="model" ref="account.model_account_move"/>
+  </record>
+</odoo>

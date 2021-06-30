@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Part of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="import_datev_action" model="ir.actions.act_window">
+    <field name="name">DATEV Import</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">import.datev</field>
+    <field name="view_id" ref="import_datev_tree_view"/>
+  </record>
+
+  <menuitem action="import_datev_action" id="datev_import_menu"
+            parent="ecoservice_financeinterface.menu_finance_interface" sequence="20"
+            groups="ecoservice_financeinterface.group_ecofi_financeinterface"/>
+
+</odoo>

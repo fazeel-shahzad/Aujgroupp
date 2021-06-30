@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo>
+
+  <record id="view_ecoservice_finance_interface_configuration" model="ir.ui.view">
+    <field name="name">Finance Interface Settings: DATEV Auto Export</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="ecoservice_financeinterface.view_ecoservice_finance_interface_configuration"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='ecofi_general_settings']" position="after">
+        <div name="ecofi_auto_datev_export_settings">
+          <h2>Auto Mail Configuration</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-12 o_setting_box">
+              <div class="text-muted">Select period based on customer</div>
+              <field name="auto_datev_export_config_ids"/>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

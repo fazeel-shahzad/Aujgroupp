@@ -1,0 +1,576 @@
+<odoo>
+    <data>
+        <template id="report_payroll_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <style>
+                                .employee_general_info {
+                                border:2px solid black;
+                                text-align: center;
+                                font-size:12px;
+                                vertical-align:middle;
+                                }
+                                .employee_general_info h4 {
+                                text-align: center;
+                                margin-auto;
+                                font-size: 14px;
+                                padding-left: 0px;
+                                }
+                                .employee_info_div {
+                                text-align:left;
+                                font-weight:normal;
+                                font-size:12px;
+                                padding:0;
+                                border-bottom:1px solid black;
+                                }
+                                .div_headings {
+                                border:1px solid black;
+                                text-align: center;
+                                background-color:#bfbfbf;
+                                font-size:12px;
+                                margin-top:2em;
+                                vertical-align:middle;
+                                }
+                                .div_headings h4 {
+                                text-align: center;
+                                margin: auto;
+                                font-weight: bold;
+                                vertical-align:middle;
+                                font-size:14px;
+                                }
+                                .personal_info_div {
+                                text-align:left;
+                                margin-top:4em;
+                                font-weight:normal;
+                                font-size:12px;
+                                margin-top:2em;
+                                padding-left:0;
+                                }
+                                .educational_div_heading {
+                                text-align:center;
+                                font-size:10px;
+                                font-weight:700;
+                                }
+                                .educational_detail_div {
+                                font-size:10px;
+                                text-align:left;
+                                }
+                                .work_experience_second_heading {
+                                font-size:6px;
+                                text-align:center;
+                                fon-weight:700;
+                                }
+                                .work_experience_div {
+                                font-size:10px;
+                                text-align:left;
+                                margin-top:2em;
+                                }
+                                .optional_info {
+                                font-size:10px;
+                                margin-top: 2em;
+                                }
+                                .padding_left{
+                                padding-left:0px;
+                                }
+                                .border_bottom {
+                                border-bottom:1px solid black;
+                                margin-left:3px;
+                                padding-left;
+                                }
+                                .border_bottom_left {
+                                border-bottom:1px solid black;
+                                margin-left:-12px;
+                                }
+                                .all_border {
+                                border:1px solid black;
+                                }
+                                .language_div_data {
+                                font-size:10px;
+                                text-align:left;
+                                }
+                                .language_div_heading{
+
+                                }
+                                .padding_left{
+                                padding-left:0;
+                                }
+                                .employee_info_div {
+                                text-align:left;
+                                margin-top:.5em;
+                                font-weight:normal;
+                                font-size:12px;
+                                padding:0;
+                                border-bottom:1px solid black;
+                                }
+                                .educational_detail_heading{
+                                font-weight:900;
+                                padding-left:1px;
+                                }
+                                .education_data {
+                                margin-top:-.05em;
+                                }
+                                .margin_left {
+                                margin-left:40%;
+                                text-transform:capitalize;
+                                margin-top:.5em;
+                                }
+                                .table_div_no_bottom{
+                                text-align:left;
+                                margin-top:.5em;
+                                font-weight:normal;
+                                font-size:12px;
+                                padding:0;
+
+                                }
+                                .three_side_border{
+                                border-top:1px solid black;
+                                border-right:1px solid black;
+                                border-bottom:1px solid black;
+                                }
+                            </style>
+                            <!-- here is the top heading -->
+                            <div class="container col-12 row" style="border:1px solid black;">
+                                <h6 class="margin_left">Employee Information Form</h6>
+                            </div>
+                            <!-- here is the employee info -->
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Employee Code</div>
+                                        <div class="col-7 padding_left"><span t-field="o.employee_code"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Job Title</div>
+                                        <div class="col-7 padding_left"><span t-field="o.job_id" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Join Date</div>
+                                        <div class="col-7 padding_left"><span t-field="o.join_date"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Department</div>
+                                        <div class="col-7 padding_left"><span t-field="o.department_id.name"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- here the info div ends -->
+
+                            <!-- here the personal info div starts-->
+                            <div class="container col-12 row" style="border:1px solid black; background-color:#bfbfbf; margin-top:10px;">
+                                <h6 class="margin_left">Personal Information</h6>
+                            </div>
+                            <!-- here is the employee info -->
+
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left"> Full Name (as per cnic)</div>
+                                        <div class="col-7 padding_left"><span t-field="o.name"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+<!--                                        <div class="col-5 padding_left">Last Name(as per CNIC):</div>-->
+<!--                                        <div class="col-7 padding_left">Value</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left"> Father's/Husband's Name:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.father_name"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">  CNIC #:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.identification_id"/></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left"> Date of Birth:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.birth_date"/></div>
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left"> Present Address:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.address_home_id"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">  Permanent Address:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.permanent_address" /></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Contact (Mobile):</div>
+                                        <div class="col-7 padding_left"><span t-field="o.work_phone" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left"> Marital Status:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.marital"/></div>
+
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-6 padding_left">In Case of Emergency Contact:    </div>
+                                        <div class="col-6 padding_left"><span t-field="o.emergency_contact"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Blood Group:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.blood_group"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Domicile</div>
+                                        <div class="col-7 padding_left"><span t-field="o.domicile"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">   Religion::</div>
+                                        <div class="col-7 padding_left"><span t-field="o.religion"/></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Email:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.emails"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- here the personal info div ends -->
+
+                            <!-- here the educational Details Div starts -->
+
+                            <div class="container col-12 row" style="border:1px solid black; background-color:#bfbfbf;margin-top:10px;">
+                                <h6 class="margin_left">Educational Details</h6>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:-.1em;">
+                                <div class="col-12">
+                                    <div class="row educational_detail_heading">
+                                        <div class="col-1 all_border padding_left">Program</div>
+                                        <div class="col-2 three_side_border">Degree tile</div>
+                                        <div class="col-3 three_side_border">Name of Place and Institute</div>
+                                        <div class="col-2 three_side_border">passing Year</div>
+                                        <div class="col-2 three_side_border">Grade/Div</div>
+                                        <div class="col-2 three_side_border">Major Subject</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <t t-foreach="o.employee_details" t-as="line">
+                                <div class="container col-12 table_div_no_bottom education_data row" style="margin-top:-.1em;">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-1 all_border padding_left"><span t-field="line.programme.name"/></div>
+                                            <div class="col-2 all_border"><span t-field="line.degree_title"/></div>
+                                            <div class="col-3 three_side_border"><span t-field="line.name_place"/></div>
+                                            <div class="col-2 three_side_border"><span t-field="line.passing_year"/></div>
+                                            <div class="col-2 three_side_border"><span t-field="line.grade_div"/> </div>
+                                            <div class="col-2 three_side_border"><span t-field="line.major_sub"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- here the educational details ends -->
+
+                            <!-- here the div for work Experience -->
+                            <div class="container col-12 row" style="border:1px solid black; margin-top:.5em;background-color:#bfbfbf;margin-top:10px;">
+                                <h6 class="margin_left">WORKING EXPERIENCE</h6>
+                            </div>
+                            <div class="col-12 work_experience_second_heading">
+                                <h6 style="margin-top:.7em;">In reverse sequence (Start with most recent job)</h6>
+                            </div>
+                            <t t-foreach="o.work_experience" t-as="line">
+                                <div class="container col-12 employee_info_div row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"> Job Title:</div>
+                                            <div class="col-7 padding_left"><span t-field="line.e_job_title"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"></div>
+                                            <div class="col-7 padding_left"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container col-12 employee_info_div row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"> Supervisor Name:</div>
+                                            <div class="col-7 padding_left"><span t-field="line.supervisor_name"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left">From - To: (dd-mm-yy)</div>
+                                            <div class="col-7 padding_left"><span t-field="line.start_from"/> to <span t-field="line.end_on"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container col-12 employee_info_div row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"> Reason of leaving:</div>
+                                            <div class="col-7 padding_left"><span t-field="line.leave_reason"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left">Contact</div>
+                                            <div class="col-7 padding_left"><span t-field="line.contact"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container col-12 employee_info_div row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"> Drawn Salary:</div>
+                                            <div class="col-7 padding_left"><span t-field="line.drawn_salary"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-5 padding_left"></div>
+                                            <div class="col-7 padding_left"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- here the work experience div ends -->
+
+                            <!-- here the language starts and other optional details code starts -->
+
+                            <div class="container col-12 row" style="border:1px solid black; margin-top:.5em;background-color:#bfbfbf; margin-top:10px;">
+                                <h6 style="margin-left:45%;margin-top:.2em;">Languages</h6>
+                            </div>
+
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:-.1em;">
+                                <div class="col-12">
+                                    <div class="row educational_detail_heading">
+                                        <div class="col-4 all_border">SR.No</div>
+                                        <div class="col-4 three_side_border">Language</div>
+                                        <div class="col-4 three_side_border">Level(Average/Good/Excellent)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom education_data row" style="margin-top:-.1em;">
+                                <t t-set="count_id" t-value="0"/>
+                                <div class="col-12">
+                                    <t t-foreach="o.emp_lang" t-as="line">
+                                        <t t-set="count_id" t-value="count_id+1"/>
+                                        <div class="row">
+                                            <div class="col-4 all_border"><t t-esc="count_id"/></div>
+                                            <div class="col-4 three_side_border"><span t-field="line.language"/></div>
+                                            <div class="col-4 three_side_border"><span t-field="line.level"/></div>
+
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div education_data row" style="margin-top:.9em;">
+                                <div class="col-12 padding_left row">
+                                    <div class="col-5 padding_left" style="padding-left:18px;">
+                                        Do you have any disability? If yes, mention the detail.
+                                    </div>
+                                    <div class="col-7">
+
+                                        <span t-field="o.disability"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div education_data row" style="margin-top:.9em;">
+                                <div class="col-12 padding_left row">
+                                    <div class="col-5" style="padding-left:18px;">
+                                        Do you have any allergic or desease or any kind of medical treatment, which you are suffering from?.
+                                        If yes, mention the detail.
+                                    </div>
+                                    <div class="col-7">
+                                        <span t-field="o.allergy"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 employee_info_div education_data row" style="margin-top:.9em;">
+                                <div class="col-12 padding_left row">
+                                    <div class="col-5" style="padding-left:18px;">
+                                        Have you ever been arrested or commited any crime or part of any illegal activity? .
+                                        If yes, mention the detail.
+                                    </div>
+                                    <div class="col-7">
+                                        <span t-field="o.arrest"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- here the div for the references starts-->
+
+                            <div class="container col-12 row" style="border:1px solid black; margin-top:.5em;background-color:#bfbfbf; margin-top:10px;">
+                                <h6 style="margin-left:45%;margin-top:.2em;">References</h6>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:-.1em;">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-3 all_border">Name</div>
+                                        <div class="col-3 three_side_border">Address and Email</div>
+                                        <div class="col-3 three_side_border">Contact No</div>
+                                        <div class="col-3 three_side_border">Occupation</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-foreach="o.employee_reference_line" t-as="line">
+                                <div class="container col-12 table_div_no_bottom row" style="margin-top:-.1em;">
+                                    <div class="col-12">
+                                        <div class="row" style="margin-top:-.5em;">
+                                            <div class="col-3 all_border"><span t-field="line.name"/></div>
+                                            <div class="col-3 three_side_border"><span t-field="line.email"/></div>
+                                            <div class="col-3 three_side_border"><span t-field="line.contact_no"/></div>
+                                            <div class="col-3 three_side_border"><span t-field="line.occupation"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                            <!-- here the divs for the references ends -->
+
+                            <div class="container col-12 row" style="border:1px solid black; margin-top:.5em;background-color:#bfbfbf; margin-top:10px;">
+                                <h6 style="margin-left:40%;margin-top:.2em;">Signature and Certificates</h6>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:-.1em;">
+                                <div class="col-12">
+                                    <div class="row">
+                                        I certify that, all of the information on and attached to this form is true, correct, complete and  to
+                                        the best of my knowledge. I understand that any information I povide on or attached to this form
+                                        may be investigated.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:2em;">
+                                <div class="col-12 padding_left">
+                                    <div class="row">
+                                        <div class="col-6 row">
+                                            <div class="col-3">
+                                                Signature
+                                            </div>
+                                            <div class="col-9 padding_left">
+                                                _______________
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6 row">
+
+                                            <div class="col-3">
+                                                Date
+                                            </div>
+                                            <div class="col-9 padding_left">
+                                                ________________
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- here the divs for the signature and certification ends -->
+
+                            <!-- here the div for the office use only starts-->
+
+
+
+
+                            <div class="container col-12 row" style="border:1px solid black; margin-top:2em;">
+                                <h6 class="margin_left">For Office Use Only</h6>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row" style="margin-top:10px;">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Join Date</div>
+                                        <div class="col-7 padding_left"><span t-field="o.join_date"/></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Per Month Gross Salary</div>
+                                        <div class="col-7 padding_left"><span t-field="o.per_month_gross_sal"/></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container col-12 table_div_no_bottom row">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5 padding_left">Any incentive/Allowance:</div>
+                                        <div class="col-7 padding_left"><span t-field="o.any_incentives"/></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="container row" style="margin-top:4em; font-size:10px;">
+                                <div class="col-6">
+                                    __________________________________
+                                </div>
+                                <div class="col-6">
+                                    __________________________________
+                                </div>
+                            </div>
+                            <div class="container row" style="font-size:10px;">
+                                <div class="col-6">
+                                    HR Department
+                                </div>
+                                <div class="col-6">
+                                    Director / Chief information Officer
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

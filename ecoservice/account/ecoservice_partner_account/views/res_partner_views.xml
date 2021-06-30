@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="view_partner_property_form_inherit_ecoservice_partner_account"
+          model="ir.ui.view">
+    <field name="name">res.partner.property.form.inherit.partner.account</field>
+    <field name="model">res.partner</field>
+    <field name="type">form</field>
+    <field name="priority">100</field>
+    <field name="inherit_id" ref="account.view_partner_property_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='accounting_entries']/field[@name='property_account_receivable_id']"
+             position="replace">
+        <div>
+          <field name="property_account_receivable_is_default" invisible="1"/>
+          <button name="action_create_receivable_account" type="object"
+                  string="Create Receivable Account"
+                  attrs="{'invisible': [('property_account_receivable_is_default', '=', False)]}"
+                  class="btn-secondary"/>
+          <field name="property_account_receivable_id"/>
+        </div>
+      </xpath>
+
+      <xpath expr="//group[@name='accounting_entries']/field[@name='property_account_payable_id']"
+             position="replace">
+        <div>
+          <field name="property_account_payable_is_default" invisible="1"/>
+          <button name="action_create_payable_account" type="object"
+                  string="Create Payable Account"
+                  attrs="{'invisible': [('property_account_payable_is_default', '=', False)]}"
+                  class="btn-secondary"/>
+          <field name="property_account_payable_id"/>
+        </div>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- add action entry in the Action Menu -->
+  <record id="ecoservice_partner_account_action_server_selection"
+          model="ir.actions.server">
+    <field name="name">Create Accounts (Selection)</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">
+      for partner in records.filtered('is_company'):
+      partner.with_context(create_payable=partner.supplier, create_receivable=partner.customer).create_accounts()
+    </field>
+  </record>
+
+  <record id="ecoservice_partner_account_action_server_all"
+          model="ir.actions.server">
+    <field name="name">Create Accounts (All)</field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="code">
+      for partner in records.search([('is_company', '=', True)]):
+      partner.with_context(create_payable=partner.supplier, create_receivable=partner.customer).create_accounts()
+    </field>
+  </record>
+
+</odoo>

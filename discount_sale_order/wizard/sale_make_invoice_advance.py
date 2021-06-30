@@ -15,7 +15,7 @@ class SaleAdvancePaymentInv(models.TransientModel):
     def _get_advance_details(self, order):
         if order.global_order_discount:
             IrConfigPrmtrSudo = self.env['ir.config_parameter'].sudo()
-            discTax = IrConfigPrmtrSudo.get_param('account.global_discount_tax')
+            discTax = IrConfigPrmtrSudo.get_param('sale.global_discount_tax')
             if discTax == 'taxed':
                 total = order.amount_untaxed + order.amount_tax
             else:

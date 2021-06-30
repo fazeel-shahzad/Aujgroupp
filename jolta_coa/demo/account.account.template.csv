@@ -1,0 +1,26 @@
+"id","name","code","user_type_id/id","chart_template_id/id","tag_ids/id","reconcile","parent_id"
+
+"capital_reserves","CAPITAL AND RESERVES","01-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_long_term_loans_depositss","LONG TERM LOANS AND DEPOSITS","02-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_deferred_liabilities","DEFERRED LIABILITIES","03-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_current_liabilities","CURRENT LIABILITIES","04-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_fixed_assets_owned","FIXED ASSETS-Owned","05-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_fixed_assets_leased","FIXED ASSETS-Leased","06-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_accumulated_depreciation_owned_assets","ACCUMULATED DEPRECIATION-Owned Assets","07-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_accumulated_depreciation_leased_assets","ACCUMULATED DEPRICIATION-Leased Assets","08-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_capital_work_progress","CAPITAL WORK IN PROGRESS","09-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+
+
+"coa_deferred_costs","DEFFERRED COSTS","10-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_long_term_deposits","LONG TERM DEPOSITS","11-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_long_term_advance_loan","LONG TERM ADVANCES/LOANS","12-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_current_assets","CURRENT ASSETS","13-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_sales_net","SALES-NET","14-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_cost_sales","COST OF SALES","15-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_administrative_expense","ADMINISTRATIVE EXPENSES","16-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_selling_distributed_expense","SELLING AND DISTRIBUTION EXPENSES","17-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_financial_expense","FINANCIAL EXPENSES","18-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+"coa_other_income","OTHER INCOME","19-00-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+
+"acount_issued_subscribed_paid","Issued, Subscribed and Paid Capital","01-01-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False",""
+

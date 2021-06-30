@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+  <!-- Register: Report Invoice without Payment-->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="report_invoice_without_payment" model="ir.actions.report">
+    <field name="name">Invoice without Payment</field>
+    <field name="model">account.move</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_invoice.report_invoice_template_without_payment</field>
+  </record>
+
+  <!-- Register: Invoice without Payment (without logo) -->
+  <report id="report_invoice_without_payment_without_logo"
+          string="Invoice without Payment Letter Paper"
+          model="account.move"
+          attachment_use="True"
+          attachment="(object.state in ('open','paid')) and (('{}'.format(object.eco_report_name())).replace('/','')+'.pdf')"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          report_type="qweb-pdf"
+          print_report_name="'Invoice'"
+          name="ecoservice_german_documents_invoice.report_invoice_template_without_payment_without_logo"/>
+
+  <!-- Register: Report Invoice without Payment-->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="report_invoice_report" model="ir.actions.report">
+    <field name="name">Invoice</field>
+    <field name="model">account.move</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_invoice.report_invoice_template</field>
+  </record>
+
+  <!-- Register: Invoice (without logo) -->
+  <report id="report_invoice_without_logo"
+          string="Invoice Letter Paper"
+          model="account.move"
+          attachment_use="True"
+          attachment="(object.state in ('open','paid')) and (('{}'.format(object.eco_report_name())).replace('/','')+'.pdf')"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          report_type="qweb-pdf"
+          print_report_name="'Invoice'"
+          name="ecoservice_german_documents_invoice.report_invoice_template_without_logo"/>
+
+  <!-- Build: Report Invoice without Payment -->
+  <template id="report_invoice_template_without_payment">
+    <t t-call="account.report_invoice"/>
+  </template>
+
+  <!-- Build: Report Invoice without Payment (without logo) -->
+  <template id="report_invoice_template_without_payment_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="account.report_invoice"/>
+  </template>
+
+  <!-- Build: Report Invoice -->
+  <template id="report_invoice_template">
+    <t t-call="account.report_invoice_with_payments"/>
+  </template>
+
+  <!-- Build: Report Invoice (without logo) -->
+  <template id="report_invoice_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="account.report_invoice_with_payments"/>
+  </template>
+
+  <!-- Translate: Invoice (non-fields) -->
+  <template id="report_translator_invoice">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+
+    <t t-set="doc_name">Invoice</t>
+    <t t-if="'refund' in o.type" t-set="doc_name">Refund</t>
+
+    <t t-set="doc_text" t-value="o.account_invoice"/>
+    <t t-if="'refund' in o.type" t-set="doc_text" t-value="o.account_refund"/>
+
+    <t t-set="doc_text_bottom" t-value="o.account_invoice_bottom"/>
+    <t t-if="'refund' in o.type" t-set="doc_text_bottom" t-value="o.account_refund_bottom"/>
+
+    <t t-call="ecoservice_german_documents_invoice.report_invoice_document"/>
+  </template>
+
+  <template id="report_invoice_inherit_gd" inherit_id="account.report_invoice_with_payments">
+    <xpath expr="//t[@t-call='account.report_invoice_document_with_payments']" position="replace">
+      <t t-set="gd_active"
+         t-value="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_invoice.report_translator_invoice" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="account.report_invoice_document_with_payments" t-lang="o.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+  <template id="report_invoice_without_payment_inherit_gd" inherit_id="account.report_invoice">
+    <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+      <t t-set="hide_payments" t-value="1"/>
+      <t t-set="gd_active"
+         t-value="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_invoice.report_translator_invoice" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="account.report_invoice_document" t-lang="o.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+  <!-- Register: Report Invoice Duplicate-->
+  <report id="report_invoice_duplicate_report"
+          string="Duplicate"
+          model="account.move"
+          attachment_use="True"
+          attachment="(object.state in ('open','paid')) and (('{}-Duplikat'.format(object.eco_report_name())).replace('/','')+'.pdf')"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          report_type="qweb-pdf"
+          name="ecoservice_german_documents_invoice.report_invoice_duplicate_template"/>
+
+  <!-- Register: Invoice Duplicate (without logo) -->
+  <report id="report_invoice_duplicate_without_logo"
+          string="Duplicate Letter Paper"
+          model="account.move"
+          attachment_use="True"
+          attachment="(object.state in ('open','paid')) and (('{}-Duplikat'.format(object.eco_report_name())).replace('/','')+'.pdf')"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          report_type="qweb-pdf"
+          name="ecoservice_german_documents_invoice.report_invoice_duplicate_template_without_logo"/>
+
+  <!-- Build: Report Invoice Duplicate -->
+  <template id="report_invoice_duplicate_template">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-set="payments_vals" t-value="o._get_reconciled_info_JSON_values()"/>
+        <t t-call="ecoservice_german_documents_invoice.report_translator_invoice_duplicate" t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Build: Report Invoice Duplicate (without logo) -->
+  <template id="report_invoice_duplicate_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-set="payments_vals" t-value="o._get_reconciled_info_JSON_values()"/>
+        <t t-call="ecoservice_german_documents_invoice.report_translator_invoice_duplicate" t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Translate: Invoice Duplicate (non-fields) -->
+  <template id="report_translator_invoice_duplicate">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+
+    <t t-set="doc_name">Invoice (Duplicate)</t>
+    <t t-if="'refund' in o.type" t-set="doc_name">Refund (Duplicate)</t>
+
+    <t t-set="doc_text" t-value="o.account_invoice"/>
+    <t t-if="'refund' in o.type" t-set="doc_text" t-value="o.account_refund"/>
+
+    <t t-set="doc_text_bottom" t-value="o.account_invoice_bottom"/>
+    <t t-if="'refund' in o.type" t-set="doc_text_bottom" t-value="o.account_refund_bottom"/>
+
+    <t t-call="ecoservice_german_documents_invoice.report_invoice_document"/>
+  </template>
+</odoo>

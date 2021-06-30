@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+  <record id="uom_categ_eco" model="uom.category">
+    <field name="name">Ecoservice</field>
+    <field name="uom_template" eval="True"/>
+  </record>
+  <record id="eco_uom_piece" model="uom.uom">
+    <field name="name">Piece (reference)</field>
+    <field name="category_id" ref="ecoservice_uom_conversion.uom_categ_eco"/>
+    <field name="factor" eval="1.0"/>
+    <field name="rounding" eval="0.00001"/>
+  </record>
+  <record id="eco_uom_square_meters" model="uom.uom">
+    <field name="name">Square meters (m²)</field>
+    <field name="category_id" ref="ecoservice_uom_conversion.uom_categ_eco"/>
+    <field name="factor_inv" eval="2.77"/>
+    <field name="uom_type">bigger</field>
+    <field name="rounding" eval="0.00001"/>
+  </record>
+  <record id="eco_uom_cubic_meters" model="uom.uom">
+    <field name="name">Cubic meter (cbm)</field>
+    <field name="category_id" ref="ecoservice_uom_conversion.uom_categ_eco"/>
+    <field name="factor" eval="0.0198"/>
+    <field name="uom_type">smaller</field>
+    <field name="rounding" eval="0.00001"/>
+  </record>
+  <record id="eco_uom_kg" model="uom.uom">
+    <field name="name">Kilogram (kg)</field>
+    <field name="category_id" ref="ecoservice_uom_conversion.uom_categ_eco"/>
+    <field name="factor" eval="0.594"/>
+    <field name="uom_type">smaller</field>
+    <field name="rounding" eval="0.00001"/>
+  </record>
+  <record id="eco_uom_palette" model="uom.uom">
+    <field name="name">palette (Palette)</field>
+    <field name="category_id" ref="ecoservice_uom_conversion.uom_categ_eco"/>
+    <field name="factor" eval="0.00625"/>
+    <field name="uom_type">smaller</field>
+    <field name="rounding" eval="0.00001"/>
+  </record>
+</odoo>

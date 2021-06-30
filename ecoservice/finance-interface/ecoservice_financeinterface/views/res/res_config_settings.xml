@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="view_ecoservice_finance_interface_configuration" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.import.export.configuration</field>
+    <field name="model">res.config.settings</field>
+    <field name="priority" eval="80"/>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[hasclass('settings')]" position="inside">
+        <div name="ecoservice_financeinterface" class="app_settings_block" data-string="Finance Interface" string="Finance Interface" data-key="ecoservice_financeinterface" groups="ecoservice_financeinterface.group_ecofi_financeinterface">
+          <div name="ecofi_general_settings">
+            <h2>Finance Interface</h2>
+
+            <div class="row mt16 o_settings_container">
+              <div class="col-xs-9 col-md-8 o_setting_box">
+                <div class="text-muted">Select default journals</div>
+                <field name="journal_ids" domain="[('company_id', '=', company_id)]"/>
+              </div>
+              <div class="col-xs-3 col-md-4 o_setting_box">
+                <div class="o_setting_left_pane"></div>
+                <div class="o_setting_right_pane">
+                  <div class="text-muted">Configure validations</div>
+                  <field name="ecofi_validation_id" class="oe_inline"/>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-3 o_setting_box">
+                <div class="o_setting_left_pane">
+                  <field name="default_ecofi_validations_enabled" class="oe_inline"/>
+                </div>
+                <div class="o_setting_right_pane">
+                  <label for="default_ecofi_validations_enabled"/>
+                  <div class="text-muted">Select if validations should be enabled by default for new moves</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

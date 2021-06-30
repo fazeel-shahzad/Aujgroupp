@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="report_invoice_document">
+    <t t-call="web.external_layout">
+      <div class="page">
+
+        <!-- Letterhead -->
+        <div class="row address_row">
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_base.letterhead_sender_address"/>
+            <t t-call="ecoservice_german_documents_base.letterhead_receiver_address"/>
+          </div>
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_invoice.letterhead_reference"/>
+          </div>
+        </div>
+
+        <div id="custom_title"
+             t-if="'account_invoice_title' in o and o.account_invoice_title">
+          <h1 style="font-size: 14pt; font-weight:bold;">
+            <span t-field="o.account_invoice_title" name="invoice_title"/>
+          </h1>
+        </div>
+
+        <!-- Salutation & Introduction -->
+        <div id="letterhead_introduction" class="row mt16">
+          <div t-if="doc_text" class="col-12" align="left">
+            <t t-call="ecoservice_german_documents_base.letter_salutation"/>
+            <div style="margin-top:5px;">
+              <!-- Render the HTML fields as a mako template to evaluate variables -->
+              <t t-raw="o.env['mail.template']._render_template(doc_text, o._name, o.id)"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="row">
+          <div class="col-12">
+            <t t-call="ecoservice_german_documents_invoice.report_table_base_invoice"/>
+          </div>
+        </div>
+
+        <!-- Summary of all tables -->
+        <div id="tables_summary" class="row">
+          <t t-call="ecoservice_german_documents_base.final_amount_template"/>
+        </div>
+
+        <div t-if="doc_text_bottom" class="row mt16">
+          <div class="col-12" align="left">
+            <div>
+              <!-- Render the HTML fields as a mako template to evaluate variables -->
+              <t t-raw="o.env['mail.template']._render_template(doc_text_bottom, o._name, o.id)"/>
+            </div>
+          </div>
+        </div>
+
+        <!--Incoterms-->
+        <t t-call="ecoservice_german_documents_base.incoterms"
+           groups="sale_stock.group_display_incoterm">
+          <t t-set="incoterms_id" t-value="o.invoice_incoterm_id"/>
+        </t>
+
+        <div class="row" t-if="o.invoice_payment_ref">
+          <div class="col-12">
+            Please use the following communication for your payment :
+            <span class="bold" t-field="o.invoice_payment_ref"/>
+          </div>
+        </div>
+
+        <!-- Other customly needed fields -->
+        <div id="note" t-if="o.narration" class="row mt16">
+          <div class="col-12">
+            <span t-field="o.narration"/>
+          </div>
+        </div>
+
+        <!--Payment terms-->
+        <t t-call="ecoservice_german_documents_base.payment_terms">
+          <t t-set="show_payment_terms_note" t-value="True"/>
+        </t>
+
+        <div id="fiscal_position"
+             t-if="o.fiscal_position_id and o.fiscal_position_id.note"
+             class="row mt16">
+          <div class="col-12">
+            <span t-field="o.fiscal_position_id.note"/>
+          </div>
+        </div>
+
+        <div id="qrcode" class="row mt16"
+             t-if="(o.company_id.qr_code) and (o.currency_id.name == 'EUR') and (o.invoice_partner_bank_id.acc_number != False)">
+          <p t-if="o.invoice_partner_bank_id.qr_code_valid">
+            <strong class="text-center">Scan me with your banking app.</strong>
+            <br/>
+            <br/>
+            <img class="border border-dark rounded"
+                 t-att-src="o.invoice_partner_bank_id.build_qr_code_url(o.amount_residual,(o.ref) if (o.ref) else o.name)"/>
+          </p>
+          <p t-if="not o.invoice_partner_bank_id.qr_code_valid">
+            <strong class="text-center">The SEPA QR Code informations are not set correctly.</strong>
+            <br/>
+          </p>
+        </div>
+
+      </div>
+    </t>
+  </template>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="ecofi_validation_form_view_inherit_datev" model="ir.ui.view">
+    <field name="name">ecofi.validation.form.inherit.datev</field>
+    <field name="model">ecofi.validation</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="ecoservice_financeinterface.ecofi_validation_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="/form/sheet/group" position="inside">
+        <group id="ecofi_datev" string="DATEV">
+          <field name="validate_account_counter_account"/>
+
+          <field name="validate_required_tax_is_set"/>
+          <field name="validate_automatic_account_has_tax"/>
+          <field name="validate_automatic_account_line_has_correct_tax"/>
+          <field name="validate_tax_booking_key_is_set"/>
+        </group>
+      </xpath>
+
+    </field>
+  </record>
+
+</odoo>

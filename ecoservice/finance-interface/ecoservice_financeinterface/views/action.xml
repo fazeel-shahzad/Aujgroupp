@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="ecoservice_ecofi_export_wizard" model="ir.actions.act_window">
+    <field name="name">Create Finance Export</field>
+    <field name="res_model">export.ecofi</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="export_ecofi_view"/>
+    <field name="target">new</field>
+  </record>
+
+  <record id="eco_ecofi_action" model="ir.actions.act_window">
+    <field name="name">Finance Exports</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">ecofi</field>
+    <field name="view_mode">form,tree</field>
+    <field name="view_id" ref="eco_ecofi_tree_view"/>
+  </record>
+
+  <record id="action_financeinterface_configuration" model="ir.actions.act_window">
+    <field name="name">Settings</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module' : 'ecoservice_financeinterface'}</field>
+  </record>
+
+</odoo>

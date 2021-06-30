@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="report_stock_document_picking_operation">
+    <t t-call="web.external_layout">
+      <div class="page">
+
+        <!-- Letterhead -->
+        <div class="row address_row">
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_base.letterhead_sender_address"/>
+            <div t-if="o.move_lines and o.move_lines[0].partner_id">
+              <t t-set="delivery_address" t-value="o.move_lines[0].partner_id"/>
+              <t t-call="ecoservice_german_documents_stock.letterhead_receiver_address_drop_shipping"/> <!-- Drop Shipping -->
+            </div>
+            <div t-if="not (o.move_lines and o.move_lines[0].partner_id) and o.partner_id">
+              <t t-call="ecoservice_german_documents_base.letterhead_receiver_address"/>
+            </div>
+            <div class="mt32 left" t-if="is_picking">
+              <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                   style="width: 300px; height: 50px;" alt="Barcode"/>
+            </div>
+          </div>
+          <div class="col-6">
+            <t t-call="ecoservice_german_documents_stock.letterhead_reference"/>
+          </div>
+        </div>
+
+        <!-- Tables -->
+        <div id="tables_summary" class="row" style="margin-left:0px" t-if="o.state not in ['draft', 'waiting', 'confirmed']">
+          <div class="col-12">
+            <t t-call="ecoservice_german_documents_stock.report_table_base_stock"/>
+          </div>
+        </div>
+
+        <div class="row mt8" t-if="o.state in ['draft', 'waiting', 'confirmed']">
+          Some of the products may be waiting for availability. Please click the 'Reserve' button to check if the products are available.
+        </div>
+
+        <!-- Other customly needed fields -->
+        <div id="custom_area" class="delivery_note">
+        </div>
+
+        <!--Note-->
+        <div class="row mt32">
+          <span t-field="o.note"/>
+        </div>
+
+        <!-- Load Base CSS Styles -->
+        <t t-call="ecoservice_german_documents_base.report_css_body"/>
+        <!-- Include optional Base CSS File for stock tables only -->
+        <t t-call="ecoservice_german_documents_stock.report_css_body_stock"/>
+
+      </div>
+    </t>
+  </template>
+
+</odoo>

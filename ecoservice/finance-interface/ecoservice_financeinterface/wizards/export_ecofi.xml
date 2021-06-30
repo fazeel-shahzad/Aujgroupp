@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="export_ecofi_view" model="ir.ui.view">
+    <field name="name">Create Finance Export</field>
+    <field name="model">export.ecofi</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <field name="company_id" class="oe_inline"/>
+          <field name="journal_ids"
+                 domain="[('company_id', '=', company_id)]"/>
+        </group>
+
+        <group col="4">
+          <field name="date_from"/>
+          <field name="date_to"/>
+        </group>
+
+        <footer>
+          <group>
+            <button icon="fa-check-square"
+                    string="Start Export"
+                    name="start_export"
+                    type="object"
+                    class="btn-primary"/>
+            <button icon="fa-minus-square"
+                    string="Cancel"
+                    special="cancel"/>
+          </group>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+</odoo>

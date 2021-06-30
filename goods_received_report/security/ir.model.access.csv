@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_goodspo_report_wizard,access.po.goods.report.wizard,model_po_goods_report_wizard,,1,1,1,1

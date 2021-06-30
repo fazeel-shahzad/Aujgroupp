@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="report_table_base_sale_inherit_magu"
+            inherit_id="ecoservice_german_documents_sale.report_table_base_sale">
+
+    <!-- Remove taxes from lines-->
+    <th t-if="display_taxes" position="replace"/>
+    <td t-if="display_taxes" position="replace"/>
+
+    <td t-if="display_discount" position="replace">
+      <td t-if="display_discount"
+          class="text-right"
+          groups="product.group_discount_per_so_line">
+          <t t-if="line.discount">
+            <span t-field="line.discount"/>%
+          </t>
+      </td>
+    </td>
+
+  </template>
+
+</odoo>

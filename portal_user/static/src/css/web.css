@@ -1,0 +1,165 @@
+/*
+    DEMO STYLE
+*/
+#wrapper {
+    overflow-x: hidden;
+ }
+ #sidebar{
+    background: white;
+    color:black;
+    min-width: 19rem;
+    max-width: 19rem;
+}
+
+.navbar{
+    margin-left: 90px;
+}
+.nav{
+    border: none;
+}
+.bgimage{
+  background-image: url('e0a8e8e4-cb50-4b9e-b044-bba1a97b0e4d.o.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  /*width: 100%;*/
+  background-repeat: no-repeat;
+  }
+  #profile{
+  color:white;
+  margin-left:50px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  padding-right: 10px;
+  }
+  h1:before{
+  content:'|';
+  color: red;
+  padding-right: 10px;
+  }
+
+/*.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}*/
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.nav1{
+   background-color: #f9f9f9;
+   /*padding-top: 20px;*/
+   height: 50px;
+   /*border-top:2px solid red;*/
+
+}
+.nav-link {
+    color: rgb(110, 110, 110);
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #55c57a
+}
+.navul{
+    margin:0 5px 0 0;
+    width: 170px;
+
+}
+.navul a:hover{
+    color:black;
+}
+.c1{
+   height: 120px;
+}
+h6{
+    padding-top: 50px;
+    color: #828282;
+}
+.pagination{
+    padding-top: 70px;
+}
+.pagination li>a:hover{
+    background-color: red;
+    color:black;
+    border-color: black;
+}
+thead{			<nav>
+
+    color: #828282;
+}
+tbody{
+    color: #828282;
+}
+.child-ul li{
+   text-decoration: none;
+  display: inline-block;
+  padding: 5px;
+
+}
+.child-ul li a:hover{
+    text-decoration: none;
+    color:white;
+}
+.child-nav{
+    padding: 10px;
+    margin:5px;
+   background-color: #f9f9f9;
+
+}
+/*.nav-pills .nav-link.active {
+    color: red;
+    background-color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-weight: 600
+}
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 130vh;
+    transition: all 0.3s;
+}
+#page-content-wrapper {
+  min-width: 100vw;
+
+}			<nav>
+
+.thumb{
+    height: 250px;
+    width: 250px;
+    padding-right: 50px;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}

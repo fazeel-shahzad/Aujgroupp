@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo>
+
+  <record model="ecofi.datev.formate" id="ecofi_datev_formate_default_account_receivable">
+    <field name="name">Accounts Receivable</field>
+    <field name="datev_domain">[('user_type_id','=',1)]</field>
+    <field name="datev_type">account_receivable</field>
+  </record>
+
+  <record model="ecofi.datev.formate" id="ecofi_datev_formate_default_payment_terms">
+    <field name="name">Payment Terms</field>
+    <field name="datev_domain">[]</field>
+    <field name="datev_type">payment_term</field>
+  </record>
+
+  <record model="ecofi.datev.formate" id="ecofi_datev_formate_default_account_payable">
+    <field name="name">Accounts Payable</field>
+    <field name="datev_domain">[('user_type_id','=',2)]</field>
+    <field name="datev_type">account_payable</field>
+  </record>
+
+</odoo>

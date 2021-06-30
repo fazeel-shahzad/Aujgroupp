@@ -1,0 +1,2 @@
+"id","name","code","user_type_id/id","chart_template_id/id","tag_ids/id","reconcile","parent_id"
+"acount_issued_subscribed_paid","Issued, Subscribed and Paid Capital","01-01-0000","account_parent.data_account_type_view","l10n_generic_coa.configurable_chart_template","","False","account_capital_and_reserves"

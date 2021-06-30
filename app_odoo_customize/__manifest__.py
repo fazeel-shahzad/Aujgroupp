@@ -22,8 +22,8 @@
 # description:
 
 {
-    'name': 'odoo Customize OEM(Boost, Data reset)',
-    'version': '14.21.03.03',
+    'name': 'odoo 14,13 Customize OEM(Boost, Data reset)',
+    'version': '13.20.09.10',
     'author': 'Sunpop.cn',
     'category': 'Productivity',
     'website': 'https://www.sunpop.cn',
@@ -32,14 +32,14 @@
     'summary': """
     1 click customize odoo, reset data. For quick develop. Set brand, boost, reset data, debug. Language Switcher. 
     Easy Delete data.reset account chart.
-    customize my odoo. odoo customize, odoo oem.
+    customize my odoo. 
     """,
     'description': """
     
     App Customize Odoo (Change Title,Language,Documentation,Quick Debug)
     ============
     White label odoo.
-    Support Odoo 14, 13, 12, 11, 10, 9.
+    Support Odoo 13, 12, 11, 10, 9.
     You can config odoo, make it look like your own platform.
     1. Deletes Odoo label in footer
     2. Replaces "Odoo" in Windows title
@@ -72,10 +72,10 @@
     29. Apps version compare. Add Install version in App list. Add Local updatable filter in app list.
     30. 1 key export app translate file like .po file.
     31. Show or hide odoo Referral in the top menu.
-    32. Fix odoo bug of complete name bug of product category and stock location.
+    32. Fix odoo bug of complete name bug of product category and stock location..
     33. Add Demo Ribbon Setting.
-    34. Add Remove all quality data(for odoo Enterprise).
-    35. Add odoo 14 Support.
+    34. Add Remove all quality data.
+    35. Fixed for odoo 14.
     36. Add refresh translate for multi module.
     
     This module can help to white label the Odoo.
@@ -83,7 +83,7 @@
     The user can get the help document just by one click.
     ## 在符合odoo开源协议的前提下，去除odoo版权信息，自定义你的odoo
     可完全自行设置下列 odoo 选项，让 odoo 看上去像是你的软件产品
-    支持Odoo 14,13,12, 11, 10, 9 版本，社区版企业版通用    
+    支持Odoo 13,12, 11, 10, 9 版本，社区版企业版通用    
     1. 删除菜单导航页脚的 Odoo 标签
     2. 将弹出窗口中 "Odoo" 设置为自定义名称
     3. 自定义用户菜单中的 Documentation, Support, About 的链接
@@ -117,7 +117,7 @@
     31. 显示或去除 odoo 推荐
     32. 增加修复品类及区位名的操作 
     33. 增加 Demo 的显示设置 
-    34. 增加清除质检数据 (企业版)
+    34. 增加清除质检数据 
     35. 优化至odoo14适用 
     36. 可为多个模块强制更新翻译 
     """,
@@ -132,8 +132,6 @@
         # 'web_mobile'
     ],
     'data': [
-        'security/res_groups.xml',
-        'security/ir.model.access.csv',
         'views/app_odoo_customize_views.xml',
         'views/app_theme_config_settings_views.xml',
         'views/res_config_settings_views.xml',
@@ -148,6 +146,8 @@
         'data/ir_module_module_data.xml',
         # 'data/digest_template_data.xml',
         'data/res_company_data.xml',
+        'security/res_groups.xml',
+        'security/ir.model.access.csv',
     ],
     'qweb': [
         'static/src/xml/*.xml',

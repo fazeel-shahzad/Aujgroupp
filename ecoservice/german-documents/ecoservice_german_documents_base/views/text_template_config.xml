@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="text_template_config_view_form" model="ir.ui.view">
+    <field name="name">text.template.config.view.form</field>
+    <field name="model">text.template.config</field>
+    <field name="arch" type="xml">
+      <form create="false" delete="false">
+        <sheet>
+          <group>
+            <field name="model"/>
+            <field name="name"/>
+            <field name="default_text" widget="html"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="text_template_config_view_tree" model="ir.ui.view">
+    <field name="name">text.template.config.tree</field>
+    <field name="model">text.template.config</field>
+    <field name="arch" type="xml">
+      <tree create="false" delete="false">
+        <field name="name"/>
+        <field name="model" options="{'no_open': True}"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

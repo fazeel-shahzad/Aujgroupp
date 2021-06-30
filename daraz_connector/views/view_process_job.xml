@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_process_job" model="ir.sequence">
+            <field name="name">Process Job</field>
+            <field name="code">process.job</field>
+            <field name="prefix">DRZJ</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="view_process_job_log_tree" model="ir.ui.view">
+            <field name="name">Transaction log</field>
+            <field name="model">process.job</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="name"/>
+                    <field name="instance_id"/>
+                    <field name="process_type"/>
+                    <field name="operation_type"/>
+                    <field name="message"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_process_job_log_form" model="ir.ui.view">
+            <field name="name">Transaction Job</field>
+            <field name="model">process.job</field>
+            <field name="arch" type="xml">
+                <form create="0" edit="0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="name" string="Name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="instance_id"/>
+                            <field name="process_type"/>
+                            <field name="operation_type"/>
+                            <field name="create_date"/>
+                            <field name="message"/>
+                        </group>
+                        <notebook>
+                            <page string="Process Log Lines">
+                                <field name="line_ids" readonly="1">
+                                    <tree>
+                                        <field name="message"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Request &amp; Response" groups="base.group_no_one">
+                                <group string="Request">
+                                    <field name="request" widget="ace" style="word-break: break-all;" nolabel="1"
+                                           options="{'mode': 'python'}"/>
+                                </group>
+                                <group string="Response">
+                                    <field name="response" style="word-break: break-all;" nolabel="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="transaction_search_view" model="ir.ui.view">
+            <field name="name">Transaction Search View</field>
+            <field name="model">process.job</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Instance">
+                    <field name="message"/>
+                    <field name="create_date"/>
+                    <filter string="Except Tax" domain="[('process_type','!=','tax')]" name="except_tax_req_filter"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Instance" name="instance" context="{'group_by':'instance_id'}"/>
+                        <filter string="Process Type" name="process_type" context="{'group_by':'process_type'}"/>
+                        <filter string="Operation Type" name="operation_type" context="{'group_by':'operation_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_process_job_log" model="ir.actions.act_window">
+            <field name="name">Process Job</field>
+            <field name="res_model">process.job</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_except_tax_req_filter':1}</field>
+            <field name="help" type="html">
+                <div>
+                    <p>
+                        <b>No Log Details available right now.</b>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <menuitem id="process_job_log" parent="daraz_connector_menu_root"
+                  name="Process Log Details"  action="action_process_job_log" sequence="25"/>
+
+    </data>
+</odoo>

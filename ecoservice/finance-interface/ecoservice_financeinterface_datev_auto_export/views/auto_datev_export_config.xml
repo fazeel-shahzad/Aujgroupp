@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo>
+
+  <!-- #region Menu -->
+
+  <record id="auto_datev_export_config_action" model="ir.actions.act_window">
+    <field name="name">DATEV Auto Export Configuration</field>
+    <field name="res_model">auto.datev.export.config</field>
+    <field name="view_mode">tree</field>
+  </record>
+
+  <menuitem id="auto_datev_export_config_menu"
+    name="DATEV Auto Export Configuration"
+    parent="ecoservice_financeinterface.menu_finance_interface"
+    action="auto_datev_export_config_action"
+    sequence="30"/>
+
+  <!-- #endregion -->
+
+  <record id="auto_datev_export_config_view_tree" model="ir.ui.view">
+    <field name="name">auto.datev.export.config.tree</field>
+    <field name="model">auto.datev.export.config</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="partner_id"/>
+        <field name="period"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

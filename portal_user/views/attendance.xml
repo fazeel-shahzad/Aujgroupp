@@ -1,0 +1,90 @@
+<odoo>
+	<template id="attendance" name="Attendance">
+		<t t-call="website.layout">
+			<div class="wrapper">
+				<!-- 				 Sidebar   -->
+				<nav id="sidebar">
+					<ul class="list-unstyled components">
+						<li>
+							<a href="/dashboard">Dashboard</a>
+						</li>
+						<li>
+							<a href="/attendance">Attendance</a>
+						</li>
+						<li class="active">
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Leave Request</a>
+							<ul class="collapse list-unstyled" id="homeSubmenu">
+								<li>
+									<a href="/my-time-off-request">My Time Off Request</a>
+								</li>
+								<li>
+									<a href="/my-allocation">My Allocation Request</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="active">
+							<a href="#home1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Loan Request</a>
+							<ul class="collapse list-unstyled" id="home1Submenu">
+								<li>
+									<a href="/loan-request">Request for Loan</a>
+								</li>
+								<li>
+									<a href="/advance-salary">Request for Advance Salary</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<!--  Page Content   -->
+				<div id="content">
+					<div class="container" style="margin-top:10px;">
+						<form class="form justify-content-center" role="form" action="/attendance-form" method="POST">
+							<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+							<h1 class="text-center h1">Attendance</h1>
+							<br/>
+							<div class="form-row">
+								<div class="form-group input-group-md col-3">
+									<h5 for="inputState" class="">Employee</h5>
+									<select class="form-control" name="employee_id" id="employee_advance" >
+										<option value="">Employee...</option>
+										<t t-foreach="hr_employee" t-as="employee">
+											<option t-att-value="employee.id">
+												<t t-esc="employee.name"/>
+											</option>
+										</t>
+									</select>
+								</div>
+								<div class="form-group input-group-md col-3">
+									<h5 for="inputAdvance">Check In</h5>
+									<input type="date" name="check_in" class="form-control" id="inputAdvance" placeholder="0.00"/>
+								</div>
+								<div class="form-group input-group-md col-3">
+									<h5 for="inputAdvance">Check Out</h5>
+									<input type="date" name="check_out" class="form-control" id="inputAdvance" placeholder="0.00"/>
+								</div>
+								<div class="form-group input-group-md col-3">
+									<h5 for="inputDate">Work Hours</h5>
+									<input type="number" name="worked_hours" class="form-control" id="inputAdvance"/>
+								</div>
+							</div>
+<!--							<div class="form-row">-->
+<!--								-->
+<!--								-->
+<!--							</div>-->
+							<div class="form-row ">
+								<div class="col-6"> </div>
+								<div class="form-group col-6">
+									<button class="btn btn-primary btn-lg float-right" type="submit" name="submit"> Submit </button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" type="text/css" href="/portal_user/static/src/css/style.css"/>
+			</xpath>
+		</t>
+	</template>
+</odoo>

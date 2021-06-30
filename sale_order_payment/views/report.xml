@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="advance_payment_report"
+                string="Payment Report"
+                model="account.payment"
+                report_type="qweb-pdf"
+                name="sale_order_payment.advance_payment_template"
+                file="sale_order_payment.advance_payment_template"
+        />
+        <!--                 paperformat="paperformat_fhs_contrato_encomienda"-->
+
+    </data>
+</odoo>

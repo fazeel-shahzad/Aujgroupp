@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="res_config_settings_view_form_inherit_ecoservice_partner_account"
+          model="ir.ui.view">
+    <field name="name">res.partner.settings</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@data-key='account']//div[@id='bank_cash']"
+             position="after">
+
+        <h2>Automatic Account Generation</h2>
+        <div class="row mt16 o_settings_container">
+          <div class="col-md-6 o_setting_box">
+            <div class="o_setting_left_pane">
+              <field name="partner_account_generate_automatically"/>
+            </div>
+            <div class="o_setting_right_pane">
+              <label for="partner_account_generate_automatically"/>
+              <span class="fa fa-lg fa-building-o"
+                    title="Values set here are company-specific."
+                    aria-label="Values set here are company-specific."
+                    groups="base.group_multi_company"
+                    role="img"/>
+              <div class="text-muted">
+                Generate and assign creditor and debtor automatically for any new company contact.
+              </div>
+              <div class="content-group"
+                   attrs="{'invisible': [('partner_account_generate_multi_company', '=', False)]}">
+                <div class="text-warning mt16 mb4">
+                  Activating this in combination with the share option will also generate accounts for the other companies independent of their automatic option.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 o_setting_box">
+            <div class="o_setting_left_pane">
+              <field name="partner_account_generate_multi_company"/>
+            </div>
+            <div class="o_setting_right_pane">
+              <label for="partner_account_generate_multi_company"/>
+              <span class="fa fa-lg fa-building-o"
+                    title="Values set here are company-specific."
+                    aria-label="Values set here are company-specific."
+                    groups="base.group_multi_company"
+                    role="img"/>
+              <div class="text-muted">
+                Share created creditor and debtor accounts across all companies.
+              </div>
+              <div class="content-group"
+                   attrs="{'invisible': [('partner_account_generate_multi_company', '=', False)]}">
+                <div class="text-warning mt16 mb4">
+                  The accounts will be shared within companies with this option enabled.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 o_setting_box">
+            <div class="o_setting_left_pane">
+              <field name="config_set_ref_on_account_creation"/>
+            </div>
+            <div class="o_setting_right_pane">
+              <label for="config_set_ref_on_account_creation"/>
+              <div class="text-muted">
+                Set the account code as the partner reference if a account changes.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 o_setting_box"
+               attrs="{'invisible': [('config_set_ref_on_account_creation', '=', False)]}">
+            <div class="o_setting_left_pane"/>
+            <div class="o_setting_right_pane">
+              <label for="partner_account_account_code_ref_preferred"/>
+              <span class="fa fa-lg fa-building-o"
+                    title="Values set here are company-specific."
+                    aria-label="Values set here are company-specific."
+                    role="img"/>
+              <div class="text-muted">
+                Select whether you prefer the customer or the supplier account to be set as the reference.
+              </div>
+              <div class="content-group mt16">
+                <field name="partner_account_account_code_ref_preferred"
+                       widget="radio"
+                       attrs="{'required': [('config_set_ref_on_account_creation', '=', True)]}"/>
+
+                <div class="text-warning mt16 mb4">
+                  This setting has effect only when both accounts are created at the same time, which is impossible via the GUI but can be achieved with scripts and imports.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

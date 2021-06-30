@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="sale_line_product_image.list">
+      <field name="name">sale_line_product_image list</field>
+      <field name="model">sale_line_product_image.sale_line_product_image</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="sale_line_product_image.action_window">
+      <field name="name">sale_line_product_image window</field>
+      <field name="res_model">sale_line_product_image.sale_line_product_image</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="sale_line_product_image.action_server">
+      <field name="name">sale_line_product_image server</field>
+      <field name="model_id" ref="model_sale_line_product_image_sale_line_product_image"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="sale_line_product_image" id="sale_line_product_image.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="sale_line_product_image.menu_1" parent="sale_line_product_image.menu_root"/>
+    <menuitem name="Menu 2" id="sale_line_product_image.menu_2" parent="sale_line_product_image.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="sale_line_product_image.menu_1_list" parent="sale_line_product_image.menu_1"
+              action="sale_line_product_image.action_window"/>
+    <menuitem name="Server to list" id="sale_line_product_image" parent="sale_line_product_image.menu_2"
+              action="sale_line_product_image.action_server"/>
+-->
+  </data>
+</odoo>

@@ -1,0 +1,179 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_account_vat_replacement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-24 15:19+0000\n"
+"PO-Revision-Date: 2020-06-24 15:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__company_id
+msgid "Company"
+msgstr "Mandant"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__configuration_id
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__configuration_id
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__configuration_account_ids
+msgid "Configuration Account"
+msgstr "Kontenkonfiguration"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__configuration_tax_ids
+msgid "Configuration Tax"
+msgstr "Steuerkonfiguration"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__create_uid
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__create_uid
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__create_date
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__create_date
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__description
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__display_name
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__display_name
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model_terms:ir.ui.view,arch_db:ecoservice_account_vat_replacement.vat_configuration_view_form
+msgid "Execute Configuration"
+msgstr "Konfiguration ausführen"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__id
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__id
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__id
+msgid "ID"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration____last_update
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account____last_update
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__write_uid
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__write_uid
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__write_date
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__write_date
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__source_account_id
+msgid "Source Account"
+msgstr "Ausgangskonto"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__source_tax_id
+msgid "Source Tax"
+msgstr "Ausgangssteuer"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_account__target_account_id
+msgid "Target Account"
+msgstr "Zielkonto"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration_tax__target_tax_id
+msgid "Target Tax"
+msgstr "Zielsteuer"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model,name:ecoservice_account_vat_replacement.model_vat_configuration
+msgid "VAT Configuration"
+msgstr "MwSt.-Konfiguration"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model,name:ecoservice_account_vat_replacement.model_vat_configuration_account
+msgid "VAT Configuration Account Line"
+msgstr "MwSt.-Konfigurationskontozeile"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model,name:ecoservice_account_vat_replacement.model_vat_configuration_tax
+msgid "VAT Configuration Tax Line"
+msgstr "MwSt.-Konfigurationssteuerzeile"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.actions.act_window,name:ecoservice_account_vat_replacement.vat_configuration_action
+#: model:ir.ui.menu,name:ecoservice_account_vat_replacement.vat_configuration_menu
+msgid "VAT Replacement Configuration"
+msgstr "MwSt.-Konfiguration"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.constraint,message:ecoservice_account_vat_replacement.constraint_vat_configuration_account_unique_source_account
+msgid ""
+"You must not replace the source account more than once within one "
+"configuration!"
+msgstr ""
+"Innerhalb einer Konfiguration darf ein Ausgangskonto nur einmal ersetzt "
+"werden!"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.constraint,message:ecoservice_account_vat_replacement.constraint_vat_configuration_tax_unique_source_tax
+msgid ""
+"You must not replace the source tax more than once within one configuration!"
+msgstr ""
+"Innerhalb einer Konfiguration darf eine Steuer nur einmal ersetzt "
+"werden!"
+
+#. module: ecoservice_account_vat_replacement
+#: model_terms:ir.ui.view,arch_db:ecoservice_account_vat_replacement.vat_configuration_view_form
+msgid "Cronjob execution set to:"
+msgstr "CronJob wird ausgeführt am:"
+
+#. module: ecoservice_account_vat_replacement
+#: model_terms:ir.ui.view,arch_db:ecoservice_account_vat_replacement.vat_configuration_view_form
+msgid "Cronjob last executed on:"
+msgstr "CronJob wurde ausgeführt am:"
+
+#. module: ecoservice_account_vat_replacement
+#: model:ir.model.fields,field_description:ecoservice_account_vat_replacement.field_vat_configuration__execution_time
+msgid "Execution Time"
+msgstr "Ausführungszeitpunkt"
+
+#. module: ecoservice_account_vat_replacement
+#: model_terms:ir.ui.view,arch_db:ecoservice_account_vat_replacement.vat_configuration_view_form
+msgid "No Cronjob set!"
+msgstr "Keine Ausführung geplant!"
+
+#. module: ecoservice_account_vat_replacement
+#: model_terms:ir.ui.view,arch_db:ecoservice_account_vat_replacement.vat_configuration_view_form
+msgid "Schedule Cronjob"
+msgstr "Ausführung planen"

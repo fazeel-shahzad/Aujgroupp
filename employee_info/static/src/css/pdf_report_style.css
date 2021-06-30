@@ -1,0 +1,12 @@
+
+.main-div {
+    display: block;
+}
+.main-div .inner-div{
+ float: flex;
+ display: -webkit-box-flex;
+}
+.employee_info {
+    border:1px solid black;
+    text-align: center;
+}

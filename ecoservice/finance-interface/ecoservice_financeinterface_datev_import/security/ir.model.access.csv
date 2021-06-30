@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_import_datev","import.datev","model_import_datev","ecoservice_financeinterface.group_ecofi_financeinterface",1,1,1,1
+"access_import_datev_log","import.datev.log","model_import_datev_log","ecoservice_financeinterface.group_ecofi_financeinterface",1,1,1,1

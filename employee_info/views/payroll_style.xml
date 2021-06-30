@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <odoo>
+            <!--      <template id="web_assets_backend_ext" name="Pdf Reports style1" inherit_id="web.assets_common"> -->
+            <!--         <xpath expr="." position="inside"> -->
+            <!--             <link rel="stylesheet" type="text/css" href="/bookings/static/src/css/pdf_report_style.css"/> -->
+            <!--         </xpath> -->
+            <!--     </template> -->
+        </odoo>
+    </data>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- Register: Report Purchase Order / Quotation -->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="report_purchase_order_quotation" model="ir.actions.report">
+    <field name="name">RFQ / Purchase Order</field>
+    <field name="model">purchase.order</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_purchase.report_purchase_order_quotation_template</field>
+  </record>
+
+  <!-- Register: Report Purchase Order / Quotation (without logo) -->
+  <report id="report_purchase_order_quotation_without_logo"
+          string="RFQ / Purchase Order Letter Paper"
+          model="purchase.order"
+          report_type="qweb-pdf"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          print_report_name="'Purchase'"
+          name="ecoservice_german_documents_purchase.report_purchase_order_quotation_template_without_logo"/>
+
+  <!-- TODO: Remove in 14.0 -->
+  <template id="report_purchase_order_quotation_template">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="ecoservice_german_documents_purchase.report_purchase_order_quotation_translator" t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Build: Report Purchase Order (without logo) -->
+  <template id="report_purchase_order_quotation_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="ecoservice_german_documents_purchase.report_purchase_order_quotation_translator" t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Translate: Report Purchase Order (non-fields) -->
+  <template id="report_purchase_order_quotation_translator">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+    <t t-if="o.state in ['purchase', 'done']">
+      <t t-set="doc_name">Purchase Order</t>
+      <t t-set="is_po" t-value="True"/>
+      <t t-set="doc_text" t-value="o.purchase_confirmation"/>
+      <t t-set="doc_text_bottom" t-value="o.purchase_confirmation_bottom"/>
+    </t>
+    <t t-else="">
+      <t t-set="doc_name">Request for Quotation</t>
+      <t t-set="doc_text" t-value="o.purchase_rfq"/>
+      <t t-set="doc_text_bottom" t-value="o.purchase_rfq_bottom"/>
+    </t>
+    <t t-call="ecoservice_german_documents_purchase.report_document_purchase"/>
+  </template>
+
+  <template id="report_purchaseorder_inherit_gd" inherit_id="purchase.report_purchaseorder">
+    <xpath expr="//t[@t-call='purchase.report_purchaseorder_document']" position="replace">
+      <t t-set="gd_active" t-value="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_purchase.report_purchase_order_quotation_translator" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+  <template id="report_purchasequotation_inherit_gd" inherit_id="purchase.report_purchasequotation">
+    <xpath expr="//t[@t-call='purchase.report_purchasequotation_document']" position="replace">
+      <t t-set="gd_active" t-value="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_purchase.report_purchase_order_quotation_translator" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="purchase.report_purchasequotation_document" t-lang="o.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+</odoo>

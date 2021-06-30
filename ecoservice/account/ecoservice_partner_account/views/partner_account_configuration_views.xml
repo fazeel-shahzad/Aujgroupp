@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="partner_account_configuration_view_form" model="ir.ui.view">
+    <field name="name">partner.account.configuration.form</field>
+    <field name="model">partner.account.configuration</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="company_id"/>
+          </group>
+          <group string="Sequences">
+            <field name="account_receivable_sequence_id"
+                   domain="[('code', '=', 'ecoservice.partner.account.receivable'), ('company_id', 'in', [company_id, False])]"/>
+            <field name="account_payable_sequence_id"
+                   domain="[('code', '=', 'ecoservice.partner.account.payable'), ('company_id', 'in', [company_id, False])]"/>
+          </group>
+          <group string="Configuration">
+            <field name="partner_account_generate_automatically"/>
+            <field name="partner_account_generate_multi_company"/>
+            <field name="partner_account_account_code_ref_preferred"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="partner_account_configuration_view_search" model="ir.ui.view">
+    <field name="name">partner.account.configuration.search</field>
+    <field name="model">partner.account.configuration</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="company_id"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="partner_account_configuration_view_tree" model="ir.ui.view">
+    <field name="name">partner.account.configuration.tree</field>
+    <field name="model">partner.account.configuration</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="company_id"/>
+        <field name="account_receivable_sequence_id"
+               string="Receivable Account Sequence"/>
+        <field name="account_payable_sequence_id"
+               string="Payable Account Sequence"/>
+        <field name="partner_account_generate_automatically"/>
+        <field name="partner_account_generate_multi_company"/>
+        <field name="partner_account_account_code_ref_preferred"/>
+      </tree>
+    </field>
+  </record>
+
+</odoo>

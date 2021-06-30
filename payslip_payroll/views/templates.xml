@@ -1,0 +1,246 @@
+<odoo>
+    <data>
+<!--         <template id="my_custom_layout_header">
+
+            <t t-foreach="docs" t-as="o">
+
+                <div class="header">
+                    <div class="row" style="border-bottom: 1px solid black;">
+                        <div class="col-xs-3 pull-right">
+                            <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
+                        <div t-field="o.company_id.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' /> </div></div></div>
+                    </t>
+
+        </template> -->
+    <template id="report_payslip_inherit" inherit_id="hr_payroll.report_payslip">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+           <div class="header">
+           <h1>Header title</h1>
+               <div class="header">
+                    <div class="row" style="border-bottom: 1px solid black;">
+                        <div class="col-xs-3 pull-right">
+                            <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 45px;"/>
+                        <div t-field="o.company_id.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' /> </div></div></div>
+<!--           <t t-call="payslip.my_custom_layout_header"> -->
+<!--           </t> -->
+    </div>
+                <div style="text-align:center;">
+                <h2>Salary Slip</h2>
+                    </div>
+                        <table class="table table-sm table-bordered" style="width:60%; margin-left: 150px">
+                            <tr>
+                                <td>
+                                    <strong>Employee Name</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id"/>
+                                </td>
+                                <tr>
+                                    <td>
+                                        <strong>Employee Code</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.number"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Department</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.contract_id.department_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Designation</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.employee_id.job_id"/>
+                                    </td>
+                                </tr>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Date Of Joining</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.date_start"/>
+                                </td>
+                                <td>
+                                    <t t-set="salary" t-value="0"/>
+                                    <t t-set="salary" t-value="o.contract_id.wage"/>
+                                    <strong>Salary</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="salary"/>
+                                </td>
+                                <tr>
+                                    <td>
+                                        <strong>For the Month of</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.month"/>
+                                    </td>
+                                    <td>
+                                        <strong>Year</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.year"/>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <strong>Payment Mode</strong>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.employee_id.payment_mode"/>
+                                    </td>
+                                 </tr>
+                            </tr>
+                        </table>
+                        <table width="100%" style="margin-left:-15px;">
+                            <tbody>
+                                <tr>
+                                    <td width="49%">
+                                        <table width="99.8%">
+                                            <thead>
+                                                <tr style="border: 1px solid #875A7B;">
+                                                    <th colspan="2" style="text-align:center">Earning</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                                                    <t t-if = "not line.category_id.name == 'Deduction'">
+                                                    <t t-if = "not line.category_id.name == 'Net'">
+                                                    <tr>
+                                                        <t t-if= " not line.name == 'Gross'">
+                                                        <td  class="pl-2" width="66.9%" style="border: 1px solid black;">
+                                                            <t t-if= "line.name == 'Gross'">
+                                                                <span t-field="line.name" class="font-weight-bold"/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <span t-field="line.name"/>
+                                                            </t>
+                                                        </td>
+
+                                                        <td class="text-right pr-2" width="37.1%" style="border: 1px solid black;">
+                                                            <span t-esc="line.total"
+                                                                  t-options="{'widget': 'integer'}"/>
+                                                        </td>
+                                                        </t>
+                                                    </tr>
+                                                </t>
+                                                    </t>
+                                                </t>
+
+                                            </tbody>
+                                        </table>
+
+                                    </td>
+                                    <td width="49%">
+                                        <table width="99.8%">
+                                            <thead>
+                                                <tr style="border: 1px solid #875A7B;">
+                                                    <th colspan="2" style="text-align:center">Deduction</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+<!--                                                    <t t-if = ",'|',line.category_id.name=='Deduction'','line.category_id.name=='Net'">-->
+                                                        <t t-if = "line.category_id.code=='NET'">
+                                                            <tr>
+                                                                <t t-if= " not line.name == 'Net Salary'">
+                                                                <td class="pl-2" width="66.9%" style="border: 1px solid black;">
+                                                                    <t t-if= "line.name == 'Net Salary'">
+                                                                        <span t-field="line.name" class="font-weight-bold"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <span t-field="line.name"/>
+                                                                    </t>
+                                                                </td>
+                                                                <td class="text-right pr-2" width="37.1%" style="border: 1px solid black;">
+
+                                                                    <span t-esc="line.total"
+                                                                          t-options="{'widget': 'integer'}"/>
+                                                                </td>
+                                                                </t>
+                                                            </tr>
+                                                    </t>
+                                                    <t t-if = "line.category_id.name=='Deduction'">
+                                                            <tr>
+                                                            <td class="pl-2" width="66.9%" style="border: 1px solid black;">
+                                                                <span t-field="line.name"/>
+                                                            </td>
+                                                            <td class="text-right pr-2" width="37.1%" style="border: 1px solid black;">
+                                                                <span t-esc="line.total"
+                                                                     t-options="{'widget': 'integer'}"/>
+                                                            </td>
+                                                            </tr>
+                                                    </t>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+    <table width="100%" style="margin-left:-15px; margin-top:15px;">
+        <tbody>
+            <tr>
+                <td width="49%">
+            <table width="99.8%">
+                <tbody>
+                    <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                                <tr>
+                                     <t t-if= "line.name == 'Gross'">
+                                    <td  class="pl-2" width="66.9%" style="border: 1px solid black;">
+                                            <span t-field="line.name" class="font-weight-bold"/>
+                                    </td>
+                                    <td class="text-right pr-2" width="37.1%" style="border: 1px solid black;">
+                                        <span t-esc="line.total" t-options="{'widget': 'integer'}"/>
+                                    </td>
+                                     </t>
+                                </tr>
+                            </t>
+                </tbody>
+            </table>
+                </td>
+                <td width="49%">
+            <table width="99.8%">
+                <tbody>
+                    <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                                <tr>
+                                     <t t-if= "line.name == 'Net Salary'">
+                                    <td  class="pl-2" width="66.9%" style="border: 1px solid black;">
+                                            <span t-field="line.name" class="font-weight-bold"/>
+                                    </td>
+                                    <td class="text-right pr-2" width="37.1%" style="border: 1px solid black;">
+                                        <span t-esc="line.total" t-options="{'widget': 'integer'}"/>
+                                    </td>
+                                     </t>
+                                </tr>
+                            </t>
+                </tbody>
+            </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+          <div style="font-size:16px; width:100%; margin-top:15px">
+                            <strong>Amount In Words : </strong>
+                            <span t-field="o.amount_in_word"/>
+                </div>
+                <div class="footer">
+                    <p class="text-left">
+                        <span style="font-size: 10px;">NOTE: This report is system generated and doesn't require any signature.</span>
+                    </p>
+                </div>
+
+            </div>
+        </xpath>
+    </template>
+    </data>
+</odoo>

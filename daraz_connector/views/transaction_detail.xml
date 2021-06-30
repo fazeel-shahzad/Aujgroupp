@@ -1,0 +1,128 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="transaction_detail_list">
+        <field name="name">Transaction List</field>
+        <field name="model">transaction.detail</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" string="Daraz Store List">
+                <field name="name"/>
+                  <field name="fee_name"/>
+                <field name="instance_id"/>
+                <field name="trans_date"/>
+                <field name="trans_ttype"/>
+                <field name="amount"/>
+                <field name="order_no"/>
+                <field name="order_item_no"/>
+                <field name="paid_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_transaction_detail_form" model="ir.ui.view">
+      <field name="name">Transaction Job</field>
+      <field name="model">transaction.detail</field>
+      <field name="arch" type="xml">
+          <form create="0" edit="0">
+              <sheet>
+                  <div class="oe_title">
+                      <label class="oe_edit_only" for="name" string="Name"/>
+                      <h1>
+                          <field name="name" class="oe_inline"/>
+                      </h1>
+                  </div>
+                  <group>
+                      <group>
+                          <field name="instance_id"/>
+                           <field name="fee_name"/>
+                          <field name="trans_ttype"/>
+                          <field name="amount"/>
+                          <field name="paid_status"/>
+                      </group>
+                     <group>
+                        <field name="trans_date"/>
+                        <field name="order_no"/>
+                        <field name="order_item_no"/>
+                        <field name="sale_id" />
+                        <field name="invoice_id" />
+                     </group>
+                  </group>
+              </sheet>
+              <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+      </field>
+  </record>
+
+  <record id="transaction_detail_search_view" model="ir.ui.view">
+      <field name="name">Transaction Detail View</field>
+      <field name="model">transaction.detail</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+          <search>
+              <field name="trans_ttype"/>
+              <field name="instance_id"/>
+              <group expand="0" string="Group By...">
+                  <filter string="Daraz Store" name="instance" context="{'group_by':'instance_id'}"/>
+                  <filter string="Transaction Type" name="trans_ttype" context="{'group_by':'trans_ttype'}"/>
+                  <filter string="Transaction Date" name="trans_date" context="{'group_by':'trans_date'}"/>
+                  <filter string="Paid Status" name="paid_status" context="{'group_by':'paid_status'}"/>
+              </group>
+          </search>
+      </field>
+  </record>
+
+  <record id="action_transaction_detail" model="ir.actions.act_window">
+      <field name="name">Transaction Details</field>
+      <field name="res_model">transaction.detail</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <div>
+              <p>
+                  <b>No transaction Details available right now.</b>
+              </p>
+          </div>
+      </field>
+  </record>
+
+  <menuitem id="transaction_detail_menu" parent="daraz_connector_menu_root"
+    name="Transaction Details"  action="action_transaction_detail" sequence="27"/>
+
+  <record id="action_view_create_invoice_from_trns" model="ir.actions.server">  
+    <field name="name">Create Invoice</field>
+    <field name="model_id" ref="daraz_connector.model_transaction_detail"/>
+    <field name="binding_model_id" ref="daraz_connector.model_transaction_detail"/>
+    <field name="state">code</field>
+    <field name="code">
+      if records:
+        records.create_invoice()
+    </field>
+  </record>
+
+  <record id="global_discount_invoice_view_form" model="ir.ui.view">
+    <field name="name">account.move.form</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+        <!-- <xpath expr="//form/sheet/notebook/page[1]/group" position="after">
+            <div class="container">
+                <field name="daraz_fee" invisible="1"/>
+
+            </div>
+            <div class="container">
+                <label for="global_daraz_rate" string="Shipping Charge :" />
+                <field name="global_daraz_rate" class="oe_inline"  attrs="{'readonly':['|',('state', 'in', ['posted', 'cancel'])]}"/>
+            </div>
+        </xpath> -->
+        <xpath expr="//field[@name='amount_by_group']" position="after">
+            <field name="daraz_fee" />
+        </xpath>
+    </field>
+  </record>
+  
+  </data>
+
+</odoo>

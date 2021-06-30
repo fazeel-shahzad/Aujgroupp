@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_ecofi_datev_formate","ecofi.datev.formate","model_ecofi_datev_formate","ecoservice_financeinterface.group_ecofi_financeinterface",1,1,1,1
+"access_ecofi_datev_spalten","ecofi.datev.spalten","model_ecofi_datev_spalten","ecoservice_financeinterface.group_ecofi_financeinterface",1,1,1,1

@@ -1,0 +1,251 @@
+<odoo>
+    <data>
+        <template id="report_delivery_challan_new">
+            <t t-call="web.html_container">
+                <!--                <t t-call="web.internal_layout">-->
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="delivery_challan.external_layout_custom">
+                        <div class="page">
+                            <style>
+                                .top_heading_container h2 {
+                                width:32%;
+                                margin-left:38%;
+                                padding-left:17px;
+                                margin-top: -50px;
+                                text-transform: capitalize;
+                                }
+                                .top_paragraph{
+                                margin-top:90px;
+                                }
+                                .table_heading{
+                                border: 1px solid black;
+                                text-align:center;
+                                padding-left:2px;
+                                }
+                                .table_body {
+                                border: 1px solid black;
+                                text-align:center;
+                                }
+                                .padding{
+                                padding-top:12px;
+                                padding-bottom:2px;
+                                }
+                                .font-size {
+                                font-size:18px;
+                                font-weight: bold;
+                                }
+                                .padding_left {
+                                margin-left:-15px;
+                                }
+                                .margin-left{
+                                padding-left: 85px;
+                                font-weight: bold;
+                                }
+                                padding_zero{
+                                padding-left:0;
+                                }
+                            </style>
+
+
+                            <div class="container top_heading_container">
+                                <h2 class="pb-4">Delivery Challan</h2>
+                            </div>
+                            <div class="container col-12 row">
+                                <div class="col-6 text-center bg-dark text-light padding">
+                                    <p class="font-size">Outward Gate Pass</p>
+
+                                </div>
+                                <div class="col-6 text-center padding">
+                                    <p class="font-size">Returnable/Non returnable</p>
+                                </div>
+                            </div>
+                            <div class="container col-12 row">
+                                <div class="col-6">
+                                    <h6 class="font-size padding_left"><span t-field="o.partner_id.name"/></h6>
+                                    <h6 class="font-size padding_left">Address: <span t-field="o.partner_id.street"/><span t-field="o.partner_id.state_id"/> </h6>
+                                    <h6 class="font-size padding_left">Cell No: <span t-field="o.partner_id.phone"/></h6>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="margin-left">O.G.P: <span t-field="o.name"/></h6>
+                                    <h6 class="margin-left">Date:  <span t-field="o.scheduled_date"/></h6>
+<!--                                    <h6 class="margin-left">Vehicle No:</h6>-->
+                                </div>
+                            </div>
+
+                            <table width="70%" class="float-right mt-5 mb-3">
+                                <thead>
+                                    <tr>
+<!--                                        <th class="table_heading text-left">Invoice No:</th>-->
+<!--                                        <th class="table_heading text-left">D/C No:</th>-->
+                                        <th class="table_heading text-left">Your Order No: <span t-field="o.origin"/></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+<!--                                        <td class="pl-1">Invoice No:</td>-->
+<!--                                        <td class="pl-1">D/C No:</td>-->
+<!--                                        <td class="pl-1"><span t-field="o.origin"/></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <!--                            <table width="20%" class="float-right text-right pr-0 ml-5">-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>Ref #-->
+                            <!--                                        <span>JE/70-0044</span>-->
+                            <!--                                    </td>-->
+                            <!--                                </tr>-->
+                            <!--                                <tr>-->
+                            <!--                                    <td>Date: DEC 29,2020</td>-->
+                            <!--                                </tr>-->
+                            <!--                            </table>-->
+                            <table width="100%">
+                                <thead>
+                                    <th class="table_heading">S/NO</th>
+                                    <th width="40%" class="table_heading">MOTOR/NO</th>
+                                    <th class="table_heading">CHASSIS NO</th>
+                                    <th class="table_heading">MODEL N0</th>
+                                    <th class="table_heading">QUANTITY</th>
+                                </thead>
+                                <t t-set="count_id" t-value="0"/>
+                                <t t-foreach="o.move_ids_without_package" t-as="line">
+                                    <tbody class="table_body">
+                                        <t t-set="count_id" t-value="count_id+1"/>
+                                        <td class="table_body">
+                                            <t t-esc="count_id"/>
+                                        </td>
+                                        <td class="table_body">
+                                            <span t-field="line.motor_number"/>
+                                        </td>
+                                        <td class="table_body">
+                                            <span t-field="line.chassis_no"/>
+                                        </td>
+                                        <td class="table_body">
+                                            <span t-field="line.model_number"/>
+                                        </td>
+                                        <td class="table_body">
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                    </tbody>
+                                </t>
+                            </table>
+
+                            <div class="container col-12 row mt-4 ">
+                                <div class="col-6 padding_zero" style="padding-left:0;">
+                                    <h6>Received the above Items in full quantity or quality</h6>
+                                </div>
+                                <div class="col-6" style="padding-left: 26px;">
+                                    <h6>Received By: _____________________________</h6>
+                                </div>
+                            </div>
+                            <div class="container col-12 row mt-4 ">
+                                <div class="col-6 padding_zero" style="padding-left:0;">
+                                    <h6>Name: ________________________________</h6>
+                                </div>
+                                <div class="col-6" style="padding-left: 26px;">
+                                </div>
+                            </div>
+                            <div class="container col-12 row mt-4 ">
+                                <div class="col-6 padding_zero" style="padding-left:0;">
+                                    <h6>Signature: _____________________________</h6>
+                                </div>
+                                <div class="col-6" style="padding-left: 27px;">
+                                    <h6>Stamp: _____________________________</h6>
+                                </div>
+                            </div>
+                            <div class="container col-12 row mt-4 ">
+                                <div class="col-12 padding_zero" style="padding-left:0;">
+                                    <h6>Company Address: ___________________________________________________________________________________________</h6>
+                                </div>
+                            </div>
+                            <div class="container col-12 row mt-5">
+                                <div class="col-4 padding_zero" style="padding-left:0;">
+                                    <h6>Warehouse: _____________________</h6>
+                                </div>
+                                <div class="col-4 padding_zero" style="padding-left:0;">
+                                    <h6>Accounts Finance: _________________</h6>
+                                </div>
+                                <div class="col-4 padding_zero" style="padding-left:0;">
+                                    <h6>Security Guard: ___________________</h6>
+                                </div>
+                            </div>
+                            <div class="container col-12 row mt-3">
+                                <div class="col-12 padding_zero" style="padding-left:0;">
+                                    <h6>Address: Plot #745-7 Gate # 3 Sudar Estate Industrail Area Lahore Pakistan. </h6>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </t>
+                </t>
+                <!--                </t>-->
+            </t>
+        </template>
+        <!-- here we customized the height and width of the logo -->
+        <template t-name="web.external_layout_standard" id="external_layout_custom">
+            <div t-attf-class="header" t-att-style="report_header_style" height="10%" width="100%">
+
+                <div class="row" id="logo_center" style="margin-top:-95px;">
+                    <div class="col-12" style="margin-top:90px;">
+                        <img src='/web/binary/company_logo' style="height: 150px;" width="100%"/>
+                    </div>
+                    <!--                <div class="row" id="logo_center">-->
+                    <!--                    <div class="col-8" style="border-bottom:3px solid black; margin-top:90px;">-->
+                    <!--                        <img src='/web/binary/company_logo' style="max-height: 45px;"/>-->
+                    <!--                        <img t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>-->
+                    <!--                                            <img t-att-src="image_data_uri(company.logo)" alt="Logo"/>-->
+                    <!--                    </div>-->
+
+                </div>
+            </div>
+            <!-- support for custom footer -->
+            <!--            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout" position="attributes"-->
+            <div t-attf-class="footer o_standard_footer" position="attributes"
+                 id="footer">
+                <attribute name="t-if">
+                    <div class="row">
+                        <!--                        <div class="col-6" style="border-top: 3px solid black;">-->
+                        <!--                            <h6>Contact Information</h6>-->
+                        <!--                            <h6>Phone: +966 12 668 1577 - +966 55 303 5545</h6>-->
+                        <!--                            <h6>Email: info@foodfld.com</h6>-->
+                        <!--                            <h6>Web: www.foodfld.com</h6>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-6" style="border-top:3px solid black;">-->
+                        <!--                            <h6>Banking Information</h6>-->
+                        <!--                            <h6>Bank: Saudi British Bank</h6>-->
+                        <!--                            <h6>Beneficiary: Food Field Trading Company</h6>-->
+                        <!--                            <h6>Iban: SA56 4500 0000 2622 4367 8001</h6>-->
+                        <!--                        </div>-->
+                    </div>
+
+                </attribute>
+            </div>
+            <!--            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout" position="after">-->
+            <div t-attf-class="footer o_standard_footer" position="after">
+                <!--                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">-->
+                <div t-attf-class="footer o_standard_footer">
+                    <t t-if="custom_footer" t-raw="custom_footer"/>
+                </div>
+            </div>
+            <!--            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"-->
+            <!--                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+
+            <div t-attf-class="article o_report_layout_standard"
+                 t-att-data-oe-model="o and o._name"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <div class="pt-5">
+                    <!-- This div ensures that the address is not cropped by the header. -->
+                    <t t-call="web.address_layout"/>
+                </div>
+                <t t-raw="0"/>
+
+            </div>
+        </template>
+
+
+    </data>
+
+
+</odoo>

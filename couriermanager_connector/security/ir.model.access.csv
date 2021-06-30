@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_couriermanager_connector,access.couriermanager.connector,model_couriermanager_connector,base.group_user,1,1,1,1
+access_expedition_price,access.expedition.price,model_expedition_price,base.group_user,1,1,1,1
+access_routing_cities,access.routing.cities,model_routing_cities,base.group_user,1,1,1,1
+access_expedition_info,access.expedition.info,model_expedition_info,base.group_user,1,1,1,1
+access_expedition_invoice,access.expedition.invoice,model_expedition_invoice,base.group_user,1,1,1,1
+access_couriermanager_autoconnector,access.couriermanager.autoconnector,model_couriermanager_autoconnector,base.group_user,1,1,1,1

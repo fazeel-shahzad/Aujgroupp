@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="hr_employee_inherit_id" model="ir.ui.view">
+            <field name="name">HR Employee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form//sheet//notebook//page//field[@name='study_school']" position="after">
+                    <field name="program"/>
+                    <field name="degree_title"/>
+                    <field name="name_place_institute"/>
+                    <field name="passing_year"/>
+                    <field name="grade_div"/>
+                    <field name="major_sub"/>
+                </xpath>
+
+                <!-- here is the code for the work_experience -->
+                <notebook position="inside">
+                    <page string="Work Experience">
+                        <div class="col-12">
+                            <field name="work_experience">
+                                <tree editable="bottom">
+                                    <field name="e_job_title"/>
+                                    <field name="emp_name_address"/>
+                                    <field name="supervisor_name"/>
+                                    <field name="start_from"/>
+                                    <field name="end_on"/>
+                                    <field name="leave_reason"/>
+                                    <field name="contact"/>
+                                    <field name="drawn_salary"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </page>
+                </notebook>
+
+                <!-- here is the language code for one2many -->
+                <notebook position="inside">
+                    <page string="Languages">
+                        <div class="container col-12 row">
+                            <div class="col-4">
+                                <field name="emp_lang">
+                                    <tree editable="bottom">
+                                        <field name="language"/>
+                                        <field name="level"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div class="col-8">
+                                <group string-="Other Info">
+                                    <field name="disability_state" widget="radio" options="{'horizontal': true}" />
+                                    <field name="disability" placeholder="Please Explain here..." attrs="{'invisible': [('disability_state','!=','yes')]}"/>
+                                    <field name="allergy_state" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="allergy" placeholder="Please Explain here..." attrs="{'invisible': [('allergy_state','!=','yes')]}"/>
+                                    <field name="arrest_state" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="arrest" placeholder="Please Explain here..." attrs="{'invisible': [('arrest_state','!=','yes')]}"/>
+                                </group>
+
+                            </div>
+                        </div>
+
+                    </page>
+                </notebook>
+
+                <!-- here is the page for Employee reference -->
+
+                <notebook position="inside">
+                    <page string="Employee Reference">
+                        <div class="container col-12 row">
+
+                            <field name="employee_reference_line">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="contact_no"/>
+                                    <field name="occupation"/>
+                                </tree>
+                            </field>
+
+                        </div>
+                    </page>
+                </notebook>
+
+                <!-- here is the page for other information -->
+
+                <notebook position="inside">
+                    <page string="Other Info">
+                        <div class="container col-6 row">
+                            <group string-="Other Info">
+                                <field name="domicile"/>
+                                <field name="permanent_address"/>
+                                <field name="join_date"/>
+                                <field name="per_month_gross_sal"/>
+                                <field name="any_incentives"/>
+                                <field name="employee_code"/>
+                            </group>
+                        </div>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

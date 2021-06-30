@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="letterhead_reference">
+    <div id="letterhead_reference" class="purchase row">
+      <div>
+        <!-- Set document specific variables -->
+        <t t-set="client_order_ref"
+           t-value="o.partner_ref"/>
+
+        <!-- References about this document -->
+        <t name="reference_document"
+           t-call="ecoservice_german_documents_base.letterhead_reference_document"/>
+
+        <!-- Vendor No. & VAT references -->
+        <t name="reference_customer_vat"
+           t-call="ecoservice_german_documents_purchase.letterhead_reference_supplier_vat"/>
+
+        <!-- References about the case for the vendor -->
+        <t name="reference_case"
+           t-call="ecoservice_german_documents_base.letterhead_reference_case"/>
+
+        <!-- References about our company for the vendor -->
+        <t name="reference_contact"
+           t-call="ecoservice_german_documents_base.letterhead_reference_contact"/>
+
+        <!-- Details about our company -->
+        <t name="reference_company"
+           t-call="ecoservice_german_documents_base.letterhead_reference_company"/>
+      </div>
+    </div>
+  </template>
+
+  <!-- Supplier No. & VAT references -->
+  <template id="letterhead_reference_supplier_vat">
+    <t t-set="partner_ref" t-value="o.partner_id.ref or o.partner_id.parent_id.ref"/>
+    <t t-set="partner_vat" t-value="o.partner_id.vat or o.partner_id.parent_id.vat"/>
+    <div id="letterhead_reference_supplier_vat"
+         class="row"
+         style="border-top: 0.1em solid black;"
+         t-if="partner_ref or partner_vat">
+      <div class="col-6 ptb-5" t-if="partner_ref">
+        <div class="span font-alt no-wrap">Supplier No.</div>
+        <br/>
+        <span class="no-wrap" t-esc="partner_ref"/>
+      </div>
+      <div t-attf-class="col-6 ptb-5 #{ partner_ref and 'text-right' }" t-if="partner_vat">
+        <div class="span font-alt no-wrap">Supplier VAT-ID</div>
+        <br/>
+        <span class="no-wrap" t-esc="partner_vat"/>
+      </div>
+    </div>
+  </template>
+
+  <template id="show_position_number">
+    <td align="left" t-if="display_pos_no and continuous_pos_no">
+      <t t-esc="o.report_line_index"/>
+      <t t-esc="o.set_report_line_index(o.report_line_index+1)"/>
+    </td>
+    <td align="left" t-if="display_pos_no and not continuous_pos_no">
+      <t t-esc="line_index+1"/>
+    </td>
+  </template>
+
+</odoo>

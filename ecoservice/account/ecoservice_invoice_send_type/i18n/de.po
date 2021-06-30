@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_invoice_send_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-09 11:41+0000\n"
+"PO-Revision-Date: 2020-06-09 11:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model,name:ecoservice_invoice_send_type.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model.fields,help:ecoservice_invoice_send_type.field_account_move__invoice_send_type
+#: model:ir.model.fields,help:ecoservice_invoice_send_type.field_res_partner__invoice_send_type
+#: model:ir.model.fields,help:ecoservice_invoice_send_type.field_res_users__invoice_send_type
+msgid ""
+"Determine the way of sending an invoice. Selecting a type restricts the way "
+"of sending an invoice to this customer. If this field is left empty all "
+"options are avaiblable in the invoice."
+msgstr ""
+"Bestimmen Sie die Art des Rechnungsversandes. "
+"Das Wählen einer Option beschränkt den Zugriff auf diese Option. "
+"Wenn das Feld leer gelassen wird stehen in der Rechnung alle Optionen zur Verfügung."
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model.fields.selection,name:ecoservice_invoice_send_type.selection__account_move__invoice_send_type__email
+#: model:ir.model.fields.selection,name:ecoservice_invoice_send_type.selection__res_partner__invoice_send_type__email
+msgid "Email"
+msgstr "E-Mail"
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model.fields,field_description:ecoservice_invoice_send_type.field_account_move__invoice_send_type
+#: model:ir.model.fields,field_description:ecoservice_invoice_send_type.field_res_partner__invoice_send_type
+#: model:ir.model.fields,field_description:ecoservice_invoice_send_type.field_res_users__invoice_send_type
+msgid "Invoice Send Type"
+msgstr "Art des Rechnungsversandes"
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model,name:ecoservice_invoice_send_type.model_account_move
+msgid "Journal Entries"
+msgstr "Buchungssätze"
+
+#. module: ecoservice_invoice_send_type
+#: model:ir.model.fields.selection,name:ecoservice_invoice_send_type.selection__account_move__invoice_send_type__print
+#: model:ir.model.fields.selection,name:ecoservice_invoice_send_type.selection__res_partner__invoice_send_type__print
+msgid "Print"
+msgstr "Post"

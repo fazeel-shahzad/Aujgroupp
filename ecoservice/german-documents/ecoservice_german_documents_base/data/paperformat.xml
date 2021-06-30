@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="paperformat_euro_a4_ecoservice" model="report.paperformat">
+    <field name="name">European A4 (ecoservice)</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="page_height">0</field>
+    <field name="page_width">0</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">25</field>
+    <field name="margin_bottom">30</field>
+    <field name="margin_left">20</field>
+    <field name="margin_right">10</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">20</field>
+    <field name="dpi">96</field>
+  </record>
+
+</odoo>

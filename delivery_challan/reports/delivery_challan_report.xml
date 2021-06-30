@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <!-- QWeb delivery challan  Report  -->
+        <report
+                id="report_delivery_challan"
+                model="stock.picking"
+                string="Delivery Challan Report"
+                report_type="qweb-pdf"
+                file="delivery_challan.report_delivery_challan_new"
+                name="delivery_challan.report_delivery_challan_new"
+        />
+    </data>
+</odoo>

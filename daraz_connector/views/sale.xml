@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="sale_order_extended_for_daraz" model="ir.ui.view">
+            <field name="name">sale.order.daraz</field>
+            <field name="model">sale.order</field>
+
+            <field name="inherit_id" ref="sale.view_order_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="replace">
+                    <header>
+                    <field name="po_ids" invisible="1"/>
+                    <button name="action_create_purchase_order" string="Create Purchase Order" type="object" class="btn-primary" attrs="{'invisible':[('po_count','!=',0)]}"/>
+                    <button name="action_ready_to_ship" string="Ready To Ship" type="object" attrs="{'invisible':[('state','!=','pending')]}"   class="btn-primary"/>
+                <!-- <button name="action_shipped" string="Set To Shipped" type="object"  class="btn-primary"/> -->
+                    <button name="daraz_order_cancel" attrs="{'invisible':[('state','=','canceled')]}" type="object" string="Daraz Cancel"/>
+                    <button name="import_document_sale_order" attrs="{'invisible':[('order_status','!=','ready_to_ship')]}" type="object" string="Import Shipping Documents" />
+                    <button name="import_document_sale_order" attrs="{'invisible':[('order_status','!=','ready_to_ship')]}" type="object" string="Import Invoice Document" context="{'doc_type':'invoice'}"/>
+                    <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>
+                    <field name="state" invisible="1"/>
+                    <field name="order_status" widget="statusbar" statusbar_visible="pending,ready_to_ship,shipped,delivered,canceled" />
+                </header>
+                </xpath>
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="action_view_po" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('po_count', '=', 0)]}">
+                        <field name="po_count" widget="statinfo" string="Purchases"/>
+                    </button>
+                </xpath>
+                <field name="payment_term_id" position="after">
+                    <field name="po_ids" readonly="1" widget="many2many_tags"/>
+                </field>
+                <xpath expr="//field[@name='payment_term_id']" position="before">
+                    <field name="customer_name" readonly="1"/>
+                    <field name="delivery_type" />
+                    <field name="shipping_provider" />
+                    <field name="date_order" />
+                    <field name="qty_on_hand" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="before">
+                    <field name="instance_id" readonly="1"/>
+                    <field name="update_order_status" />
+                    <field name="orderid" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <!-- <field name="tracking_no" attrs="{'required':[('parent.delivery_type','=','dropship')]}"/>   --> 
+                 <field name="item_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_view_search_inherit_for_daraz" model="ir.ui.view">
+            <field name="name">sale.order.daraz</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='salesperson']" position="after">
+                    <filter string="Daraz Store" name="instance_id" domain="[]" context="{'group_by': 'instance_id'}"/>
+                    <filter string="Daraz status" name="order_status" domain="[]" context="{'group_by': 'order_status'}"/>
+                </xpath>
+                <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+                    <filter string="Quantity Less Then Zero" name="qty_on_hand" domain="[('qty_on_hand', '&lt;=', 0),('type', '=', 'product')]"/> 
+                    <filter string="Done with Document Import" name="doc_imported" domain="[('doc_imported', '=', True)]"/> 
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_tree_view_extended_for_qty_onhand_daraz" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"></field>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="decoration-danger">type == 'product' and qty_on_hand&lt;=0</attribute>
+                    <attribute name="decoration-info">type != 'product' or qty_on_hand&gt;0</attribute>
+                </tree>
+                <field name="partner_id" position="after">
+                    <field name="type" invisible="1" />
+                    <field name="qty_on_hand" attrs="{'invisible':[('type', '!=', 'product')]}" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="server_action_create_purchase_order" model="ir.actions.server">
+            <field name="name">Create Purchase Order</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+            if records:
+                records.action_create_purchase_order()
+            </field>
+        </record>
+    </data>
+</odoo>

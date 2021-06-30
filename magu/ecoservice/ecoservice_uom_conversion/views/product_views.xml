@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="product_template_form_view" model="ir.ui.view">
+    <field name="name">product.template.common.form.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
+    <field name="arch" type="xml">
+      <field name="uom_po_id" position="after">
+        <field name="uom_categ_id" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}" groups="uom.group_uom"/>
+      </field>
+      <xpath expr="//notebook" position="inside">
+        <page string="UOMs" name="uom_template" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}" groups="uom.group_uom">
+          <field name="eco_uom_ids" widget="one2many" force_save="1">
+            <tree editable="bottom">
+              <field name="eco_uom_name"/>
+              <field name="eco_uom_type"/>
+              <field name="eco_factor" string="Factor"/>
+            </tree>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>

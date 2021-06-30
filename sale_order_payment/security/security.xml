@@ -1,0 +1,23 @@
+<odoo>
+
+    <record id="group_show_advance_payment_buttons_user" model="res.groups">
+        <field name="name">Show Advance Payment Buttons</field>
+        <field name="category_id" ref="base.module_category_sales_sales"/>
+    </record>
+
+    <record model="ir.module.category" id="accounting_approvals_groups_root">
+        <field name="name">Accounting Approvals</field>
+   		<field name="description">Manage Account Approvals Security</field>
+    </record>
+
+     <record id="group_ceo_approval" model="res.groups">
+            <field name="name">Credit Approval for CEO</field>
+            <field name="category_id" ref="accounting_approvals_groups_root"/>
+     </record>
+
+    <record id="group_manager_approval" model="res.groups">
+            <field name="name">Credit Approval for Manager</field>
+            <field name="category_id" ref="accounting_approvals_groups_root"/>
+    </record>
+
+</odoo>

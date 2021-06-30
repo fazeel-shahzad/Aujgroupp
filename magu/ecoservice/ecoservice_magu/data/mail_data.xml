@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="mail_notification_paynow_inherit_magu"
+            inherit_id="mail.mail_notification_paynow">
+
+    <!-- Remove button to portal-view
+         - /../.. ->  remove parent elements not only the link name
+    -->
+    <xpath expr="//t[@t-esc='access_name']/../.." position="replace"/>
+
+  </template>
+
+</odoo>

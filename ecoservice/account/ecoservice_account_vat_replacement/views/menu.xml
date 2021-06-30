@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <act_window id="vat_configuration_action"
+              name="VAT Replacement Configuration"
+              res_model="vat.configuration"
+              view_mode="tree,form"/>
+
+  <menuitem id="vat_configuration_menu"
+            parent="account.menu_finance_entries"
+            action="vat_configuration_action"/>
+
+</odoo>

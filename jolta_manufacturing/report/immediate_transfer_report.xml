@@ -1,0 +1,92 @@
+<odoo>
+
+    <report
+                id="report_immediate_transfer_inh"
+                model="stock.picking"
+                string="Immediate Transfer"
+                report_type="qweb-pdf"
+                name="jolta_manufacturing.report_immediate_transfer_document"
+                file="jolta_manufacturing.report_immediate_transfer_document"/>
+
+    <template id="report_immediate_transfer_document">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-if="user.company_id.id == 44">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False"/>
+                        <t t-if="partner" name="partner_header">
+                            <t t-set="address">
+                                <div t-esc="partner"
+                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                            </t>
+                        </t>
+                        <div class="page">
+                            <div class="text-center"><h2>Immediate Transfer</h2></div><br/>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Reference:</strong>
+                                    <span class="m-0" t-field="o.name"/>
+                                </div>
+                                <div class="col-5">
+                                    <span>
+                                        <strong>DATE:</strong>
+                                        <span class="m-0" t-field="o.create_date"/>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <br/><br/><table class="table table-condensed" style="border:1px solid black;" name="quality_table">
+                                <thead>
+                                    <tr style="border:1px solid black;">
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Sr#</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Part Name</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Unit</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>QTY</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Reason of Rejection</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Qty Submitted to Store</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Return to Vendor/Scrap</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Material Received Against Rejection Line</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                        <tr t-foreach="o.move_line_ids_without_package" t-as="line"  style="border:1px solid black;">
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.product_id"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.product_uom_id.name"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.qty_done"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.reason_of_rejection"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.qty_store"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.return_vendor"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="line.material_received"/>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                        </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+            </t>
+    </template>
+
+</odoo>

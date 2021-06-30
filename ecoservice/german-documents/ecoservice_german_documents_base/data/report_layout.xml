@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="report_layout_german_documents" model="report.layout">
+    <field name="name">German Documents</field>
+    <field name="view_id" ref="ecoservice_german_documents_base.external_layout_german_documents"/>
+    <field name="image">/ecoservice_german_documents_base/static/img/preview_gd.png</field>
+    <field name="pdf">/ecoservice_german_documents_base/static/pdf/preview_gd.pdf</field>
+  </record>
+
+</odoo>

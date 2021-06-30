@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo>
+
+  <record model="ir.ui.view" id="ecofi_datev_spalten_form_view">
+    <field name="name">ecofi.datev.spalten.form</field>
+    <field name="model">ecofi.datev.spalten</field>
+    <field name="arch" type="xml">
+      <form string="Export Columns">
+        <group>
+          <field name="mako" colspan="4"/>
+          <field name="datevid" colspan="4"/>
+          <field name="feldname" colspan="4"/>
+          <field name="typ" colspan="4"/>
+          <field name="laenge" colspan="4"/>
+          <field name="nks" colspan="4"/>
+          <field name="maxlaenge" colspan="4"/>
+          <field name="mussfeld" colspan="4"/>
+          <field name="beschreibung" colspan="4"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="ecofi_datev_spalten_tree_view">
+    <field name="name">ecofi.datev.spalten.tree</field>
+    <field name="model">ecofi.datev.spalten</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="mako" colspan="4"/>
+        <field name="feldname" colspan="4"/>
+        <field name="typ" colspan="4"/>
+        <field name="beschreibung" colspan="4"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="ecofi_datev_formate_view">
+    <field name="name">ecofi.datev.formate.form</field>
+    <field name="model">ecofi.datev.formate</field>
+    <field name="arch" type="xml">
+      <form string="Datev Export Formats">
+        <header>
+          <button string="Import Template" name="getfields_fromcsv" type="object"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="datev_domain"/>
+            <field name="datev_type"/>
+          </group>
+          <group>
+            <field name="mako_help"/>
+          </group>
+          <group>
+            <field name="csv_spalten" nolabel="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="ecofi_datev_formate_tree_view">
+    <field name="name">ecofi.datev.formate.tree</field>
+    <field name="model">ecofi.datev.formate</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="ecofi_datev_formate_all">
+    <field name="name">Datev Reference Format Configuration</field>
+    <field name="res_model">ecofi.datev.formate</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="ecofi_datev_formate_tree_view"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="ecofi_datev_formate_action_crm_tag_tree">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="ecofi_datev_formate_tree_view"/>
+    <field name="act_window_id" ref="ecofi_datev_formate_all"/>
+  </record>
+
+  <record model="ir.actions.act_window.view" id="ecofi_datev_formate_action_crm_tag_form">
+    <field name="sequence" eval="3"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="ecofi_datev_formate_view"/>
+    <field name="act_window_id" ref="ecofi_datev_formate_all"/>
+  </record>
+
+  <menuitem
+    action="ecofi_datev_formate_all"
+    id="menu_ecofi_datev_formate"
+    groups="ecoservice_financeinterface.group_ecofi_financeinterface"
+    parent="ecoservice_financeinterface.menu_finance_interface"
+  />
+
+</odoo>

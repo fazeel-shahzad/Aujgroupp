@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_sale_customer_pdf_report" model="ir.actions.report">
+        <field name="name">Sale Dealer Wise Report</field>
+        <field name="model">sale.customer.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale_customer_report_pdf.report_sale_customer_document</field>
+    </record>
+
+    <template id="report_sale_customer_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center"><h2>Sale Dealer/Customer Wise Report</h2></div>
+                    <div class="row mt32 mb32" id="informations">
+                        <strong>Date From:</strong>
+                        <span class="m-0" t-esc="date_from"/>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <strong>Date to:</strong>
+                        <span class="m-0" t-esc="date_to"/>
+                    </div>
+                    <br/>
+                    <table class="table table-sm o_main_table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th name="th_name" class="text-left"><strong>Customer Name</strong></th>
+                                <th name="th_name" class="text-left"><strong>SR#</strong></th>
+                                <th name="th_name" class="text-left"><strong>Product Name</strong></th>
+                                <th name="th_qty" class="text-center"><strong>Qty</strong></th>
+                                <th name="th_rate" class="text-center"><strong>Rate</strong></th>
+                                <th name="th_value" class="text-right"><strong>Value(<span t-esc="currency.name"/>)</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t  t-foreach="partner_ids" t-as="ptr">
+                                <tr>
+                                    <t t-set="i" t-value="0"/>
+                                    <td id="partner" class="thead-light">
+                                        <span t-esc="ptr.name"/>
+                                    </td>
+                                </tr>
+                                <t t-set="total" t-value="0"/>
+                                <t t-foreach="partner_sales(ptr)" t-as="ps">
+<!--                                    <t t-foreach="ps" t-as="line">-->
+                                        <tr>
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td>
+                                            </td>
+                                            <td id="count">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="name">
+                                                <span t-esc="ps.product_id.name"/>
+                                            </td>
+                                            <td id="invoice_date">
+                                                <t t-set="total_qty" t-value="qty(ps.product_id, ptr)"/>
+                                                <span t-esc="total_qty"/>
+                                            </td>
+                                            <td id="invoice_date" class="text-center">
+                                                <span t-field="ps.price_unit"/>
+                                            </td>
+                                            <td id="jan" class="text-right">
+                                                <t t-set="total_value" t-value="total_qty* ps.price_unit"/>
+                                                <t t-set="total" t-value="total + total_value"/>
+                                                <span t-esc="total_value" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                                </td>
+                                        </tr>
+<!--                                    </t>-->
+                                </t>
+                                <div>
+                                    <tr class=" text-right" style="padding:0;">
+                                        <tr class="text-right" >
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            <td>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <span>
+                                                    <b>Total: </b>
+                                                </span>
+                                            </td>
+                                            <td style="text-align:right">
+                                                <b><t t-esc="total" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></b>
+                                            </td>
+                                        </tr>
+
+                                    </tr>
+                                </div>
+                                <!--                                </tr>-->
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

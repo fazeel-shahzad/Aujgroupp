@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="ecofi_validation_form_view" model="ir.ui.view">
+    <field name="name">ecofi.validation.form</field>
+    <field name="model">ecofi.validation</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group colspan="4">
+              <field name="company_id"/>
+            </group>
+            <group id="ecofi" string="Basic">
+              <field name="validate_tax_count"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+</odoo>

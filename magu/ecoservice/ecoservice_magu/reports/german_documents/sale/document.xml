@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="report_sale_document_inherit_magu"
+            inherit_id="ecoservice_german_documents_sale.report_sale_document">
+
+    <div class="row mt16" id="fiscal_position_remark" position="before">
+      <div id="delivery_date" class="row mt16" t-if="o.commitment_date">
+        <div class="col-4 bold">Delivery date:</div>
+        <div class="col-8">
+          <span t-field="o.commitment_date" t-options="{'widget': 'date'}"/>
+        </div>
+      </div>
+
+      <div id="delivery_address" class="row mt16" t-if="o.partner_shipping_id">
+        <div class="col-4 bold">Delivery address:</div>
+        <div class="col-8">
+          <t t-set="delivery_address" t-value="o.partner_shipping_id" />
+          <t t-call="ecoservice_german_documents_base.delivery_address_snippet"/>
+        </div>
+      </div>
+
+      <div id="customer_info" class="row mt16">
+        <div class="col-4 bold">Customer:</div>
+        <div class="col-8">
+          <t t-if="not o.partner_id.is_company">
+            <t t-if="o.partner_id.parent_id.name">
+              <span t-field="o.partner_id.parent_id.name"/>,
+            </t>
+          </t>
+
+          <t t-if="o.partner_id.name">
+            <span t-field="o.partner_id.title"/>
+            <t t-if="o.partner_id.has_lastname()">
+              <span t-field="o.partner_id.firstname"/>
+              <span t-field="o.partner_id.lastname"/>,
+            </t>
+            <t t-if="not o.partner_id.has_lastname()">
+              <span t-field="o.partner_id.name"/>,
+            </t>
+          </t>
+
+          <t t-if="o.partner_id.phone">
+            Tel. <span t-field="o.partner_id.phone"/>,
+          </t>
+          <t t-if="o.partner_id.email">
+            <span t-field="o.partner_id.email"/>
+          </t>
+        </div>
+      </div>
+
+    </div>
+
+  </template>
+
+</odoo>

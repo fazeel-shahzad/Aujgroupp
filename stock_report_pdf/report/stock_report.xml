@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paper_format_stock_report" model="report.paperformat">
+        <field name="name">Stock Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">25</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_stock_pdf_report" model="ir.actions.report">
+        <field name="name">Stock Report</field>
+        <field name="model">stock.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">stock_report_pdf.report_stock_document</field>
+        <field name="paperformat_id" ref="stock_report_pdf.paper_format_stock_report"/>
+    </record>
+
+    <template id="report_stock_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center"><h2>Stock Movement Report</h2>
+                        <div class="row mt32 mb32" id="information">
+                            <strong>Date From:</strong>
+                            <span class="m-0" t-esc="date_from"/>
+                        </div>
+                        <div class="row mt32 mb32" id="information">
+                            <strong> Date to:</strong>
+                            <span>&#160;</span><span>&#160;</span><span>&#160;</span><span>&#160;</span><span>&#160;</span><span>&#160;</span><span>&#160;</span>
+                            <span class="m-0" t-esc="date_to"/>
+                        </div>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th name="th_name" class="text-left"><strong>Product Name</strong></th>
+                                    <th name="th_name" class="text-left"><strong>Unit of Measure</strong></th>
+                                    <th name="th_open_qty" class="text-center"><strong>Opening Qty</strong></th>
+                                    <th name="th_purchase" class="text-center"><strong>Purchase Qty</strong></th>
+                                    <th name="th_purchase" class="text-center"><strong>Purchase return Qty</strong></th>
+                                    <th name="th_purchase" class="text-center"><strong>Inventory Adjustment Stock In Qty</strong></th>
+                                    <th name="th_purchase" class="text-center"><strong>Inventory Adjustment Stock Out Qty</strong></th>
+                                    <th name="th_sale" class="text-center"><strong>Issuance Qty</strong></th>
+                                    <th name="th_sale" class="text-center"><strong>Sale Return Qty</strong></th>
+                                    <th name="th_total" class="text-center"><strong>Closing Stock Qty</strong></th>
+                                    <th name="th_rate" class="text-center" ><strong>Rate</strong></th>
+                                    <th name="th_value" class="text-right"><strong>Closing Value</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="products" t-as="product">
+                                    <t t-set="purchase_qty" t-value="0" />
+                                    <t t-set="purchase_return_qty" t-value="0" />
+                                    <t t-set="sale_return_qty" t-value="0" />
+                                    <t t-set="sale_qty" t-value="0" />
+                                    <t t-set="total_qty" t-value="0" />
+                                    <t t-set="price" t-value="0" />
+                                    <t t-set="closing_value" t-value="0" />
+                                    <t t-set="open_qty" t-value="0" />
+                                    <t t-set="inventory_adjust_pur_qty" t-value="0" />
+                                    <t t-set="inventory_adjust_sale_qty" t-value="0" />
+                                    <tr>
+                                        <td class="text-left">
+                                            <span t-esc="product.name"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-esc="product.uom_id.name"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="open_qty" t-value="opening_balance(product)" />
+                                            <span t-esc="open_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="purchase_qty" t-value="purchase(product)" />
+                                            <span t-esc="purchase_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="purchase_return_qty" t-value="purchase_return(product)" />
+                                            <span t-esc="purchase_return_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="inventory_adjust_pur_qty" t-value="inventory_adjustment_purchase(product)" />
+                                            <span t-esc="inventory_adjust_pur_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="inventory_adjust_sale_qty" t-value="inventory_adjustment_sale(product)" />
+                                            <span t-esc="inventory_adjust_sale_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="sale_qty" t-value="sale(product)" />
+                                            <span t-esc="sale_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="sale_return_qty" t-value="sale_return(product)" />
+                                            <span t-esc="sale_return_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="total_qty" t-value="open_qty + (purchase_qty - purchase_return_qty)   - (sale_return_qty + sale_qty)" />
+                                            <t t-set="total_qty" t-value="(total_qty + inventory_adjust_pur_qty) - inventory_adjust_sale_qty" />
+                                            <span t-esc="total_qty" t-options="{'widget': 'integer'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-set="price" t-value="last_price(product)" />
+                                            <t t-if="not price == 0">
+                                                <span t-esc="price"/>
+                                            </t>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-set="closing_value" t-value="float(price * total_qty)" />
+                                            <span t-esc="closing_value" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="oe_structure"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

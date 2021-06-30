@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  For the case you wish to overwork the all
+  purchase tables, you can to this here by inherit or override.
+-->
+<odoo>
+  <template id="report_table_base_purchase">
+    <t t-set="display_taxes" t-value="any(line.taxes_id for line in o.order_line)"/>
+    <t t-set="display_pos_no" t-value="o.company_id.report_table_position"/>
+    <t t-set="continuous_pos_no" t-value="o.company_id.report_table_position_continuous"/>
+
+    <table class="table table-sm" style="padding-left: 0">
+      <thead>
+        <tr>
+          <th class="text-left" t-if="display_pos_no">
+            Pos
+          </th>
+          <th class="text-left" style="width:35%">
+            Product
+          </th>
+          <th class="text-center"
+              t-if="display_taxes and is_po"
+              style="width:10%">
+            Taxes
+          </th>
+          <th class="text-center">
+            Delivery
+          </th>
+          <th class="text-right">
+            Quantity
+          </th>
+          <th class="text-center" groups="uom.group_uom">
+            UoM
+          </th>
+          <th class="text-right" t-if="is_po">
+            Unit Price
+          </th>
+          <th class="text-right" t-if="is_po">
+            Total Price
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <t t-set="current_subtotal" t-value="0"/>
+        <t t-foreach="o.order_line" t-as="line">
+
+          <t t-if="not line.display_type"
+             t-set="descriptions"
+             t-value="line.name.split('\n')"/> <!--Product description-->
+          <t t-set="current_subtotal"
+             t-value="current_subtotal + line.price_subtotal"
+             groups="account.group_show_line_subtotals_tax_excluded"/>
+          <t t-set="current_subtotal"
+             t-value="current_subtotal + line.price_total"
+             groups="account.group_show_line_subtotals_tax_included"/>
+
+          <tr t-att-class="'bg-200 font-weight-bold' if line.display_type == 'line_section' else 'font-italic' if line.display_type == 'line_note' else ''">
+            <t t-if="not line.display_type">
+              <t t-call="ecoservice_german_documents_purchase.show_position_number"/>
+              <td align="left;">
+                <span t-esc="descriptions[0]"/>
+              </td>
+              <td align="center" t-if="display_taxes and is_po">
+                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.taxes_id))"/>
+              </td>
+              <td align="center">
+                <span t-field="line.date_planned"
+                      t-options="{'widget': 'date'}"/>
+              </td>
+              <td align="right">
+                <span t-field="line.product_qty"/>
+              </td>
+              <td align="center" groups="uom.group_uom">
+                <span t-field="line.product_uom"/>
+              </td>
+              <td class="text-right" t-if="is_po">
+                <span t-field="line.price_unit"/>
+              </td>
+              <td class="text-right" t-if="is_po">
+                <span t-field="line.price_subtotal"
+                      t-options="{'display_currency': o.currency_id}"
+                      widget="monetary"/>
+              </td>
+            </t>
+
+            <!--Section-->
+            <t t-if="line.display_type == 'line_section'">
+                <td colspan="99" id="section">
+                    <span t-field="line.name"/>
+                </td>
+                <t t-set="current_section" t-value="line"/>
+                <t t-set="current_subtotal" t-value="0"/>
+            </t>
+
+            <!--Note-->
+            <t t-if="line.display_type == 'line_note'">
+                <td colspan="99" id="note">
+                    <span t-field="line.name"/>
+                </td>
+            </t>
+          </tr>
+          <t t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section')">
+            <tr class="is-subtotal text-right">
+                <td colspan="99" id="subtotal">
+                    <strong class="mr16">Subtotal</strong>
+                    <span
+                        t-esc="current_subtotal"
+                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                </td>
+            </tr>
+          </t>
+          <tr t-foreach="descriptions" t-as="description">
+            <t t-if="description_index > 0">
+              <td class="no-mbp" t-if="display_pos_no">&amp;nbsp;</td>
+              <td align="left" class="no-bp">
+                <span t-esc="description"/>
+              </td>
+              <td class="no-mbp" t-if="is_po">&amp;nbsp;</td>
+              <td class="no-mbp">&amp;nbsp;</td>
+              <td class="no-mbp">&amp;nbsp;</td>
+              <td class="no-mbp" groups="uom.group_uom">&amp;nbsp;</td>
+              <td class="no-mbp" t-if="is_po">&amp;nbsp;</td>
+              <td class="no-mbp" t-if="is_po">&amp;nbsp;</td>
+            </t>
+          </tr>
+        </t>
+      </tbody>
+    </table>
+
+    <!-- Load Base CSS Styles -->
+    <t t-call="ecoservice_german_documents_base.report_css_body"/>
+    <!-- Include optional Base CSS File for purchase tables only -->
+    <t t-call="ecoservice_german_documents_purchase.report_css_body_purchase"/>
+  </template>
+
+</odoo>

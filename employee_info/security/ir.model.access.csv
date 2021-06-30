@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_info_employee_references,employee_info.employee.references,model_employee_references,,1,1,1,1
+access_employee_info_employee_languages,employee_info.employee.languages,model_employee_languages,,1,1,1,1
+access_employee_info_employee_work_experience,employee_info.employee.work.experience,model_employee_work_experience,,1,1,1,1

@@ -1,0 +1,292 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_german_documents_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200121\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-08 08:19+0000\n"
+"PO-Revision-Date: 2020-04-08 08:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.delivery_address_snippet
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_sender_address
+msgid "&amp;#8226;"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "&amp;nbsp;<span>on</span>&amp;nbsp;"
+msgstr "&amp;nbsp;<span>von</span>&amp;nbsp;"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid ""
+"<br/>\n"
+"                  BIC:"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid ""
+"<br/>\n"
+"                  IBAN:"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "<strong>Amount Due</strong>"
+msgstr "<strong>Fälliger Betrag</strong>"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "<strong>Total</strong>"
+msgstr "<strong>Brutto</strong>"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+msgid "Change Text Template"
+msgstr "Template editieren"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_res_company__chief_executive_officer
+msgid "Chief Executive Officer"
+msgstr "Geschäftsführer"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model,name:ecoservice_german_documents_base.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model,name:ecoservice_german_documents_base.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfiguration"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model,name:ecoservice_german_documents_base.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_customer_vat
+msgid "Customer No."
+msgstr "Kundennummer"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_customer_vat
+msgid "Customer VAT-ID"
+msgstr "Kunden USt. IdNr."
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_document
+msgid "Date"
+msgstr "Datum"
+
+#. module: ecoservice_german_documents_base
+#: code:addons/ecoservice_german_documents_base/models/res_partner.py:0
+#, python-format
+msgid "Dear Sir or Madam"
+msgstr "Sehr geehrte Damen und Herren"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__default_text
+msgid "Default Text"
+msgstr "Standardtext"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__name
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_eco_report_mixin__display_name
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_contact
+msgid "E-Mail:"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model,name:ecoservice_german_documents_base.model_eco_report_mixin
+msgid "Eco Report Mixin"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid "Fax:"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+msgid "General"
+msgstr "Allgemein"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+msgid "German Documents"
+msgstr "Deutsche Dokumente"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_receiver_address
+msgid "Herrn"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_eco_report_mixin__id
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__id
+msgid "ID"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.incoterms
+msgid "Incoterms:"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_eco_report_mixin____last_update
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_text_template_config__model
+msgid "Model"
+msgstr "Modell"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "Net"
+msgstr "Netto"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid "Page:"
+msgstr "Seite:"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "Paid on"
+msgstr "Bezahlt am"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_document
+msgid "Please add to any letters"
+msgstr "Bitte auf allen Schriftstücken angeben"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_case
+msgid "Reference:"
+msgstr "Referenz:"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_eco_report_mixin__report_compute_date
+msgid "Report Compute Date"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_eco_report_mixin__report_line_index
+msgid "Report Line Index"
+msgstr ""
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_res_company__report_table_position_continuous
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_res_config_settings__report_table_position_continuous
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+msgid "Share continuous line item numbers across all sections"
+msgstr "Fortlaufende Nummer Sektionsunabhängig weiterzählen"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_res_company__report_table_position
+#: model:ir.model.fields,field_description:ecoservice_german_documents_base.field_res_config_settings__report_table_position
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+msgid "Show line item number in printed documents"
+msgstr "Fortlaufende Nummer in Dokumenten"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.final_amount_template
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid "Tel:"
+msgstr "Tel::"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_contact
+msgid "Telephone:"
+msgstr "Telefon:"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.payment_terms
+msgid "Terms of payment:"
+msgstr "Zahlungsbedingung(en):"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.text_template_config_view_tree
+msgid "Text Template"
+msgstr "Textvorlage"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model,name:ecoservice_german_documents_base.model_text_template_config
+msgid "Text Template Config"
+msgstr "Textvorlagen Konfiguration"
+
+#. module: ecoservice_german_documents_base
+#: model:ir.model.fields,help:ecoservice_german_documents_base.field_text_template_config__name
+msgid "Text field, which will be printed in the documents."
+msgstr "Textfeld für das Dokument"
+
+#. module: ecoservice_german_documents_base
+#: code:addons/ecoservice_german_documents_base/models/res_config.py:0
+#, python-format
+msgid "Text templates for documents"
+msgstr "Textvorlagen für Dokumente"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid "VAT-ID:"
+msgstr "USt. IdNr.:"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.external_layout_footer
+msgid "Website:"
+msgstr "Webseite:"
+
+#. module: ecoservice_german_documents_base
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_base.letterhead_reference_contact
+msgid "Your contact:"
+msgstr "Ihr Kontakt:"

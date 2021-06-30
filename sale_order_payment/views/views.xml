@@ -1,0 +1,54 @@
+<odoo>
+
+        <record model="ir.ui.view" id="sale_order_form_inh">
+            <field name="name">sale.order.form.inh</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_draft']" position="after">
+                    <button string="Advance Payment" type="object" class="oe_highlight" name="action_register_payment" attrs="{'invisible': ['|',('state', '!=', 'draft'), ('company_id', '!=', 24)]}"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" icon="fa-dollar"  type="object" name="action_show_payments" attrs="{'invisible': [('company_id', '!=', 24)]}">
+                        <field name="payment_count" string="Advance Payment" widget="statinfo"/>
+                    </button>
+                </xpath>
+                 <xpath expr="//field[@name='amount_untaxed']" position="after">
+                     <field name="advance_payment" string="Advance Payment" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="account_move_form_inh">
+           <field name="name">account.move.form.inh</field>
+           <field name="model">account.move</field>
+           <field name="inherit_id" ref="account.view_move_form"/>
+           <field name="arch" type="xml">
+               <xpath expr="//field[@name='amount_total']" position="before">
+                    <field name="advance_payment"/>
+               </xpath>
+           </field>
+       </record>
+
+
+   <record model="ir.ui.view" id="account_payment_form_inh">
+           <field name="name">account.payment.form.inh</field>
+           <field name="model">account.payment</field>
+           <field name="inherit_id" ref="account.view_account_payment_form"/>
+           <field name="arch" type="xml">
+               <xpath expr="//field[@name='journal_id']" position="after">
+                   <!-- <field name="user_id" string="Sales Person"/> -->
+
+                    <field name="wiz_description" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                    <field name="cheque_no" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                    <field name="paid_by" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                    <field name="received_by" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                   <field name="approved_by" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+                    <field name="so_number" attrs="{'invisible': [('company_id', '!=', 24)]}"/>
+
+               </xpath>
+
+           </field>
+       </record>
+
+</odoo>

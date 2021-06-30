@@ -1,0 +1,35 @@
+<odoo>
+
+
+	<record id="view_form_po_wizard_goods" model="ir.ui.view">
+		<field name="name">PO Report wizard</field>
+		<field name="model">po.goods.report.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Goods Receiving Report">
+				<group col="4">
+					<field name="date_from" required="1"/>
+					<field name="date_to" required="1"/>
+<!--					<field name="product_ids" widget="many2many_tags" required="1"/>-->
+				</group>
+
+				<footer>
+					<button name="print_report" string="Print" type="object" class="btn-primary"/>
+					<button  string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="action_po_report_wizard_view" model="ir.actions.act_window">
+		<field name="name">Goods Receiving Report</field>
+		<field name="res_model">po.goods.report.wizard</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_form_po_wizard_goods" />
+		<field name="target">new</field>
+	</record>
+
+	<menuitem id="menu_po_goods"
+			  action="goods_received_report.action_po_report_wizard_view"
+			  name="Goods Receiving Report PDF" parent="purchase.menu_procurement_management" />
+
+</odoo>

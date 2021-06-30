@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="view_partner_property_form_inherit_invoice_send_types" model="ir.ui.view">
+    <field name="name">res.partner.property.form.inherit.invoice_send_types</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="account.view_partner_property_form" />
+    <field name="arch" type="xml">
+      <field name="property_payment_term_id" position="before">
+        <field name="invoice_send_type"/>
+      </field>
+    </field>
+  </record>
+
+</odoo>

@@ -1,0 +1,547 @@
+<odoo>
+	<template id="web_page" name="Website">
+		<t t-call="website.layout">
+			
+			<div class="jumbotron jumbotron-fluid bgimage bg-dark">
+				<div class="container-fluid">
+					<h1 class="h1" id="profile">PROFILE</h1>
+				</div>
+			</div>
+			<div class="container-fluid ">
+				<br/>
+				<nav class="first-nav" style="margin-left:50px;height:50px;border-bottom:1px solid;">
+					<a style="display:inline;" class="nav-link" href="#">Home</a>
+					<a style="display:inline;margin-left:-10px;" class="nav-link" href="#">Profile</a>
+				</nav>
+			</div>
+			<br/>
+			<div class="wrapper">
+				<div id="sidebar" >
+					<div class="card" style="width: 15rem;margin-left:60px;">
+						<div class="card-title" style="height:200px;">
+							<img class="card-img-top" style="height:200px;" src="portal_user/static/src/images/images.jpg" alt="Card image cap"/>
+						</div>
+						
+						<div class="card-footer text-center">
+							<h3>Student</h3>
+						</div>
+					</div>
+				</div>
+				<div id="content">
+					<nav>
+						<div class="nav container" style="border-style: none;">
+							<ul class="nav-tabs nav text-center" role="tablist">
+								<li class="nav-item navul" role="tab">
+									<a class=" nav-link nav1 active" id="nav-home-tab" data-toggle="tab" href="#nav-courses" aria-selected="true">
+										<i class="fa fa-book fa2x" style="margin-right:5px;"/> Courses
+									</a>
+								</li>
+								
+								<li class="nav-item navul" role="tab">
+									<a class="nav1 nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-orders"  aria-controls="nav-profile" aria-selected="false">
+										<i class="fa fa-shopping-cart fa2x" style="margin-right:5px;"/>
+										Orders
+									</a>
+								</li>
+								<li class="nav-item navul"  role="tab">
+									<a class="nav1 nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-setting" aria-controls="nav-contact" aria-selected="false">
+										<i class="fa fa-cog fa2x"  style="margin-right:5px;"/>Settings
+									</a>
+								</li>
+								<li class="nav-item navul" role="tab">
+									<a class="nav-item nav1 nav-link"  id="nav-contact-tab" data-toggle="tab" href="#nav-quiz"  aria-controls="nav-contact" aria-selected="false">
+										<i class="fa fa-check-square"  style="margin-right:5px;"/>
+										Quiz Results
+									</a>
+								</li>
+								<li class ="nav-item navul" role="tab">
+									<a class="nav-link  nav1 nav-link" data-toggle="tab" id="nav-contact-tab" href="#nav-wishlist" role="tab" aria-controls="nav-contact" aria-selected="false">
+										<i class="fa fa-heart fa2x"  style="margin-right:5px;"/>
+										Wishlist
+									</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+					<!--Start Courses  -->
+					<div class="tab-content animation" id="nav-tabContent">
+						<div class="tab-pane fade show active" id="nav-courses" role="tabpanel" aria-labelledby="nav-home-tab">
+							<br/>
+							<br/>
+							<nav>
+								<ul class="nav-tabs nav text-center" style="border-style: none;">
+									<li class="nav-item " role="tab" >
+										<a class=" nav-link active" data-toggle="tab" href="#" aria-selected="true" style="font-size: 12px;">
+											Purchased
+										</a>
+									</li>
+								</ul>
+							</nav>
+							<br/>
+							<div class="tab-content" id="nav-tabContent" style="margin-left: -48px;">
+								<nav>
+									<ul class="child-ul">
+										<li >
+											<a style="color: #828282;" data-toggle="tab" href="#nav-all">All</a>
+										</li>
+										<li >
+											<a href="#nav-finished" data-toggle="tab" style="color: #828282;">Finished</a>
+										</li >
+										<li >
+											<a href="" style="color: #828282;">Passed</a>
+										</li>
+										<li >
+											<a href="" style="color: #828282;">Failed</a>
+										</li>
+										<li >
+											<a href="" style="color: #828282;">Not enrolled</a>
+										</li>
+									</ul>
+								</nav>
+							
+							</div>
+							<!-- for all -->
+							<div class="tab-pane fade" id="nav-all" role="tabpanel">
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col" colspan="3">Course</th>
+											<th scope="col">Date</th>
+											<th scope="col">Passing Grade</th>
+											<th scope="col">Progress</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th colspan="3">course 1</th>
+											<td>1/12/2020</td>
+											<td>70%</td>
+											<td>40% in progress</td>
+										</tr>
+										<tr>
+											<th colspan="3">Course2</th>
+											<td>1/12/2020</td>
+											<td>80%</td>
+											<td>50% in progress</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							
+							<!-- for finished -->
+							<div class="tab-pane fade" id="nav-finished" role="tabpanel" style="margin-top: -100px;">
+								<div class="border" style="background-color: #dbf5d8;">
+									<p style="padding-top: 10px;color:green;">NO Course</p>
+								</div>
+							</div>
+						</div>
+						<!-- end of courses -->
+						<div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-profile-tab">
+							<div>
+								<br/>
+								<br/>
+								<h3 style="color:black;font-weight: bold;">My Orders</h3>
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col">Order</th>
+											<th scope="col">Date</th>
+											<th scope="col">Status</th>
+											<th scope="col">Total</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th scope="row">1</th>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+											<td>action</td>
+										</tr>
+										<tr>
+											<th scope="row">2</th>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+											<td>action</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="container border">
+								<div class="row">
+									<div class="col-5 border c1">
+										<h6>Displaying 1 to 10 of 26 items.</h6>
+									</div>
+									<div class="col-7 border c1">
+										<nav aria-label="Page navigation example">
+											<ul class="pagination">
+												
+												<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+												<li class="page-item"><a class="page-link" href="#">1</a></li>
+												<li class="page-item"><a class="page-link" href="#">2</a></li>
+												<li class="page-item"><a class="page-link" href="#">3</a></li>
+												<li class="page-item"><a class="page-link" href="#">Next</a></li>
+											
+											</ul>
+										</nav>
+									</div>
+								</div>
+							
+							</div>
+							<div class="container">
+								<div class="row container">
+									<p style="padding-top: 30px;   color: #828282;">If you have a valid order key you can recover it here.
+									</p>
+									<br/>
+								</div>
+								<div class="row" style="margin-top: 10px;">
+									<div class="col-4">
+										<label class="sr-only" for="inlineFormInputName2">Name</label>
+										<input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Order key"/>
+									</div>
+									<button type="submit" class="btn btn-danger mb-2" style="font-weight: bold;">RECOVER</button>
+								
+								</div>
+							</div>
+						</div>
+						<!-- for setting div -->
+						<div class="tab-pane fade" id="nav-setting" role="tabpanel" aria-labelledby="nav-contact-tab">
+							<br/>
+							<br/>
+							<nav>
+								<ul class="nav-tabs nav text-center" style="border-style: none;">
+									<li class="nav-item  " role="tab" >
+										<a class=" nav-link  child-nav " data-toggle="tab" href="#nav-general" aria-selected="true" style="font-size: 15px;">
+											General
+										</a>
+									</li>
+									<li class="nav-item " role="tab" >
+										<a class=" nav-link  child-nav " data-toggle="tab" href="#nav-avator" aria-selected="true" style="font-size: 15px;">
+											Avator
+										</a>
+									</li>
+									<li class="nav-item " role="tab" >
+										<a class=" nav-link  child-nav " data-toggle="tab" href="#nav-password" aria-selected="true" style="font-size: 15px;">
+											Password
+										</a>
+									</li>
+									<li class="nav-item " role="tab" >
+										<a class=" nav-link  child-nav " data-toggle="tab" href="#" aria-selected="true" style="font-size: 15px;">
+											Publicity
+										</a>
+									</li>
+								</ul>
+							</nav>
+							<div class="tab-pane fade" id="nav-general" role="tabpanel" aria-labelledby="nav-contact-tab">
+								<br/>
+								<div class="container  border">
+									<div class="row">
+										<div class="form-group col-12">
+											<br/>
+											<label for="exampleFormControlTextarea1" style="font-weight:bold;">Biographical Info</label>
+											<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+											<p style="font-size:15px">Share a little biographical information to fill out your profile. This may be shown publicly.
+											</p>
+										</div>
+									
+									</div>
+									<div class="container">
+										<form>
+											<div class="form-group col-4">
+												<label for="formGroupExampleInput">First Name</label>
+												<input type="text" class="form-control" id="formGroupExampleInput" placeholder="TD"/>
+											</div>
+											<div class="form-group col-4">
+												<label for="formGroupExampleInput2">Last Name</label>
+												<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="TH"/>
+											</div>
+											<div class="form-group col-4">
+												<label for="formGroupExampleInput2">Nick Name</label>
+												<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="DF"/>
+											</div>
+											<div class="form-group col-4">
+												<label for="formGroupExampleInput2">Display name publicly as</label>
+												<select class="form-control">
+													<option>Default select</option>
+													<option>Pakistan</option>
+													<option>India</option>
+													<option>Afghan</option>
+												</select>
+											</div>
+											<div class="form-group col-4">
+												<button type="button" class="btn btn-danger btn-lg">Save Changes</button>
+											
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!--avator start-->
+							<div class="tab-pane fade" id="nav-avator" role="tabpanel" aria-labelledby="nav-contact-tab" style="margin-top:-520px;">
+								<div class="container border" style="height:250px;">
+									<div>
+										<img src="portal_user/static/src/images/images.jpg" alt="" class="img-thumbnail"/>
+									</div>
+									<button style="margin-top:20px" type="button" class="btn btn-primary btn-lg">Image Upload</button>
+								
+								</div>
+							
+							</div>
+							
+							<!--for password -->
+							<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-contact-tab" style="margin-top:-250px;">
+								<div class="border">
+									<br/>
+									<form >
+										<div class="form-group col-4">
+											<label for="formGroupExampleInput">Old Password</label>
+											<input type="text" class="form-control" id="formGroupExampleInput"/>
+										</div>
+										<div class="form-group col-4">
+											<label for="formGroupExampleInput2">New Password</label>
+											<input type="text" class="form-control" id="formGroupExampleInput2"/>
+										</div>
+										<div class="form-group col-4">
+											<label for="formGroupExampleInput2">Confirmed Password</label>
+											<input type="text" class="form-control" id="formGroupExampleInput2"/>
+										</div>
+										<div class="form-group col-4">
+											<button type="button" class="btn btn-danger btn-lg">Save Changes</button>
+										
+										</div>
+									</form>
+								</div>
+							</div>
+						
+						</div>
+						<!-- ending setting div -->
+						<!--						start quiz result-->
+						<div class="tab-pane fade" id="nav-quiz" role="tabpanel" aria-labelledby="nav-contact-tab">
+							<br/>
+							<br/>
+							<h2>My Quizzes</h2>
+							<br/>
+							<div class="tab-content" id="nav-tabContent" style="margin-left: -48px;">
+								<nav>
+									<ul class="child-ul">
+										<li >
+											<a style="color: #828282;" data-toggle="tab" href="#nav-all-quiz">All</a>
+										</li>
+										<li >
+											<a href="#nav-all-finished" data-toggle="tab" style="color: #828282;">Finished</a>
+										</li >
+										<li >
+											<a href="#nav-all-passed" data-toggle="tab"  style="color: #828282;">Passed</a>
+										</li>
+										<li >
+											<a href="#nav-all-failed" data-toggle="tab" style="color: #828282;">Failed</a>
+										</li>
+									
+									</ul>
+								</nav>
+							</div>
+							<!--							for all quiz-->
+							
+							<div class="tab-pane fade" id="nav-all-quiz" role="tabpanel">
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col" style="width:300px;" >Course</th>
+											<th scope="col">Quiz</th>
+											<th scope="col">Date</th>
+											<th scope="col">Passing </th>
+											<th scope="col">Interval</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th>course 1</th>
+											<td>1/12/2020</td>
+											<td>70%</td>
+											<td>40% in progress</td>
+											<td>40% in progress</td>
+										</tr>
+										<tr>
+											<th >Course2</th>
+											<td>1/12/2020</td>
+											<td>80%</td>
+											<td>50% in progress</td>
+											<td>50% in progress</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<!--							for finished-->
+							<div class="tab-pane fade" id="nav-all-finished" role="tabpanel" style="margin-top:-100px">
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col" style="width:300px;" >Course</th>
+											<th scope="col">Quiz</th>
+											<th scope="col">Date</th>
+											<th scope="col">Passing </th>
+											<th scope="col">Interval</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th>course 1</th>
+											<td>1/12/2020</td>
+											<td>70%</td>
+											<td>40% in progress</td>
+											<td>40% in progress</td>
+										</tr>
+										<tr>
+											<th >Course2</th>
+											<td>1/12/2020</td>
+											<td>80%</td>
+											<td>50% in progress</td>
+											<td>50% in progress</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--							for passed-->
+							<div class="tab-pane fade" id="nav-all-passed" role="tabpanel" style="margin-top:-100px">
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col" style="width:300px;" >Course</th>
+											<th scope="col">Quiz</th>
+											<th scope="col">Date</th>
+											<th scope="col">Passing </th>
+											<th scope="col">Interval</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th>course 1</th>
+											<td>1/12/2020</td>
+											<td>70%</td>
+											<td>40% in progress</td>
+											<td>40% in progress</td>
+										</tr>
+										<tr>
+											<th >Course2</th>
+											<td>1/12/2020</td>
+											<td>80%</td>
+											<td>50% in progress</td>
+											<td>50% in progress</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--								for failed-->
+							<div class="tab-pane fade" id="nav-all-failed" role="tabpanel" style="margin-top:-100px">
+								<table class="table border table-sm">
+									<thead  class="table-bordered-less">
+										<tr>
+											<th scope="col" style="width:300px;" >Course</th>
+											<th scope="col">Quiz</th>
+											<th scope="col">Date</th>
+											<th scope="col">Passing </th>
+											<th scope="col">Interval</th>
+										</tr>
+									</thead>
+									<tbody class="border table-bordered">
+										<tr>
+											<th>course 1</th>
+											<td>1/12/2020</td>
+											<td>70%</td>
+											<td>40% in progress</td>
+											<td>40% in progress</td>
+										</tr>
+										<tr>
+											<th >Course2</th>
+											<td>1/12/2020</td>
+											<td>80%</td>
+											<td>50% in progress</td>
+											<td>50% in progress</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+						
+						
+						<!--						end of quizz-->
+						
+						<!--						for wishlist-->
+						
+						
+						
+						
+						<div class="tab-pane fade" id="nav-wishlist" role="tabpanel" aria-labelledby="nav-contact-tab">
+							<br/>
+							<br/>
+							<h3>Features Couses</h3>
+							<br/>
+							<div class="container">
+								<div class="row">
+									
+									<div class="col-lg-3 col-md-6 mb-4 mb-lg-0 col-4">
+										<!-- Card-->
+										<div class="card rounded shadow-sm border-0">
+											<div class="card-body p-4"><img src="portal_user/static/src/images/images.jpg" alt="" class="img-fluid d-block mx-auto mb-3"/>
+												<h5> <a href="#" class="text-dark">Student</a></h5>
+												<p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+												<ul class="list-inline small">
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-lg-3 col-md-6 mb-4 mb-lg-0 col-4">
+										<!-- Card-->
+										<div class="card rounded shadow-sm border-0">
+											<div class="card-body p-4"><img src="portal_user/static/src/images/images.jpg" alt="" class="img-fluid d-block mx-auto mb-3"/>
+												<h5> <a href="#" class="text-dark">Student</a></h5>
+												<p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+												<ul class="list-inline small">
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-lg-3 col-md-6 mb-4 mb-lg-0 col-4">
+										<!-- Card-->
+										<div class="card rounded shadow-sm border-0">
+											<div class="card-body p-4"><img src="portal_user/static/src/images/images.jpg" alt="" class="img-fluid d-block mx-auto mb-3"/>
+												<h5> <a href="#" class="text-dark">Student</a></h5>
+												<p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+												<ul class="list-inline small">
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+													<li class="list-inline-item m-0"><i class="fa fa-star-o text-success"></i></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		
+		</t>
+	</template>
+</odoo>

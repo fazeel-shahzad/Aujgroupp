@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+
+        <template id="rate_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-center" style="font-size:20px;">
+                            <strong>Rate Comparision report</strong>
+                        </div>
+                        <br/>
+                        <div class="row" style="padding-left:15px;">
+                            <strong style="font-size:16px; margin-top:-20px;">Date from:</strong>
+                            <span t-esc="date_from"/>
+                            <br/>
+                            <strong style="font-size:16px; margin-top:-20px;">Date to:</strong>
+                            <span style="padding-left:20px;" t-esc="date_to"/>
+                        </div>
+
+                        <table style="width:100%; margin-top:15px;" class="table table-condensed">
+                            <thead class="thead-light">
+                                <tr style="">
+                                    <th  colspan="" class="text-left"><strong style="font-size:16px;"><span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></strong></th>
+                                    <th  name="th_on_hand" class="text-left"><strong style="font-size:16px;">Product</strong></th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th  name="th_on_hand" class="text-left"><strong style="font-size:16px; white-space:nowrap;"><span t-esc="month"/></strong></th>
+                                    </t>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-set="colspan_val" t-value="int(len(months)+2)"/>
+                                <t t-foreach="vendors" t-as="ven">
+                                    <tr style="font-size:14px; background-color:#a2a5a8; color:white;">
+                                        <td t-att-colspan="colspan_val" class="text-left"><strong><span t-field="ven.name"/>:</strong></td>
+                                    </tr>
+                                    <t t-set="vprd" t-value="get_vendor_product(ven,po_lines)"/>
+                                    <t t-set="prod_lines" t-value="vprd[1]"/>
+                                   <!--for checking the return values from function 'get_vendor_product'-->
+<!--                                    <tr>-->
+<!--                                        <td><span t-esc="vprd[0]"/></td>-->
+<!--                                        <td><span t-esc="vprd[1]"/></td>-->
+<!--                                    </tr>-->
+                                     <!--end of for checking the return values from function 'get_vendor_product'-->
+                                    <t t-foreach="vprd[0]" t-as="product">
+                                        <t t-set="data" t-value="get_latest_data(product,prod_lines)"/>
+                                        <tr>
+                                            <td></td>
+                                            <td><span t-field="product.name"/></td>
+                                            <t t-foreach="months"  t-as="mon">
+                                                <t t-set="prd_data" t-value="month_rec(mon,data, product)"/>
+                                                   <t t-if="not prd_data == False">
+                                                         <td><span t-esc="prd_data.price_unit"/></td>-->
+                                                   </t>
+
+                                                     <t t-if="prd_data == False">
+                                                        <td><span>&#160;</span></td>
+                                                    </t>
+
+<!--                                                <t t-if="mon == data[1]">-->
+<!--                                                    <td><span t-esc="data[0]"/></td>-->
+<!--                                                </t>-->
+<!--                                                <t t-else="">-->
+<!--                                                    <td><span>&#160;</span></td>-->
+<!--                                                </t>-->
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </t>
+                           </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</odoo>

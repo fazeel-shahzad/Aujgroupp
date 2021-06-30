@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="seq_eco_ecofi_vorlauf" model="ir.sequence">
+    <field name="name">VorlaufID</field>
+    <field name="code">ecofi.vorlauf</field>
+    <field name="prefix">VL</field>
+    <field name="padding">8</field>
+    <field eval="1" name="number_next"/>
+    <field eval="1" name="number_increment"/>
+  </record>
+
+</odoo>

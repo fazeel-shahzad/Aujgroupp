@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="letterhead_reference">
+    <div id="letterhead_reference" class="invoice row">
+      <div>
+        <!-- Set document specific variables -->
+        <t t-set="client_order_ref"
+           t-value="o.name"/>
+
+        <!-- References about this document -->
+        <t name="reference_document"
+           t-call="ecoservice_german_documents_base.letterhead_reference_document"/>
+
+        <!-- Customer No. & VAT references -->
+        <t name="reference_customer_vat"
+           t-call="ecoservice_german_documents_base.letterhead_reference_customer_vat"/>
+
+        <!-- References about the case for the customer -->
+        <t name="reference_case"
+           t-call="ecoservice_german_documents_invoice.invoice_letterhead_reference_case"/>
+
+        <!-- References about our company for the customer -->
+        <t name="reference_contact"
+           t-call="ecoservice_german_documents_base.letterhead_reference_contact"/>
+
+        <!-- Details about our company -->
+        <t name="reference_company"
+           t-call="ecoservice_german_documents_base.letterhead_reference_company"/>
+      </div>
+    </div>
+  </template>
+
+  <template id="invoice_letterhead_reference_case">
+    <div id="invoice_letterhead_reference_case"
+         class="row"
+         style="border-top: 0.1em solid #cacaca;">
+      <div class="col-6 ptb-5">
+        <div class="span font-alt no-wrap">Reference:</div>
+        <br/>
+        <span t-field="o.ref"/>
+      </div>
+      <t t-if="o.invoice_origin">
+        <div class="offset-1 col-5 ptb-5" style="text-align: right;">
+          <div class="span font-alt no-wrap" style="margin-right: -5px;">Source Document:</div>
+          <br/>
+          <div>
+            <span t-field="o.invoice_origin"/>
+          </div>
+        </div>
+      </t>
+    </div>
+  </template>
+
+</odoo>

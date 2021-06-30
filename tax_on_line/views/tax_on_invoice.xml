@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+      <record id="view_account_move_invoice_line_inh" model="ir.ui.view">
+        <field name="name">account.move.tax.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='tax_ids']" position="after">
+                <field name="tax_amount" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="view_sale_order_view" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='order_line']//tree//field[@name='tax_id']" position="after">
+                <field name="tax_amount" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>  

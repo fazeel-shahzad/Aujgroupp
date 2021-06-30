@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_german_documents_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-09 19:04+0000\n"
+"PO-Revision-Date: 2020-12-09 19:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "&amp;nbsp;"
+msgstr ""
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.actions.report,print_report_name:ecoservice_german_documents_purchase.report_purchase_order_quotation_without_logo
+msgid "'Purchase'"
+msgstr ""
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Delivery"
+msgstr "Lieferung"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_document_purchase
+msgid "Delivery Address:"
+msgstr "Lieferadresse:"
+
+#. module: ecoservice_german_documents_purchase
+#: code:addons/ecoservice_german_documents_purchase/models/purchase_order.py:0
+#, python-format
+msgid "PO"
+msgstr "Bestellung"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Pos"
+msgstr ""
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Product"
+msgstr "Produkt"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model,name:ecoservice_german_documents_purchase.model_purchase_order
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_purchase_order_quotation_translator
+#: model:text.template.config,name:ecoservice_german_documents_purchase.purchase_order_text
+msgid "Purchase Order"
+msgstr "Beschaffungsauftrag"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model.fields,field_description:ecoservice_german_documents_purchase.field_purchase_order__purchase_confirmation_bottom
+#: model:text.template.config,name:ecoservice_german_documents_purchase.purchase_order_text_bottom
+msgid "Purchase Order (Bottom)"
+msgstr "Beschaffungsauftrag (Unten)"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model.fields,field_description:ecoservice_german_documents_purchase.field_purchase_order__purchase_confirmation
+msgid "Purchase Order (Top)"
+msgstr "Beschaffungsauftrag (Oben)"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model,name:ecoservice_german_documents_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Bestellposition"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: ecoservice_german_documents_purchase
+#: model:text.template.config,name:ecoservice_german_documents_purchase.purchase_rfq_text
+msgid "RFQ"
+msgstr "Angebotsanfrage"
+
+#. module: ecoservice_german_documents_purchase
+#: model:text.template.config,name:ecoservice_german_documents_purchase.purchase_rfq_text_bottom
+msgid "RFQ (Bottom)"
+msgstr "Angebotsanfrage (Unten)"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.actions.report,name:ecoservice_german_documents_purchase.report_purchase_order_quotation
+msgid "RFQ / Purchase Order"
+msgstr "Anfrage / Bestellung"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.actions.report,name:ecoservice_german_documents_purchase.report_purchase_order_quotation_without_logo
+msgid "RFQ / Purchase Order Letter Paper"
+msgstr "Anfrage / Bestellung Briefpapier"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_purchase_order_quotation_translator
+msgid "Request for Quotation"
+msgstr "Angebotsanfrage"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model.fields,field_description:ecoservice_german_documents_purchase.field_purchase_order__purchase_rfq_bottom
+msgid "Request for Quotation (Bottom)"
+msgstr "Angebotsanfrage (Unten)"
+
+#. module: ecoservice_german_documents_purchase
+#: model:ir.model.fields,field_description:ecoservice_german_documents_purchase.field_purchase_order__purchase_rfq
+msgid "Request for Quotation (Top)"
+msgstr "Angebotsanfrage (Oben)"
+
+#. module: ecoservice_german_documents_purchase
+#: code:addons/ecoservice_german_documents_purchase/models/purchase_order.py:0
+#, python-format
+msgid "RfQ"
+msgstr "Anfrage"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.letterhead_reference_supplier_vat
+msgid "Supplier No."
+msgstr "Lieferantennummer"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.letterhead_reference_supplier_vat
+msgid "Supplier VAT-ID"
+msgstr "Lieferanten USt. IdNr."
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.purchase_order_form_inherited_text_template
+msgid "Text Template"
+msgstr "Textvorlage"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Total Price"
+msgstr "Gesamtpreis"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_purchase_order_quotation_template_without_logo
+msgid "True"
+msgstr "Wahr"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "Unit Price"
+msgstr "Preis pro ME"
+
+#. module: ecoservice_german_documents_purchase
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_purchase.report_table_base_purchase
+msgid "UoM"
+msgstr "ME"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="expedition_price_action">
+            <field name="name">Expedition Price Action</field>
+            <field name="res_model">expedition.price</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_price_tree_view">
+            <field name="name">Expedition Price Tree View</field>
+            <field name="model">expedition.price</field>
+            <field name="arch" type="xml">
+                <tree string="Expedition Price">
+                    <field name="cm_client_name"/>
+                    <field name="cm_expedition_price"/>
+                    <field name="cm_expedition_zone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_price_form_view">
+            <field name="name">Expedition Price Form View</field>
+            <field name="model">expedition.price</field>
+            <field name="arch" type="xml">
+                <form string="Expedition">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="cm_client_name"/>
+                                <field name="cm_expedition_price"/>
+                                <field name="cm_expedition_zone"/>
+                            </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="expeditions" parent="couriermanager_menu_root" name="Expedition" sequence="2"/>
+        <menuitem id="expedition_price" parent="expeditions" name="Expedition Price" action="expedition_price_action"/>
+
+    </data>
+</odoo>

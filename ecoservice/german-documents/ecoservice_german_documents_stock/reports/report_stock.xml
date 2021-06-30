@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- Register: Report Delivery Note -->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="report_stock_delivery_note" model="ir.actions.report">
+    <field name="name">Delivery Note</field>
+    <field name="model">stock.picking</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_stock.report_stock_delivery_note_template</field>
+  </record>
+
+  <!-- Register: Report Delivery Note (without logo) -->
+  <report id="report_stock_delivery_note_no_logo"
+          string="Delivery Note Letter Paper"
+          model="stock.picking"
+          report_type="qweb-pdf"
+          print_report_name="'Delivery Note Letter paper'"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          name="ecoservice_german_documents_stock.report_stock_delivery_note_template_without_logo"/>
+
+  <!-- Register: Report Picking Operation -->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="report_stock_picking_operation" model="ir.actions.report">
+    <field name="name">Picking Operation</field>
+    <field name="model">stock.picking</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_stock.report_stock_picking_operation_template</field>
+  </record>
+
+  <!-- Register: Picking Operation (without logo) -->
+  <report id="report_stock_picking_operation_no_logo"
+          string="Picking Operation Letter Paper"
+          model="stock.picking"
+          report_type="qweb-pdf"
+          print_report_name="'Picking Operation Letter paper'"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          name="ecoservice_german_documents_stock.report_stock_picking_operation_template_without_logo"/>
+
+  <!-- Build: Report Delivery Note -->
+  <!-- TODO: Remove in 14.0 -->
+  <template id="report_stock_delivery_note_template">
+    <t t-call="stock.report_deliveryslip"/>
+  </template>
+
+  <!-- Build: Report Delivery Note (without logo) -->
+  <template id="report_stock_delivery_note_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="stock.report_deliveryslip"/>
+  </template>
+
+  <!-- Build: Report Picking Operation -->
+  <!-- TODO: Remove in 14.0 -->
+  <template id="report_stock_picking_operation_template">
+    <t t-call="stock.report_picking"/>
+  </template>
+
+  <!-- Build: Report Picking Operation (without logo) -->
+  <template id="report_stock_picking_operation_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="stock.report_picking"/>
+  </template>
+
+  <!-- Translate: Report Purchase Order (non-fields) -->
+  <template id="report_delivery_note_translator">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+    <t t-set="move_line_ids" t-value="o.move_line_ids"/>
+    <t t-set="doc_name">Delivery Note</t>
+    <t t-call="ecoservice_german_documents_stock.report_stock_document_delivery_note"/>
+  </template>
+
+  <!-- Translate: Report Picking Operation (non-fields) -->
+  <template id="report_picking_operation_translator">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+    <t t-set="is_picking" t-value="True"/>
+    <t t-set="move_line_ids" t-value="o.move_line_ids"/>
+    <t t-set="doc_name">Picking Operation</t>
+    <t t-call="ecoservice_german_documents_stock.report_stock_document_picking_operation"/>
+  </template>
+
+  <template id="report_deliveryslip_inherit_gd" inherit_id="stock.report_deliveryslip">
+    <xpath expr="//t[@t-call='stock.report_delivery_document']" position="attributes">
+      <attribute name="t-if">
+        o.sudo().company_id.external_report_layout_id.key != 'ecoservice_german_documents_base.external_layout_german_documents'
+      </attribute>
+    </xpath>
+    <xpath expr="//t[@t-call='stock.report_delivery_document']" position="before">
+      <t t-call="ecoservice_german_documents_stock.report_delivery_note_translator"
+         t-if="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+    </xpath>
+  </template>
+
+    <template id="report_picking_inherit_gd" inherit_id="stock.report_picking">
+    <xpath expr="//t[@t-call='web.external_layout']" position="before">
+      <t t-call="ecoservice_german_documents_stock.report_picking_operation_translator"
+         t-if="o.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+    </xpath>
+    <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+      <attribute name="t-if">
+        o.sudo().company_id.external_report_layout_id.key != 'ecoservice_german_documents_base.external_layout_german_documents'
+      </attribute>
+    </xpath>
+  </template>
+
+</odoo>

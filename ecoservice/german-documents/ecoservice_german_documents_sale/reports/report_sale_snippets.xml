@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="letterhead_reference">
+    <div id="letterhead_reference" class="sale row">
+      <div>
+        <!-- Set document specific variables -->
+        <t t-set="client_order_ref"
+           t-value="o.client_order_ref"/>
+
+        <!-- References about this document -->
+        <t name="reference_document"
+           t-call="ecoservice_german_documents_base.letterhead_reference_document"/>
+
+        <!-- Customer No. & VAT references -->
+        <t name="reference_customer_vat"
+           t-call="ecoservice_german_documents_base.letterhead_reference_customer_vat"/>
+
+        <!-- References about the case for the customer -->
+        <t name="reference_case"
+           t-call="ecoservice_german_documents_base.letterhead_reference_case"/>
+
+        <!-- References about our company for the customer -->
+        <t name="reference_contact"
+           t-call="ecoservice_german_documents_base.letterhead_reference_contact"/>
+
+        <!-- Details about our company -->
+        <t name="reference_company"
+           t-call="ecoservice_german_documents_base.letterhead_reference_company"/>
+      </div>
+    </div>
+  </template>
+
+  <template id="report_saleorder_suggested_products">
+    <t t-set="has_option_discount"
+       t-value="any(o.sale_order_option_ids.filtered(lambda o: o.discount != 0.0))"/>
+
+    <div style="page-break-before:always;">
+      <h4>Suggested Products</h4>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th t-if="has_option_discount"
+                groups="product.group_discount_per_so_line"/>
+            <th class="text-right">Unit Price</th>
+          </tr>
+        </thead>
+        <tbody class="sale_tbody">
+          <tr t-foreach="o.sale_order_option_ids" t-as="option">
+            <td>
+              <span t-field="option.product_id.name"/>
+            </td>
+            <td>
+              <span t-field="option.name"/>
+            </td>
+            <td groups="product.group_discount_per_so_line"
+                t-if="has_option_discount">
+              <strong class="text-info" t-if="option.discount != 0.0">
+                <t t-esc="((option.discount % 1) and '%s' or '%d') % option.discount"/>% discount
+              </strong>
+            </td>
+            <td>
+              <strong class="text-right">
+                <div t-field="option.price_unit"
+                     t-options="{'display_currency': o.pricelist_id.currency_id}"
+                     t-att-style="option.discount and 'text-decoration: line-through' or None"
+                     t-att-class="option.discount and 'text-danger' or None"
+                     widget="monetary"/>
+                <div t-if="option.discount">
+                  <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)"/>
+                </div>
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+  <template id="show_position_number">
+    <td align="left" t-if="display_pos_no and continuous_pos_no">
+      <t t-esc="o.report_line_index"/>
+      <t t-esc="o.set_report_line_index(o.report_line_index+1)"/>
+    </td>
+    <td align="left" t-if="display_pos_no and not continuous_pos_no">
+      <t t-esc="line_index+1"/>
+    </td>
+  </template>
+
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="expedition_invoice_action">
+            <field name="name">Expedition Invoice Action</field>
+            <field name="res_model">expedition.invoice</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_invoice_tree_view">
+            <field name="name">Expedition Invoice Tree View</field>
+            <field name="model">expedition.invoice</field>
+            <field name="arch" type="xml">
+                <tree string="Expedition Invoice">
+                    <field name="in_number"/>
+                    <field name="in_name" />
+                    <field name="in_value"/>
+                    <field name="in_tva"/>
+                    <field name="in_due_days"/>
+                    <field name="in_city"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_invoice_form_view">
+            <field name="name">Expedition Invoice Form View</field>
+            <field name="model">expedition.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Invoice">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="in_number"/>
+                                <field name="in_name" />
+                                <field name="in_value"/>
+                                <field name="in_tva"/>
+                                <field name="in_currency"/>
+                            </group>
+                            <group>
+                                <field name="in_date"/>
+                                <field name="in_due_days"/>
+                                <field name="in_city"/>
+                                <field name="in_county"/>
+                                <field name="in_zone"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="in_to_date"/>
+                                <field name="in_from_date"/>
+                                <field name="in_emiter"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="expedition_invoice" parent="couriermanager_menu_root" name="Invoices" action="expedition_invoice_action"/>
+
+    </data>
+</odoo>

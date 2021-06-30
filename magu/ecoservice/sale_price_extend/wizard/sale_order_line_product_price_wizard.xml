@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_line_wizard" model="ir.ui.view">
+        <field name="name">Sale Order Line</field>
+        <field name="model">sale.order.line.product.price.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lines to update price on pricelist">
+                <group>
+                    <field name="so_product_ids" nolabel="1">
+                        <tree create="false" delete="false" editable="top">
+                            <field name="company_id" invisible="1"/>
+                            <field name="apply_changed_price" string="Select Product"/>
+                            <field name="product_id" string="Product Name" readonly="1"/>
+                            <field name="so_line_price" string="Price" readonly="1"/>
+                            <field name="price_unit" string="Updated Price" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="change_customer_pricelist_product_price"
+                            string="Yes"
+                            type="object"/>
+                    <button name="action_confirm_on_cancel"
+                            string="Cancel"
+                            class="btn-secondary"
+                            type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

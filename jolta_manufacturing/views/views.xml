@@ -1,0 +1,333 @@
+<odoo>
+    <data>
+
+        <record id="view_product_form_inh" model="ir.ui.view">
+            <field name="name">product.template.form.inh</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+  <xpath expr="//field[@name='standard_price']" position="after"> 
+<field name="parent_sku" invisible="1"/>
+      </xpath>
+
+                <xpath expr="//field[@name='list_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+                <xpath expr="//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+                <xpath expr="//label[@for='list_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+         <record id="view_product_tree_jolta_inh" model="ir.ui.view">
+            <field name="name">product.template.tree.inh</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='list_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+         <record id="view_product_kanban_inh" model="ir.ui.view">
+            <field name="name">product.template.kanban.inh</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//field[@name='lst_price']" position="attributes">-->
+<!--                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//ul/li[1]" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>
+                </xpath>
+<!--                <xpath expr="//field[@name='standard_price']" position="attributes">-->
+<!--                    <attribute name="groups">jolta_manufacturing.group_sale_cost_price_user</attribute>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="view_requisition_tree_inh" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.tree</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_tree_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="ref" attrs="{'invisible': [('company_id', '!=', 44)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_requisition_form_inh" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.form</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='requisition_line_ids']//tree//field[@name='qty']" position="after">
+                    <field name="issued_qty" />
+                    <field name="short_qty" />
+                </xpath>
+                <xpath expr="//field[@name='requisition_line_ids']//tree//field[@name='qty']" position="attributes">
+                    <attribute name="string">Requested Qty</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="ref" />
+                    <field name="is_internal_transfer_done" invisible="1"/>
+                    <field name="is_created_by_store" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//field[@name='dest_location_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_received']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('is_internal_transfer_done', '=', False), ('state', '!=', 'stock')]}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="internal_stock_location_user" model="ir.ui.view">
+            <field name="name">Stock Location</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='return_location']" position="after">
+                    <field name="user_id" widget="many2many_tags" attrs="{'invisible': [('company_id', '!=', 44)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_mrp_manufacturing_form_inh" model="ir.ui.view">
+            <field name="name">mrp.production.form.inh</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header/button[@name='action_assign']" position="before">
+                    <button name="action_create_requisition" type="object" string="Create Requisition" class="oe_highlight" attrs="{'invisible': ['|','|',('state', '!=', 'confirmed'), ('is_req_created', '=', True),('company_id', '!=', 44)]}"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" icon="fa-wrench" type="object" name="action_show_requisitions" attrs="{'invisible': [('company_id', '!=', 44)]}">
+                            <field string="Requisitions" name="req_count" widget="statinfo" />
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="is_req_created" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="view_stock_picking_form_inh" model="ir.ui.view">
+            <field name="name">Stock Transfer</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <div name="button_box" class="oe_button_box" position="inside">
+                        <button class="oe_stat_button" icon="fa-wrench" type="object" name="action_backorder_button" attrs="{'invisible': ['|',('backorder_count', '=', 0), ('company_id', '!=', 44)]}">
+                            <field string="Backorder" widget="statinfo" name="backorder_count"/>
+                        </button>
+                </div>
+
+                <xpath expr="//header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,partially_available,assigned,qc_approved,done" />
+                </xpath>
+<!--                <xpath expr="//button[@name='button_scrap']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//button[@name='action_cancel']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+
+<!--                 <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">&ndash;&gt;-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//header/button[@name='%(stock.act_stock_return_picking)d']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//button[@name='action_assign']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//button[@name='button_validate']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                                <xpath expr="//button[@name='do_unreserve']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//header/button[4]" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('is_store_user', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+
+                <xpath expr="//header/button[4]" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//header/button[3]" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_scrap']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//header/button[@name='%(stock.act_stock_return_picking)d']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_assign']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+<!--                <xpath expr="//button[@name='button_validate']" position="attributes">-->
+<!--&lt;!&ndash;                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>&ndash;&gt;-->
+<!--                    <attribute name="attrs">{'invisible': [('state', '!=', 'assigned')]}</attribute>-->
+<!--                </xpath>-->
+
+
+
+<!--                &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+
+                <xpath expr="//header/button[@name='action_assign']" position="after">
+                    <button name="button_validate" type="object" string="Validate" class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'purchase_waiting')]}" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='do_unreserve']" position="after">
+                    <button name="do_unreserve" type="object" string="Unreserve"
+                             groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="after">
+                    <button name="action_assign" type="object" string="Check Availability" class="oe_highlight"
+                           attrs="{'invisible': [('state','!=', 'purchase_waiting')]}" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="after">
+                    <button name="%(stock.act_stock_return_picking)d" type="action" string="Return" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="after">
+                    <button name="action_toggle_is_locked" type="object" string="Unlock" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='action_toggle_is_locked']" position="after">
+                    <button name="action_cancel" type="object" string="Cancel" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='do_unreserve']" position="after">
+                    <button name="button_scrap" type="object" string="Scrap" groups="jolta_manufacturing.group_immediate_transfer_purchase_user"/>
+                </xpath>
+<!--Test-->
+
+<!--                <xpath expr="//button[3]" position="attributes">-->
+<!--&lt;!&ndash;                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>&ndash;&gt;-->
+<!--                    <attribute name="attrs">{'invisible': [('state', '!=', 'assigned')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//button[4]" position="attributes">-->
+<!--&lt;!&ndash;                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>&ndash;&gt;-->
+<!--                    <attribute name="attrs">{'invisible': [('state', '!=', 'assigned')]}</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//button[@name='do_unreserve']" position="attributes">
+                    <attribute name="groups">jolta_manufacturing.group_internal_transfer_store_user</attribute>
+                </xpath>
+
+                <xpath expr="//header/button[@name='button_validate']" position="before">
+                    <button name="approve" type="object" string="Approve" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', '!=', 'approval'), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_internal_transfer_store_user"/>
+                </xpath>
+                 <xpath expr="//header/button[@name='approve']" position="after">
+                    <button name="reject" type="object" string="Reject" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', 'not in', ['approval']), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_internal_transfer_store_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="before">
+                    <button name="approve_quality" type="object" string="Approve Quality" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', '!=', 'qc'), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_immediate_transfer_quality_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="before">
+                    <button name="send_approval" type="object" string="Send for Approval" class="oe_highlight"
+                            attrs="{'invisible': ['|','|','|',('state', '!=', 'assigned'), ('is_greater_done', '=', False), ('is_grn_approved', '=', True),('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_internal_transfer_store_user"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="before">
+                    <button name="approve_grn" type="object" string="Approve GRN" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', '!=', 'sent_approve'), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_grn_manager"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="after">
+                    <button name="reject_grn" type="object" string="Reject GRN" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', '!=', 'sent_approve'), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_grn_manager"/>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" position="after">
+                    <button name="create_requisition" type="object" string="Create Requisition"
+                            attrs="{'invisible': ['|','|',('state', 'not in', ['confirmed', 'assigned']), ('is_req_created', '=', True), ('company_id', '!=', 44)]}" groups="jolta_manufacturing.group_internal_transfer_store_user"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" type="object" icon="fa-pencil-square-o" name="action_show_requisitions">
+                         <field string="Requisitions" name="req_count" widget="statinfo" />
+                    </button>
+                </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group col="4" attrs="{'invisible': [('company_id', '!=', 44)]}">
+                        <field name="section_id" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="model" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="color" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="lot_no" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="lot_qty" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="work_order" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="work_order_qty" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="date_approval" attrs="{'invisible': [('immediate_transfer', '=', True)]}"/>
+                        <field name="is_greater_done" invisible="1"/>
+                        <field name="is_grn_approved" invisible="1"/>
+                        <field name="is_req_created" invisible="1"/>
+                        <field name="is_store_user" invisible="1"/>
+                        <field name="is_purchase_user" invisible="1"/>
+                    </group>
+                </xpath>
+
+<!--                <xpath expr="//notebook/page[2]" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('immediate_transfer', '=', False)]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='move_line_ids_without_package']" position="replace">-->
+<!--                    <field name='move_line_ids_without_package' attrs="{'readonly': ['|', '|', ('show_operations', '=', False), ('state', '=', 'cancel'),'&amp;', ('state', 'in', ['done','approval']), ('is_locked', '=', True)]}" context="{'tree_view_ref': 'stock.view_stock_move_line_detailed_operation_tree', 'default_picking_id': id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id, 'default_company_id': company_id}">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="product_id" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="lot_id" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="location_id" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="location_dest_id" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="product_uom_qty" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="qty_done" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="product_uom_id" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="company_id" invisible="1"/>-->
+<!--                            <field name="reason_of_rejection" attrs="{'invisible': [('parent.state', '!=', 'draft')]}"/>-->
+<!--                            <field name="observation" attrs="{'invisible': [('parent.state', '!=', 'qc')]}"/>-->
+<!--                            <field name="qty_store" attrs="{'invisible': [('parent.state', '!=', 'qc')]}"/>-->
+<!--                            <field name="return_vendor" attrs="{'invisible': [('parent.state', '!=', 'qc')]}"/>-->
+<!--                            <field name="material_received" attrs="{'invisible': [('parent.state', '!=', 'qc')]}"/>-->
+<!--                            <field name="is_immediate" />-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

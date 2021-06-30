@@ -1,0 +1,325 @@
+Mako,Nr.,Feldname,Typ,Länge,NKS,Max. Länge,Muss-Feld,Beschreibung
+${account.code},1,Konto,Konto,9,0,9,Ja,"Personen-Kontonummer
+Sachkontennummernlänge + 1 = Personenkontenlänge"
+${partner.name},2,Name (Adressattyp Unternehmen),Text,50,0,50, , 
+,3,Unternehmensgegenstand,Text,50,0,50, , 
+,4,Name (Adressattyp natürl. Person),Text,30,0,30, , 
+,5,Vorname (Adressattyp natürl. Person),Text,30,0,30, , 
+,6,Name (Adressattyp keine Angabe),Text,50,0,50, , 
+,7,Adressattyp,Text,1,0,1, ,"0= keine Angabe
+1= natürliche Person
+2= Unternehmen
+Standardwert = Unternehmen"
+,8,Kurzbezeichnung,Text,15,0,15, , 
+${partner.country_id.code},9,EU-Land,Text,2,0,2, ,"Die USt-IdNr. besteht aus
+2-stelligen Länderkürzel
+13-stelliger USt-IdNr.
+Beachten Sie bitte, dass kein Leerzeichen zwischen diesen beiden Eingabewerten sein darf."
+${partner.vat},10,EU-UStID,Text,13,0,13, ,
+${partner.title.name},11,Anrede,Text,30,0,30, , 
+,12,Titel/Akad. Grad,Text,25,0,25, ,"Nur bei Adressatentyp ""natürliche Person"" relevant.
+Wird der Titel/Akad.Grad bei einem Adressatentyp ""Unternehmen"" übergeben, wird der Wert in den Datenbestand übernommen, ist aber an der Oberfläche nicht sichtbar."
+,13,Adelstitel,Text,15,0,15, ,"Nur bei Adressatentyp ""natürliche Person"" relevant.
+Wird der Adelstitel bei einem Adressatentyp ""Unternehmen"" übergeben, wird der Wert in den Datenbestand übernommen, ist aber an der Oberfläche nicht sichtbar."
+,14,Namensvorsatz,Text,14,0,14, ,"Nur bei Adressatentyp ""natürliche Person"" relevant.
+Wird der Namensvorsatz bei einem Adressatentyp ""Unternehmen"" übergeben, wird der Wert in den Datenbestand übernommen, ist aber an der Oberfläche nicht sichtbar."
+,15,Adressart,Text,3,0,3, ,"STR = Straße 
+PF = Postfach
+GK = Großkunde
+Wird die Adressart nicht übergeben, wird sie automatisch in Abhängigkeit zu den übergebenen Feldern (Straße oder Postfach) gesetzt."
+${partner.street},16,Straße,Text,36,0,36, ,"Wird sowohl eine Straße als auch ein Postfach übergeben, werden beide Werte in den Datenbestand übernommen; auf der Visitenkarte in den Debitoren-/Kreditoren-Stammdaten wird die Postfachadresse angezeigt."
+,17,Postfach,Text,10,0,10, ,
+${partner.zip},18,Postleitzahl,Text,10,0,10, , 
+${partner.city},19,Ort,Text,30,0,30, , 
+${partner.country_id.code},20,Land,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,21,Versandzusatz,Text,50,0,50, , 
+,22,Adresszusatz,Text,36,0,36, ,Beispiel: z. Hd. Herrn Mustermann
+,23,Abweichende Anrede,Text,30,0,30, ,Es kann ein beliebiger individueller Text verwendet werden.
+,24,Abw. Zustellbezeichnung 1,Text,50,0,50, , 
+,25,Abw. Zustellbezeichnung 2,Text,36,0,36, , 
+,26,Kennz. Korrespondenzadresse,Zahl,1,0,1, ,1= Kennzeichnung Korrespondenzadresse
+,27,Adresse Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,28,Adresse Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+${partner.phone},29,Telefon,Text,60,0,60, ,Standard-Telefonnummer
+,30,Bemerkung (Telefon),Text,40,0,40, , 
+,31,Telefon Geschäftsleitung,Text,60,0,60, ,Geschäftsleitungs-Telefonnummer
+,32,Bemerkung (Telefon GL),Text,40,0,40, , 
+,33,E-Mail,Text,60,0,60, , 
+,34,Bemerkung (E-Mail),Text,40,0,40, , 
+,35,Internet,Text,60,0,60, , 
+,36,Bemerkung (Internet),Text,40,0,40, , 
+,37,Fax,Text,60,0,60, , 
+,38,Bemerkung (Fax),Text,40,0,40, , 
+,39,Sonstige,Text,60,0,60, , 
+,40,Bemerkung (Sonstige),Text,40,0,40, , 
+,41,Bankleitzahl 1,Text,8,0,8, , 
+,42,Bankbezeichnung 1,Text,30,0,30, , 
+,43,Bank-Kontonummer 1,Konto,10,0,10, , 
+,44,Länderkennzeichen 1,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,45,IBAN1,Text,34,0,34, , 
+,46,IBAN 1 korrekt,Zahl,1,0,1, ,Wert 1= IBAN korrekt
+,47,SWIFT-Code 1,Text,11,0,11, , 
+,48,Abw. Kontoinhaber 1,Text,70,0,70, , 
+,49,Kennz. Hauptbankverb. 1,Zahl,1,0,1, ,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,50,Bankverb. 1 Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,51,Bankverb. 1 Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+,52,Bankleitzahl 2,Text,8,0,8, , 
+,53,Bankbezeichnung 2,Text,30,0,30, , 
+,54,Bank-Kontonummer 2,Konto,10,0,10, , 
+,55,Länderkennzeichen 2,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,56,IBAN2,Text,34,0,34, , 
+,57,IBAN 2 korrekt,Zahl,1,0,1, ,Wert 1= IBAN korrekt
+,58,SWIFT-Code 2,Text,11,0,11, , 
+,59,Abw. Kontoinhaber 2,Text,70,0,70, , 
+,60,Kennz. Hauptbankverb. 2,Zahl,1,0,1, ,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,61,Bankverb. 2 Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,62,Bankverb. 2 Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+,63,Bankleitzahl 3,Text,8,0,8, , 
+,64,Bankbezeichnung 3,Text,30,0,30, , 
+,65,Bank-Kontonummer 3,Konto,10,0,10, , 
+,66,Länderkennzeichen 3,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,67,IBAN3,Text,34,0,34, , 
+,68,IBAN 3 korrekt,Zahl,1,0,1, ,Wert 1= IBAN korrekt
+,69,SWIFT-Code 3,Text,11,0,11, , 
+,70,Abw. Kontoinhaber 3,Text,70,0,70, , 
+,71,Kennz. Hauptbankverb. 3,Zahl,1,0,1, ,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,72,Bankverb. 3 Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,73,Bankverb. 3 Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+,74,Bankleitzahl 4,Text,8,0,8, , 
+,75,Bankbezeichnung 4,Text,30,0,30, , 
+,76,Bank-Kontonummer 4,Konto,10,0,10, , 
+,77,Länderkennzeichen 4,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,78,IBAN4,Text,34,0,34, , 
+,79,IBAN 4 korrekt,Zahl,1,0,1, ,Wert 1 = IBAN korrekt
+,80,SWIFT-Code 4,Text,11,0,11, , 
+,81,Abw. Kontoinhaber 4,Text,70,0,70, , 
+,82,Kennz. Hauptbankverb. 4,Zahl,1,0,1, ,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,83,Bankverb. 4 Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,84,Bankverb. 4 Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+,85,Bankleitzahl 5,Text,8,0,8, , 
+,86,Bankbezeichnung 5,Text,30,0,30, , 
+,87,Bank-Kontonummer 5,Konto,10,0,10, , 
+,88,Länderkennzeichen 5,Text,2,0,2, ,ISO-Code beachten! (Dok.-Nr. 1080169)
+,89,IBAN5,Text,34,0,34, , 
+,90,IBAN 5 korrekt,Zahl,1,0,1, ,Wert 1= IBAN korrekt
+,91,SWIFT-Code 5,Text,11,0,11, , 
+,92,Abw. Kontoinhaber 5,Text,70,0,70, , 
+,93,Kennz. Hauptbankverb. 5,Zahl,1,0,1, ,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,94,Bankverb. 5 Gültig von,Datum,8,0,10, ,Format: TTMMJJJJ
+,95,Bankverb. 5 Gültig bis,Datum,8,0,10, ,Format: TTMMJJJJ
+,96,Leerfeld,Zahl,3,0,3, , 
+,97,Briefanrede,Text,100,0,100, , 
+,98,Grußformel,Text,50,0,50, , 
+,99,Kundennummer,Text,15,0,15, ,Kann nicht geändert werden wenn zentralisierte Geschäftspartner verwendet werden.
+,100,Steuernummer,Text,20,0,20, , 
+,101,Sprache,Zahl,2,0,2, ,"1 = Deutsch
+4 = Französisch
+5 = Englisch
+10 = Spanisch
+19 = Italienisch"
+,102,Ansprechpartner,Text,40,0,40, , 
+,103,Vertreter,Text,40,0,40, , 
+,104,Sachbearbeiter,Text,40,0,40, , 
+,105,Diverse-Konto,Zahl,1,0,1, ,"0 = Nein 
+1 = Ja"
+,106,Ausgabeziel,Zahl,1,0,1, ,"1 = Druck 
+2 = Telefax
+3 = E-Mail"
+,107,Währungssteuerung,Zahl,1,0,1, ,"0 = Zahlungen in Eingabewährung
+2 = Ausgabe in EUR"
+,108,Kreditlimit (Debitor),Betrag,10,0,13, ,"Nur für Debitoren gültig
+Beispiel:
+1.123.123.123"
+${partner.property_supplier_payment_term_id.id},109,Zahlungsbedingung,Zahl,3,0,3, ,Eine gespeicherte Zahlungsbedingung kann hier einem Geschäftspartner zugeordnet werden.
+,110,Fälligkeit in Tagen (Debitor),Zahl,3,0,3, ,Nur für Debitoren gültig
+,111,Skonto in Prozent (Debitor),Zahl,2,2,5, ,"Nur für Debitoren gültig
+Beispiel: 12,12"
+,112,Kreditoren-Ziel 1 (Tage),Zahl,2,0,2, ,Nur für Kreditoren gültig
+,113,Kreditoren-Skonto 1 (%),Zahl,2,2,5, ,"Nur für Kreditoren gültig
+Beispiel: 12,12"
+,114,Kreditoren-Ziel 2 (Tage),Zahl,2,0,2, ,Nur für Kreditoren gültig
+,115,Kreditoren-Skonto 2 (%),Zahl,2,2,5, ,"Nur für Kreditoren gültig
+Beispiel: 12,12"
+,116,Kreditoren-Ziel 3 Brutto (Tage),Zahl,3,0,3, ,Nur für Kreditoren gültig
+,117,Kreditoren-Ziel 4 (Tage),Zahl,2,0,2, ,Nur für Kreditoren gültig
+,118,Kreditoren-Skonto 4 (%),Zahl,2,2,5, ,"Nur für Kreditoren gültig
+Beispiel: 12,12"
+,119,Kreditoren-Ziel 5 (Tage),Zahl,2,0,2, ,Nur für Kreditoren gültig
+,120,Kreditoren-Skonto 5 %,Zahl,2,2,5, ,"Nur für Kreditoren gültig
+Beispiel: 12,12"
+,121,Mahnung,Zahl,1,0,1, ,"0 = Keine Angaben
+1 = 1. Mahnung
+2 = 2. Mahnung
+3 = 1. + 2. Mahnung
+4 = 3. Mahnung
+5 = (nicht vergeben)
+6 = 2. + 3. Mahnung
+7 = 1., 2. + 3. Mahnung
+9 = keine Mahnung"
+,122,Kontoauszug,Zahl,1,0,1, ,"1 = Kontoauszug für alle Posten
+2 = Auszug nur dann, wenn ein Posten mahnfähig ist
+3 = Auszug für alle mahnfälligen Posten
+9 = kein Kontoauszug"
+,123,Mahntext 1,Zahl,1,0,1, ,"Leer = keinen Mahntext ausgewählt
+1 = Textgruppe 1
+...
+9 = Textgruppe 9"
+,124,Mahntext 2,Zahl,1,0,1, ,"Leer = keinen Mahntext ausgewählt
+1 = Textgruppe 1
+...
+9 = Textgruppe 9"
+,125,Mahntext 3,Zahl,1,0,1, ,"Leer = keinen Mahntext ausgewählt
+1 = Textgruppe 1
+...
+9 = Textgruppe 9"
+,126,Kontoauszugstext,Zahl,1,0,1, ,"Leer = kein Kontoauszugstext ausgewählt
+1 = Kontoauszugstext 1
+...
+8 = Kontoauszugstext 8
+9 = Kein Kontoauszugstext"
+,127,Mahnlimit Betrag,Betrag,5,2,9, ,"Beispiel: 12.123,12"
+,128,Mahnlimit %,Zahl,2,2,5, ,"Beispiel: 12,12"
+,129,Zinsberechnung,Zahl,1,0,1, ,"0 = MPD-Schlüsselung gilt
+1 = Fester Zinssatz
+2 = Zinssatz über Staffel
+9 = Keine Berechnung für diesen Debitor"
+,130,Mahnzinssatz 1,Zahl,2,2,5, ,"Beispiel: 12,12"
+,131,Mahnzinssatz 2,Zahl,2,2,5, ,"Beispiel: 12,12"
+,132,Mahnzinssatz 3,Zahl,2,2,5, ,"Beispiel: 12,12"
+,133,Lastschrift,Text,1,0,1, ,"Leer bzw. 0 = keine Angaben, es gilt die MPD-Schlüsselung
+1 = Einzellastschrift mit einer Rechnung
+2 = Einzellastschrift mit mehreren Rechnungen
+3 = Sammellastschrift mit einer Rechnung4 = Sammellastschrift mit mehreren Rechnungen
+5 = Datenträgeraustausch mit einer Rechnung6 = Datenträgeraustausch mit mehreren Rechnungen
+7 = (nicht vergeben)8 = (nicht vergeben)
+9 = kein Lastschriftverfahren bei diesem Debitor"
+,134,Verfahren,Text,1,0,1, ,"0 = Einzugsermächtigung
+1 = Abbuchungsverfahren"
+,135,Mandantenbank,Zahl,4,0,4, ,"Zuordnung der gespeicherten Mandantenbank, die für das Lastschriftverfahren verwendet werden soll."
+,136,Zahlungsträger,Text,1,0,1, ,"Leer bzw. 0 = keine Angaben, es gilt die MPD-Schlüsselung
+1 = Einzelüberweisung mit einer Rechnung
+2 = Einzelüberweisung mit mehreren Rechnungen
+3 = Sammelüberweisung mit einer Rechnung
+4 = Sammelüberweisung mit mehreren Rechnungen
+5 = Einzelscheck
+6 = Sammelscheck
+7 = Datenträgeraustausch mit einer Rechnung
+8 = Datenträgeraustausch mit mehreren Rechnungen
+9 = keine Überweisungen, Schecks"
+,137,Indiv. Feld 1,Text,40,0,40, , 
+,138,Indiv. Feld 2,Text,40,0,40, , 
+,139,Indiv. Feld 3,Text,40,0,40, , 
+,140,Indiv. Feld 4,Text,40,0,40, , 
+,141,Indiv. Feld 5,Text,40,0,40, , 
+,142,Indiv. Feld 6,Text,40,0,40, , 
+,143,Indiv. Feld 7,Text,40,0,40, , 
+,144,Indiv. Feld 8,Text,40,0,40, , 
+,145,Indiv. Feld 9,Text,40,0,40, , 
+,146,Indiv. Feld 10,Text,40,0,40, , 
+,147,Indiv. Feld 11,Text,40,0,40, , 
+,148,Indiv. Feld 12,Text,40,0,40, , 
+,149,Indiv. Feld 13,Text,40,0,40, , 
+,150,Indiv. Feld 14,Text,40,0,40, , 
+,151,Indiv. Feld 15,Text,40,0,40, , 
+,152,Abweichende Anrede (Rechnungsadresse),Text,30,0,30,0,Es kann ein beliebiger individueller Text verwendet werden.
+,153,Adressart (Rechnungsadresse),Text,3,0,3,0,"STR = Straße 
+PF = Postfach
+GK = Großkunde
+Wird die Adressart nicht übergeben, wird sie automatisch in Abhängigkeit zu den übergebenen Feldern (Straße oder Postfach) gesetzt."
+,154,Straße (Rechnungsadresse),Text,36,0,36,0,"Wird sowohl eine Straße als auch ein Postfach übergeben, werden beide Werte in den Datenbestand übernommen; auf der Visitenkarte in den Debitoren-/Kreditoren-Stammdaten wird die Postfachadresse angezeigt."
+,155,Postfach (Rechnungsadresse),Text,10,0,10,0, 
+,156,Postleitzahl (Rechnungsadresse),Text,10,0,10,0, 
+,157,Ort (Rechnungsadresse),Text,30,0,30,0, 
+,158,Land (Rechnungsadresse),Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,159,Versandzusatz (Rechnungsadresse),Text,50,0,50,0, 
+,160,Adresszusatz (Rechnungsadresse),Text,36,0,36,0,Beispiel: z. Hd. Herrn Mustermann
+,161,Abw. Zustellbezeichnung 1 (Rechnungsadresse),Text,50,0,50,0, 
+,162,Abw. Zustellbezeichnung 2 (Rechnungsadresse),Text,36,0,36,0, 
+,163,Adresse Gültig von (Rechnungsadresse),Datum,8,0,10,0,Format: TTMMJJJJ
+,164,Adresse Gültig bis (Rechnungsadresse),Datum,8,0,10,0,Format: TTMMJJJJ
+,165,Bankleitzahl 6,Text,8,0,8,0, 
+,166,Bankbezeichnung 6,Text,30,0,30,0, 
+,167,Bank-Kontonummer 6,Konto,30,0,10,0, 
+,168,Länderkennzeichen 6,Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,169,IBAN-Nr. 6,Text,34,0,34,0, 
+,170,IBAN6 korrekt,Text,1,0,1,0,Wert 1 = IBAN korrekt
+,171,SWIFT-Code 6,Text,11,0,11,0, 
+,172,Abw. Kontoinhaber 6,Text,70,0,70,0, 
+,173,Kennz. Hauptbankverb. 6,Zahl,1,0,1,0,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,174,Bankverb 6 Gültig von,Datum,8,0,10,0,Format: TTMMJJJJ
+,175,Bankverb 6 Gültig bis,Datum,8,0,10,0,Format: TTMMJJJJ
+,176,Bankleitzahl 7,Text,8,0,8,0, 
+,177,Bankbezeichnung 7,Text,30,0,30,0, 
+,178,Bank-Kontonummer 7,Konto,30,0,10,0, 
+,179,Länderkennzeichen 7,Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,180,IBAN-Nr. 7,Text,34,0,34,0, 
+,181,IBAN7 korrekt,Text,1,0,1,0,Wert 1 = IBAN korrekt
+,182,SWIFT-Code 7,Text,11,0,11,0, 
+,183,Abw. Kontoinhaber 7,Text,70,0,70,0, 
+,184,Kennz. Hauptbankverb. 7,Zahl,1,0,1,0,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,185,Bankverb 7 Gültig von,Datum,8,0,10,0,Format: TTMMJJJJ
+,186,Bankverb 7 Gültig bis,Datum,8,0,10,0,Format: TTMMJJJJ
+,187,Bankleitzahl 8,Text,8,0,8,0, 
+,188,Bankbezeichnung 8,Text,30,0,30,0, 
+,189,Bank-Kontonummer 8,Konto,30,0,10,0, 
+,190,Länderkennzeichen 8,Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,191,IBAN-Nr. 8,Text,34,0,34,0, 
+,192,IBAN8 korrekt,Text,1,0,1,0,Wert 1 = IBAN korrekt
+,193,SWIFT-Code 8,Text,11,0,11,0, 
+,194,Abw. Kontoinhaber 8,Text,70,0,70,0, 
+,195,Kennz. Hauptbankverb. 8,Zahl,1,0,1,0,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,196,Bankverb 8 Gültig von,Datum,8,0,10,0,Format: TTMMJJJJ
+,197,Bankverb 8 Gültig bis,Datum,8,0,10,0,Format: TTMMJJJJ
+,198,Bankleitzahl 9,Text,8,0,8,0, 
+,199,Bankbezeichnung 9,Text,30,0,30,0, 
+,200,Bank-Kontonummer 9,Konto,30,0,10,0, 
+,201,Länderkennzeichen 9,Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,202,IBAN-Nr. 9,Text,34,0,34,0, 
+,203,IBAN9 korrekt,Text,1,0,1,0,Wert 1 = IBAN korrekt
+,204,SWIFT-Code 9,Text,11,0,11,0, 
+,205,Abw. Kontoinhaber 9,Text,70,0,70,0, 
+,206,Kennz. Hauptbankverb. 9,Zahl,1,0,1,0,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,207,Bankverb 9 Gültig von,Datum,8,0,10,0, 
+,208,Bankverb 9 Gültig bis,Datum,8,0,10,0, 
+,209,Bankleitzahl 10,Text,8,0,8,0, 
+,210,Bankbezeichnung 10,Text,30,0,30,0, 
+,211,Bank-Kontonummer 10,Konto,30,0,10,0, 
+,212,Länderkennzeichen 10,Text,2,0,2,0,ISO-Code beachten! (Dok.-Nr. 1080169)
+,213,IBAN-Nr. 10,Text,34,0,34,0, 
+,214,IBAN10 korrekt,Text,1,0,1,0,Wert 1 = IBAN korrekt
+,215,SWIFT-Code 10,Text,11,0,11,0, 
+,216,Abw. Kontoinhaber 10,Text,70,0,70,0, 
+,217,Kennz. Hauptbankverb. 10,Zahl,1,0,1,0,"Kennzeichn. als Haupt-Bankverbindung
+1= Ja 
+0= Nein
+Nur eine Bankverbindung eines Debitoren/Kreditoren kann als Haupt-Bankverbindung gekennzeichnet werden."
+,218,Bankverb 10 Gültig von,Datum,8,0,10,0,Format: TTMMJJJJ
+,219,Bankverb 10 Gültig bis,Datum,8,0,10,0,Format: TTMMJJJJ
+,220,Nummer Fremdsystem,Text,15,0,15,0,Achtung: Wird bei Verwendung zentralisierter Geschäftspartner von DATEV überschrieben.

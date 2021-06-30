@@ -15,15 +15,18 @@
             </xpath>
 
             <xpath expr="//table[@id='sales_order_table']//tbody//tr//td[@t-if='display_discount']" position="replace">
+                <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
+                    <strong t-if="line.discount &gt; 0" class="text-info">
+                        <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount"/>
+                    </strong>
+                </td>
+            </xpath>
+
+            <xpath expr="//table[@id='sales_order_table']//tbody//tr//td[@t-if='display_discount']" position="before">
                 <td t-if="display_discount and line.discount_type" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
                     <strong t-if="line.discount &gt; 0" class="text-info">
                         <t t-if="line.discount_type == 'percent'">Percent</t>
                         <t t-if="line.discount_type == 'fixed'">Fixed</t>
-                    </strong>
-                </td>
-                <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
-                    <strong t-if="line.discount &gt; 0" class="text-info">
-                        <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount"/>
                     </strong>
                 </td>
             </xpath>
@@ -36,10 +39,8 @@
                     <t t-esc="line.price_unit - (line.discount / line.product_uom_qty)" t-options='{"widget": "float", "decimal_precision": "Product Price"}'/>
                 </div>
             </xpath>
-        </template>
 
-        <template id="sale_order_portal_content_totals_table_inherit" inherit_id="sale.sale_order_portal_content_totals_table">
-            <xpath expr="//table//tr//td//span[@data-id='total_amount']//..//.." position="before">
+            <xpath expr="//div[@id='total']//div//table//tr//td//span[@data-id='total_amount']//..//.." position="before">
                 <t t-if="sale_order.total_global_discount">
                     <tr class="border-black">
                         <td>

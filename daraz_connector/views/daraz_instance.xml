@@ -1,0 +1,302 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="daraz_connector_list">
+      <field name="name">Daraz Store List</field>
+      <field name="model">daraz.connector</field>
+      <field name="arch" type="xml">
+        <tree string="Daraz Store List">
+          <field name="name"/>
+          <field name="api_url"/>
+          <field name="userId"/>
+          <field name="api_key"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="daraz_connector_form">
+      <field name="name">Daraz Store Form</field>
+      <field name="model">daraz.connector</field>
+      <field name="arch" type="xml">
+        <form string="Daraz Store">
+          <header>
+              <button name="button_reset" string="Reset Instance"  type="object" states="connected"  class="btn btn-primary" />
+              <button name="doConnection" string="Check Connection" type="object" class="btn-primary"/>
+              <button name="doConnection" string="Confirm Instance" type="object" states="draft" class="btn btn-primary" />
+              <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+            
+            <group>
+                <group>
+                    <field name="name"/>
+                    <field name="api_url"/>
+                    <field name="default_customer_id" />
+                    <field name="fees_account_id" />
+                </group>
+                <group>
+                    <field name="userId"/>
+                    <field name="api_key"/>
+                    <field name="default_vendor_id" />
+                </group>
+            </group>
+            <notebook>
+              <page string="Automatic Processes">
+                  <div >
+                    <label for="import_pending_orders"></label>
+                    <field name="import_pending_orders" />
+                    <div attrs="{'invisible':[('import_pending_orders','!=',True)]}">
+                      <label for="name" string="Import Pending Order At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="pending_so_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('import_pending_orders','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="pending_so_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('import_pending_orders','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="pending_so_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('import_pending_orders','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="pending_so_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('import_pending_orders','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+                  <div >
+                    <label for="so_auto_import"></label>
+                    <field name="so_auto_import" />
+                    <div attrs="{'invisible':[('so_auto_import','!=',True)]}">
+                      <label for="name" string="Import Sale Order At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="so_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('so_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="so_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('so_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="so_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('so_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="so_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('so_auto_import','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+
+                  <div>
+                    <label for="so_auto_import_status"></label>
+                    <field name="so_auto_import_status" />
+                    <div attrs="{'invisible':[('so_auto_import_status','!=',True)]}">
+                      <label for="name" string="Import Sale Order At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="so_import_status_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('so_auto_import_status','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="so_import_status_interval_type" class="oe_inline"
+                        attrs="{'required':[('so_auto_import_status','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="so_import_status_next_execution" class="oe_inline"
+                        attrs="{'required':[('so_auto_import_status','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="so_import_status_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('so_auto_import_status','=',True)]}" />
+                    </div>
+                  </div>
+                  <br/>
+                  
+                  <div>
+                    <label for="prod_auto_import"></label>
+                    <field name="prod_auto_import" />
+                    <div attrs="{'invisible':[('prod_auto_import','!=',True)]}">
+                      <label for="name" string="import Product At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="prod_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('prod_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="prod_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('prod_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="prod_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('prod_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="prod_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('prod_auto_import','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+                  <div>
+                    <label for="attribute_auto_import"></label>
+                    <field name="attribute_auto_import" />
+                    <div attrs="{'invisible':[('attribute_auto_import','!=',True)]}">
+                      <label for="name" string="import Attribute At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="attribute_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('attribute_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="attribute_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('attribute_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="attribute_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('attribute_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="attribute_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('attribute_auto_import','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+                  <div>
+                    <label for="categ_auto_import"></label>
+                    <field name="categ_auto_import" />
+                    <div attrs="{'invisible':[('categ_auto_import','!=',True)]}">
+                      <label for="name" string="import Category At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="categ_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('categ_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="categ_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('categ_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="categ_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('categ_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="categ_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('categ_auto_import','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+                  <div >
+                    <label for="trans_auto_import"></label>
+                    <field name="trans_auto_import" />
+                    <div attrs="{'invisible':[('trans_auto_import','!=',True)]}">
+                      <label for="name" string="Import Transction Detail At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="trans_import_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="trans_import_interval_type" class="oe_inline"
+                        attrs="{'required':[('trans_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="trans_import_next_execution" class="oe_inline"
+                        attrs="{'required':[('trans_auto_import','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="trans_import_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_auto_import','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+
+                  <div >
+                    <label for="trans_set_so"></label>
+                    <field name="trans_set_so" />
+                    <div attrs="{'invisible':[('trans_set_so','!=',True)]}">
+                      <label for="name" string="Set So in Transction Detail At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="trans_set_so_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_set_so','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="trans_set_so_interval_type" class="oe_inline"
+                        attrs="{'required':[('trans_set_so','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="trans_set_so_next_execution" class="oe_inline"
+                        attrs="{'required':[('trans_set_so','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="trans_set_so_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_set_so','=',True)]}" />
+                    </div>
+                  </div>
+                  <br />
+
+                  <div >
+                    <label for="trans_create_invoice"></label>
+                    <field name="trans_create_invoice" />
+                    <div attrs="{'invisible':[('trans_create_invoice','!=',True)]}">
+                      <label for="name" string="Create invoice in Transction Detail At Every"
+                        class="oe_inline" />
+                      <label for="name" string="    " />
+                      <field name="trans_create_invoice_interval_number"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_create_invoice','=',True)]}" />
+                      <label for="name" string="    " />
+                      <field name="trans_create_invoice_interval_type" class="oe_inline"
+                        attrs="{'required':[('trans_create_invoice','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="Will Execute On " />
+                      <field name="trans_create_invoice_next_execution" class="oe_inline"
+                        attrs="{'required':[('trans_create_invoice','=',True)]}" />
+                      <label for="name" string="    " />
+                      <label for="name" string="    By " />
+                      <field name="trans_create_invoice_user_id" widget="selection"
+                        class="oe_inline"
+                        attrs="{'required':[('trans_create_invoice','=',True)]}" />
+                    </div>
+                  </div>
+                <br />
+              </page>
+            </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.actions.act_window" id="daraz_connector_action_window">
+      <field name="name">Daraz Store</field>
+      <field name="res_model">daraz.connector</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">Create the Store</p>
+      </field>
+    </record>
+
+    <menuitem name="Daraz" id="daraz_connector_menu_root" web_icon="daraz_connector,static/description/main_screen.jpg"/>
+    <menuitem name="Daraz Stores" id="daraz_connector_child" parent="daraz_connector_menu_root" />
+    <menuitem name="Stores" id="daraz_connector_menu_1_list" parent="daraz_connector_child" action="daraz_connector_action_window"  />
+    
+
+
+  </data>
+</odoo>

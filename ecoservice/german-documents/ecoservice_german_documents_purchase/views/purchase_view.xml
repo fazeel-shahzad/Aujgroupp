@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="purchase_order_form_inherited_text_template" model="ir.ui.view">
+    <field name="name">purchase.order.form.inherited.text.template</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page name="text_template" string="Text Template">
+          <group>
+            <field name="purchase_rfq"/>
+            <field name="purchase_confirmation"/>
+            <field name="purchase_rfq_bottom"/>
+            <field name="purchase_confirmation_bottom"/>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

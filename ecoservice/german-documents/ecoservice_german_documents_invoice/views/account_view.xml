@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+  <record id="invoice_form_inherited_text_template" model="ir.ui.view">
+    <field name="name">account.move.form.inherited.text.template</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page name="text_template" string="Text Template">
+          <group>
+            <field name="account_invoice"
+                   attrs="{'invisible': [('type', 'not in', ['in_invoice', 'out_invoice'])]}"/>
+            <field name="account_invoice_bottom"
+                   attrs="{'invisible': [('type', 'not in', ['in_invoice', 'out_invoice'])]}"/>
+            <field name="account_refund"
+                   attrs="{'invisible': [('type', 'not in', ['in_refund', 'out_refund'])]}"/>
+            <field name="account_refund_bottom"
+                   attrs="{'invisible': [('type', 'not in', ['in_refund', 'out_refund'])]}"/>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>

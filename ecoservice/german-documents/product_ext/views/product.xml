@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch"  type="xml">
+            <xpath expr="//group[@name='group_lots_and_weight']/div[@name='volume']" position="after">
+
+                <label for="square" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="square" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="square" string="Square"/>
+                    <span>m<sup>2</sup></span>
+<!--                    <span><field name="square_uom_name"/></span>-->
+<!--                    <span><field name="square_bool"/></span>-->
+                </div>
+                <label for="platten" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="platten" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="platten" string="Paletten"/>
+                    <span>Paletten</span>
+<!--                    <span><field name="platten_uom_name"/></span>-->
+<!--                    <span><field name="platten_bool"/></span>-->
+                </div>
+            </xpath>
+        </field>
+
+     </record>
+
+
+      <record id="product_variant_easy_edit_view_extension" model="ir.ui.view">
+            <field name="name">product.product.view.form.easy.extension</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='weight']" position="inside">
+                    <label for="square"/>
+                    <div class="o_row">
+                        <field name="square"/>
+                        <span>m<sup>2</sup></span>
+<!--                        <span><field name="square_uom_name"/></span>-->
+                    </div>
+                    <label for="platten"/>
+                    <div class="o_row">
+                        <field name="platten"/>
+                        <span>Paletten</span>
+<!--                        <span><field name="platten_uom_name"/></span>-->
+                    </div>
+                </xpath>
+            </field>
+      </record>
+
+</odoo>

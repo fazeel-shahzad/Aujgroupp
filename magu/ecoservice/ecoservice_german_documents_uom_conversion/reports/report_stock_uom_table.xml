@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_table_base_uom_stock" inherit_id="ecoservice_german_documents_stock.report_table_base_stock">
+    <xpath expr="//thead/tr/th[6]" position="attributes">
+      <attribute name="class">text-left</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td[7]" position="attributes">
+      <attribute name="align">left</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td/span[@t-field='move_line.qty_done']" position="after">
+      <t t-foreach="move_line.ecoservice_uom_ids" t-as="uom">
+        <span t-field="uom.ecoservice_uom_factor"/>
+        <br/>
+      </t>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td/span[@t-field='move_line.product_uom_id']" position="after">
+      <t t-foreach="move_line.ecoservice_uom_ids" t-as="uom">
+        <span t-field="uom.ecoservice_uom_name"/>
+        <br/>
+      </t>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td/span[@t-field='move_line.product_uom_id']" position="attributes">
+      <attribute name="t-if">not move_line.ecoservice_uom_ids</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td/span[@t-field='move_line.product_uom_qty']" position="attributes">
+      <attribute name="t-if">not move_line.ecoservice_uom_ids</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/td/span[@t-field='move_line.qty_done']" position="attributes">
+      <attribute name="t-if">not move_line.ecoservice_uom_ids</attribute>
+    </xpath>
+  </template>
+</odoo>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- Get proper salutation -->
+  <template id="letter_salutation">
+    <span t-esc="o.partner_id.get_xml_salutation()"/>,
+  </template>
+
+  <!-- Get receiver of this letter -->
+  <template id="letterhead_receiver_address">
+    <div id="letterhead_receiver_address">
+      <t t-if="not o.partner_id.is_company">
+        <t t-if="o.partner_id.parent_id.name">
+          <span t-field="o.partner_id.parent_id.name"/>
+          <br/>
+        </t>
+        <t t-if="o.partner_id.name">
+          <span t-if="o.partner_id.title.name == 'Herr'">Herrn</span>
+          <span t-if="o.partner_id.title.name != 'Herr'"
+                t-field="o.partner_id.title"/>
+          <t t-if="o.partner_id.has_lastname()">
+            <span t-field="o.partner_id.firstname"/>
+            <span t-field="o.partner_id.lastname"/>
+          </t>
+          <t t-if="not o.partner_id.has_lastname()">
+            <span t-field="o.partner_id.name"/>
+          </t>
+          <br/>
+        </t>
+      </t>
+      <t t-if="o.partner_id.is_company">
+        <span t-field="o.partner_id.name"/>
+        <br/>
+      </t>
+
+      <span t-field="o.partner_id.street"/>
+      <br/>
+      <t t-if="o.partner_id.street2">
+        <span t-field="o.partner_id.street2"/>
+        <br/>
+      </t>
+      <span t-field="o.partner_id.zip"/>
+      <t t-set="country_set_properly"
+         t-value="o.partner_id.country_id and o.company_id.country_id"/>
+      <t t-if="country_set_properly and (o.partner_id.country_id != o.company_id.country_id)">
+        <span style="text-transform: uppercase" t-field="o.partner_id.city"/>
+        <br/>
+        <span style="text-transform: uppercase"
+              t-field="o.partner_id.country_id.with_context(lang=o.company_id.partner_id.lang).name"/>
+      </t>
+      <t t-else="">
+        <span t-field="o.partner_id.city"/>
+      </t>
+
+    </div>
+  </template>
+
+  <template id="letterhead_sender_address">
+    <div id="letterhead_sender_address">
+      <span class="bold" t-field="o.company_id"/>
+      &amp;#8226;
+      <span t-field="o.company_id.street"/>
+      &amp;#8226;
+      <span t-field="o.company_id.zip"/>
+      <span t-field="o.company_id.city"/>
+    </div>
+  </template>
+
+  <template id="final_amount_template">
+    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto clearfix"
+         name="final_amount_template">
+      <table class="table table-sm">
+        <tr class="o_subtotal">
+          <td>Net</td>
+          <td class="text-right">
+            <span t-field="o.amount_untaxed"/>
+          </td>
+        </tr>
+
+        <!--Sale Orders-->
+        <t t-if="o._name == 'sale.order'">
+          <tr t-foreach="o.amount_by_group" t-as="amount_by_group">
+            <t t-if="amount_by_group[3] == 1 and o.amount_untaxed == amount_by_group[2]">
+              <td>
+                <span t-esc="amount_by_group[0]"/>
+                <span>&amp;nbsp;<span>on</span>&amp;nbsp;
+                  <t t-esc="amount_by_group[2]"
+                     t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+                </span>
+              </td>
+              <td class="text-right o_price_total">
+                <span t-esc="amount_by_group[1]"
+                      t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+              </td>
+            </t>
+            <t t-else="">
+              <td>
+                <span t-esc="amount_by_group[0]"/>
+              </td>
+              <td class="text-right o_price_total">
+                <span t-esc="amount_by_group[1]"
+                      t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+              </td>
+            </t>
+          </tr>
+        </t>
+
+        <!--Taxes for purchase-->
+        <tr t-if="is_po and o._name == 'purchase.order'">
+          <td>Taxes</td>
+          <td class="text-right">
+            <span t-field="o.amount_tax"
+                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+          </td>
+        </tr>
+
+        <t t-if="o._name == 'account.move'">
+          <tr t-foreach="o.amount_by_group" t-as="amount_by_group">
+            <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) == 1 and o.amount_untaxed == amount_by_group[2]">
+              <td>
+                <span t-esc="amount_by_group[0]"/>
+              </td>
+              <td class="text-right o_price_total">
+                <span t-esc="amount_by_group[3]"/>
+              </td>
+            </t>
+            <t t-else="">
+              <td>
+                <span t-esc="amount_by_group[0]"/>
+                <span>&amp;nbsp;<span>on</span>&amp;nbsp;
+                  <t t-esc="amount_by_group[4]"/>
+                </span>
+              </td>
+              <td class="text-right o_price_total">
+                <span t-esc="amount_by_group[3]"/>
+              </td>
+            </t>
+          </tr>
+        </t>
+        <tr class="border-black o_total">
+          <td>
+            <strong>Total</strong>
+          </td>
+          <td class="text-right">
+            <span t-field="o.amount_total"/>
+          </td>
+        </tr>
+
+        <!-- Paid on for account.move -->
+        <t t-if="o._name == 'account.move' and not hide_payments">
+          <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+          <t t-if="payments_vals and len(payments_vals)">
+            <t t-foreach="payments_vals" t-as="payment_val">
+              <tr style="font-size: 9px;">
+                <td>Paid on <t t-esc="payment_val['date']" t-options='{"widget": "date"}'/></td>
+                <td class="text-right">
+                  <span t-esc="payment_val['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                </td>
+              </tr>
+            </t>
+            <tr class="border-black">
+              <td><strong>Amount Due</strong></td>
+              <td class="text-right">
+                <span t-field="o.amount_residual"/>
+              </td>
+            </tr>
+          </t>
+        </t>
+      </table>
+    </div>
+  </template>
+
+  <template id="payment_terms">
+    <t t-if="doc_model == 'account.move'">
+      <t t-set="payment_term_id" t-value="o.invoice_payment_term_id"/>
+    </t>
+    <t t-else="">
+      <t t-set="payment_term_id" t-value="o.payment_term_id"/>
+    </t>
+    <div id="payment_terms" t-if="payment_term_id">
+      <div class="row mt16">
+        <div class="col-4 bold">
+          Terms of payment:
+        </div>
+        <div class="col-8">
+          <span t-field="payment_term_id.name" t-if="show_payment_terms_name"/>
+          <span t-field="payment_term_id.note" t-if="show_payment_terms_note"/>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="delivery_address_snippet">
+    <div id="delivery_address">
+      <t t-if="delivery_address">
+        <t t-if="delivery_address.parent_id">
+          <span t-field="delivery_address.parent_id"/>
+          <br/>
+        </t>
+        <span t-field="delivery_address.name"/> &amp;#8226;
+        <span t-field="delivery_address.street"/> &amp;#8226;
+        <t t-if="delivery_address.street2">
+          <span t-field="delivery_address.street2"/> &amp;#8226;
+        </t>
+        <t t-if="delivery_address.country_id and delivery_address.country_id.code != 'DE'">
+          <span t-field="delivery_address.country_id.code"/>-
+        </t>
+        <span t-field="delivery_address.zip"/>
+        <span t-field="delivery_address.city"/> &amp;#8226;
+        <span t-field="delivery_address.country_id"/>
+      </t>
+    </div>
+  </template>
+
+  <template id="incoterms">
+    <div id="incoterms" class="row mt16" t-if="incoterms_id">
+      <div class="col-4 bold">
+        Incoterms:
+      </div>
+      <div class="col-8">
+        <span t-field="incoterms_id.code"/>
+      </div>
+    </div>
+  </template>
+
+</odoo>

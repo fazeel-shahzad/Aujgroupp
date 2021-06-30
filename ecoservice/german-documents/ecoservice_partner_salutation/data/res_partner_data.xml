@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+  <!-- Resource: res.partner.title -->
+  <data noupdate="1">
+    <record id="res_partner_title_doctor_female" model="res.partner.title">
+      <field name="name">Doctor (f)</field>
+      <field name="shortcut">Dr. (f)</field>
+      <field name="salutation">Dear Dr.</field>
+    </record>
+
+    <record id="res_partner_title_prof_female" model="res.partner.title">
+      <field name="name">Professor (f)</field>
+      <field name="shortcut">Prof. (f)</field>
+      <field name="salutation">Dear Professor</field>
+    </record>
+  </data>
+</odoo>

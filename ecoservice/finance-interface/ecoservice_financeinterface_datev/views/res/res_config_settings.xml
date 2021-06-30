@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# # Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="view_ecoservice_finance_interface_datev_configuration" model="ir.ui.view">
+    <field name="name">Finance Interface Settings</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="ecoservice_financeinterface.view_ecoservice_finance_interface_configuration"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='ecofi_general_settings']" position="after">
+
+        <div name="ecofi_datev_export_settings">
+          <h2>DATEV Export</h2>
+
+          <!-- Fields -->
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_right_pane">
+                <label for="" string="Preferred export method"/>
+                <field name="datev_export_method" class="oe_inline"/>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_right_pane">
+                <label for="l10n_de_datev_client_number"/>
+                <div class="text-muted">Obtained from accountant</div>
+                <field name="l10n_de_datev_client_number" class="oe_inline"/>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_right_pane">
+                <label for="l10n_de_datev_consultant_number"/>
+                <div class="text-muted">Obtained from accountant</div>
+                <field name="l10n_de_datev_consultant_number" class="oe_inline"/>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_right_pane">
+                <label for="" string="Length of analytic G/L account numbers"/>
+                <field name="account_code_digits" class="oe_inline"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="datev_ignore_currency" class="oe_inline"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="datev_ignore_currency"/>
+                <div class="text-muted">Ignore foreign currencies and use default</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="datev_group_lines" class="oe_inline"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="datev_group_lines"/>
+                <div class="text-muted">Group different move lines sharing the same account</div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="datev_group_sh" class="oe_inline" attrs="{'readonly': [('datev_group_lines', '=', False)]}"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="datev_group_sh"/>
+                <div class="text-muted">Accumulate credit &amp; debit towards the bigger side if sharing same account</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-3 o_setting_box">
+              <button name="%(action_ecofi_move_migration)d" type="action" string="Migration of old Accounting Entries" class="btn-primary"/>
+            </div>
+          </div>
+        </div>
+
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

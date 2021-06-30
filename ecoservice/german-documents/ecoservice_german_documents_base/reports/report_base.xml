@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  Only Header, Footer & Base Templates shall be in here!
+  For everything else please use the report_snippets.xml!
+-->
+<odoo>
+
+  <!-- Document Base -->
+  <template id="external_layout_german_documents">
+    <t t-if="not o" t-set="o" t-value="doc"/>
+
+    <t t-if="not company">
+      <!-- Multicompany -->
+      <t t-if="company_id">
+        <t t-set="company" t-value="company_id"/>
+      </t>
+      <t t-elif="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+      </t>
+      <t t-else="else">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+    </t>
+
+    <t t-if="not hide_header_footer"
+       t-call="ecoservice_german_documents_base.external_layout_header"/>
+    <div class="article"
+         t-att-data-oe-model="o and o._name"
+         t-att-data-oe-id="o and o.id"
+         t-att-data-oe-lang="o and o.env.context.get('lang')">
+      <t t-raw="0"/>
+    </div>
+    <t t-if="not hide_header_footer"
+       t-call="ecoservice_german_documents_base.external_layout_footer"/>
+  </template>
+
+  <!-- Document Header -->
+  <template id="external_layout_header">
+    <div class="row header text-right">
+      <div class="col-6 offset-6">
+        <span t-if="not company.logo" t-field="company.name"/>
+        <img t-if="company.logo"
+             t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+             class="pull-right"
+             style="max-height: 90px; max-width: 300px;"/>
+      </div>
+    </div>
+  </template>
+
+  <!-- Document Footer -->
+  <template id="external_layout_footer">
+    <div class="footer">
+      <div class="row doc_ref_page_number" style="margin-bottom: 5px;">
+        <table style="width:100%; margin:0px 0px 0px 0px;">
+          <tr>
+            <td class="doc_ref" style="width: 50%;">
+              <span t-esc="doc_name"/>
+              <span t-esc="public_reference"/>
+            </td>
+            <td class="text-right page_number" style="width: 50%;">
+              <div style="display:inline">Page:</div>
+              <span class="page"/>
+              /
+              <span class="topage"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="row company_legal_banks">
+        <table style="width:100%; margin-top:5px;">
+          <tr>
+
+            <!-- Display company information -->
+            <td class="company_info">
+              <div class="font-alt" style="width:auto; float:left;">
+                <span class="company_name" t-field="company.name"/>
+                <br/>
+                <span t-field="company.street"/>
+                <br/>
+                <span t-field="company.zip"/>
+                <span t-field="company.city"/>
+                <table class="full font-alt company_contact">
+                  <tr t-if="company.phone">
+                    <td>Tel:</td>
+                    <td>
+                      <span t-field="company.phone"/>
+                    </td>
+                  </tr>
+                  <tr t-if="'fax' in company and company.fax">
+                    <td>Fax:</td>
+                    <td>
+                      <span t-field="company.fax"/>
+                    </td>
+                  </tr>
+                  <tr t-if="company.email">
+                    <td>E-Mail: &#160;</td>
+                    <td>
+                      <a href="mailto: company.email"
+                         t-field="company.email"
+                         class="font-alt"
+                      />
+                    </td>
+                  </tr>
+                  <tr t-if="company.website">
+                    <td>Website: &#160;</td>
+                    <td>
+                      <span t-field="company.website"/>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+
+            <!-- Display legal information -->
+            <td class="legal">
+              <div class="font-alt" style="float:left;">
+                <span t-if="company.chief_executive_officer"
+                      t-field="company.chief_executive_officer"
+                      class="company_ceo"/>
+                <span t-if="company.company_registry"
+                      t-field="company.company_registry"/>
+                <t t-if="company.vat">
+                  <div style="display:inline;">VAT-ID:</div>
+                  <span t-field="company.vat"/>
+                </t>
+              </div>
+            </td>
+
+            <!--
+              Iterate through the company bank accounts,
+              DON'T! use partner_id or res.partner.bank here again!
+              it breaks the odoo way of doing ;)
+             -->
+            <t t-set="banks" t-value="company.get_bank_accounts()"/>
+            <td t-foreach="banks"
+                t-as="bank"
+                t-if="bank_index &lt; 2"
+                class="bank"
+                style="width:auto;vertical-align: top;">
+              <div class="font-alt" style="float:left;">
+                <span t-field="bank.bank_id.name" class="bank_name"/>
+                <br/>
+                IBAN:&#160;
+                <span t-field="bank.bank_acc_number"/>
+                <br/>
+                BIC:&#160;
+                <span t-field="bank.bank_id.bic"/>
+                <br/>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Include Base CSS File for footer -->
+      <t t-call="ecoservice_german_documents_base.report_css_footer"/>
+    </div>
+  </template>
+
+</odoo>

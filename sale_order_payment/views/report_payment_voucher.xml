@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="advance_payment_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <t t-if="o.company_id.id == 24">
+                        <br/>
+                        <h2 style="text-align:center">
+                            <strong>Jolta Electric Pvt Ltd </strong>
+                        </h2>
+                        <br/>
+                        <h3 style="text-align:center;margin-bottom:1px;padding-bottom:1px;">
+                            <strong>Receipt Voucher</strong> <span style ="font-size:12px; padding-left:763px;">(Office copy)</span>
+                        </h3>
+                        <h6 style="text-align:left">
+                            <strong>Reference</strong> <span t-field="o.so_number"/>
+                        </h6>
+
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>Amount=</span>
+                                        <strong>
+                                            <!-- <span t-esc="'{:,}'.format(o.amount)"/>/-</strong> -->
+                                            <span t-esc="o.amount" t-options='{"widget": "float", "precision": 0}'/>/-</strong>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <span>Date:</span>
+                                        <span t-esc="o.payment_date.strftime('%d-%m-%Y')"/>
+                                        <!-- <span t-esc="datetime.date.strptime(str(datetime.date.date(o.payment_date)),'%Y-%m-%d').strftime('%d-%m-%Y')"/> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>From:</span>
+                                        <span t-esc="o.partner_id.name"/>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <strong>
+                                            <span>Cheque No:</span>
+                                        </strong>
+                                        <span t-esc="o.cheque_no"/>
+                                    </td>
+                                </tr>
+                                <!--                        <tr>-->
+                                <!--                            <td class="text-center" colspan="3" style="border: 1px solid black; font-weight:bold;">-->
+                                <!--                                <span>.Method of Payment</span>-->
+                                <!--                                <span t-field="o.payment_method_id.name"/>-->
+                                <!--                            </td>-->
+                                <!--                        </tr>-->
+                                <!--                        <t t-if="o.company_id== 24">-->
+                                <tr>
+                                    <td class="text-left" colspan="3" style="border: 1px solid black;">
+                                        <span>Amount in Words:</span>
+                                        <span t-esc="o.get_amount_in_words(o.amount)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="3" style="border: 1px solid black;">
+                                        <span> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>Descriptions:</span>
+                                        <br/>
+                                        <span t-field="o.wiz_description"/>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <span> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Paid By:</span>
+                                        <span t-field="o.paid_by"/>
+                                    </td>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Received By:</span>
+                                        <span t-field="o.received_by"/>
+                                    </td>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Approved By:</span>
+                                        <span t-field="o.approved_by"/>
+                                    </td>
+                                </tr>
+                                <!--                    </t>-->
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <h2 style="text-align:center">
+                            <strong>Jolta Electric Pvt Ltd </strong>
+                        </h2>
+                        <br/>
+                        <h3 style="text-align:center;margin-bottom:1px;padding-bottom:1px;">
+                            <strong>Receipt Voucher</strong>
+                        </h3>
+                        <h6 style="text-align:left">
+                            <strong>Reference</strong> <span t-field="o.so_number"/>
+                        </h6>
+                        <span style ="font-size:12px; padding-left:750px;">(Customer copy)</span>
+                        <table class="table table-sm o_main_table">
+                            <tbody>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>Amount=</span>
+                                        <strong>
+                                            <span t-esc="o.amount" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>/-</strong>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <span>Date:</span>
+                                        <span t-esc="o.payment_date.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>From:</span>
+                                        <span t-esc="o.partner_id.name"/>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <strong>
+                                            <span>Cheque No:</span>
+                                        </strong>
+                                        <span t-esc="o.cheque_no"/>
+                                    </td>
+                                </tr>
+                                <!--                        <tr>-->
+                                <!--                            <td class="text-center" colspan="3" style="border: 1px solid black; font-weight:bold;">-->
+                                <!--                                <span>.Method of Payment</span>-->
+                                <!--                                <span t-field="o.payment_method_id.name"/>-->
+                                <!--                            </td>-->
+                                <!--                        </tr>-->
+                                <tr>
+                                    <td class="text-left" colspan="3" style="border: 1px solid black;">
+                                        <span>Amount in Words:</span>
+                                        <span t-esc="o.get_amount_in_words(o.amount)"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="3" style="border: 1px solid black;">
+                                        <span> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" colspan="2" style="border: 1px solid black;">
+                                        <span>Descriptions:</span>
+                                        <br/>
+                                        <span t-field="o.wiz_description"/>
+                                    </td>
+                                    <td class="text-left" colspan="1" style="border: 1px solid black;">
+                                        <span> </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Paid By:</span>
+                                        <span t-field="o.paid_by"/>
+                                    </td>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Received By:</span>
+                                        <span t-field="o.received_by"/>
+                                    </td>
+                                    <td class="text-left" style="border: 1px solid black;">
+                                        <span>Approved By:</span>
+                                        <span t-field="o.approved_by"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!--    -->
+    <!--    <template id="account_payment_voucher_report_inherit" inherit_id="account.report_payment_receipt_document">-->
+    <!--        <xpath expr="//div[@class='page']" position="replace">-->
+    <!--            <div class="page">-->
+    <!--                <br/>-->
+    <!--                <h2 style="text-align:center">-->
+    <!--                    <strong>Jolta Electric Pvt Ltd </strong>-->
+    <!--                </h2>-->
+    <!--                <br/>-->
+    <!--                <h3 style="text-align:center;margin-bottom:1px;padding-bottom:1px;">-->
+    <!--                    <strong>Receipt Voucher</strong> <span style ="font-size:12px; padding-left:763px;">(Office copy)</span>-->
+    <!--                </h3>-->
+    <!--                   <h6 style="text-align:left">-->
+    <!--                    <strong>Reference</strong> <span t-field="o.so_number"/>-->
+    <!--                </h6>-->
+    <!--                -->
+    <!--                <table class="table table-sm o_main_table">-->
+    <!--                    <tbody>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>Amount=</span>-->
+    <!--                                <strong>-->
+    <!--                                    &lt;!&ndash; <span t-esc="'{:,}'.format(o.amount)"/>/-</strong> &ndash;&gt;-->
+    <!--                                     <span t-esc="o.amount" t-options='{"widget": "float", "precision": 0}'/>/-</strong>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <span>Date:</span>-->
+    <!--                                <span t-esc="o.date.strftime('%d-%m-%Y')"/>-->
+    <!--                                &lt;!&ndash; <span t-esc="datetime.date.strptime(str(datetime.date.date(o.payment_date)),'%Y-%m-%d').strftime('%d-%m-%Y')"/> &ndash;&gt;-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>From:</span>-->
+    <!--                                <span t-esc="o.partner_id.name"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <strong>-->
+    <!--                                    <span>Cheque No:</span>-->
+    <!--                                </strong>-->
+    <!--                                <span t-esc="o.cheque_no"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+    <!--&lt;!&ndash;                            <td class="text-center" colspan="3" style="border: 1px solid black; font-weight:bold;">&ndash;&gt;-->
+    <!--&lt;!&ndash;                                <span>.Method of Payment</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                <span t-field="o.payment_method_id.name"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+    <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+    <!--&lt;!&ndash;                        <t t-if="o.company_id== 24">&ndash;&gt;-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="3" style="border: 1px solid black;">-->
+    <!--                                <span>Amount in Words:</span>-->
+    <!--                                <span t-esc="o.get_amount_in_words(o.amount)"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="3" style="border: 1px solid black;">-->
+    <!--                                <span> </span>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>Descriptions:</span>-->
+    <!--                                <br/>-->
+    <!--                                <span t-field="o.wiz_description"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <span> </span>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Paid By:</span>-->
+    <!--                                <span t-field="o.paid_by"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Received By:</span>-->
+    <!--                                <span t-field="o.received_by"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Approved By:</span>-->
+    <!--                                <span t-field="o.approved_by"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--&lt;!&ndash;                    </t>&ndash;&gt;-->
+    <!--                    </tbody>-->
+    <!--                </table>-->
+    <!--                <br/>-->
+    <!--                <br/>-->
+    <!--                <h2 style="text-align:center">-->
+    <!--                    <strong>Jolta Electric Pvt Ltd </strong>-->
+    <!--                </h2>-->
+    <!--                <br/>-->
+    <!--                <h3 style="text-align:center;margin-bottom:1px;padding-bottom:1px;">-->
+    <!--                    <strong>Receipt Voucher</strong>-->
+    <!--                </h3>-->
+    <!--                   <h6 style="text-align:left">-->
+    <!--                    <strong>Reference</strong> <span t-field="o.so_number"/>-->
+    <!--                </h6>-->
+    <!--                 <span style ="font-size:12px; padding-left:750px;">(Customer copy)</span>-->
+    <!--                <table class="table table-sm o_main_table">-->
+    <!--                    <tbody>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>Amount=</span>-->
+    <!--                                <strong>-->
+    <!--                                    <span t-esc="o.amount" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>/-</strong>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <span>Date:</span>-->
+    <!--                                <span t-esc="o.date.strftime('%d-%m-%Y')"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>From:</span>-->
+    <!--                                <span t-esc="o.partner_id.name"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <strong>-->
+    <!--                                    <span>Cheque No:</span>-->
+    <!--                                </strong>-->
+    <!--                                <span t-esc="o.cheque_no"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+    <!--&lt;!&ndash;                            <td class="text-center" colspan="3" style="border: 1px solid black; font-weight:bold;">&ndash;&gt;-->
+    <!--&lt;!&ndash;                                <span>.Method of Payment</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                <span t-field="o.payment_method_id.name"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+    <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="3" style="border: 1px solid black;">-->
+    <!--                                <span>Amount in Words:</span>-->
+    <!--                                <span t-esc="o.get_amount_in_words(o.amount)"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="3" style="border: 1px solid black;">-->
+    <!--                                <span> </span>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" colspan="2" style="border: 1px solid black;">-->
+    <!--                                <span>Descriptions:</span>-->
+    <!--                                <br/>-->
+    <!--                                <span t-field="o.wiz_description"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" colspan="1" style="border: 1px solid black;">-->
+    <!--                                <span> </span>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                        <tr>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Paid By:</span>-->
+    <!--                                <span t-field="o.paid_by"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Received By:</span>-->
+    <!--                                <span t-field="o.received_by"/>-->
+    <!--                            </td>-->
+    <!--                            <td class="text-left" style="border: 1px solid black;">-->
+    <!--                                <span>Approved By:</span>-->
+    <!--                                <span t-field="o.approved_by"/>-->
+    <!--                            </td>-->
+    <!--                        </tr>-->
+    <!--                    </tbody>-->
+    <!--                </table>-->
+    <!--            </div>-->
+    <!--        </xpath>-->
+    <!--    </template>-->
+</odoo>

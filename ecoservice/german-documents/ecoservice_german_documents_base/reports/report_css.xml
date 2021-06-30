@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  Docs & GitHub: CSS inline or layout. Not over CSS file, it will go wrong.
+  https://www.odoo.com/documentation/10.0/reference/reports.html#useful-remarks
+  https://github.com/odoo/odoo/issues/4359
+
+  Always use report_css_* so that it's easily understandable what you do call.
+-->
+<odoo>
+
+  <template id="report_css_body">
+
+    <t t-if="not company">
+      <!-- Multicompany -->
+      <t t-if="company_id">
+        <t t-set="company" t-value="company_id"/>
+      </t>
+      <t t-elif="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+      </t>
+      <t t-else="else">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+    </t>
+
+    <t t-set="font" t-value="company.font or 'lato'"/>
+
+    <style>
+      /* General CSS Rules */
+      div { margin:0; padding:0; }
+      main.container { font-family:<t t-esc="font"/>,sans-serif,"Segoe UI",Roboto,Arial; }
+      .article { font-family:<t t-esc="font"/>,sans-serif,"Segoe UI",Roboto,Arial; }
+      .font-alt { text-decoration:none; color:#494F4E; font-size: 11px; }
+      .row, table { font-size: 12px; line-height:15px}
+      .bold { font-weight: bold; }
+      .mt8 { margin-top: 8px; }
+      .mt16 { margin-top: 16px; }
+      .mt32 { margin-top: 32px; }
+      .pt5 { margin-top: 5px; }
+      .ptb-5 { padding-top: 5px; padding-bottom: 5px; }
+      .space { margin-right:3px; }
+      .space-left { margin-left:3px; }
+      .full { width: 100%; }
+      .span { display:inline-block; }
+      .overflow { overflow: visible; }
+      .no-wrap { white-space: nowrap; }
+      .relative { position: relative; }
+      .bottom-right { position: absolute; bottom: 2px; right: 0px; }
+
+      /* Letterhead Snippets */
+      div#letterhead_sender_address { font-size:10px; text-align:left; color:#707070; padding-top: 30mm }
+      div#letterhead_receiver_address { margin-top: 5px; }
+      .address_row { min-height: 90mm; }
+      .letterhead_address { margin-top: 5px; font-size: 12px; }
+      .letterhead_address span:first-child { font-weight: bold; }
+      div#letterhead_reference { display: block; float: right; width: 100%; margin-top: 15px; }
+      div#letterhead_reference > div { padding: 5px 0px; border: 0.1em solid #cacaca; text-align:left; font-size:11px; }
+      div#letterhead_reference .doc-type { font-size:18px; font-weight: bold; }
+      div#letterhead_introduction > div { margin-bottom: 20px; }
+      table#letterhead_reference_contact { border-top: 0.1em solid #cacaca; }
+      table#letterhead_reference_contact tr:first-child td { padding-top: 5px; }
+      table#letterhead_reference_contact tr:last-child td { padding-bottom: 5px; }
+      table#letterhead_reference_contact tr td:first-child { padding-left: 15px; }
+      div#letterhead_reference_document > div { overflow: visible; white-space: nowrap; }
+
+      /* Global Generated-Table CSS */
+      div.category.pagebreak:not(:first-of-type) { display:inline-block; }
+      div.category { margin-bottom: 40px; }
+      div.category.h4 { margin-bottom: 10px; }
+      div.row { margin-left: 0px; margin-right: 0px; }
+      div.summary { border: 1px solid black; border-top: 0px; padding: 5px; }
+      div.summary th { width: 75px; }
+      div#tables_summary { font-size:11px; margin-top: 40px; }
+      table.default { border-bottom: 1px solid black; margin-bottom:0px; }
+
+      /* Header and Footer */
+      .footer .row, .footer table { font-size: 9px !important; }
+      .no-mbp { border: 0 !important; margin: 0 !important; padding: 0 !important; }
+      .eco-border-top { border-top: 1px solid black !important; }
+      .eco-border-bottom { border-bottom: 1px solid black !important; }
+      .no-pl { padding-left: 0 !important; }
+      .no-bp { border:0 !important; padding-top: 0 !important; margin-top: 0 !important; }
+    </style>
+  </template>
+
+  <template id="report_css_footer">
+    <t t-set="font" t-value="company and company.font or 'lato'"/>
+    <style>
+      div.footer { margin-left:5px; font-family:<t t-esc="font"/>,sans-serif,"Segoe UI",Roboto,Arial; }
+      div.footer .legal { width:auto; vertical-align: top; }
+      div.footer td.legal span::after { content: "\A"; white-space: pre; }
+      .footer .row { font-size: 11px;color:#707070 }
+      .footer .row.company_legal_banks { border-top:1px solid #A9A9A9; }
+      /* .footer .company_info { color:#A9A9A9; }
+      .footer .company_contact { color:#A9A9A9; }
+      .footer .legal { color:#A9A9A9; }
+      .footer .bank { color:#A9A9A9; } */
+      .footer .company_name,.footer .company_ceo, .footer .bank_name { font-weight:bold; }
+    </style>
+  </template>
+
+</odoo>

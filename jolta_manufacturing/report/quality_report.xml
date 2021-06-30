@@ -1,0 +1,84 @@
+<odoo>
+
+    <report
+                id="report_quatlity"
+                model="quality.check"
+                string="Quality Report"
+                report_type="qweb-pdf"
+                name="jolta_manufacturing.report_quality_document_doc"
+                file="jolta_manufacturing.report_quality_document_doc"/>
+
+    <template id="report_quality_document_doc">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-if="user.company_id.id == 44">
+                    <t t-foreach="docs" t-as="o">
+<!--                        <t t-set="o" t-value="o.with_context(lang=o.production_id.user_id.lang)" />-->
+<!--                        <t t-set="partner" t-value="o.production_id.user_id or (o.move_lines and o.move_lines[0].partner_id) or False"/>-->
+<!--                        <t t-if="partner" name="partner_header">-->
+<!--                            <t t-set="address">-->
+<!--                                <div t-esc="partner"-->
+<!--                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>-->
+<!--                            </t>-->
+<!--                        </t>-->
+                        <div class="page">
+                            <div class="text-center"><h2>Quality Report</h2></div><br/>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Reference:</strong>
+                                    <span class="m-0" t-field="o.production_id.name"/>
+                                </div>
+                                <div class="col-5">
+                                    <span>
+                                        <strong>DATE:</strong>
+                                        <span class="m-0" t-field="o.create_date"/>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <br/><br/><table class="table table-condensed" style="border:1px solid black;" name="quality_table">
+                                <thead>
+                                    <tr style="border:1px solid black;">
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Product</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Lot #</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Check Date</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Checked By</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Team</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Status</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                        <tr  style="border:1px solid black;">
+<!--                                            <t t-set="i" t-value="i+1"/>-->
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.product_id"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.lot_id"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.control_date"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.user_id"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.team_id"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span t-field="o.quality_state"/>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                        </table>
+
+                        </div>
+                    </t>
+                </t>
+                </t>
+            </t>
+    </template>
+
+</odoo>

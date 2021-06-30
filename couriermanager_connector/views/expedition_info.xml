@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="expedition_info_action">
+            <field name="name">Expedition Info Action</field>
+            <field name="res_model">expedition.info</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_info_tree_view">
+            <field name="name">Expedition Info Tree View</field>
+            <field name="model">expedition.info</field>
+            <field name="arch" type="xml">
+                <tree string="Expedition Price">
+                    <field name="ex_number"/>
+                    <field name="ex_client" />
+                    <field name="ex_status"/>
+                    <field name="ex_cash_on_delivery"/>
+                    <field name="ex_price"/>
+                    <field name="ex_to_address"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="expedition_info_form_view">
+            <field name="name">Expedition Info Form View</field>
+            <field name="model">expedition.info</field>
+            <field name="arch" type="xml">
+                <form string="Expedition">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ex_number"/>
+                                <field name="ex_client" />
+                                <field name="ex_status"/>
+                            </group>
+                            <group>
+                                <field name="ex_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="ex_sender_city"/>
+                                <field name="ex_sender_country"/>
+                                <field name="ex_sender_phone"/>
+                            </group>
+                            <group>
+                                <field name="ex_receiver_city"/>
+                                <field name="ex_receiver_country"/>
+                                <field name="ex_to_address"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="ex_cash_on_delivery"/>
+                            <field name="ex_price"/>
+                            <field name="ex_bol"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="expedition_info" parent="expeditions" name="Expedition Info" action="expedition_info_action"/>
+
+    </data>
+</odoo>

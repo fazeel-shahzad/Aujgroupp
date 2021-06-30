@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <report
+                id="report_payroll_pdf"
+                model="hr.employee"
+                string="Payroll Pdf"
+                report_type="qweb-pdf"
+                name="employee_info.report_payroll_pdf"
+                file="employee_info.report_payroll_pdf"
+
+        />
+    </data>
+</odoo>

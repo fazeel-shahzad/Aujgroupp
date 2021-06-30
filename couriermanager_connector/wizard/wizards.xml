@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <record id="couriermanager_wizard_form" model="ir.ui.view">
+            <field name="name">couriermanager.wizard</field>
+            <field name="model">couriermanager.wizard</field>
+            <field name="arch" type="xml" >
+                <form string="Creating Courier Manager Client">
+                    <group>
+                        <field name="cm_client_name"/>
+                        <field name="cm_client_api" password="1"/>
+                    </group>
+                    <footer>
+                        <button name="save_client" type="object" string="Save" class="oe_highlight" style="width:10%"/>
+                        <button name="test_connection" type="object" string="Test" class="oe_highlight" style="width:10%"/>
+                        <button string="Cancel" special="cancel" style="width:10%"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_expedition_status_wizard_action" model="ir.actions.act_window">
+            <field name="name">Expedition Status Open Action</field>
+            <field name="res_model">expedition_status.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="open_expedition_status_wizard_form" model="ir.ui.view">
+            <field name="name">Expedition Status Open Form</field>
+            <field name="model">expedition_status.wizard</field>
+            <field name="arch" type="xml" >
+                <form string="Getting Expedition Status">
+                    <group>
+                        <field name="expedition_no"/>
+                    </group>
+                    <footer>
+                        <button name="get_status" type="object" string="Get Status" class="oe_highlight" style="width:10%"/>
+                        <button string="Cancel" special="cancel" style="width:10%"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_expedition_cancel_wizard_action" model="ir.actions.act_window">
+            <field name="name">Expedition Cancel Open Action</field>
+            <field name="res_model">expedition_cancel.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="open_expedition_cancel_wizard_form" model="ir.ui.view">
+            <field name="name">Expedition Cancel Open Form</field>
+            <field name="model">expedition_cancel.wizard</field>
+            <field name="arch" type="xml" >
+                <form string="Canceling Expedition">
+                    <group>
+                        <field name="expedition_no"/>
+                    </group>
+                    <footer>
+                        <button name="cancel_expedition" type="object" string="Cancel Expedition" class="oe_highlight" style="width:10%"/>
+                        <button string="Cancel" special="cancel" style="width:10%"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="couriermanager_wizard_action" model="ir.actions.act_window">
+            <field name="name">Creating Courier Manager Client</field>
+            <field name="res_model">couriermanager.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

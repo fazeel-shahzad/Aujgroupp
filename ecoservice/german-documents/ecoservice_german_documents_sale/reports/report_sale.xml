@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- Register: Report Quotation / Order Confirmation -->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="sale_order_report" model="ir.actions.report">
+    <field name="name">Quotation / Order</field>
+    <field name="model">sale.order</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_sale.report_quotation_template</field>
+  </record>
+
+  <!-- Register: Report Quotation / Order Confirmation (without logo) -->
+  <report id="sale_order_report_without_logo"
+          string="Quotation / Order Letter Paper"
+          model="sale.order"
+          report_type="qweb-pdf"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          print_report_name="'Sale'"
+          name="ecoservice_german_documents_sale.report_quotation_template_without_logo"/>
+
+  <!-- Register: Report PRO-FORMA Invoice -->
+  <!-- Create the report as a record. -->
+  <!-- This way there will be no entry in the print menu. This is intended! -->
+  <!-- TODO: Remove in 14.0 -->
+  <record id="sale_order_report_proforma" model="ir.actions.report">
+    <field name="name">PRO-FORMA Invoice</field>
+    <field name="model">sale.order</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ecoservice_german_documents_sale.report_quotation_proforma_template</field>
+  </record>
+
+
+  <!-- Register: Report PRO-FORMA Invoice (without logo) -->
+  <report id="sale_order_report_proforma_without_logo"
+          string="PRO-FORMA Invoice Letter Paper"
+          model="sale.order"
+          report_type="qweb-pdf"
+          paperformat="ecoservice_german_documents_base.paperformat_euro_a4_ecoservice"
+          print_report_name="'Sale'"
+          groups="sale.group_proforma_sales"
+          name="ecoservice_german_documents_sale.report_quotation_proforma_template_without_logo"/>
+
+  <!-- Build: Report Quotation / Order Confirmation -->
+  <!-- TODO: Remove in 14.0 -->
+  <template id="report_quotation_template">
+    <t t-call="sale.report_saleorder"/>
+  </template>
+
+  <!-- Build: Report Quotation / Order Confirmation (without logo) -->
+  <template id="report_quotation_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="sale.report_saleorder"/>
+  </template>
+
+  <!-- Build: Report PRO-FORMA Invoice-->
+  <!-- TODO: Remove in 14.0 -->
+  <template id="report_quotation_proforma_template">
+    <t t-call="web.html_container">
+      <t t-set="is_pro_forma" t-value="True"/>
+      <t t-foreach="docs" t-as="o">
+        <t t-call="ecoservice_german_documents_sale.report_sale_order_translator"
+           t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Build: Report PRO-FORMA Invoice (without logo) -->
+  <template id="report_quotation_proforma_template_without_logo">
+    <t t-set="hide_header_footer">True</t>
+    <t t-call="web.html_container">
+      <t t-set="is_pro_forma" t-value="True"/>
+      <t t-foreach="docs" t-as="o">
+        <t t-call="ecoservice_german_documents_sale.report_sale_order_translator"
+           t-lang="o.partner_id.lang"/>
+      </t>
+    </t>
+  </template>
+
+  <!-- Translate: Quotation / Order Confirmation (non-fields) -->
+  <template id="report_sale_order_translator">
+    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+    <t t-esc="o.set_report_line_index(1)"/>
+    <t t-set="public_reference" t-value="o.name"/>
+    <t t-if="env.context.get('proforma', False) or is_pro_forma">
+      <t t-set="doc_name">Pro-Forma Invoice</t>
+      <t t-set="doc_text" t-value="o.proforma_invoice"/>
+      <t t-set="doc_text_bottom" t-value="o.proforma_invoice_bottom"/>
+    </t>
+    <t t-elif="o.state in ['draft', 'sent']">
+      <t t-set="doc_name">Quotation</t>
+      <t t-set="doc_text" t-value="o.sale_quotation"/>
+      <t t-set="doc_text_bottom" t-value="o.sale_quotation_bottom"/>
+    </t>
+    <t t-else="">
+      <t t-set="doc_name">Order Confirmation</t>
+      <t t-set="doc_text" t-value="o.sale_confirmation"/>
+      <t t-set="doc_text_bottom" t-value="o.sale_confirmation_bottom"/>
+    </t>
+    <t t-call="ecoservice_german_documents_sale.report_sale_document"/>
+  </template>
+
+  <template id="report_saleorder_inherit_gd" inherit_id="sale.report_saleorder">
+    <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">
+      <t t-set="o" t-value="doc"/>
+      <t t-set="gd_active"
+         t-value="doc.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_sale.report_sale_order_translator" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+  <template id="report_saleorder_pro_forma_inherit_gd" inherit_id="sale.report_saleorder_pro_forma">
+    <xpath expr="//t[@t-call='sale.report_saleorder_document']" position="replace">
+      <t t-set="o" t-value="doc"/>
+      <t t-set="gd_active" t-value="doc.sudo().company_id.external_report_layout_id.key == 'ecoservice_german_documents_base.external_layout_german_documents'"/>
+      <t t-call="ecoservice_german_documents_sale.report_sale_order_translator" t-lang="o.partner_id.lang" t-if="gd_active"/>
+      <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang" t-else=""/>
+    </xpath>
+  </template>
+
+</odoo>

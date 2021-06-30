@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="ecoservice_financeinterface.menu_finance_interface" model="ir.ui.menu">
+    <field name="parent_id" ref="account_accountant.menu_accounting"/>
+  </record>
+
+</odoo>

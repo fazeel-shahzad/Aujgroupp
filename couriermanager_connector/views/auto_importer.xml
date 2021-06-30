@@ -1,0 +1,72 @@
+<odoo>
+    <data noupdate="1">
+        <record id="object0" model="couriermanager.autoconnector">
+            <field name="field_name">CourierManager Auto</field>
+        </record>
+    </data>
+
+    <data>
+        <record model="ir.ui.view" id="couriermanager_auto_form_view">
+            <field name="name">couriermanager.autoform</field>
+            <field name="model">couriermanager.autoconnector</field>
+            <field name="arch" type="xml">
+                <form string="Courier Manager Automated Actions Settings" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <h1>Automated Actions Settings</h1>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Shipment Info">
+                                <field name="auto_import_expedition_info" />
+                                <field name="expedition_info_start_number" />
+                                <field name="interval_number_expedition_info" />
+                                <field name="interval_unit_expedition_info" />
+                            </group>
+                            <group string="Shipment Price">
+                                <field name="auto_import_expedition_price" />
+                                <field name="interval_number_expedition_price" />
+                                <field name="interval_unit_expedition_price" />
+                            </group>
+                            <group string="Routing Cities">
+                                <field name="auto_import_routing_cities" />
+                                <field name="interval_number_routing_cities" />
+                                <field name="interval_unit_routing_cities" />
+                            </group>
+                            <group string="Invoices">
+                                <field name="auto_import_invoices" />
+                                <field name="interval_number_invoices" />
+                                <field name="interval_unit_invoices" />
+                            </group>
+
+                            <group>
+                                <button name="sync_data" type="object" string="Save" class="oe_highlight" icon="fa-refresh fa-2x" style="width:20%" />
+                            </group>
+                            <br></br>
+                            <span class="text-success">This may take some time if scheduler is already running</span>
+
+                        </group>
+
+                    </sheet>
+
+                </form>
+            </field>
+
+        </record>
+
+        <record model="ir.actions.act_window" id="couriermanager_auto_action">
+            <field name="name">Courier Manager auto window</field>
+            <field name="res_model">couriermanager.autoconnector</field>
+            <field name="view_mode">form,tree</field>
+            <field name="res_id" ref="couriermanager_connector.object0" />
+            <field name="target">inline</field>
+        </record>
+
+
+        <menuitem id="couriermanager_auto_action_auto_menu" name="Courier Manager Auto Settings"
+                  parent="couriermanager_menu_root" action="couriermanager_auto_action" sequence="110"/>
+
+    </data>
+</odoo>

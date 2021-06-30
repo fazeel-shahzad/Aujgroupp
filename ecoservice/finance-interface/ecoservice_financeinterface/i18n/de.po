@@ -1,0 +1,377 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_financeinterface
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-04 17:20+0000\n"
+"PO-Revision-Date: 2021-02-04 17:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.constraint,message:ecoservice_financeinterface.constraint_ecofi_validation_company_unique
+msgid "A configuration for this company already exists!"
+msgstr "Eine Konfiguration für dieses Unternehmen existiert bereits!"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_account_account
+msgid "Account"
+msgstr "Konto"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move_line__ecofi_account_counterpart
+msgid "Account Counterpart"
+msgstr "Gegenkonto"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__account_moves
+msgid "Account Moves"
+msgstr "Buchungssätze"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.ecofi_validation_form_view
+msgid "Basic"
+msgstr ""
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.export_ecofi_view
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__note
+msgid "Comment"
+msgstr "Kommentar"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__company_id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__company_id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__company_id
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationseinstellungen"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_ecoservice_finance_interface_configuration
+msgid "Configure validations"
+msgstr "Validierungen konfigurieren"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/ecofi/ecofi.py:0
+#, python-format
+msgid "Copying this model is not permitted."
+msgstr "Das Kopieren dieses Models ist nicht möglich."
+
+#. module: ecoservice_financeinterface
+#: model:ir.actions.act_window,name:ecoservice_financeinterface.ecoservice_ecofi_export_wizard
+#: model:ir.ui.menu,name:ecoservice_financeinterface.ecoservice_ecofi_wizard_menu
+msgid "Create Finance Export"
+msgstr "Finanzexport erzeugen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__create_uid
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__create_uid
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__create_date
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__create_date
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__date_from
+msgid "Date From"
+msgstr "Datum von"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__date_to
+msgid "Date To"
+msgstr "Datum bis"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_company__journal_ids
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_config_settings__journal_ids
+msgid "Default Journals"
+msgstr "Standardjournale"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__display_name
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__display_name
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation_mixin__display_name
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_company__ecofi_validation_id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_config_settings__ecofi_validation_id
+msgid "Ecofi Validation"
+msgstr "Ecofi-Validierung"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_ecofi_validation
+msgid "En- or disable specific checks company-wide"
+msgstr "Unternehmensweites ein- oder ausschalten spezifischer Überprüfungen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_company__ecofi_validations_enabled
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_res_config_settings__default_ecofi_validations_enabled
+msgid "Enabled Validations"
+msgstr "Validierungen aktivieren"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/account/account_move_line.py:0
+#, python-format
+msgid "Error! There can only be one tax per invoice line."
+msgstr "Fehler! Es darf nur eine Steuer pro Zeile ausgewählt werden."
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/account/account_move.py:0
+#, python-format
+msgid "Error! You cannot modify an already exported move."
+msgstr ""
+"Fehler! Sie können einen bereits exportierten Buchungssatz nicht bearbeiten."
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move__vorlauf_id
+msgid "Export"
+msgstr ""
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__csv_file
+msgid "Export CSV"
+msgstr "CSV Datei"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move__ecofi_buchungstext
+msgid "Export Voucher Text"
+msgstr "Export Buchungstext"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__name
+msgid "Exportname"
+msgstr ""
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_export_ecofi
+msgid "Finance Export"
+msgstr "Finanzexport"
+
+#. module: ecoservice_financeinterface
+#: model:ir.actions.act_window,name:ecoservice_financeinterface.eco_ecofi_action
+#: model:ir.ui.menu,name:ecoservice_financeinterface.menu_eco_ecofi
+msgid "Finance Exports"
+msgstr "Finanzexports"
+
+#. module: ecoservice_financeinterface
+#: model:ir.ui.menu,name:ecoservice_financeinterface.menu_finance_interface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_ecoservice_finance_interface_configuration
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_move_form_inherit_ecofi
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_move_line_form_inherit_ecofi
+#: model:res.groups,name:ecoservice_financeinterface.group_ecofi_financeinterface
+msgid "Finance Interface"
+msgstr "Finanzinterface"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__date_from
+msgid "From"
+msgstr "Von"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_ecofi_validation_mixin
+msgid "Helper for easy finance interface validation"
+msgstr "Helfer für einfache Finanzinterface-Validierung"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation_mixin__id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__id
+msgid "ID"
+msgstr ""
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__journal_ids
+msgid "Journal"
+msgstr ""
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_account_move
+msgid "Journal Entries"
+msgstr "Buchungssätze"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__journale
+msgid "Journals"
+msgstr "Journale"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi____last_update
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation____last_update
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation_mixin____last_update
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__write_uid
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__write_uid
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__write_date
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__write_date
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_export_ecofi__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/account/account_move.py:0
+#, python-format
+msgid "Line {number}: {validation}"
+msgstr "Zeile {number}: {validation}"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/account/account_move_line.py:0
+#, python-format
+msgid "More than one tax specified!"
+msgstr "Es wurde mehr als eine Steuer angegeben!"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.eco_ecofi_form_view
+msgid "Move Lines"
+msgstr "Buchungszeilen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move_line__ecofi_tax_id
+msgid "Move Tax"
+msgstr "Steuer"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.eco_ecofi_form_view
+msgid "Other"
+msgstr "Andere"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move__ecofi_validations_enabled
+msgid "Perform Validations"
+msgstr "Validierungen durchführen"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_ecoservice_finance_interface_configuration
+msgid "Select default journals"
+msgstr "Standard-Journale auswählen"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_ecoservice_finance_interface_configuration
+msgid "Select if validations should be enabled by default for new moves"
+msgstr ""
+"Wählen ob Validierungen für neue Buchungssätze standardmäßig aktiviert sein "
+"sollen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move__ecofi_manual
+msgid "Set Counter accounts manually"
+msgstr "Gegenkonto manuell setzen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.actions.act_window,name:ecoservice_financeinterface.action_financeinterface_configuration
+#: model:ir.ui.menu,name:ecoservice_financeinterface.menu_financeinterface_configuration
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.export_ecofi_view
+msgid "Start Export"
+msgstr "Export starten"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__csv_file_fname
+msgid "Stored Filename"
+msgstr "Gespeicherter Dateiname"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/ecofi/ecofi.py:0
+#, python-format
+msgid "There are no non-exported moves in the given period and journals!"
+msgstr ""
+"Für die angegebenen Journale und Periode gibt es keine Buchungssätze,die "
+"nicht bereits exportierte wurden"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/ecofi/ecofi.py:0
+#, python-format
+msgid ""
+"This export is conducted under the Vorlaufname: {vorlaufname}\n"
+"{sign}\n"
+"Start export\n"
+msgstr ""
+"Exportname: {vorlaufname}\n"
+"{sign}\n"
+"Export starten\n"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi__date_to
+msgid "To"
+msgstr "Bis"
+
+#. module: ecoservice_financeinterface
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface.view_account_move_filter_inherit_ecofi
+msgid "To Check"
+msgstr "Zu Prüfen"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_ecofi_validation__validate_tax_count
+msgid "Validate Tax Count"
+msgstr "Steuer-Anzahl validieren"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,help:ecoservice_financeinterface.field_ecofi_validation__validate_tax_count
+msgid "Validates that there is max. 1 tax set per line."
+msgstr "Überprüft, dass max. 1 Steuer pro Zeile gesetzt ist."
+
+#. module: ecoservice_financeinterface
+#: model:ir.model.fields,field_description:ecoservice_financeinterface.field_account_move__ecofi_to_check
+msgid "Verify"
+msgstr "Prüfen"
+
+#. module: ecoservice_financeinterface
+#: code:addons/ecoservice_financeinterface/models/account/account_move.py:0
+#, python-format
+msgid ""
+"Warning! Account moves which are already in an export can not be deleted!"
+msgstr ""
+"Warnung! Buchungssätze die sich bereits in einem Export befinden, können "
+"nicht gelöscht werden!"
+
+#. module: ecoservice_financeinterface
+#: model:ir.model,name:ecoservice_financeinterface.model_ecofi
+msgid "ecoservice Finance Interface"
+msgstr "ecoservice Finanzinterface"

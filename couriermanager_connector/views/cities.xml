@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="routing_cities_action">
+            <field name="name">Routing Cities Action</field>
+            <field name="res_model">routing.cities</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="routing_cities_tree_view">
+            <field name="name">Routing Cities Tree View</field>
+            <field name="model">routing.cities</field>
+            <field name="arch" type="xml">
+                <tree string="Routing Cities Price">
+                    <field name="cm_city_name"/>
+                    <field name="cm_city_province"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="routing" parent="couriermanager_menu_root" name="Routing" sequence="3"/>
+        <menuitem id="routing_cities" parent="routing" name="Cities" action="routing_cities_action"/>
+
+    </data>
+</odoo>

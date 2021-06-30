@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="sale_quotation_text" model="text.template.config">
+    <field name="name">Quotation (Top)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+
+  <record id="sale_confirmation_text" model="text.template.config">
+    <field name="name">Order Confirmation (Top)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+
+  <record id="proforma_invoice_text" model="text.template.config">
+    <field name="name">Pro-Forma Invoice (Top)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+
+  <record id="sale_quotation_text_bottom" model="text.template.config">
+    <field name="name">Quotation (Bottom)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+
+  <record id="sale_confirmation_text_bottom" model="text.template.config">
+    <field name="name">Order Confirmation (Bottom)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+
+  <record id="proforma_invoice_text_bottom" model="text.template.config">
+    <field name="name">Pro-Forma Invoice (Bottom)</field>
+    <field name="model" ref="sale.model_sale_order"/>
+  </record>
+</odoo>

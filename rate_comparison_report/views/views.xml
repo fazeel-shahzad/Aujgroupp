@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+
+        <menuitem action="create_comparison_report_wizard_action" id="rate_comp_menu"
+            parent="purchase.purchase_report"
+            sequence="0"/>
+  </data>
+
+</odoo>

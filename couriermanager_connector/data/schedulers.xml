@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="status_from_cron_scheduler_action_shipment_price" model="ir.cron">
+        <field name="name">Shipment Price Scheduler</field>
+        <field name="model_id" ref="model_couriermanager_autoconnector" />
+        <field name="state">code</field>
+        <field name="active">0</field>
+        <field name="code">model.auto_import_ex_price()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="status_from_cron_scheduler_action_shipment_info" model="ir.cron">
+        <field name="name">Shipment Info Scheduler</field>
+        <field name="model_id" ref="model_couriermanager_autoconnector" />
+        <field name="state">code</field>
+        <field name="active">0</field>
+        <field name="code">model.auto_import_ex_info()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="status_from_cron_scheduler_action_routing_cities" model="ir.cron">
+        <field name="name">Routing Cities Scheduler</field>
+        <field name="model_id" ref="model_couriermanager_autoconnector" />
+        <field name="state">code</field>
+        <field name="active">0</field>
+        <field name="code">model.auto_import_ro_cities()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="status_from_cron_scheduler_action_invoices" model="ir.cron">
+        <field name="name">Invoices Scheduler</field>
+        <field name="model_id" ref="model_couriermanager_autoconnector" />
+        <field name="state">code</field>
+        <field name="active">0</field>
+        <field name="code">model.auto_import_in()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

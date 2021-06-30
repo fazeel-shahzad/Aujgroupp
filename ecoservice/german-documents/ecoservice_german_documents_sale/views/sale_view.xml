@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <record id="view_order_form_inherited_text_template" model="ir.ui.view">
+    <field name="name">sale.order.form.inherited.text.template</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page name="text_templates" string="Text Template">
+          <group>
+            <field name="sale_quotation"/>
+            <field name="sale_confirmation"/>
+            <field name="proforma_invoice"/>
+            <field name="sale_quotation_bottom"/>
+            <field name="sale_confirmation_bottom"/>
+            <field name="proforma_invoice_bottom"/>
+          </group>
+        </page>
+      </xpath>
+      <xpath expr="//group/group[2]" position="replace">
+        <group name="order_details">
+          <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])]}"/>
+          <div class="o_td_label" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}">
+            <label for="date_order" string="Quotation Date"/>
+          </div>
+          <field name="date_order" nolabel="1" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}"/>
+          <div class="o_td_label" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])]}">
+            <label for="date_order" string="Order Date"/>
+          </div>
+          <field name="date_order" attrs="{'required': [('state', 'in', ['sale', 'done'])], 'invisible': [('state', 'in', ['draft', 'sent'])]}" nolabel="1"/>
+          <field name="pricelist_id" groups="product.group_product_pricelist" options="{'no_open':True,'no_create': True}"/>
+          <field name="currency_id" invisible="1"/>
+          <field name="payment_term_id" options="{'no_open':True,'no_create': True}"/>
+        </group>
+      </xpath>
+
+    </field>
+  </record>
+
+</odoo>

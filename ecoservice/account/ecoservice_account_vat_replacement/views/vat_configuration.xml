@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files at the root directory for full details.
+-->
+
+<odoo>
+
+  <record id="vat_configuration_view_tree" model="ir.ui.view">
+    <field name="name">vat.configuration.view.tree</field>
+    <field name="model">vat.configuration</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="description"/>
+        <field name="company_id"/>
+        <field name="execution_time"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="vat_configuration_view_form" model="ir.ui.view">
+    <field name="name">vat.configuration.view.form</field>
+    <field name="model">vat.configuration</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_run"
+                  string="Execute Configuration"
+                  class="oe_highlight"
+                  type="object"
+                  groups="account.group_account_manager"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="description"/>
+            <field name="company_id"/>
+            <field name="execution_time"/>
+            <field name="scheduled_cron_job" invisible="1" readonly="1"/>
+            <field name="cron_active" invisible="1"/>
+            <field name="cron_nextcall" invisible="1"/>
+
+            <div colspan="2" class="alert alert-info" role="alert" attrs="{'invisible': [('scheduled_cron_job', '!=', False)]}">
+              No Cronjob set!
+            </div>
+            <div colspan="2" class="alert alert-info" role="alert" attrs="{'invisible': [('scheduled_cron_job', '=', False)]}">
+              <div attrs="{'invisible': [('cron_active', '!=', True)]}">
+                Cronjob execution set to: <field name="cron_nextcall" nolabel="1"/>
+              </div>
+              <div attrs="{'invisible': [('cron_active', '!=', False)]}">
+                Cronjob last executed on: <field name="cron_nextcall" nolabel="1"/>
+              </div>
+            </div>
+            <button name="action_cron"
+                    string="Schedule Cronjob"
+                    colspan="2"
+                    type="object"
+                    groups="account.group_account_manager"
+                    attrs="{'invisible': [('execution_time', '=', False)]}"/>
+          </group>
+          <group>
+            <field name="configuration_account_ids"
+                   mode="tree"
+                   context="{'default_configuration_id': active_id}">
+              <tree editable="bottom">
+                <field name="configuration_id" invisible="1"/>
+                <field name="source_account_id"
+                       domain="[('company_id', '=', parent.company_id)]"/>
+                <field name="target_account_id"
+                       domain="[('company_id', '=', parent.company_id)]"/>
+              </tree>
+            </field>
+          </group>
+          <group>
+            <field name="configuration_tax_ids"
+                   mode="tree"
+                   context="{'default_configuration_id': active_id}">
+              <tree editable="bottom">
+                <field name="configuration_id" invisible="1"/>
+                <field name="source_tax_id"
+                       domain="[('company_id', '=', parent.company_id)]"/>
+                <field name="target_tax_id"
+                       domain="[('company_id', '=', parent.company_id)]"/>
+              </tree>
+            </field>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+</odoo>

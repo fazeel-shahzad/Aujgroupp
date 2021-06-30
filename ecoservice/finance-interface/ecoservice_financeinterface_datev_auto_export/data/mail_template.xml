@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="send_email_finance_report_summary" model="mail.template">
+    <field name="name">Summary : Finance Report</field>
+    <field name="model_id" ref="ecoservice_financeinterface_datev_auto_export.model_auto_datev_export_config"/>
+    <!-- <field name="subject">Finance Report Summary</field> -->
+    <field name="email_from">${user.email_formatted | safe}</field>
+    <field name="partner_to">${object.partner_id.id}</field>
+    <field name="body_html" type="html">
+      <div style="margin: 0px; padding: 0px;">
+        <p style="margin: 0px; padding: 0px; font-size: 13px;">
+          Dear ${object.partner_id.name}<br/>
+          <br/>
+          <br/>
+          Please find the summary of financial report from the attached file.<br/>
+          <br/>
+          <br/>
+          Regards,<br/>
+          ${user.partner_id.name}
+        </p>
+      </div>
+    </field>
+    <field name="lang">${object.partner_id.lang}</field>
+    <field name="user_signature" eval="False"/>
+    <field name="auto_delete" eval="True"/>
+  </record>
+
+</odoo>

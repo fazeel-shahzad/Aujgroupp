@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="product_uom_categ_form_view" model="ir.ui.view">
+    <field name="name">uom.category.form.inherit</field>
+    <field name="model">uom.category</field>
+    <field name="inherit_id" ref="uom.product_uom_categ_form_view"/>
+    <field name="arch" type="xml">
+      <field name="measure_type" position="after">
+        <field name="uom_template"/>
+      </field>
+    </field>
+  </record>
+
+  <record id="product_uom_categ_tree_view" model="ir.ui.view">
+    <field name="name">uom.category.tree.inherit</field>
+    <field name="model">uom.category</field>
+    <field name="inherit_id" ref="uom.product_uom_categ_tree_view"/>
+    <field name="arch" type="xml">
+      <field name="measure_type" position="after">
+        <field name="uom_template"/>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_ecoservice_uom_form" model="ir.ui.view">
+    <field name="name">ecoservice.uom.form</field>
+    <field name="model">ecoservice.uom</field>
+    <field name="arch" type="xml">
+      <form editable="bottom">
+        <group>
+          <field name="eco_uom_name" string="Name"/>
+          <field name="eco_uom_type" string="Type"/>
+          <field name="eco_factor" string="Ratio"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_ecoservice_uom_tree" model="ir.ui.view">
+    <field name="name">ecoservice.uom.tree</field>
+    <field name="model">ecoservice.uom</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="eco_uom_name"/>
+        <field name="eco_uom_type"/>
+        <field name="eco_factor"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_ecoservice_order_line_uom_form" model="ir.ui.view">
+    <field name="name">ecoservice.order.line.uom.form</field>
+    <field name="model">ecoservice.order.line.uom</field>
+    <field name="arch" type="xml">
+      <form editable="bottom" create="false">
+        <group>
+          <field name="ecoservice_uom_name" string="Name"/>
+          <field name="ecoservice_uom_type" string="Ratio"/>
+          <field name="ecoservice_uom_factor" string="Type"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_ecoservice_order_line_uom_tree" model="ir.ui.view">
+    <field name="name">ecoservice.order.line.uom.tree</field>
+    <field name="model">ecoservice.order.line.uom</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom" create="false">
+        <field name="ecoservice_uom_name"/>
+        <field name="ecoservice_uom_type"/>
+        <field name="ecoservice_uom_factor"/>
+      </tree>
+    </field>
+  </record>
+</odoo>

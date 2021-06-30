@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  For the case you wish to overwork the all
+  stock tables, you can to this here by inherit or override.
+-->
+<odoo>
+
+  <template id="report_table_base_stock">
+    <t t-set="has_barcode"
+       t-value="any(move_lines.product_id and move_lines.product_id.sudo().barcode or move_lines.package_id for move_lines in o.move_line_ids)"/>
+    <t t-set="has_serial_number"
+       t-value="o.move_line_ids.filtered(lambda ml: ml.lot_id or ml.lot_name)"/>
+    <t t-set="display_pos_no" t-value="o.company_id.report_table_position"/>
+
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th class="text-left" t-if="display_pos_no">
+            Pos
+          </th>
+          <th class="text-left">
+            Product
+          </th>
+          <th class="text-center" t-if="has_barcode and is_picking">
+            Barcode
+          </th>
+          <th class="text-center" t-if="has_serial_number"
+              groups="stock.group_lot_on_delivery_slip">
+            Lot/Serial Number
+          </th>
+          <th class="text-right">
+            Quantity
+          </th>
+          <th class="text-center">
+            UoM
+          </th>
+          <th class="text-right"
+              t-if="is_picking and o.picking_type_id.code != 'incoming'">
+            Source
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <t t-foreach="move_line_ids" t-as="move_line">
+
+          <t t-set="descriptions"
+             t-if="o.picking_type_code == 'outgoing' and move_line.product_id.sudo().description_pickingout"
+             t-value="move_line.product_id.sudo().description_pickingout.rstrip().split('\n')"/>
+          <t t-set="descriptions"
+             t-if="o.picking_type_code == 'incoming' and move_line.product_id.sudo().description_pickingin"
+             t-value="move_line.product_id.sudo().description_pickingin.rstrip().split('\n')"/>
+
+          <tr>
+            <!--Index-->
+            <td class="text-left" t-if="display_pos_no">
+              <t t-esc="move_line_index+1"/>
+            </td>
+            <!--Product description-->
+            <td class="text-left">
+              <span t-field="move_line.product_id"/> <br/>
+              <span t-field="move_line.product_id.description_sale"/>
+              <span t-esc="descriptions[0]" t-if="descriptions"/><br/>
+              <span t-esc="descriptions[1]" t-if="descriptions"/>
+<!--                <t t-if="_index > 0"-->
+<!--                <span t-esc="description.rstrip()"/>-->
+<!--              <br/>-->
+              <span t-esc="move_line.product_id.description_picking"/>
+              <t t-if="not move_line.product_id and move_line.package_id">
+<!--                <br/>-->
+                <span t-field="move_line.package_id"/>
+              </t>
+            </td>
+            <!--Barcode-->
+            <td t-if="has_barcode and is_picking" class="text-center">
+              <span t-if="move_line.product_id and move_line.product_id.barcode">
+                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', move_line.product_id.barcode, 600, 100)"
+                     style="width:300px;height:50px"/>
+              </span>
+              <span t-if="move_line.package_id and not move_line.product_id">
+                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', move_line.package_id.name, 600, 100)"
+                     style="width:300px;height:50px"/>
+              </span>
+            </td>
+            <!--Lot/Serial number-->
+            <t t-set="lot_id" t-value="move_line.lot_id"/>
+            <td class="text-center" t-if="has_serial_number and lot_id"
+                groups="stock.group_lot_on_delivery_slip">
+              <span t-field="lot_id.name"/>
+            </td>
+            <td class="text-center" t-if="has_serial_number and not lot_id"
+                groups="stock.group_lot_on_delivery_slip">
+              <span t-field="move_line.lot_name"/>
+            </td>
+            <!--Quantity-->
+            <td class="text-right" style="font-family:monospace;">
+
+<!--              <span t-esc="str('%.3f'%move_line.product_uom_qty).replace('.', ',')"/>-->
+
+
+              <span t-if="o.state != 'done'"
+                    t-esc="str('%.3f'%(move_line.product_uom_qty)).replace('.', ',')"/>
+              <span t-if="o.state == 'done'" t-esc="str('%.3f'%(move_line.qty_done)).replace('.', ',')"/>
+              <br/>
+
+              <t t-if="o.state != 'done'">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.weight * move_line.product_uom_qty),3))).replace('.', ',')"/>
+              </t>
+              <t t-else="">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.weight * move_line.qty_done),3))).replace('.', ',')"/>
+              </t>
+
+              <br/>
+
+              <t t-if="o.state != 'done'">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.volume * move_line.product_uom_qty),3))).replace('.', ',')"/>
+              </t>
+              <t t-else="">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.volume * move_line.qty_done),3))).replace('.', ',')"/>
+              </t>
+
+              <br/>
+              <t t-if="o.state != 'done'">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.square * move_line.product_uom_qty),3))).replace('.', ',')"/>
+              </t>
+              <t t-else="">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.square * move_line.qty_done),3))).replace('.', ',')"/>
+              </t>
+              <br/>
+
+              <t t-if="o.state != 'done'">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.platten * move_line.product_uom_qty),3))).replace('.', ',')"/>
+              </t>
+              <t t-else="">
+                <span t-esc="str('%.3f'%(round((move_line.product_id.platten * move_line.qty_done),3))).replace('.', ',')"/>
+              </t>
+                <br/>
+            </td>
+            <!--Unit of measure-->
+            <td align="center">
+              <span t-field="move_line.product_uom_id"/>
+              <br/>
+              <span t-field="move_line.product_id.weight_uom_name"/>
+              <br/>
+              <span t-field="move_line.product_id.volume_uom_name"/>
+              <br/>
+              <span>m<sup>2</sup></span>
+              <br/>
+              <span>Paletten</span>
+            </td>
+            <!--Location-->
+            <td class="text-right"
+                t-if="is_picking and o.picking_type_id.code != 'incoming'">
+              <span t-field="move_line.location_id"/>
+            </td>
+          </tr>
+<!--          <tr t-foreach="descriptions" t-as="description">-->
+<!--            <t t-if="description_index > 0">-->
+<!--              <td class="no-mbp" t-if="display_pos_no">&amp;nbsp;</td>-->
+<!--              <td align="left" class="no-bp">-->
+<!--                <span t-esc="description.rstrip()"/>-->
+<!--              </td>-->
+<!--              <td class="no-mbp" t-if="has_barcode and is_picking">&amp;nbsp;-->
+<!--              </td>-->
+<!--              <td class="no-mbp" t-if="has_serial_number"-->
+<!--                  groups="stock.group_lot_on_delivery_slip">&amp;nbsp;-->
+<!--              </td>-->
+<!--              <td class="no-mbp">&amp;nbsp;</td>-->
+<!--              <td class="no-mbp">&amp;nbsp;</td>-->
+<!--              <td class="no-mbp"-->
+<!--                  t-if="is_picking and o.picking_type_id.code != 'incoming'">&amp;nbsp;-->
+<!--              </td>-->
+<!--            </t>-->
+<!--          </tr>-->
+        </t>
+      </tbody>
+    </table>
+  </template>
+
+</odoo>

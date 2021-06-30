@@ -1,0 +1,323 @@
+<odoo>
+
+    <record id="paperformat_report_internal_tansfer" model="report.paperformat">
+            <field name="name">Internal Paper Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+    <report
+                id="report_stock_jolta"
+                model="stock.picking"
+                string="Store Issue Note"
+                report_type="qweb-pdf"
+                name="jolta_manufacturing.report_jolta_document"
+                file="jolta_manufacturing.report_jolta_document"
+                paperformat="paperformat_report_internal_tansfer"/>
+
+    <template id="report_jolta_document">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                    <t t-if="user.company_id.id == 44">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False"/>
+                        <t t-if="partner" name="partner_header">
+                            <t t-set="address">
+                                <div t-esc="partner"
+                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                            </t>
+                        </t>
+                        <div class="page">
+                        <br/>
+                        <br/>
+                        <br/>
+                            <div class="text-center"><h2>Production Lot Sheet</h2></div>
+                            <div class="text-center"><h2>Store Issue Note</h2></div><br/>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>SECTION:</strong>
+                                <span class="m-0" t-field="o.section_id.name"/>
+                            </div>
+                            <div class="col-5">
+                                <span>
+                                    <strong>DATE:</strong>
+                                    <span class="m-0" t-field="o.create_date"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>MODEL:</strong>
+                                <span class="m-0" t-field="o.model"/>
+                            </div>
+                            <div class="col-5">
+                                <span>
+                                    <strong>COLOR:</strong>
+                                    <span class="m-0" t-field="o.color"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>LOT No:</strong>
+                                <span class="m-0" t-field="o.lot_no"/>
+                            </div>
+                            <div class="col-5">
+                                <span>
+                                    <strong>LOT QTY:</strong>
+                                    <span class="m-0" t-field="o.lot_qty"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>WORK ORDER #:</strong>
+                                <span class="m-0" t-field="o.work_order"/>
+                            </div>
+                            <div class="col-5">
+                                <span>
+                                    <strong>WORK ORDER QTY:</strong>
+                                    <span class="m-0" t-field="o.work_order_qty"/>
+                                </span>
+                            </div>
+                        </div>
+                            <div class="row">
+                            <div class="col-6">
+                                <strong>Source Document:</strong>
+                                <span class="m-0" t-esc="o.get_source_document()"/>
+                            </div>
+<!--                            <div class="col-5">-->
+<!--                                <span>-->
+<!--                                    <strong>WORK ORDER QTY:</strong>-->
+<!--                                    <span class="m-0" t-field="o.work_order_qty"/>-->
+<!--                                </span>-->
+<!--                            </div>-->
+                        </div>
+                            <br/><table class="table table-condensed" style="border:1px solid black;" name="stock_move_table">
+                                <thead>
+                                    <tr style="border:1px solid black;">
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>SR#</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Part No</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Description</strong></th>
+                                        <th name="th_sm_product" style="border:1px solid black;"><strong>Unit</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>BOM/Bike</strong></th>
+                                        <th name="th_sm_serial" class="text-center" style="border:1px solid black;"><strong>Requested Qty</strong></th>
+                                        <th name="th_sm_note" class="text-center" style="border:1px solid black;"><strong>Issued Qty</strong></th>
+                                        <th name="th_sm_note" class="text-center" style="border:1px solid black;"><strong>Received By</strong></th>
+                                        <th name="th_sm_note" class="text-center" style="border:1px solid black;"><strong>Shortage</strong></th>
+                                        <th name="th_sm_note" class="text-center" style="border:1px solid black;"><strong>Shortage Received By</strong></th>
+                                        <th name="th_sm_note" class="text-center" style="border:1px solid black;"><strong>REMARKS</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                    <t t-if="not o.backorder_id">
+                                        <tr t-foreach="o.move_ids_without_package" t-as="line" style="border:1px solid black;">
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_id.name"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_uom.name"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_uom_qty + o.get_shortage(line)"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.quantity_done"/>
+                                            </td>
+                                            <td class=" text-center" style="border:1px solid black;">
+                                                <t t-if="o.state == 'done'">
+                                                    <span t-esc="o.location_dest_id.user_id.name"/><br/>
+                                                    <span t-esc="o.get_approval_date(line)"/>
+                                                </t>
+                                            </td>
+                                            <td class=" text-center" style="border:1px solid black;">
+                                                <span t-esc="o.get_shortage(line)"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-esc="o.get_backorder_line(line)"/><br/>
+                                                <span t-esc="o.get_backorder_approval_date(line)"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                        </tr>
+<!--                                        <t t-set="back_line" t-value="o.get_backorder_line()"/>-->
+<!--                                        <t t-if="back_line" t-foreach="back_line" t-as="b_line">-->
+<!--                                        <tr  t-foreach="back_line.move_ids_without_package" t-as="c_line" style="border:1px solid black;">-->
+<!--                                            <t t-set="i" t-value="i+1"/>-->
+<!--                                            <td id="count" class="text-center" style="border:1px solid black;">-->
+<!--                                                <span  t-esc="i"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.name"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.product_uom.name"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td class=" text-center" style="border:1px solid black;">-->
+<!--                                                <t t-if="o.state == 'done'">-->
+<!--                                                    <span t-esc="o.location_dest_id.user_id.name"/>-->
+<!--                                                </t>-->
+<!--                                            </td>-->
+<!--                                            <td class=" text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.product_uom_qty - c_line.quantity_done"/>-->
+<!--                                            </td>-->
+<!--                                            <td style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+
+<!--                                        </tr>-->
+<!--                                        </t>-->
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr t-foreach="o.backorder_id.move_ids_without_package" t-as="line" style="border:1px solid black;">
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_id.name"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_uom.name"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.product_uom_qty + o.backorder_id.get_shortage(line)"/>
+                                            </td>
+                                            <td class="text-center" style="border:1px solid black;">
+                                                <span t-esc="line.quantity_done"/>
+                                            </td>
+                                            <td class=" text-center" style="border:1px solid black;">
+                                                <t t-if="o.state == 'done'">
+                                                    <span t-esc="o.location_dest_id.user_id.name"/><br/>
+                                                    <span t-esc="o.get_approval_date(line)"/>
+                                                </t>
+                                            </td>
+                                            <td class=" text-center" style="border:1px solid black;">
+                                                <span t-esc="o.backorder_id.get_shortage(line)"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-esc="o.backorder_id.get_backorder_line(line)"/><br/>
+                                                <span t-esc="o.backorder_id.get_backorder_approval_date(line)"/>
+<!--                                                <span t-esc="o.get_approval_date(line)"/>-->
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span>&#160;</span>
+                                            </td>
+                                        </tr>
+<!--                                        <tr  t-foreach="o.move_ids_without_package" t-as="c_line" style="border:1px solid black;">-->
+<!--                                            <t t-set="i" t-value="i+1"/>-->
+<!--                                            <td id="count" class="text-center" style="border:1px solid black;">-->
+<!--                                                <span  t-esc="i"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.name"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.product_uom.name"/>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td class="text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td class=" text-center" style="border:1px solid black;">-->
+<!--                                                <t t-if="o.state == 'done'">-->
+<!--                                                    <span t-esc="o.location_dest_id.user_id.name"/>-->
+<!--                                                </t>-->
+<!--                                            </td>-->
+<!--                                            <td class=" text-center" style="border:1px solid black;">-->
+<!--                                                <span>0</span>-->
+<!--                                            </td>-->
+<!--                                            <td style="border:1px solid black;">-->
+<!--                                                <span t-esc="c_line.product_uom_qty - c_line.quantity_done"/>-->
+<!--                                            </td>-->
+<!--                                            <td style="border:1px solid black;">-->
+<!--                                                <span>&#160;</span>-->
+<!--                                            </td>-->
+
+<!--                                        </tr>-->
+
+                                    </t>
+                                </tbody>
+                            </table>
+<!--                            <div class="container row" style="margin-top:2em;margin-left:1em;float:right; font-size:15px;">-->
+<!--                                <div class="col-12" t-if="o.sale_id.note_picklist">-->
+<!--                                    <strong><span>Note:</span> </strong><span t-esc="o.sale_id.note_picklist"/>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+
+
+<!--                            <div  class="mt32 ml64 mr4" name="signature">-->
+<!--                                <div class="offset-8">-->
+<!--                                    <strong>Signature</strong>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                                <div class="offset-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <img t-att-src="image_data_uri(o.signature)" style="max-height: 4cm; max-width: 8cm;"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                                <div class="offset-8 text-center">-->
+<!--                                    <p t-field="o.partner_id.name"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </t>
+                </t>
+            </t>
+            </t>
+        </template>
+
+</odoo>

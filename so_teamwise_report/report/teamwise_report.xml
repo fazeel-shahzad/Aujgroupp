@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_so_teamwise_pdf_report" model="ir.actions.report">
+        <field name="name">Saleorder teamwise report pdf</field>
+        <field name="model">so.teamwise.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">so_teamwise_report.report_teamwise_so_document</field>
+    </record>
+
+
+     <template id="report_teamwise_so_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="text-center" style="font-size:20px;">
+                        <strong>Sales Officer/Team Wise report</strong>
+                    </div>
+                    <br/>
+                    <div class="row" style="padding-left:15px;">
+                        <strong style="font-size:16px; margin-top:-20px;">Date from:</strong>
+                        <span t-esc="date_from"/>
+                        <br/>
+                        <strong style="font-size:16px; margin-top:-20px;">Date to:</strong>
+                        <span t-esc="date_to"/>
+                    </div>
+
+                    <table style="width:100%; margin-top:15px;" class="table table-condensed">
+                        <thead class="thead-light">
+                            <tr style="">
+                                <th  colspan="" class="text-left"><strong style="font-size:14px;">Customer</strong></th>
+                                <th  colspan="" class="text-left"><strong style="font-size:14px;">Sr#</strong></th>
+                                <th  colspan="" class="text-left"><strong style="font-size:14px;">Date</strong></th>
+                                <th  name="th_on_hand" class="text-left"><strong style="font-size:16px;">Product</strong></th>
+                                <th  name="th_purchase" class="text-center"><strong style="font-size:16px;">Qty</strong></th>
+                                <th  name="th_purchase" class="text-center"><strong style="font-size:16px;">Unit Price</strong></th>
+                                <th  name="th_sale" class="text-center"><strong style="font-size:16px;">Value</strong></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="grand_total" t-value="0.0"/>
+                            <t t-foreach="salepersons" t-as="sp">
+                                <t t-set="sr" t-value="0"/>
+                                <t t-set="total_qty" t-value="0"/>
+                                <t t-set="total_value" t-value="0.0"/>
+
+                                <t t-set="users_so" t-value="get_users_sales(sp,doc_model.date_from,doc_model.date_to)"/>
+                                <t t-if="len(users_so) >= 1">
+                                    <tr style="font-size:14px; background-color:#e6f5fa">
+                                        <td colspan="7" class="text-left"><strong><span t-field="sp.name"/>:</strong></td>
+                                    </tr>
+                                    <t t-foreach="users_so" t-as="sale_rec">
+                                        <t t-set="sr" t-value="sr +1"/>
+                                       <tr style="font-size:14px;">
+                                                <td  class="text-center"></td>
+                                                <td  class="text-center">
+                                                    <span t-esc="sr"/>
+                                                </td>
+
+                                                <td class="text-left" style=" white-space: nowrap;" colspan="">
+                                                    <span t-esc="sale_rec.order_id.date_order.date()"/>
+                                                </td>
+
+                                                <td  class="text-left">
+                                                    <span t-field="sale_rec.product_id.name"/>
+                                                </td>
+
+                                                <td  class="text-right">
+                                                    <span t-field="sale_rec.product_uom_qty"/>
+                                                    <t t-set="total_qty" t-value="total_qty + sale_rec.product_uom_qty"/>
+                                                </td>
+
+                                                <td  class="text-right">
+                                                    <span t-field="sale_rec.price_unit"/>
+                                                    <t t-set="total_value" t-value="total_value + sale_rec.price_unit"/>
+                                                </td>
+                                                <t t-set="value" t-value="(sale_rec.product_uom_qty * sale_rec.price_unit)"/>
+                                                <td  class="text-right">
+                                                     <span t-esc="value"/>
+                                                </td>
+
+                                       </tr>
+                                    </t>
+                                    <!-- for saleperson wise total quantity and total value-->
+                                    <tr style="border-top:1px solid black; font-size:14px;">
+                                        <td  class="text-center"></td>
+                                        <td  class="text-center"></td>
+                                        <td  class="text-center"></td>
+                                        <td style="" class="text-right"><strong>Total:</strong></td>
+<!--                                        <td style="border-top:2px solid black;" class="text-right"><span t-esc="int(total_qty)"/></td>-->
+                                        <td style="border-top:2px solid black;" class="text-right"></td>
+                                        <td style="border-top:2px solid black;" class="text-right"></td>
+                                        <td style="border-top:2px solid black;" class="text-right"><span t-esc="total_value"/></td>
+                                        <t t-set="grand_total" t-value="grand_total + total_value"/>
+                                    </tr>
+
+                                </t>
+
+                             </t>
+
+                            <tr style="border-top:1px solid black; font-size:14px;">
+                                <td  class="text-center"></td>
+                                <td  class="text-center"></td>
+                                <td  class="text-center"></td>
+                                <td style="" class="text-right"><strong>Grand Total:</strong></td>
+<!--                                        <td style="border-top:2px solid black;" class="text-right"><span t-esc="int(total_qty)"/></td>-->
+                                <td style="border-top:2px solid black;" class="text-right"></td>
+                                <td style="border-top:2px solid black;" class="text-right"></td>
+                                <td style="border-top:2px solid black;" class="text-right"><span t-esc="grand_total"/></td>
+
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

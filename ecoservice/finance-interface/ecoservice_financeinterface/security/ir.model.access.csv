@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecofi,ecofi,model_ecofi,ecoservice_financeinterface.group_ecofi_financeinterface,1,1,1,0
+access_ecofi_validation_all_user,ecofi.validation.all,model_ecofi_validation,,1,0,0,0
+access_ecofi_validation_fi_user,ecofi.validation.fi.user,model_ecofi_validation,ecoservice_financeinterface.group_ecofi_financeinterface,1,1,1,1

@@ -1,0 +1,89 @@
+<odoo>
+	<template id="salary_advance_view" name="Advance Salary View">
+		<t t-call="website.layout">
+			<div class="wrapper">
+				<!--  Sidebar   -->
+				<nav id="sidebar">
+					<ul class="list-unstyled components">
+						<li>
+							<a href="/dashboard">Dashboard</a>
+						</li>
+						<li>
+							<a href="/attendance">Attendance</a>
+						</li>
+						<li class="active">
+							<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Leave Request</a>
+							<ul class="collapse list-unstyled" id="homeSubmenu">
+								<li>
+									<a href="/my-time-off-request">My Time Off Request</a>
+								</li>
+								<li>
+									<a href="/my-allocation">My Allocation Request</a>
+								</li>
+							</ul>
+						</li>
+						
+						<li class="active">
+							<a href="#home1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Loan Request</a>
+							<ul class="collapse list-unstyled" id="home1Submenu">
+								<li>
+									<a href="/loan-request">Request for Loan</a>
+								</li>
+								<li>
+									<a href="/advance-salary">Request for Advance Salary</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<!--  Page Content   -->
+				<div id="content">
+					<!-- 				<t t-esc="latter_view.employee"/> -->
+					<div class="container-fluid">
+						<xpath expr="." position="inside">
+				<link rel="stylesheet" type="text/css" href="/portal_user/static/src/css/style.css"/>
+						</xpath>
+						<h2 id="h2" style="text-align:center">Advance Salary View</h2>
+						<br/>
+						<table class="table table-bordered table-striped text-center table-sm">
+							<thead>
+								<tr style="height:50px;">
+									<th scope="col">Employee</th>
+									<th scope="col">Advance</th>
+									<th scope="col">Department</th>
+									<th scope="col">Reason</th>
+									<th scope="col">Date</th>
+									<th scope="col">Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="salary" t-as="salary">
+									<tr>
+										<td>
+											<t t-esc="salary.employee_id.name"/>
+										</td>
+										<td>
+											<t t-esc="salary.advance"/>
+										</td>
+										<td>
+											<t t-esc="salary.department.name"/>
+										</td>
+										<td>
+											<t t-esc="salary.reason"/>
+										</td>
+										<td>
+											<t t-esc="salary.date"/>
+										</td>
+										<td>
+											<t t-esc="salary.state"/>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+</odoo>

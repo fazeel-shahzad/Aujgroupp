@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_po_goods_pdf_report" model="ir.actions.report">
+        <field name="name">Po goods Report act</field>
+        <field name="model">po.goods.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">goods_received_report.report_pogo_received_document</field>
+    </record>
+
+
+    <template id="report_pogo_received_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="text-center" style="font-size:20px;">
+                        <strong>Purchase order and Goods Received report</strong>
+                    </div>
+                    <br/>
+                    <div class="row" style="padding-left:15px;">
+                        <strong style="font-size:16px; margin-top:-20px;">Date from:</strong>
+                        <span t-esc="date_from"/>
+                        <br/>
+
+                        <strong style="font-size:16px; margin-top:-20px;">Date to:</strong>
+                        <span t-esc="date_to"/>
+                    </div>
+
+
+                    <table style="width:100%; margin-top:15px;" class="table table-condensed">
+                        <thead class="thead-light">
+                            <tr style="">
+<!--                                <th  name="th_name" class="text-left"><strong style="font-size:14px;">&#160;</strong></th>-->
+                                <th  name="th_on_hand" colspan="3" class="text-left"><strong style="font-size:14px;">Date</strong></th>
+<!--                                <th  name="th_on_hand" class="text-center"><strong style="font-size:16px;">Date</strong></th>-->
+                                <th  name="th_on_hand" class="text-left"><strong style="font-size:16px;">PO #</strong></th>
+                                <th  name="th_purchase" class="text-center"><strong style="font-size:16px;">Product</strong></th>
+                                <th  name="th_purchase" class="text-center"><strong style="font-size:16px;">PO Qty</strong></th>
+                                <th  name="th_sale" class="text-center"><strong style="font-size:16px;">Received Qty</strong></th>
+                                <th  name="th_sale" class="text-center"><strong style="font-size:16px;">Diff</strong></th>
+
+                            </tr>
+                        </thead>
+                        <t t-set="serial" t-value="0"/>
+                        <tbody>
+                            <t t-foreach="vendors" t-as="ven">
+                                    <tr style=""><!-- -->
+
+                                            <td colspan="8" class="text-left"><strong><span t-field="ven.name"/>:</strong></td>
+
+
+                                     </tr>
+
+                                    <t t-foreach="po_data" t-as="po">
+                                         <t t-if="po.partner_id.id == ven.id">
+                                            <t t-set="serial" t-value="serial+1"/>
+                                            <tr style="background-color:#e8e7e3;">
+<!--                                                <td  class="text-center"></td>-->
+                                                <td class="text-left" colspan="3"><strong><span t-esc="po.date_order.date()"/></strong></td>
+                                                <td  class="text-left"><strong><span t-field="po.name"/></strong></td>
+                                                <td  class="text-center"></td>
+                                                <td  class="text-center"></td>
+                                                <td  class="text-center"></td>
+                                                <td  class="text-center"></td>
+                                            </tr>
+                                                <t t-foreach="po.order_line" t-as="ol">
+                                                    <tr>
+                                                        <td  class="text-center"></td>
+                                                        <td  class="text-left"></td>
+                                                        <td  class="text-center"></td>
+                                                        <td  class="text-center"></td>
+                                                        <td  class="text-left"><span t-field="ol.product_id.name"/></td>
+                                                        <td  class="text-right"><span t-field="ol.product_qty"/></td>
+                                                             <t t-set="rece_qty" t-value="get_prd_rece_qty(po,ol.product_id)"/>
+                                                        <td  class="text-right">
+                                                            <span t-esc="rece_qty"/>
+                                                        </td>
+                                                        <t t-set="qtyDiff" t-value="ol.product_qty - rece_qty "/>
+                                                        <td  class="text-right">
+                                                            <span t-esc="int(qtyDiff)"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                         </t>
+                                    </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <template id="letterhead_reference">
+    <div id="letterhead_reference" class="stock row">
+      <div>
+        <!-- Set document specific variables -->
+        <t t-if="'sale_id' in o and o.sale_id.client_order_ref"
+           t-set="client_order_ref"
+           t-value="o.sale_id.client_order_ref"/>
+        <t t-if="'sale_id' in o and not o.sale_id.client_order_ref"
+           t-set="client_order_ref"
+           t-value="o.origin"/>
+        <t t-if="'sale_id' not in o"
+           t-set="client_order_ref"
+           t-value="o.origin"/>
+
+        <!-- References about this document -->
+        <t name="reference_document"
+           t-call="ecoservice_german_documents_base.letterhead_reference_document"/>
+
+        <!-- Customer No. & VAT references -->
+        <t name="reference_customer_vat"
+           t-call="ecoservice_german_documents_base.letterhead_reference_customer_vat"/>
+
+        <!-- References about the case for the customer -->
+        <t name="reference_case"
+           t-call="ecoservice_german_documents_base.letterhead_reference_case"/>
+
+        <!-- References about our company for the customer -->
+        <t name="reference_contact"
+           t-call="ecoservice_german_documents_base.letterhead_reference_contact"/>
+
+        <!-- Details about our company -->
+        <t name="reference_company"
+           t-call="ecoservice_german_documents_base.letterhead_reference_company"/>
+      </div>
+    </div>
+  </template>
+
+
+  <template id="letterhead_receiver_address_drop_shipping">
+    <div id="letterhead_receiver_address">
+      <t t-if="not delivery_address.is_company">
+        <span t-field="delivery_address.parent_id.name"/>
+        <br/>
+        <t t-if="delivery_address.name">
+          <t t-if="delivery_address.title.name == 'Herr'">
+            <span>Herrn</span>
+          </t>
+          <t t-if="delivery_address.title.name != 'Herr'">
+            <span t-field="delivery_address.title"/>
+          </t>
+          <t t-if="delivery_address.has_lastname()">
+            <span t-field="delivery_address.firstname"/>
+            <span t-field="delivery_address.lastname"/>
+          </t>
+          <t t-if="not delivery_address.has_lastname()">
+            <span t-field="delivery_address.name"/>
+          </t>
+          <br/>
+        </t>
+      </t>
+      <t t-if="delivery_address.is_company">
+        <span t-field="delivery_address.name"/>
+        <br/>
+      </t>
+
+      <span t-field="delivery_address.street"/>
+      <br/>
+      <t t-if="delivery_address.street2">
+        <span t-field="delivery_address.street2"/>
+        <br/>
+      </t>
+      <span t-field="delivery_address.zip"/>
+      <t t-set="country_set_properly"
+         t-value="delivery_address.country_id and o.company_id.country_id"/>
+      <t t-if="country_set_properly and (delivery_address.country_id != o.company_id.country_id)">
+        <span style="text-transform: uppercase" t-field="delivery_address.city"/>
+        <br/>
+        <span style="text-transform: uppercase"
+              t-field="delivery_address.country_id.with_context(lang=o.company_id.partner_id.lang).name"/>
+      </t>
+      <t t-else="">
+        <span t-field="delivery_address.city"/>
+      </t>
+    </div>
+  </template>
+
+</odoo>

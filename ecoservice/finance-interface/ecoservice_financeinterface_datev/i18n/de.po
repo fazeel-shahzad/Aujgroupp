@@ -1,0 +1,573 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_financeinterface_datev
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-16 07:29+0000\n"
+"PO-Revision-Date: 2020-04-16 07:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields.selection,name:ecoservice_financeinterface_datev.selection__account_move_line__datev_posting_key__40
+msgid "40"
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_account_account
+msgid "Account"
+msgstr "Konto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__accounts_are_configured
+msgid "Accounts Are Configured"
+msgstr "Konten sind konfiguriert"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid ""
+"Accumulate credit &amp; debit towards the bigger side if sharing same "
+"account"
+msgstr "Soll und Haben bei gleichem Konto zur größeren Seite kumulieren."
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/wizards/models/ecofi_move_migration.py:0
+#, python-format
+msgid ""
+"Both Checkboxes 'Taxes are configured' and 'Accounts are configured' must be"
+" checked in order to proceed!"
+msgstr ""
+"Die beiden Kontrollkästchen 'Steuern sind konfiguriert' und 'Konten sind "
+"konfiguriert' müssen angewählt sein, um fortfahren zu können!"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_form
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_move_migration__accounts_are_configured
+msgid ""
+"Check this if you have configured the accounts according to the guide or the"
+" official SKR Documentation. If you have checked 'Migrate account moves of "
+"all companies' please make sure that you have configured the accounts for "
+"all appropriate companies."
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_move_migration__taxes_are_configured
+msgid ""
+"Check this if you have configured the taxes with the correct tax keys "
+"according to the guide or the official SKR Documentation.If you have checked"
+" 'Migrate account moves of all companies' please make sure that you have "
+"configured the taxes for all appropriate companies."
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__l10n_de_datev_client_number
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__l10n_de_datev_client_number
+msgid "Client No."
+msgstr "Mandanten-Nr."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__datev_group_sh
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__datev_group_sh
+msgid "Combine Credit & Debit"
+msgstr "Soll und Haben kumulieren"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_res_company
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__companies
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationseinstellungen"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__l10n_de_datev_consultant_number
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__l10n_de_datev_consultant_number
+msgid "Consultant No."
+msgstr "Berater-Nr."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "DATEV Export"
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_account_form_inherit_ecofi_datev
+msgid "Datev"
+msgstr "DATEV"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_account__datev_automatic_account
+msgid "Datev Automatic Account"
+msgstr "Automatikkonto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_move_line__datev_posting_key
+msgid "Datev BU"
+msgstr "Buchungsschlüssel"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_tax__datev_cashback_account_id
+msgid "Datev Cashback Account"
+msgstr "Skontokonto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_account__datev_tax_ids
+msgid "Datev Tax Account"
+msgstr "Steuerkonto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_account__datev_vat_handover
+msgid "Datev VAT-ID"
+msgstr "UST-ID"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_export_columns__display_name
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_ecofi_validation
+msgid "En- or disable specific checks company-wide"
+msgstr "Unternehmensweites ein- oder ausschalten spezifischer Überprüfungen"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/ecofi/ecofi.py:0
+#, python-format
+msgid "Error! No sales tax identification number stored in the partner!"
+msgstr ""
+"Fehler! Keine Umsatzsteuer-Identifikationsnummer in dem Partner gespeichert!"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__datev_export_method
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__datev_export_method
+msgid "Export method"
+msgstr "Exportmethode"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_move_line__datev_export_value
+msgid "Export value"
+msgstr "Exportwert"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_account_fiscal_position
+msgid "Fiscal Position"
+msgstr "Steuerzuordnung"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__datev_group_lines
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__datev_group_lines
+msgid "Group Move Lines"
+msgstr "Buchungszeilen gruppieren"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Group different move lines sharing the same account"
+msgstr "Gruppiere verschiedene Buchungszeilen mit demselben Konto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_export_columns__id
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__id
+msgid "ID"
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_move_migration__migrate_all_companies
+msgid "If not set only the moves of the current company will be migrated."
+msgstr ""
+"Wenn nicht gesetzt werden nur die Buchungssätze des aktuellen Unternehmens "
+"migriert."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__datev_ignore_currency
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_config_settings__datev_ignore_currency
+msgid ""
+"If set the export currency will always be the company's default currency"
+msgstr ""
+"Wenn gesetzt wird die Fremdwährung in der Buchung ignoriert und immer mit "
+"der Standard-Währung des Unternehmens exportiert"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__datev_ignore_currency
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__datev_ignore_currency
+msgid "Ignore Currency"
+msgstr "Ignoriere Fremdwährung"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Ignore foreign currencies and use default"
+msgstr "Ignoriere Fremdwährungen und nutze Standardwährung"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid "In"
+msgstr "Bei"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_account_account__datev_vat_handover
+msgid ""
+"Is required when transferring a sales tax identification number from the "
+"account partner (e.g. EU-Invoice)"
+msgstr ""
+"Wird benötigt, wenn die Umsatzsteueridentifikationsnummer des Konten-"
+"Partners übermittelt wird (z.B. EU-Rechnung)"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_account_move
+msgid "Journal Entries"
+msgstr "Buchungssätze"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_account_move_line
+msgid "Journal Item"
+msgstr "Buchungszeile"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_export_columns____last_update
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Length of analytic G/L account numbers"
+msgstr "Sachkontenlänge"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_form
+msgid "Migrate Moves"
+msgstr "Migriere Buchungssätze"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__migrate_all_companies
+msgid "Migrate account moves of all companies"
+msgstr "Migriere Buchungssätze für alle Unternehmen"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Migration of old Accounting Entries"
+msgstr "Migration der alten Buchungssätze"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.actions.act_window,name:ecoservice_financeinterface_datev.action_ecofi_move_migration
+msgid "Migraton of Account Moves"
+msgstr "Migration der Buchungssätze"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.actions.act_window,name:ecoservice_financeinterface_datev.action_ecofi_move_migration_result
+msgid "Migraton of Account Moves Result"
+msgstr "Resultat der Migration der Buchungssätze"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_form
+msgid ""
+"Note: Only account moves for companies that use either SKR03 or SKR04 will "
+"be migrated!"
+msgstr ""
+"Hinweis: Nur Buchungssätze für Unternehmen, die entweder SKR03 oder SKR04 "
+"benutzen, werden migriert!"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__account_code_digits
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_config_settings__account_code_digits
+msgid "Number of digits in an account code"
+msgstr "Stellenzahl für die Kontonummer"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid "OK"
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Obtained from accountant"
+msgstr "Erhalten vom Steuerberater"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/ecofi/ecofi_export_columns.py:0
+#, python-format
+msgid "Please ensure that your company has a valid account chart set."
+msgstr ""
+"Bitte stellen Sie sicher, dass Ihr Unternehmen einen validen Kontenrahmen "
+"gesetzt hat."
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/ecofi/ecofi_export_columns.py:0
+#, python-format
+msgid "Please ensure that your company has a valid currency set."
+msgstr ""
+"Bitte stellen Sie sicher, dass Ihr Unternehmen eine valide Währung gesetzt "
+"hat."
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid ""
+"Please note: After setting the counter accounts manually you do NOT need to "
+"start the migration again."
+msgstr ""
+"Hinweis: Nachdem Sie die Gegenkonten manuell nachgetragen haben, müssen Sie "
+"die Migration NICHT erneut starten."
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/ecofi/ecofi_export_columns.py:0
+#, python-format
+msgid "Please set a client and consultant number in the DATEV settings."
+msgstr ""
+"Bitte setzen Sie eine Mandanten- & Beraternummer in den DATEV Einstellungen."
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecoservice_finance_interface_datev_configuration
+msgid "Preferred export method"
+msgstr "Bevorzugte Exportmethode"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields.selection,name:ecoservice_financeinterface_datev.selection__account_move_line__datev_posting_key__sd
+msgid "Steuer Direkt"
+msgstr ""
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_ecofi_export_columns
+msgid "Structure and meta data for the export csv file"
+msgstr "Struktur und Metadaten für die exportierte CSV-Datei"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_account_tax
+msgid "Tax"
+msgstr "Steuer"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_account_account__datev_tax_required
+msgid "Tax posting required?"
+msgstr "Steuerbuchung erforderlich?"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__taxes_are_configured
+msgid "Taxes Are Configured"
+msgstr "Steuern sind konfiguriert"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move_line.py:0
+#, python-format
+msgid "The account requires a tax but no tax is set!"
+msgstr "Das Konto benötigt eine Steuer, es ist keine gesetzt!"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move_line.py:0
+#, python-format
+msgid ""
+"The account {account} is an automatic account but the tax ({tax}) differs "
+"from the configured ({configured_taxes})!"
+msgstr ""
+"Das Konto {account} ist ein Automatikkonto, aber die Steuer ({tax}) "
+"unterscheidet sich von der Konfigurierten ({configured_taxes})!"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move_line.py:0
+#, python-format
+msgid ""
+"The account {account} requires a tax to be set in the line but no tax is "
+"set!"
+msgstr ""
+"Das Konto {account} erfordert eine Steuer in der Zeile, aber es wurde keine "
+"gesetzt!"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move_line.py:0
+#, python-format
+msgid "The booking key for the tax \"{tax}\" is not configured!"
+msgstr "Der Buchungsschlüssel für die Steuer \"{tax}\" ist nicht konfiguriert!"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move.py:0
+#, python-format
+msgid ""
+"The difference between account and counter account debit/credit sum for move"
+" {move_name} ({move_id}) is not zero!"
+msgstr ""
+"Der Differenz der Konto und Gegenkonto Soll-/Haben-Summe für Buchungssatz "
+"{move_name} ({move_id}) ist nicht Null!"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid "The migration has been completed successfully for these companies:"
+msgstr "Die Migration wurde für diese Unternehmen erfolgreich abgeschlossen:"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_account.py:0
+#, python-format
+msgid ""
+"There must be at least 1 DATEV tax account if you want to mark this account "
+"as automatic account!"
+msgstr ""
+"Es muss min. 1 DATEV-Steuerkonto eingetragen werden wenn dieses Konto als "
+"Automatikkonto markiert werden soll!"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_move_migration__to_check_counter
+msgid "To Check Counter"
+msgstr "Zu Prüfen-Zählern"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_form
+msgid ""
+"To ensure that all moves can be migrated correctly please make sure that you"
+" have set the correct tax key in the taxes and also the correct taxes and "
+"automatic configurations in the accounts where applicable."
+msgstr ""
+"Um sicherstellen zu können, dass alle Buchungssätze korrekt migriert werden "
+"können, stellen Sie bitte sicher, dass die korrekten Steuerschlüssel in den "
+"Steuern und die korrekten Steuern und Automatikkonten konfiguriert sind."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_validation__validate_account_counter_account
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__validate_account_counter_account
+msgid "Validate Account Counter Account"
+msgstr "Überprüfe Konto/Gegenkonto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_validation__validate_automatic_account_has_tax
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__validate_automatic_account_has_tax
+msgid "Validate Automatic Account Has Tax"
+msgstr "Überprüfe ob Steuer gesetzt"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_validation__validate_automatic_account_line_has_correct_tax
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__validate_automatic_account_line_has_correct_tax
+msgid "Validate Automatic Account Line Has Correct Tax"
+msgstr "Überprüfe auf korrekte Steuer in Zeilen"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_validation__validate_required_tax_is_set
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__validate_required_tax_is_set
+msgid "Validate Required Tax Is Set"
+msgstr "Überprüfe auf gesetzte Steuern im Konto"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_ecofi_validation__validate_tax_booking_key_is_set
+#: model:ir.model.fields,field_description:ecoservice_financeinterface_datev.field_res_company__validate_tax_booking_key_is_set
+msgid "Validate Tax Booking Key Is Set"
+msgstr "Überpüfe ob Buchungsschlüssel gesetzt"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_validation__validate_automatic_account_has_tax
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__validate_automatic_account_has_tax
+msgid ""
+"Validates that an account that requires a tax has configured at least one."
+msgstr ""
+"Überprüft, dass ein Konto, das Steuern benötigt, auch min. 1 Steuer gesetzt "
+"hat."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_validation__validate_account_counter_account
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__validate_account_counter_account
+msgid "Validates that the account and counter account moves are balanced."
+msgstr ""
+"Überprüft, dass ob sich die Konto- und Gegenkonto-Buchungen ausgleichen."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_validation__validate_tax_booking_key_is_set
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__validate_tax_booking_key_is_set
+msgid "Validates that the tax in a line has set any booking key/datev code."
+msgstr ""
+"Überprüft, dass die Steuer einer Zeile einen Buchungsschlüssel gesetzt hat."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_validation__validate_automatic_account_line_has_correct_tax
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__validate_automatic_account_line_has_correct_tax
+msgid ""
+"Validates that the tax in a line is one of those that are configured in the "
+"related account."
+msgstr "Überprüft, dass die Steuer einer Zeile mit dem Konto übereinstimmt."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_ecofi_validation__validate_required_tax_is_set
+#: model:ir.model.fields,help:ecoservice_financeinterface_datev.field_res_company__validate_required_tax_is_set
+msgid ""
+"Validates that the tax in a line is set if the related account requires it."
+msgstr ""
+"Überprüft, dass die Steuer in einer Zeile gesetzt ist, wenn das Konto dies "
+"benötigt."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_ecofi_move_migration
+msgid "Wizard to set the taxes and counter accounts for the DATEV export"
+msgstr ""
+"Wizard, mit dem die Steuern und Gegenkonten für alte Buchungssätze gesetzt "
+"werden"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid ""
+"You can easily filter for account moves by selecting the according filter in"
+" the account moves list view."
+msgstr ""
+"Sie können bequem diese Buchungssätze auswählen, wenn Sie den entsprechenden"
+" Filter in der Listenasicht der Buchungssätze auswählen."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model,name:ecoservice_financeinterface_datev.model_ecofi
+msgid "ecoservice Finance Interface"
+msgstr "ecoservice Finanzinterface"
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields.selection,name:ecoservice_financeinterface_datev.selection__res_company__datev_export_method__gross
+msgid "gross"
+msgstr "Brutto"
+
+#. module: ecoservice_financeinterface_datev
+#: model_terms:ir.ui.view,arch_db:ecoservice_financeinterface_datev.view_ecofi_move_migration_result_form
+msgid ""
+"moves the counter account could not be set automatically.\n"
+"            Please set it manually where needed."
+msgstr ""
+"Buchungen konnte das Gegenkonto nicht automatisch gesetzt werden.\n"
+"            Bitte setzen sie es manuell, wo es benötigt wird."
+
+#. module: ecoservice_financeinterface_datev
+#: model:ir.model.fields.selection,name:ecoservice_financeinterface_datev.selection__res_company__datev_export_method__net
+msgid "net"
+msgstr "Netto"
+
+#. module: ecoservice_financeinterface_datev
+#: code:addons/ecoservice_financeinterface_datev/models/account/account_move.py:0
+#, python-format
+msgid ""
+"{count} lines of move {move_name} ({move_id}) do not have both accounts, an "
+"account and a counter account, defined!"
+msgstr ""
+"{count} Zeilen in Buchungssatz {move_name} ({move_id}) haben nicht beide "
+"Konten, Konto und Gegenkonto, gesetzt!"

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<!-- heading  -->
+<section id="sh_module_heading" style="padding-top: 50px;">
+	<div class="container">
+		<div class="sh_center text-center">
+			<h4 style="font-size: 30px;font-weight: 600;color: #212121;margin-bottom: 20px;">Import Product Variant from CSV/Excel file - Advance</h4>
+			
+			<p style="color: #777;font-size: 18px;margin: 0;letter-spacing: 1px;">Do you want to import products with product variants From CSV/Excel? This module helps to import products with product variants from the CSV or Excel files. This module provides a facility to import custom fields also. It will auto-create or update product and product variant with image, price, quantity, stock, etc from CSV/Excel. You can identify the same name product/product variant by "Unique Identification" field.</p>
+		</div>
+	</div>
+</section>  
+
+
+
+
+
+<!-- feature -->
+<section id="sh_feature" style="padding-top: 50px;">
+	<div class="container">
+	    <div class="sh_center text-center">
+	   		<h4 style="font-size: 30px;font-weight: 600;color: #212121;margin-bottom: 20px;">Hot Features</h4>
+	    	<hr style="width: 100px;border-width: 2px;border-color: #1976d2;" />
+	    </div>
+
+	    <div class="row">
+		   
+		   
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Import custom fields.
+</span>
+		          </div> 		       
+		    </div>
+		  
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Create product variants.</span>
+		          </div> 		       
+		    </div>
+
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Update product variants.
+</span>
+		          </div> 		       
+		    </div>
+
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Import variant extra price.
+</span>
+		          </div> 		       
+		    </div>
+
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Update variant attributes. 
+</span>
+		          </div> 		       
+		    </div>
+		    <div class="col-md-4">		       
+		          <div class="sh_icon" style="border: 1px solid #aaa;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+		             <span class="fa fa-circle" style="background-color: #1976d2;width: 35px;height: 35px;text-align: center;line-height: 35px;border-radius: 50%;color: #fff;font-size: 16px;"></span>
+		             <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;">Update variant attributes values. </span>
+		          </div> 		       
+		    </div>
+		
+			
+		    
+		    		    	
+	    </div>
+
+
+
+	</div>
+</section>
+<!-- feature -->
+
+
+
+
+<section id="sh_tab" style="padding-top: 50px;">
+	<div class="container">
+		<ul class="nav nav-tabs justify-content-center" role="tablist" style="justify-content: center;padding-bottom: 10px;border-bottom: 2px solid #aaa;">
+		    <li class="nav-item" style="background-color: rgba(25, 118, 210, 0.6);color: #fff;border-radius: 0;font-weight: 600;font-size: 14px;margin: 0 5px;">
+		        <a class="nav-link active" data-toggle="tab" href="#Feature" style="color: #333;border: 2px solid #1c76d2;">Features</a>
+		    </li>
+		    <li class="nav-item" style="background-color: rgba(25, 118, 210, 0.6);color: #fff;border-radius: 0;font-weight: 600;font-size: 14px;margin: 0 5px;">
+		        <a class="nav-link" data-toggle="tab" href="#Configurations" style="color: #333;border: 2px solid #1c76d2;">Screenshots</a>
+		    </li>
+		    <li class="nav-item" style="background-color: rgba(25, 118, 210, 0.6);color: #fff;border-radius: 0;font-weight: 600;font-size: 14px;margin: 0 5px;">
+		        <a class="nav-link" data-toggle="tab" href="#Release" style="color: #333;border: 2px solid #1c76d2;">Release</a>
+		    </li>
+		    <li class="nav-item" style="background-color: rgba(25, 118, 210, 0.6);color: #fff;border-radius: 0;font-weight: 600;font-size: 14px;margin: 0 5px;">
+		        <a class="nav-link" data-toggle="tab" href="#FAQ" style="color: #333;border: 2px solid #1c76d2;">Video</a>
+		    </li>
+		    <li class="nav-item" style="background-color: rgba(25, 118, 210, 0.6);color: #fff;border-radius: 0;font-weight: 600;font-size: 14px;margin: 0 5px;">
+		        <a class="nav-link" data-toggle="tab" href="#Support" style="color: #333;border: 2px solid #1c76d2;">Support</a>
+		    </li>
+		</ul>
+
+		<div class="tab-content" style="margin-top: 30px;">
+
+		    <!-- tab 1 -->
+		    <div id="Feature" class="tab-pane active">		        
+				<ul style="padding: 0;list-style: none;">
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> You can create or update product variants by barcode, name & internal reference.
+</li>				   
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> You can identify the same name product/product variant by "Unique Identification" fields.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Easy to import Product Variant (image, price, quantity, stock, etc) from CSV or Excel.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Easy to import custom fields with product variants.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> You can import product images by image URL or local image path.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Easy to import products with stock on-hand quantity.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Easy to create and update product variants.
+
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Download Sample CSV or Excel file from import wizard directly.
+</li>				   
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Very useful for mass records.                    
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Very well formated Excel and CSV files.
+</li>
+				    <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> Easy to install and use it, No more configuration required.
+</li>				    
+ <li style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;font-size: 16px;color: #212121;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> This module saves your important time.
+
+</li>				
+				</ul>		        
+		    </div>
+		    <!-- tab 1 -->
+
+
+
+
+
+
+
+
+		    <!-- tab 2 -->
+		    <div id="Configurations" class="container tab-pane fade">
+
+               <section id="sh_configuration">
+                 	<div class="container">
+                 	    <div class="text-center">
+
+                 	        <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">First, you need to tick the "Import Product Variants" group to import product Variant.
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="1.png" style="width: 100%;" />
+						   </div> <br/>
+
+
+                 	          <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">"Import Product Variants" menu.</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="2.png" style="width: 100%;" />
+						   </div> <br/>
+
+						    <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">After that one wizard open here you can import products with product variants From CSV/Excel.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="3.png" style="width: 100%;" />
+						   </div> <br/>
+
+
+						    <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">
+                             You can create or update product variants by barcode, name & internal reference.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="wizard.png" style="width: 100%;" />
+						   </div> <br/>
+
+
+						    <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Success message looks like below it shows successfully imported records.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="4.png" style="width: 100%;" />
+						   </div> <br/>
+
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;"> The following product template fields are imported.
+
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="5.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">We see the imported product "Collar T-Shirt" fields.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="6.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Product variants.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="7.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">The "Sales" tab in the product "Collar T-Shirt".
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="8.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">You can configure the product from here.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="9.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Product variant imported succesfully.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="10.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Using the "Variant" feature you can see product variant details.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="11.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Product variant details with qty on hand & UOM.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="12.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">You can see the product variant field which is imported.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="13.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">The following custom fields are imported (Text, Integer, Float, Character, Boolean, Selection, Many2one, Many2many custom fields are supported).
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="14.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;"> Your CSV/Excel file format must match like below.<br>
+						   	In the "Can be sold & purchased?" take true by default if not provided.<br>
+In the "Product type" take consumable by default if not provided.<br>
+Take the same name as ERP in the "UOM".<br>
+
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="sheet_1.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Taxes are separated by comma(,).<br>
+Enter the same text of selection field the same as ERP in the"Invoice policy" otherwise by default it takes ordered quantities.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="sheet_2.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">Variant attributes like color, size, or blank. <br>
+Enter the complete URL or local path in the "Image path/URL".
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="sheet_3.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">
+						   	Enter the complete URL or local path in the "Image path/URL".<br>
+						   	You can import any number of custom fields.<br>
+All custom fields must exist on the product.product model.
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="sheet_4.png" style="width: 100%;" />
+						   </div> <br/>
+
+						   <p style="color: #777;font-size: 18px;max-width: 75%;margin: auto;margin-bottom: 20px;letter-spacing: 1px;">You can import any number of custom fields.
+All custom fields must exist on the product.product model.<br>
+
+</p>
+                 	        <div class="col-md-12">
+						   	   <img class="img-responsive" src="sheet_5.png" style="width: 100%;" />
+						   </div> <br/>
+                 	    </div>
+                 	</div>
+                 </section>
+
+             
+		      
+				
+		      </div>
+		    <!-- tab 2 -->
+
+
+
+
+
+
+
+
+
+		    <!-- tab 3 -->
+		    <div id="Release" class="tab-pane fade">
+		        
+		        <div class="sh_content" style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;">
+
+		        	  <h4 style="font-size: 16px;margin: 0;color: #212121;text-decoration: none;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> <span>Version 13.0.5</span> | <span style="color: #1976d2;">Released on : 27 July 2020</span></h4>
+			        <ul style="list-style-type: disc;font-size: 16px;padding-left: 20px;color: #555;margin: 0;padding-top: 20px;">
+			           <li>Unique identification field added.<br>
+			           	create/update product variants by barcode, name & internal reference.
+</li>			         
+			        </ul>	<br>
+			        <h4 style="font-size: 16px;margin: 0;color: #212121;text-decoration: none;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> <span>Version 13.0.4</span> | <span style="color: #1976d2;">Released on : 16 March 2020</span></h4>
+			        <ul style="list-style-type: disc;font-size: 16px;padding-left: 20px;color: #555;margin: 0;padding-top: 20px;">
+			           <li>Small bug fixed.
+</li>			         
+			        </ul>	<br>
+
+
+
+			        <h4 style="font-size: 16px;margin: 0;color: #212121;text-decoration: none;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> <span>Version 13.0.3</span> | <span style="color: #1976d2;">Released on : 26 February 2020</span></h4>
+			        <ul style="list-style-type: disc;font-size: 16px;padding-left: 20px;color: #555;margin: 0;padding-top: 20px;">
+			           <li>Import product variant with custom fields. <br>
+You can create or update product variants.</li>			         
+			        </ul>	
+<br>
+
+			        <h4 style="font-size: 16px;margin: 0;color: #212121;text-decoration: none;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> <span>Version 13.0.2</span> | <span style="color: #1976d2;">Released on : 26 November 2019</span></h4>
+			        <ul style="list-style-type: disc;font-size: 16px;padding-left: 20px;color: #555;margin: 0;padding-top: 20px;">
+			           <li>Import product variant with the extra price (variant price).
+</li>			         
+			        </ul>	
+<br>
+
+
+			        <h4 style="font-size: 16px;margin: 0;color: #212121;text-decoration: none;font-weight: 600;letter-spacing: 1px;display: block;"><span class="fa fa-hand-o-right" style="color: #1976d2;font-weight: 600;font-size: 18px;padding-right: 10px;"></span> <span>Version 13.0.1</span> | <span style="color: #1976d2;">Released on : 20 October 2019</span></h4>
+			        <ul style="list-style-type: disc;font-size: 16px;padding-left: 20px;color: #555;margin: 0;padding-top: 20px;">
+			           <li>Initial release.</li>			         
+			        </ul>	
+		        </div>	        
+		    </div>
+		    <!-- tab 3 -->
+
+		    <!-- tab 4 -->
+		    <div id="FAQ" class="tab-pane fade">
+		        <div class="demo">
+				    <div class="panel-group" id="accordion" role="tablist">
+				        <div class="panel panel-default" style="padding: 20px;margin-bottom: 20px;">
+				          
+
+				          
+				          <h2 align="center">
+            <a style="background-color: #1976d2; color: white; border-color: #1976d2; position: relative; overflow: hidden;padding: 1%;text-decoration: none;border-radius: 0px;display: inline-block;" class="btn btn-success btn-lg" href="https://youtu.be/7_7rL6Bmuxw" target="_blank"><span class="o_ripple d-block position-absolute rounded-circle" style="height: 398px; width: 398px; top: -164px; left: -147.891px;"></span>How it works? Click here to watch video</a>
+         </h2>
+				        </div>
+				    </div>
+				</div>
+		    </div>
+		    <!-- tab 4 -->
+
+		    <!-- tab 5 -->
+		    <div id="Support" class="tab-pane fade">
+		        <div class="row">
+		           <div class="col-md">
+		              <div class="sh_content" style="border: 2px solid #aaa;padding: 20px;margin-bottom: 20px;">
+		                  <h4><a href="mailto:support@softhealer.com" style="text-decoration: none;color: #212121;font-size: 18px;font-weight: 600;letter-spacing: 1px;"><span class="fa fa-envelope" style="color: #1976d2;padding-right: 10px;font-size: 20px;"></span> Please mail us for support on <b style="color: #1976D2">support@softhealer.com</b></a></h4>
+						
+		              </div>
+		           </div>
+
+		         
+		        </div>	        
+		    </div>
+		    <!-- tab 5 -->
+
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+<section id="sh_like_module" style="margin: 50px 0;">
+	<div class="container">
+	    <div class="sh_center text-center">
+	   		<h4 style="font-size: 30px;font-weight: 600;color: #212121;margin-bottom: 20px;">You May Also Like</h4>
+	    	<hr style="width: 100px;border-width: 2px;border-color: #1976d2;" />
+	    </div>
+		<div id="myCarousel3" class="s_carousel s_carousel_default carousel slide" data-interval="10000" style="margin-top: 25px;">
+        	<!-- Indicators -->
+	        <ol class="carousel-indicators">
+	            <li data-target="#myCarousel3" data-slide-to="0" class="active"/>
+	            <li data-target="#myCarousel3" data-slide-to="1"/>
+	            <li data-target="#myCarousel3" data-slide-to="2"/>
+	        </ol>
+	        <!-- Content -->
+	        <div class="carousel-inner">
+	            <!-- #01 -->
+	            <div class="carousel-item active oe_custom_bg oe_img_bg" data-name="Slide">
+	                <div class="row">
+	                    <div class="col-md-4">
+
+
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                               	<a href="https://apps.odoo.com/apps/modules/13.0/sh_import_supplier_info/">    
+	                               	    <img src="image.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                                </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import Vendor Details in Product from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                               	<a href="https://www.odoo.com/apps/modules/13.0/sh_import_emp_img/">	
+	                               		<img src="image2.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                                </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import Employee Image from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                                <a href="https://www.odoo.com/apps/modules/13.0/sh_import_project_task/">
+	                            	   <img src="image3.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                                </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import Task from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                </div>	                
+	            </div>
+	            <!-- #02 -->
+	            <div class="carousel-item oe_custom_bg oe_img_bg" data-name="Slide">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                               <a href="https://www.odoo.com/apps/modules/13.0/sh_import_bsl/">    
+	                               		<img src="image4.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                               </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import bank statement lines from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                               	<a href="https://www.odoo.com/apps/modules/13.0/sh_import_partner_img/">    
+	                               	    <img src="image5.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                                </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import Customer Image from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <div class="sh_content" style="text-align: center;border: 1px solid #aaa;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);">
+	                           <div class="sh_img" style="padding: 10px;border-bottom: 1px solid #aaa;">
+	                                <a href="https://www.odoo.com/apps/modules/13.0/sh_import_bom/">    	    
+	                               	    <img src="image6.png" style="width: 100%;height: 200px;object-fit: contain;"></img>
+	                                </a>
+	                           </div>
+	                           <h4 style="font-size: 20px;font-weight: 600;color: #212121;padding: 10px;margin: 0;">Import Bill of Materials from CSV/Excel file</h4>
+	                        </div>
+	                    </div>
+
+	                </div>
+	            </div>
+	            <!-- #03 -->	            
+	        </div>
+	        <!-- Controls -->
+	        <div class="carousel-control-prev" data-target="#myCarousel3" data-slide="prev" role="img" aria-label="Previous" title="Previous">
+	            <span class="carousel-control-prev-icon"/>
+	            <span class="sr-only">Previous</span>
+	        </div>
+	        <div class="carousel-control-next" data-target="#myCarousel3" data-slide="next" role="img" aria-label="Next" title="Next">
+	            <span class="carousel-control-next-icon"/>
+	            <span class="sr-only">Next</span>
+	        </div>
+	    </div>
+    </div>
+</section>
+
+
+
+
+</body>
+</html>

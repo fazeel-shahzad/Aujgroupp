@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>    
+        <record id="po_line_view_inherit_for_new_fields" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+               
+                <field name="origin" position="after">
+                    <field name="so_id" readonly="1" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

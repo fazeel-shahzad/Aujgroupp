@@ -15,7 +15,6 @@ class AccountMove(models.Model):
     def _recompute_global_discount_lines(self):
         ''' Compute the dynamic global discount lines of the journal entry.'''
         self.ensure_one()
-        self = self.with_company(self.company_id)
         in_draft_mode = self != self._origin
         today = fields.Date.context_today(self)
 
@@ -49,7 +48,7 @@ class AccountMove(models.Model):
                 discount_balance = sign * (total * (self.global_order_discount or 0.0) / 100)
 
             if self.currency_id == self.company_id.currency_id:
-                discount_amount_currency = discount_balance
+                discount_amount_currency = 0.0
             else:
                 discount_amount_currency = discount_balance
                 discount_balance = self.currency_id._convert(
@@ -75,7 +74,7 @@ class AccountMove(models.Model):
                 else:
                     create_method = in_draft_mode and self.env['account.move.line'].new or self.env['account.move.line'].create
                     candidate = create_method({
-                        'name': 'Global Discount',
+                        'name': 'Income Tax Payable',
                         'debit': balance > 0.0 and balance or 0.0,
                         'credit': balance < 0.0 and -balance or 0.0,
                         'quantity': 1.0,
@@ -90,7 +89,8 @@ class AccountMove(models.Model):
                     })
                 new_global_discount_lines += candidate
                 if in_draft_mode:
-                    candidate.update(candidate._get_fields_onchange_balance())
+                    candidate._onchange_amount_currency()
+                    candidate._onchange_balance()
             return new_global_discount_lines
 
         existing_global_lines = self.line_ids.filtered(lambda line: line.is_global_line)
@@ -99,18 +99,17 @@ class AccountMove(models.Model):
         if not others_lines:
             self.line_ids -= existing_global_lines
             return
-
         if existing_global_lines:
             account = existing_global_lines[0].account_id
         else:
             IrConfigPrmtr = self.env['ir.config_parameter'].sudo()
-            if self.move_type in ['out_invoice', 'out_refund', 'out_receipt']:
+            if self.type in ['out_invoice', 'out_refund', 'out_receipt']:
                 account = self.env.company.discount_account_invoice
             else:
                 account = self.env.company.discount_account_bill
             if not account:
                 raise UserError(
-                    _("Global Discount!\nPlease first set account for global discount in account setting."))
+                    _("Income Tax Payable!\nPlease first set account for global discount in account setting."))
 
         to_compute = _compute_payment_terms(self)
 

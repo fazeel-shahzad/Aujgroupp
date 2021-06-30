@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- Document Header -->
+  <template id="external_layout_header_inherit_magu"
+            inherit_id="ecoservice_german_documents_base.external_layout_header">
+    <div class="row header text-right" position="replace">
+      <div class="row header text-right">
+        <div class="col-6 offset-6">
+          <span t-if="not company.logo" t-field="company.name"/>
+          <img t-if="company.logo"
+              t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+              class="pull-right"
+              style="max-height: 160px; max-width: 300px;"/>
+        </div>
+      </div>
+    </div>
+  </template>
+
+</odoo>

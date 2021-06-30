@@ -1,0 +1,81 @@
+<odoo>
+
+    <report
+                id="report_stock_production"
+                model="stock.picking"
+                string="Inter Production Transfer Note"
+                report_type="qweb-pdf"
+                name="jolta_manufacturing.report_production_document"
+                file="jolta_manufacturing.report_production_document"/>
+
+    <template id="report_production_document">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-if="user.company_id.id == 44">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <t t-set="partner" t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False"/>
+                        <t t-if="partner" name="partner_header">
+                            <t t-set="address">
+                                <div t-esc="partner"
+                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                            </t>
+                        </t>
+                        <div class="page">
+                            <div class="text-center"><h2>Inter Production Transfer Note</h2></div><br/>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Lot #:</strong>
+    <!--                                <span class="m-0" t-field="o.section_id.name"/>-->
+                                </div>
+                                <div class="col-5">
+                                    <span>
+                                        <strong>DATE:</strong>
+                                        <span class="m-0" t-field="o.create_date"/>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <br/><br/><table class="table table-condensed" style="border:1px solid black;" name="stock_move_table">
+                                <thead>
+                                    <tr style="border:1px solid black;">
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>SR#</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Frame/Chases #</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Motor#</strong></th>
+                                        <th name="th_sm_product" class="text-center" style="border:1px solid black;"><strong>Date</strong></th>
+                                        <th name="th_sm_quantity" class="text-center" style="border:1px solid black;"><strong>Remarks</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                        <tr t-foreach="o.move_ids_without_package" t-as="line" style="border:1px solid black;">
+                                            <t t-set="i" t-value="i+1"/>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                            <td id="count" class="text-center" style="border:1px solid black;">
+                                                <span  t-esc="i"/>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                        </table>
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+            </t>
+    </template>
+
+</odoo>

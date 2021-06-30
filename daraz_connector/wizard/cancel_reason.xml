@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_cancel_reason_process_form" model="ir.ui.view">
+            <field name="name">Cancel/Reason</field>
+            <field name="model">cancel.reason</field>
+            <field name="arch" type="xml">
+                <form string="Cancel/Reason" >
+                    <group>
+                        <field name="cancel_reason" />
+                    </group>
+                    <footer>                        
+                        <button name="process" attrs="{'invisible':[('cancel_reason','=',False)]}" string="Process" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Cancel Reason"
+            res_model="cancel.reason"
+            view_mode="form"
+            target="new"
+            id="action_wizard_prepare_cancel_reason"
+            view_id="view_cancel_reason_process_form" />
+
+    </data>
+</odoo>

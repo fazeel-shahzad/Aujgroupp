@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+
+  <!-- References about the generated document -->
+  <template id="letterhead_reference_document">
+    <div id="letterhead_reference_document" class="row relative">
+      <div class="col-7">
+        <div class="doc-type">
+          <span t-esc="doc_name"/>
+        </div>
+        <br/>
+        <span t-esc="public_reference"/>
+        <div style="font-size:8px">Please add to any letters</div>
+      </div>
+      <div class="col-5 text-right bottom-right" t-if="o.report_compute_date">
+        <div class="span font-alt">Date</div>
+        <br/>
+        <span class="no-wrap" t-field="o.report_compute_date"/>
+      </div>
+    </div>
+  </template>
+
+  <!-- Customer No. & VAT references -->
+  <template id="letterhead_reference_customer_vat">
+    <t t-set="partner_ref" t-value="o.partner_id.ref or o.partner_id.parent_id.ref"/>
+    <t t-set="partner_vat" t-value="o.partner_id.vat or o.partner_id.parent_id.vat"/>
+    <div id="letterhead_reference_customer_vat"
+         class="row"
+         style="border-top: 0.1em solid #cacaca;"
+         t-if="partner_ref or partner_vat">
+      <div class="col-6 ptb-5" t-if="partner_ref">
+        <div class="span font-alt no-wrap">Customer No.</div>
+        <br/>
+        <span class="no-wrap" t-esc="partner_ref"/>
+      </div>
+      <div t-attf-class="col-6 ptb-5 #{ partner_ref and 'text-right' }" t-if="partner_vat">
+        <div class="span font-alt no-wrap">Customer VAT-ID</div>
+        <br/>
+        <span class="no-wrap" t-esc="partner_vat"/>
+      </div>
+    </div>
+  </template>
+
+  <!-- References about the case for the customer -->
+  <template id="letterhead_reference_case">
+    <div id="letterhead_reference_case"
+         class="row"
+         style="border-top: 0.1em solid #cacaca;"
+         t-if="client_order_ref">
+      <div class="col-3 ptb-5">
+        <div class="span font-alt no-wrap">Reference:</div>
+      </div>
+      <div class="col-9 ptb-5">
+        <span t-esc="client_order_ref"/>
+      </div>
+    </div>
+  </template>
+
+  <!-- References about a contact person for the customer -->
+  <template id="letterhead_reference_contact">
+    <t t-if="'user_id' in o"
+       t-set="your_contact"
+       t-value="o.with_context({'lang': o.partner_id.lang}).user_id.partner_id"/>
+    <t t-else=""
+       t-set="your_contact"
+       t-value="user.with_context({'lang': o.partner_id.lang}).partner_id"/>
+
+    <!--
+      <div> with table classes != <table>.
+      Just keep the table, it's safer with WK and limited space boxes.
+    -->
+    <table id="letterhead_reference_contact" class="full ptb-5">
+
+      <!-- Your Contact Line -->
+      <tr>
+<!--        <td class="font-alt">Your contact:</td>-->
+        <td colspan="2">
+          <!--          <t t-if="o.partner_id.has_lastname()">-->
+          <!--            <span t-field="your_contact.firstname"/>-->
+          <!--            <span t-field="your_contact.lastname"/>-->
+          <!--          </t>-->
+          <!--          <span t-if="not o.partner_id.has_lastname()" t-field="your_contact.name"/>-->
+          <span>Kontaktdaten:<![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]></span><span t-field="o.partner_id"/><![CDATA[&nbsp;]]>-<![CDATA[&nbsp;]]><span t-field="o.partner_id.phone"/>
+
+
+        </td>
+      </tr>
+
+      <!-- Telephone Line -->
+      <tr t-if="your_contact.phone">
+        <td class="font-alt">Telephone:</td>
+        <td><span t-field="your_contact.phone"/></td>
+      </tr>
+
+      <!-- E-Mail Line -->
+      <tr t-if="your_contact.email">
+        <td class="font-alt">E-Mail:</td>
+        <td><span t-field="your_contact.email"/></td>
+      </tr>
+    </table>
+
+  </template>
+
+  <!-- Details about our company -->
+  <template id="letterhead_reference_company">
+    <div id="letterhead_reference_contact_vat"
+         class="row"
+         style="border-top: 0.1em solid #cacaca">
+      <div class="col-12 ptb-5">
+        <div class="span font-alt no-wrap">
+          <span t-field="o.company_id.name"/>
+        </div>
+        <br/>
+        <span class="no-wrap" t-field="o.company_id.vat"/>
+      </div>
+    </div>
+  </template>
+</odoo>

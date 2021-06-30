@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+# Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE files in the root directory of this module for full details.
+-->
+
+<odoo noupdate="1">
+
+  <record id="ir_cron_auto_datev_export_mail" model="ir.cron">
+    <field name="name">Auto send mail with Finance Report</field>
+    <field eval="True" name="active"/>
+    <field name="user_id" ref="base.user_root"/>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field eval="False" name="doall"/>
+    <field name="nextcall" eval="(datetime.utcnow() + timedelta(days=1)).strftime('%Y-%m-%d 01:00:00')"/>
+    <field eval="ref('ecoservice_financeinterface_datev_auto_export.model_auto_datev_export_config')" name="model_id"/>
+    <field name="state">code</field>
+    <field name="code">model.auto_mail_send()</field>
+  </record>
+
+</odoo>

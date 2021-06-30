@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_uom_picking" inherit_id="stock.report_picking">
+    <xpath expr="//tbody/t/t/tr/td/span[@t-field='ml.product_uom_id']" position="after">
+      <t t-foreach="ml.ecoservice_uom_ids" t-as="uom">
+        <span t-field="uom.ecoservice_uom_factor"/>
+        <span t-field="uom.ecoservice_uom_name"/>
+        <br/>
+      </t>
+    </xpath>
+    <xpath expr="//tbody/t/t/tr/td/span[@t-field='ml.product_uom_qty']" position="attributes">
+      <attribute name="t-if">not ml.ecoservice_uom_ids</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/t/tr/td/span[@t-field='ml.qty_done']" position="attributes">
+      <attribute name="t-if">not ml.ecoservice_uom_ids</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/t/tr/td/span[@t-field='ml.product_uom_id']" position="attributes">
+      <attribute name="t-if">not ml.ecoservice_uom_ids</attribute>
+    </xpath>
+  </template>
+</odoo>

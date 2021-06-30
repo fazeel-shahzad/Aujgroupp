@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="sale_order_portal_content" inherit_id="sale.sale_order_portal_content" name="Sales Order Portal Content">
+        <xpath expr="//table[@id='sales_order_table']//thead//tr/th[1]" position="after">
+            <th class="text-left" name="th_image" >Produktbild</th>
+        </xpath>
+        <xpath expr="//table[@id='sales_order_table']//tbody//tr/t/td[1]" position="after">
+            <!--        <td style="max-height: 128px;width: 300px;" class="text-right">-->
+            <td style="max-height: 128px;width: 200px;" class="text-left">
+            <style>
+                .mh128{
+                    max-height:128px;
+                }
+            </style>
+            <!-- <span t-esc="line.product_id.image_1920"/> -->
+             <span t-field="line.product_id.image_1920" t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'img-fluid mh128','style':'max-width: 256px !important;max-height: 90px;'}" style="max-width: 256px !important;max-height: 128px;" />
+<!--             <span t-field="line.product_id.image_1920" t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'img-fluid mh128','style':'max-width: 256px !important;max-height: 128px;'}" style="max-width: 256px !important;max-height: 128px;" />-->
+            <!-- <img t-att-src="line.product_id.image_1920" alt="line.product_id.image_1920"/> -->
+        </td>
+        </xpath>
+   
+    </template>
+
+  
+</odoo>

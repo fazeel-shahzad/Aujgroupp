@@ -1,0 +1,818 @@
+<odoo>
+    <data noupdate="0">
+
+        <!--<record id="jolta_chart_template_standard" model="account.chart.template">-->
+        <!--<field name="name">jolta Chart Of Account,Service</field>-->
+        <!--<field name="code_digits">6</field>-->
+        <!--<field name="bank_account_code_prefix">999001</field>-->
+        <!--<field name="cash_account_code_prefix">999002</field>-->
+        <!--<field name="transfer_account_code_prefix">999003</field>-->
+        <!--<field name="currency_id" ref="base.PKR"/>-->
+        <!--</record>-->
+
+
+       <!--Parent-->
+        <record model="account.account" id="account_capital_and_reserves">
+            <field name="name">CAPITAL AND RESERVES</field>
+            <field name="code">01-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--<field name="create_asset">draft</field>-->
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+
+        <!--child -->
+        <record model="account.account" id="acount_issued_subscribed_paid">
+            <field name="name">Issued, Subscribed and Paid Capital</field>
+            <field name="code">01-01-0000</field>
+            <field name="parent_id" ref="account_capital_and_reserves"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record model="account.account" id="acount_capital_reserves">
+            <field name="name">Capital Reserves</field>
+            <field name="code">01-02-0000</field>
+            <field name="parent_id" ref="account_capital_and_reserves"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="acount_revenue_reserves">
+            <field name="name">Revenue Reserves</field>
+            <field name="code">01-03-0000</field>
+            <field name="parent_id" ref="account_capital_and_reserves"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_long_term_loans_depositss">
+            <field name="name">LONG TERM LOANS AND DEPOSITS</field>
+            <field name="code">02-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="acount_loan_director_associate">
+            <field name="name">Loans from Directors and Associates</field>
+            <field name="code">02-01-0000</field>
+            <field name="parent_id" ref="account_long_term_loans_depositss"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="acount_loan_bank_financial">
+            <field name="name">Loan from Banks/Financial Institutions</field>
+            <field name="code">02-02-0000</field>
+            <field name="parent_id" ref="account_long_term_loans_depositss"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="acount_liability_finance_lease">
+            <field name="name">Liabilities against assets subject to finance lease</field>
+            <field name="code">02-03-0000</field>
+            <field name="parent_id" ref="account_long_term_loans_depositss"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="acount_loan_other">
+            <field name="name">Loan from Others</field>
+            <field name="code">02-04-0000</field>
+            <field name="parent_id" ref="account_long_term_loans_depositss"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="acount_loan_deposits">
+            <field name="name">Deposits</field>
+            <field name="code">02-05-0000</field>
+            <field name="parent_id" ref="account_long_term_loans_depositss"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <!--Parent-->
+        <record model="account.account" id="account_deferred_liabilities">
+            <field name="name">DEFERRED LIABILITIES</field>
+            <field name="code">03-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!-- child  -->
+
+        <record model="account.account" id="account_current_liabilities">
+            <field name="name">CURRENT LIABILITIES</field>
+            <field name="code">04-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+
+        <record model="account.account" id="acount_trade_creditors">
+            <field name="name">Trade Creditors</field>
+            <field name="code">04-01-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_liability_loan_bank_financial">
+            <field name="name">Loans from Banks/Financial Institutions</field>
+            <field name="code">04-02-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_liability_loan_director_associate">
+            <field name="name">Loan from Directors/Associates</field>
+            <field name="code">04-03-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_liability_dividend_payable">
+            <field name="name">Dividend Payable</field>
+            <field name="code">04-07-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_liability_accrued_liability">
+            <field name="name">Accrued Liabilities</field>
+            <field name="code">04-08-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_liability_payable_against_credit_card">
+            <field name="name">Payables against Credit Cards</field>
+            <field name="code">04-09-0000</field>
+            <field name="parent_id" ref="account_current_liabilities"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!--Parent -->
+        <record model="account.account" id="account_fixed_assets_owned">
+            <field name="name">FIXED ASSETS-Owned</field>
+            <field name="code">05-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!-- child -->
+        <record model="account.account" id="account_fixed_asset_land">
+            <field name="name">Land</field>
+            <field name="code">05-01-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_fixed_asset_building">
+            <field name="name">Building</field>
+            <field name="code">05-02-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_fixed_asset_air_conditioner">
+            <field name="name">Air conditioning Equipment</field>
+            <field name="code">05-03-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_fixed_asset_plant_and_machinery">
+            <field name="name">Plant and Machinery</field>
+            <field name="code">05-04-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_fixed_asset_computer_accessories">
+            <field name="name">Computers and Accessories</field>
+            <field name="code">05-05-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_fixed_asset_vehicles">
+            <field name="name">Vehicles</field>
+            <field name="code">05-06-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_fixed_asset_office_equip">
+            <field name="name">Office Equipment</field>
+            <field name="code">05-07-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_fixed_asset_furniture_fixer">
+            <field name="name">Furniture and Fixture</field>
+            <field name="code">05-08-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_fixed_asset_safety_equip">
+            <field name="name">Safety and Security Equipment</field>
+            <field name="code">05-09-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_owned"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!--Parent-->
+        <record model="account.account" id="account_fixed_assets_leased">
+            <field name="name">FIXED ASSETS-Leased</field>
+            <field name="code">06-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!-- child  -->
+        <record model="account.account" id="account_fixed_assets_leased_vehicles">
+            <field name="name">Vehicles</field>
+            <field name="code">06-01-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_leased"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_fixed_assets_leased_machinery">
+            <field name="name">Machinery</field>
+            <field name="code">06-02-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_leased"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_fixed_assets_leased_other">
+            <field name="name">Other</field>
+            <field name="code">06-03-0000</field>
+            <field name="parent_id" ref="account_fixed_assets_leased"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+
+
+        <!-- parent-->
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets">
+            <field name="name">ACCUMULATED DEPRECIATION-Owned Assets</field>
+            <field name="code">07-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--<field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_building">
+            <field name="name">Building</field>
+            <field name="code">07-01-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_air_conditioner">
+            <field name="name">Air conditioning Equipment</field>
+            <field name="code">07-02-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_plant_machinery">
+            <field name="name">Plant and Machinery</field>
+            <field name="code">07-03-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_computer_asses">
+            <field name="name">Computers and Accessories</field>
+            <field name="code">07-04-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_vehicles">
+            <field name="name">Vehicles</field>
+            <field name="code">07-05-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_office_equip">
+            <field name="name">Office Equipment</field>
+            <field name="code">07-06-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_furniture_fix">
+            <field name="name">Furniture and Fixture</field>
+            <field name="code">07-07-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_owned_assets_security_equip">
+            <field name="name">Safety and Security Equipment</field>
+            <field name="code">07-08-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_owned_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <!--Parent-->
+        <record model="account.account" id="account_accumulated_depreciation_leased_assets">
+            <field name="name">ACCUMULATED DEPRICIATION-Leased Assets</field>
+            <field name="code">08-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--            <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_leased_assets_vehicles">
+            <field name="name">Vehicles</field>
+            <field name="code">08-01-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_leased_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_accumulated_depreciation_leased_assets_machinery">
+            <field name="name">Machinery</field>
+            <field name="code">08-02-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_leased_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_accumulated_depreciation_leased_assets_other_assets">
+            <field name="name">Other Assets</field>
+            <field name="code">08-03-0000</field>
+            <field name="parent_id" ref="account_accumulated_depreciation_leased_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+
+
+       <!--Parent-->
+        <record model="account.account" id="account_capital_work_progress">
+            <field name="name">CAPITAL WORK IN PROGRESS</field>
+            <field name="code">09-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!--Parent-->
+        <record model="account.account" id="account_deferred_costs">
+            <field name="name">DEFFERRED COSTS</field>
+            <field name="code">10-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--            <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+         <!--Parent-->
+        <record model="account.account" id="account_long_term_deposits">
+            <field name="name">LONG TERM DEPOSITS</field>
+            <field name="code">11-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_long_term_deposits_lease_deposits">
+            <field name="name">Lease Deposits</field>
+            <field name="code">11-01-0000</field>
+            <field name="parent_id" ref="account_long_term_deposits"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_long_term_deposits_security_deposits">
+            <field name="name">Security Deposits</field>
+            <field name="code">11-02-0000</field>
+            <field name="parent_id" ref="account_long_term_deposits"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_long_term_deposits_other_deposits">
+            <field name="name">other Deposits</field>
+            <field name="code">11-03-0000</field>
+            <field name="parent_id" ref="account_long_term_deposits"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_long_term_advance_loan">
+            <field name="name">LONG TERM ADVANCES/LOANS</field>
+            <field name="code">12-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_long_term_advance_loan_director_associate">
+            <field name="name">Loans to Directors/Associates</field>
+            <field name="code">12-01-0000</field>
+            <field name="parent_id" ref="account_long_term_advance_loan"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_long_term_advance_loan_staff">
+            <field name="name">Loans to Staff</field>
+            <field name="code">12-02-0000</field>
+            <field name="parent_id" ref="account_long_term_advance_loan"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_long_term_advance_loan_other">
+            <field name="name">Others</field>
+            <field name="code">12-03-0000</field>
+            <field name="parent_id" ref="account_long_term_advance_loan"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!--Parent -->
+        <record model="account.account" id="account_current_assets">
+            <field name="name">CURRENT ASSETS</field>
+            <field name="code">13-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--  <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_current_assets_store_spares">
+            <field name="name">Stores and Spares</field>
+            <field name="code">13-01-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_stock_trade">
+            <field name="name">Stock in Trade</field>
+            <field name="code">13-02-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_trade_debtor">
+            <field name="name">Trade Debtors</field>
+            <field name="code">13-03-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_advance_loan_director_associate">
+            <field name="name">Advances/Loans to Directors and Associates</field>
+            <field name="code">13-04-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_loan_staff">
+            <field name="name">Advances/Loans to Staff</field>
+            <field name="code">13-05-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_current_assets_advance_tax">
+            <field name="name">Advance Tax</field>
+            <field name="code">13-06-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_prepayments">
+            <field name="name">Prepayments</field>
+            <field name="code">13-07-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_current_assets_bank_cash">
+            <field name="name">Cash at Bank</field>
+            <field name="code">13-08-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_current_assets_cash_hand">
+            <field name="name">Cash in hand</field>
+            <field name="code">13-09-0000</field>
+            <field name="parent_id" ref="account_current_assets"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_sales_net">
+            <field name="name">SALES-NET</field>
+            <field name="code">14-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--            <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_sales_net_gross_sales">
+            <field name="name">Gross Sales</field>
+            <field name="code">14-01-0000</field>
+            <field name="parent_id" ref="account_sales_net"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_sales_net_sale_discount">
+            <field name="name">Sales Discount</field>
+            <field name="code">14-02-0000</field>
+            <field name="parent_id" ref="account_sales_net"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_sales_net_sale_tax">
+            <field name="name">Sales Tax</field>
+            <field name="code">14-03-0000</field>
+            <field name="parent_id" ref="account_sales_net"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_sales_net_sale_return">
+            <field name="name">Sales Return</field>
+            <field name="code">14-04-0000</field>
+            <field name="parent_id" ref="account_sales_net"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_cost_sales">
+            <field name="name">COST OF SALES</field>
+            <field name="code">15-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+
+        </record>
+
+        <record model="account.account" id="account_cost_sales_open_stock">
+            <field name="name">Opening Stocks</field>
+            <field name="code">15-01-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_cost_sales_store_spares">
+            <field name="name">Stores and Spares</field>
+            <field name="code">15-02-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_cost_sales_stock_trade">
+            <field name="name">Stock in Trade</field>
+            <field name="code">15-03-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_cost_sales_purchase_stock_spare">
+            <field name="name">Purchases-Stores and Spares</field>
+            <field name="code">15-04-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_cost_sales_purchase_raw_packing">
+            <field name="name">Purchases-Raw and Packing Material</field>
+            <field name="code">15-05-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_cost_sales_purchase_expense">
+            <field name="name">Production Expense</field>
+            <field name="code">15-06-0000</field>
+            <field name="parent_id" ref="account_cost_sales"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_administrative_expense">
+            <field name="name">ADMINISTRATIVE EXPENSES</field>
+            <field name="code">16-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!--            <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+         <!--Parent -->
+        <record model="account.account" id="account_selling_distributed_expense">
+            <field name="name">SELLING AND DISTRIBUTION EXPENSES</field>
+            <field name="code">17-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+
+
+        <!--Parent -->
+        <record model="account.account" id="account_financial_expense">
+            <field name="name">FINANCIAL EXPENSES</field>
+            <field name="code">18-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+
+        <record model="account.account" id="account_financial_expense_markup_bank_loan">
+            <field name="name">Mark-up/Interest on Bank Loans</field>
+            <field name="code">18-01-0000</field>
+            <field name="parent_id" ref="account_financial_expense"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_financial_expense_markup_lease_finance">
+            <field name="name">Mark-up on Lease Finance</field>
+            <field name="code">18-02-0000</field>
+            <field name="parent_id" ref="account_financial_expense"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_financial_expense_markup_credit_card">
+            <field name="name">Mark-up/Interest on Credit Cards</field>
+            <field name="code">18-03-0000</field>
+            <field name="parent_id" ref="account_financial_expense"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_financial_expense_bank_charges">
+            <field name="name">Bank Charges</field>
+            <field name="code">18-04-0000</field>
+            <field name="parent_id" ref="account_financial_expense"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_financial_expense_others">
+            <field name="name">Others</field>
+            <field name="code">18-05-0000</field>
+            <field name="parent_id" ref="account_financial_expense"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <!--Parent -->
+        <record model="account.account" id="account_other_income">
+            <field name="name">OTHER INCOME</field>
+            <field name="code">19-00-0000</field>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+            <!-- <field name="chart_template_id" ref="l10n_generic_coa.configurable_chart_template"/>-->
+        </record>
+
+        <record model="account.account" id="account_other_income_gain_loss">
+            <field name="name">Exchange gain/(loss) on foreign currency transactions</field>
+            <field name="code">19-01-0000</field>
+            <field name="parent_id" ref="account_other_income"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="account_other_income_scrap_sales">
+            <field name="name">Scrap Sales</field>
+            <field name="code">19-02-0000</field>
+            <field name="parent_id" ref="account_other_income"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+        <record model="account.account" id="account_other_income_gain_loss_fixed_assets">
+            <field name="name">Gain/(loss) on the Sale of Fixed Assets</field>
+            <field name="code">19-03-0000</field>
+            <field name="parent_id" ref="account_other_income"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+        <record model="account.account" id="account_other_income_sundry_income">
+            <field name="name">Sundry and Other Income</field>
+            <field name="code">19-04-0000</field>
+            <field name="parent_id" ref="account_other_income"/>
+            <field name="user_type_id" ref="account_parent.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+
+
+        <!--        <record id="jolta_chart_template_standard" model="account.chart.template">-->
+        <!--			<field name="property_account_receivable_id" ref="account_fixed_assets_leased"/>-->
+        <!--			<field name="property_account_payable_id" ref="account_current_liabilities" />-->
+        <!--			<field name="property_account_expense_categ_id" ref="account_fixed_assets_owned" />-->
+        <!--			<field name="property_account_income_categ_id" ref="account_fixed_assets_leased" />-->
+        <!--            <field name="income_currency_exchange_account_id" ref="account_capital_and_reserves"/>-->
+        <!--            <field name="expense_currency_exchange_account_id" ref="account_accumulated_depreciation_leased_assets"/>-->
+        <!--			<field name="default_pos_receivable_account_id" ref="account_deferred_costs" />-->
+        <!--		</record>-->
+
+    </data>
+</odoo>

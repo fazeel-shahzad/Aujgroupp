@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+ <report
+            id="rate_comparison_rep"
+            model="purchase.order"
+            string="Rate Comparison Report"
+            report_type="qweb-pdf"
+            name="rate_comparison_report.rate_report"
+            file="rate_comparison_report.rate_report"
+            />
+    </data>
+</odoo>

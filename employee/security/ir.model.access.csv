@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_employee,employee.employee,model_employee_details,base.group_user,1,1,1,1
+access_program,program_program,model_program_program,base.group_user,1,1,1,1
+access_office,office_use,model_office_use,base.group_user,1,1,1,1
+access_job_type,job.type,model_job_type,base.group_user,1,1,1,1
+access_work_history,work_history,model_work_history,base.group_user,1,1,1,1
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<odoo>
+  <record id="view_partner_title_form_inherited_salutation" model="ir.ui.view">
+    <field name="name">res.partner.title.form.inherited.salutation</field>
+    <field name="model">res.partner.title</field>
+    <field name="inherit_id" ref="base.view_partner_title_form"/>
+    <field name="arch" type="xml">
+      <field name="shortcut" position="after">
+        <field name='salutation'/>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_partner_title_tree_inherited_salutation" model="ir.ui.view">
+    <field name="name">res.partner.title.tree.inherited.salutation</field>
+    <field name="model">res.partner.title</field>
+    <field name="inherit_id" ref="base.view_partner_title_tree"/>
+    <field name="arch" type="xml">
+      <field name="shortcut" position="after">
+        <field name='salutation'/>
+      </field>
+    </field>
+  </record>
+</odoo>

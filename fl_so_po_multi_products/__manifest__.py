@@ -12,7 +12,7 @@
     'sequence': 1,
     'author': 'Futurelens',
     'website': 'http://thefuturelens.com',
-    'depends': ['base', 'product', 'sale_management', 'purchase', 'product_article_finish_no'],
+    'depends': ['base', 'product', 'sale_management', 'purchase'],
     'data': [
         'wizard/select_products_wizard_view.xml',
         'views/sale_views.xml',

@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecoservice_german_documents_stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-15 10:26+0000\n"
+"PO-Revision-Date: 2020-05-15 10:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "&amp;nbsp;"
+msgstr ""
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,print_report_name:ecoservice_german_documents_stock.report_stock_delivery_note_no_logo
+msgid "'Delivery Note Letter paper'"
+msgstr ""
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,print_report_name:ecoservice_german_documents_stock.report_stock_picking_operation_no_logo
+msgid "'Picking Operation Letter paper'"
+msgstr ""
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.letterhead_receiver_address_drop_shipping
+msgid "<span>Herrn</span>"
+msgstr ""
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_delivery_note
+msgid ""
+"All items couldn't be shipped at once. The remaining ones will be shipped as"
+" soon as they become available."
+msgstr ""
+"Zu diesem Zeitpunkt können nicht alle Produkte geliefert werden. Die "
+"fehlenden Produkte werden ab Verfügbarkeit nachgeliefert."
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_picking_operation
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Barcode"
+msgstr "Strichcode"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_delivery_note
+msgid "Date"
+msgstr "Datum"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,name:ecoservice_german_documents_stock.report_stock_delivery_note
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_delivery_note_translator
+msgid "Delivery Note"
+msgstr "Lieferschein"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,name:ecoservice_german_documents_stock.report_stock_delivery_note_no_logo
+msgid "Delivery Note Letter Paper"
+msgstr "Lieferschein (Briefpapier)"
+
+#. module: ecoservice_german_documents_stock
+#: code:addons/ecoservice_german_documents_stock/models/stock_picking.py:0
+#, python-format
+msgid "Delivery-Note"
+msgstr "Lieferschein"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Lot/Serial Number"
+msgstr "Los-/Seriennummer"
+
+#. module: ecoservice_german_documents_stock
+#: code:addons/ecoservice_german_documents_stock/models/stock_picking.py:0
+#, python-format
+msgid "Packing-Slip"
+msgstr "Packzettel"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,name:ecoservice_german_documents_stock.report_stock_picking_operation
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_picking_operation_translator
+msgid "Picking Operation"
+msgstr "Packvorgang"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.actions.report,name:ecoservice_german_documents_stock.report_stock_picking_operation_no_logo
+msgid "Picking Operation Letter Paper"
+msgstr "Packvorgang (Briefpapier)"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Pos"
+msgstr ""
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Product"
+msgstr "Produkt"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_delivery_note
+msgid "Receiver (block letters)"
+msgstr "Empfänger (Druckbuchstaben)"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_delivery_note
+msgid "Signature Receiver"
+msgstr "Empfängersignatur"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_picking_operation
+msgid ""
+"Some of the products may be waiting for availability. Please click the "
+"'Reserve' button to check if the products are available."
+msgstr "Bitte überprüfen Sie die Verfügbarkeit der Produkte."
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "Source"
+msgstr "Herkunft"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.model,name:ecoservice_german_documents_stock.model_stock_move
+msgid "Stock Move"
+msgstr "Lagerbuchung"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_document_delivery_note
+msgid "This shipment is a backorder of"
+msgstr "Diese Lieferung ist eine Retour von"
+
+#. module: ecoservice_german_documents_stock
+#: model:ir.model,name:ecoservice_german_documents_stock.model_stock_picking
+msgid "Transfer"
+msgstr "Lieferung vornehmen"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_delivery_note_template_without_logo
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_stock_picking_operation_template_without_logo
+msgid "True"
+msgstr "Wahr"
+
+#. module: ecoservice_german_documents_stock
+#: model_terms:ir.ui.view,arch_db:ecoservice_german_documents_stock.report_table_base_stock
+msgid "UoM"
+msgstr "ME"

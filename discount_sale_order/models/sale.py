@@ -18,19 +18,27 @@ class SaleOrder(models.Model):
     @api.depends('order_line.price_total', 'order_line.discount_type',
                  'order_line.discount', 'global_order_discount', 'global_discount_type')
     def _amount_all(self):
-        """
-        Compute the total amounts of the SO.
-        """
         for order in self:
             amount_untaxed = amount_tax = 0.0
             total_discount = 0.0
             for line in order.order_line:
                 amount_untaxed += line.price_subtotal
-                amount_tax += line.price_tax
                 if line.discount_type == 'fixed':
                     total_discount += line.discount
                 else:
                     total_discount += line.product_uom_qty * (line.price_unit - line.price_reduce)
+                if order.company_id.tax_calculation_rounding_method == 'round_globally':
+                    quantity = 1.0
+                    if line.discount_type == 'fixed':
+                        price = line.price_unit * line.product_uom_qty - (line.discount or 0.0)
+                    else:
+                        quantity = line.product_uom_qty
+                        price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+                    taxes = line.tax_id.compute_all(price, line.order_id.currency_id,
+                        quantity, product=line.product_id, partner=line.order_id.partner_id)
+                    amount_tax += sum(t.get('amount', 0.0) for t in taxes.get('taxes', []))
+                else:
+                    amount_tax += line.price_tax
 
             IrConfigPrmtrSudo = self.env['ir.config_parameter'].sudo()
             discTax = IrConfigPrmtrSudo.get_param('account.global_discount_tax')
@@ -106,8 +114,8 @@ class SaleOrder(models.Model):
             if self.global_discount_type == 'fixed':
                 lines = self.order_line.filtered(
                     lambda l: not l.is_downpayment and l.product_uom_qty != l.qty_to_invoice)
-                # if lines:
-                #     raise UserError(_("This action is going to make partial invoice for the less quantity delivered of this order. It will not be allowed because 'Fixed' type global discount has been applied."))
+                if lines:
+                    raise UserError(_("This action is going to make partial invoice for the less quantity delivered of this order. It will not be allowed because 'Fixed' type global discount has been applied."))
             invoiceVals.update({
                 'global_discount_type': self.global_discount_type,
                 'global_order_discount': self.global_order_discount
@@ -126,9 +134,6 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_uom_qty', 'discount_type', 'discount', 'price_unit', 'tax_id')
     def _compute_amount(self):
-        """
-        Compute the amounts of the SO line.
-        """
         for line in self:
             quantity = 1.0
             if line.discount_type == 'fixed':
@@ -139,15 +144,13 @@ class SaleOrderLine(models.Model):
             taxes = line.tax_id.compute_all(price, line.order_id.currency_id, quantity,
                                             product=line.product_id, partner=line.order_id.partner_id)
             line.update({
-                'price_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
+                'price_tax': taxes['total_included'] - taxes['total_excluded'],
                 'price_total': taxes['total_included'],
                 'price_subtotal': taxes['total_excluded'],
             })
-            if self.env.context.get('import_file', False) and not self.env.user.user_has_groups('account.group_account_manager'):
-                line.tax_id.invalidate_cache(['invoice_repartition_line_ids'], [line.tax_id.id])
 
-    def _prepare_invoice_line(self, **optional_values):
-        res = super(SaleOrderLine, self)._prepare_invoice_line(**optional_values)
+    def _prepare_invoice_line(self):
+        res = super(SaleOrderLine, self)._prepare_invoice_line()
         discount = self.discount
         if self.discount_type == 'fixed' and self.product_uom_qty:
             discount = (discount * self.qty_to_invoice) / self.product_uom_qty

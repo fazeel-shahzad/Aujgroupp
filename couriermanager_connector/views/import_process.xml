@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+        <record id="view_import_process_form" model="ir.ui.view">
+            <field name="name">Import Process</field>
+            <field name="model">import.process</field>
+            <field name="arch" type="xml">
+                <form string="Import Process" style="height: 200px">
+                    <group>
+                        <group>
+                            <field name="is_import_expedition_price" />
+                            <field name="is_import_expedition_info" />
+                            <field name="is_import_routing_cities" />
+                            <field name="is_import_invoices"/>
+                        </group>
+                        <group>
+                            <br></br>
+                            <field name="starting_number" attrs="{'invisible':[('is_import_expedition_info','=',False)]}"/>
+                            <field name="ending_number" attrs="{'invisible':[('is_import_expedition_info','=',False)]}"/>
+                            <br></br>
+                            <field name="starting_date" attrs="{'invisible':[('is_import_invoices','=',False)]}"/>
+                            <field name="end_date" attrs="{'invisible':[('is_import_invoices','=',False)]}"/>
+                        </group>
+
+                    </group>
+                    <footer>
+                        <button name="import_expedition_price"
+                                attrs="{'invisible':[('is_import_expedition_price','=',False)]}"
+                                string="Import Shipping Price" type="object" class="oe_highlight"/>
+
+                        <button name="import_expedition_info"
+                                attrs="{'invisible':[('is_import_expedition_info','=',False)]}"
+                                string="Import Shipping Info" type="object" class="oe_highlight"/>
+
+                        <button name="import_routing_cities"
+                                attrs="{'invisible':[('is_import_routing_cities','=',False)]}"
+                                string="Import Routing Cities" type="object" class="oe_highlight"/>
+
+                        <button name="prepare_vendor_bill"
+                                string="Create Invoices" type="object" class="btn-primary"/>
+
+                        <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Import Processes"
+            res_model="import.process"
+            view_mode="form"
+            target="new"
+            id="action_wizard_prepare_imp"
+            view_id="view_import_process_form"/>
+
+        <menuitem name="Import Process" id="autoimport_menu_child" parent="couriermanager_menu_root" action="action_wizard_prepare_imp"
+        sequence="100"/>
+
+    </data>
+</odoo>

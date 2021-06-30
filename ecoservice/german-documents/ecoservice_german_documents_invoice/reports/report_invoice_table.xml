@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Extension of Odoo. Developed by ecoservice (Uwe Böttcher und Falk Neubert GbR).
+# See COPYRIGHT and LICENSE at the root directory of this module for full copyright and licensing details.
+-->
+
+<!--
+  For the case you wish to overwork the all
+  sale tables, you can to this here by inherit or override.
+-->
+<odoo>
+    <template id="report_table_base_invoice">
+
+        <t t-set="display_taxes"
+           t-value="any(line.tax_ids for line in o.invoice_line_ids)"/>
+        <t t-set="display_discount"
+           t-value="any(line.discount for line in o.invoice_line_ids)"/>
+        <t t-set="display_pos_no"
+           t-value="o.company_id.report_table_position"/>
+        <t t-set="continuous_pos_no"
+           t-value="o.company_id.report_table_position_continuous"/>
+
+        <table class="table table-sm" style="padding-left: 0">
+            <thead>
+                <tr>
+                    <t t-set="colspan" t-value="6"/>
+                    <th class="text-left" t-if="display_pos_no">Pos</th>
+                    <th class="text-left">Description</th>
+                    <th class="text-center" name="th_image" >Produktbild</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-center" groups="uom.group_uom">UoM
+                        <t t-set="colspan" t-value="colspan+1"/>
+                    </th>
+                    <th class="text-right">Unit Price</th>
+                    <th class="text-right" t-if="display_discount">Discount
+                        <t t-set="colspan" t-value="colspan+1"/>
+                    </th>
+                    <th class="text-center" t-if="display_taxes" style="width:10%">Taxes
+                        <t t-set="colspan" t-value="colspan+1"/>
+                    </th>
+                    <th class="text-right">Total Price</th>
+                </tr>
+            </thead>
+            <tbody class="invoice_tbody">
+                <t t-set="current_subtotal" t-value="0"/>
+                <t t-foreach="o.invoice_line_ids" t-as="line">
+
+                    <t t-set="current_subtotal"
+                       t-value="current_subtotal + line.price_subtotal"
+                       groups="account.group_show_line_subtotals_tax_excluded"/>
+                    <t t-set="current_subtotal"
+                       t-value="current_subtotal + line.price_total"
+                       groups="account.group_show_line_subtotals_tax_included"/>
+                    <t t-if="not line.display_type"
+                       t-set="product_descriptions"
+                       t-value="line.name.split('\n')"/> <!--Product description-->
+
+                    <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                        <t t-if="not line.display_type" name="account_invoice_line_accountable">
+
+                            <t t-call="ecoservice_german_documents_sale.show_position_number"/>
+
+                            <td name="account_invoice_line_name">
+                                <span t-esc="line.name" /><br/>
+<!--                                <span t-esc="product_descriptions[1]" t-if="product_descriptions"/>-->
+                            </td>
+                            <style>
+                                .mh128{
+                                max-height:128px;
+                                }
+                            </style>
+                            <td style="max-height: 128px;" class="text-center">
+                                <span t-field="line.product_id.image_1920" t-options="{'widget': 'image', 'qweb_img_responsive': True, 'class': 'img-fluid mh128','style':'max-width: 128px !important;max-height: 90px;'}" style="max-width: 256px !important;max-height: 128px;" />
+                            </td>
+                            <td class="text-right" style="font-family:monospace;">
+                                <span t-esc="str('%.3f'%(line.quantity)).replace('.', ',')"/>
+                                <br/>
+                                <span t-esc="str('%.3f'%(round((line.product_id.weight * line.quantity),3))).replace('.', ',')"/>
+                                <br/>
+                                <span t-esc="str('%.3f'%(round((line.product_id.volume * line.quantity),3))).replace('.', ',')"/>
+                                <br/>
+                                <span t-esc="str('%.3f'%(round((line.product_id.square * line.quantity),3))).replace('.', ',')"/>
+                                <br/>
+                                <span t-esc="str('%.3f'%(round((line.product_id.platten * line.quantity),3))).replace('.', ',')"/>
+                                <br/>
+                            </td>
+
+                            <td align="center">
+                                <span t-field="line.product_uom_id"/>
+                                <br/>
+                                <span t-field="line.product_id.weight_uom_name"/>
+                                <br/>
+                                <span t-field="line.product_id.volume_uom_name"/>
+                                <br/>
+                                <span>m<sup>2</sup></span>
+                                <br/>
+                                <span>Paletten</span>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="line.price_unit"/>
+                            </td>
+
+                            <td t-if="display_discount" class="text-right">
+                                <span t-field="line.discount"/>%
+                            </td>
+
+                            <td class="text-right" t-if="display_taxes">
+                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="line.price_subtotal"
+                                      t-options="{'display_currency': o.currency_id}"
+                                      widget="monetary"
+                                      groups="account.group_show_line_subtotals_tax_excluded"/>
+
+
+                                <span t-field="line.price_total"
+                                      t-options="{'display_currency': o.currency_id}"
+                                      widget="monetary"
+                                      groups="account.group_show_line_subtotals_tax_included"/>
+                            </td>
+                        </t>
+
+                        <!--Section-->
+                        <t t-if="line.display_type == 'line_section'">
+                            <td t-att-colspan="colspan">
+                                <span t-field="line.name"/>
+                            </td>
+                            <t t-set="current_section" t-value="line"/>
+                            <t t-set="current_subtotal" t-value="0"/>
+                        </t>
+
+                        <!--Note-->
+                        <t t-if="line.display_type == 'line_note'">
+                            <td t-att-colspan="colspan">
+                                <span t-field="line.name"/>
+                            </td>
+                        </t>
+                    </tr>
+
+                    <!--                    <tr t-foreach="product_descriptions" t-as="description" t-if="not line.display_type">-->
+                    <!--                        <t t-if="description_index > 0">-->
+                    <!--                            <td class="no-mbp" t-if="display_pos_no">&amp;nbsp;</td>-->
+                    <!--                            <td t-att-colspan="colspan" class="text-left no-bp">-->
+                    <!--                                <span t-esc="description"/>-->
+                    <!--                            </td>-->
+                    <!--                        </t>-->
+                    <!--                    </tr>-->
+
+                    <t t-if="current_section and (line_last or o.invoice_line_ids[line_index+1].display_type == 'line_section')">
+                        <tr class="is-subtotal text-right">
+                            <td t-att-colspan="colspan">
+                                <strong class="mr16">Subtotal</strong>
+                                <span t-esc="current_subtotal"
+                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </tbody>
+        </table>
+
+        <!-- Load Base CSS Styles -->
+        <t t-call="ecoservice_german_documents_base.report_css_body"/>
+        <!-- Include optional Base CSS File for invoice tables only -->
+        <t t-call="ecoservice_german_documents_invoice.report_css_body_invoice"/>
+    </template>
+
+</odoo>

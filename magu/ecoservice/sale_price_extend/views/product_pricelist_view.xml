@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_pricelist_view_inherit_sale_price_extend" model="ir.ui.view">
+        <field name="name">product.pricelist.custom.form.inherit.sale_price_extend</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricelist_config']" position="inside">
+                <group>
+                    <group name="is_to_be_skipped" string="Do not Update">
+                        <field name="is_to_be_skipped"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

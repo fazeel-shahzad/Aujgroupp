@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_table_base_uom_invoice" inherit_id="ecoservice_german_documents_invoice.report_table_base_invoice">
+    <xpath expr="//thead/tr/th[@groups='uom.group_uom']" position="attributes">
+      <attribute name="class">text-left</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/t/td[@groups='uom.group_uom']" position="attributes">
+      <attribute name="class">text-left</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/t/td/span[@t-field='line.quantity']" position="after">
+      <t t-foreach="line.ecoservice_uom_ids" t-as="uom">
+        <span t-field="uom.ecoservice_uom_factor"/>
+        <br/>
+      </t>
+    </xpath>
+    <xpath expr="//tbody/t/tr/t/td/span[@t-field='line.product_uom_id']" position="after">
+      <t t-foreach="line.ecoservice_uom_ids" t-as="uom">
+        <span t-field="uom.ecoservice_uom_name"/>
+        <br/>
+      </t>
+    </xpath>
+    <xpath expr="//tbody/t/tr/t/td/span[@t-field='line.product_uom_id']" position="attributes">
+      <attribute name="t-if">not line.ecoservice_uom_ids</attribute>
+    </xpath>
+    <xpath expr="//tbody/t/tr/t/td/span[@t-field='line.quantity']" position="attributes">
+      <attribute name="t-if">not line.ecoservice_uom_ids</attribute>
+    </xpath>
+  </template>
+</odoo>
