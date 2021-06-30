@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <template id="so_report_invoice_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[hasclass('page')]//table//thead//tr//th[@t-if='display_discount']" position="replace">
+                <th t-if="display_discount" class="text-right">Disc Type</th>
+                <th t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else ''}}">
+                    <span>Disc.</span>
+                </th>
+            </xpath>
+
+            <xpath expr="//tbody[hasclass('invoice_tbody')]//tr//td[@t-if='display_discount']" position="before">
+                <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                    <span t-field="line.discount_type"/>
+                </td>
+            </xpath>
+
+            <xpath expr="//div[hasclass('clearfix')]//div//div//table//tr[hasclass('o_total')]" position="before">
+                <tr t-if="o.total_global_discount > 0.0 " class="border-black">
+                    <td>
+                        <span>Global Discount</span>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="o.total_global_discount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
+                <tr t-if="o.total_discount > 0.0 ">
+                    <td>
+                        <strong>Total Discount</strong>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="o.total_discount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
+            </xpath>
+        </template>
+    </data>
+</odoo>

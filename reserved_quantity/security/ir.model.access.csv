@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reserved_quantity_reserved_quantity,reserved_quantity.reserved_quantity,model_reserved_quantity_reserved_quantity,base.group_user,1,1,1,1

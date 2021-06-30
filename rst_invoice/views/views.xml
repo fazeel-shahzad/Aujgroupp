@@ -1,0 +1,23 @@
+<odoo>
+  <data>
+
+  </data>
+<!--       <record model="ir.ui.menu" id="account.menu_action_move_out_invoice_type">-->
+<!--           <field name="parent_id" ref="sale.sale_order_menu"/>-->
+<!--           <field name="sequence">2</field>-->
+<!--       </record>-->
+
+
+<!--        <record id="account.res_partner_action_customer" model="ir.actions.act_window">-->
+<!--           <field name="domain">[]</field>-->
+<!--        </record>-->
+    <menuitem  id="menu_action_move_out_invoice_type_in_sales"
+               action="account.action_move_out_invoice_type"
+               parent="sale.sale_order_menu"
+               groups="rst_invoice.group_invoice_in_sale"
+               sequence="2"/>
+
+
+
+
+</odoo>

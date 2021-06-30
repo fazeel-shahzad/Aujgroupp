@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <record id="view_account_config" model="ir.ui.view">
+            <field name="name">res.config.settings.form.inherit.discount</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='invoicing_settings']/div[1]" position="after">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="group_order_global_discount"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_order_global_discount"/>
+                            <div class="text-muted">
+                                Allow Global discount on Invoices
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('group_order_global_discount', '=', False)]}">
+                                <div class="mt16">
+                                    <label for="discount_account_invoice"/>
+                                    <field name="discount_account_invoice" attrs="{'required': [('group_order_global_discount', '=', True)]}" class="oe_inline"/>
+                                </div>
+                                <div class="mt16">
+                                    <label for="discount_account_bill"/>
+                                    <field name="discount_account_bill" attrs="{'required': [('group_order_global_discount', '=', True)]}" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" attrs="{'invisible' : [('group_order_global_discount', '=', False)], 'required' : [('group_order_global_discount', '=', True)]}">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="global_discount_tax"/>
+                            <div class="text-muted">
+                                Global discount will be calculated on
+                            </div>
+                            <div class="mt8">
+                                <field name="global_discount_tax" class="o_light_label" widget="radio" />
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

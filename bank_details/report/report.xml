@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <report
+            id="bank_details_xlsx"
+            model="res.partner"
+            string="Payment Transfers"
+            report_type="xlsx"
+            name="bank_details.report_bank_details_xlsx"
+            file="bank_details.report_bank_details_xlsx"/>
+
+        <report
+            id="courier_xlsx"
+            model="res.partner"
+            string="Couriers"
+            report_type="xlsx"
+            name="bank_details.report_courier_xlsx"
+            file="bank_details.report_courier_xlsx"/>
+
+</odoo>

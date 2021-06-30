@@ -1,0 +1,153 @@
+<odoo>
+    <data>
+        <template id="return_request_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+
+                        <style>
+                            .top_general_head {
+                            font-weight:bold;
+                            }
+                            .data_table_heading th {
+                            border:2px solid grey;
+                            padding-left:2px;
+                            }
+                            .data_table_body td {
+                            border:2px solid grey;
+                            padding-left:2px;
+                            }
+                            .vertical_middle {
+                            text-align:center;
+                            vertical-align:middle;
+                            }
+                            .important_note {
+                            margin-top:200px;
+                            }
+                            .container p, h6 {
+                            font-weight: bold;
+                            }
+                            .margin_top {
+                            margin-top:-20px;
+                            font-size:14px;
+                            }
+                            .last_table {
+                            margin-top:70px;
+
+                            }
+                            .bold {
+                            font-weight:bold;
+                            }
+
+                        </style>
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <div style="font-size:30px; font-weight: bold;" align="center">
+                             <strong>Return Request</strong>
+                            </div>
+                            <br/>
+				            <div class="oe_structure"/>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Name:</strong>
+                                    <span class="m-0" t-field="o.partner_id.name"/>
+                                </div>
+                                <div class="col-5">
+                                    <span>
+                                        <strong>Date:</strong>
+                                        <span class="m-0" t-field="o.date"/>
+                                    </span>
+                                </div>
+				            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Address:</strong>
+                                    <span class="m-0" t-field="o.address"/>
+                                </div>
+<!--                                <div class="col-5">-->
+<!--                                    <span>-->
+<!--                                        <strong>Mobile#:</strong>-->
+<!--&lt;!&ndash;                                        <span class="m-0" t-field="o.partner_id.mobile"/>&ndash;&gt;-->
+<!--                                    </span>-->
+<!--                                </div>-->
+				            </div>
+                            <br/>
+
+                            <table class="table table-sm o_main_table">
+                                <thead >
+                                    <tr>
+                                        <th  class="vertical_middle">Sr</th>
+                                        <th >Invoice Date</th>
+                                        <th >Invoice No</th>
+                                        <th >Item Description</th>
+                                        <th>Article</th>
+                                        <th >Finish</th>
+                                        <th >Previous Return</th>
+                                        <th >Sold Qty</th>
+                                        <th >Return Qty</th>
+                                        <th >Received Qty</th>
+                                        <th class="text-left pl-2">Unit</th>
+                                        <th class="text-left pl-2">Discount</th>
+                                        <th class="text-left pl-2">Total</th>
+                                        <th class="text-left pl-2">Reason</th>
+                                    </tr>
+                                </thead>
+
+                                <!-- here we will apply the loop-->
+                                <tbody >
+                                    <t t-set="count_id" t-value="0"/>
+                                    <t t-set="total_quantity" t-value="0"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                    <t t-foreach="o.request_lines" t-as="line">
+                                        <t t-set="count_id" t-value="count_id+1"/>
+                                        <tr>
+                                            <td class="vertical_middle"> <t t-esc="count_id"/> </td>
+                                            <td><span t-field="line.invoice_date"/></td>
+                                            <td><span t-field="line.invoice_id.name"/></td>
+                                            <td style="white-space:nowrap;"><span t-field="line.product_id.name"/></td>
+                                            <td class="text-center"><span t-field="line.art"/></td>
+                                            <td class="text-center"><span t-field="line.finish_no"/></td>
+                                            <td class="text-center"><span t-field="line.previous_return_quantity"/></td>
+                                            <td class="text-center"><span t-field="line.sold_quantity"/></td>
+                                            <td class="text-center"><span t-field="line.return_quantity"/></td>
+                                            <td class="text-center"><span t-field="line.recieved_qty"/></td>
+                                            <td class="text-center"><span t-field="line.unit_price"/></td>
+                                            <td class="text-center"><span t-field="line.discount_qty"/></td>
+                                            <td class="text-center"><span t-field="line.total"/></td>
+                                            <td class="text-center"><span t-field="line.reason_of_return"/></td>
+                                        <t t-set="total_quantity" t-value="total_quantity+line.total"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <table width="100%" class="mt-3">
+                                <tbody>
+                                    <tr>
+                                        <td width="60%"/>
+                                        <td width="20%" class="text-right pr-4 font-weight-bold data_table_heading">
+                                            Total:
+                                        </td>
+                                        <td width="20%" class="text-right font-weight-bold" style="padding-right:100px;"><t t-esc="total_quantity"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+<!--                         <div class="col-12" style="padding-left:25px;margin-top:20px;font-size:15px">-->
+<!--                        Create On:-->
+<!--                        <span t-field="o.create_date" style="font-size:15px"/>-->
+<!--                        Create By:-->
+<!--                        <span t-field="o.create_uid.name" style="font-size:15px"/>-->
+<!--                        Modified on-->
+<!--                        <span t-field="o.write_date" style="font-size:15px"/>-->
+<!--                        Modified By:-->
+<!--                        <span t-field="o.write_uid.name" style="font-size:15px"/>-->
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

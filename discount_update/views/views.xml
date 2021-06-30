@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+
+    <record id="view_sale_order_discount_form_inh" model="ir.ui.view">
+		<field name="name">sale.order.form</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='amount_tax']" position="after">
+				<field name="line_discount" widget="monetary"/>
+				<field name="second_discount" widget="monetary"/>
+            </xpath>
+		</field>
+	</record>
+
+	  <record id="view_sale_order_discount_form_parent_inh" model="ir.ui.view">
+		<field name="name">sale.order.form.inh</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="discount_sale_order.inherit_sale_order_line_tree_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='total_discount']" position="attributes">
+				<attribute name="invisible">1</attribute>
+            </xpath>
+		</field>
+	</record>
+
+	  <record id="view_account_move_discount_form_inh" model="ir.ui.view">
+		<field name="name">account.move.form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='amount_by_group']" position="after">
+				<field name="line_discount" widget="monetary"/>
+				<field name="second_discount" widget="monetary"/>
+            </xpath>
+		</field>
+	</record>
+
+	  <record id="view_account_move_discount_form_parent_inh" model="ir.ui.view">
+		<field name="name">account.move.form.inh</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="discount_account_invoice.inherit_account_move_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='total_discount']" position="attributes">
+				<attribute name="invisible">1</attribute>
+            </xpath>
+		</field>
+	</record>
+
+  </data>
+</odoo>

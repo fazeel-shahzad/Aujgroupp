@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record model="ir.module.category" id="group_cost_price_root">
+            <field name="name">Show Cost Price</field>
+            <field name="description">Cost Price</field>
+<!--            <field name="sequence">3</field>-->
+        </record>
+
+        <record id="group_show_cost_price" model="res.groups">
+            <field name="name">Show Cost Price</field>
+            <field name="category_id" ref="group_cost_price_root"/>
+        </record>
+
+    </data>
+</odoo>

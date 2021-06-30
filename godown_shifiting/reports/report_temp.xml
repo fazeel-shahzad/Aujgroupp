@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="godown_shifiting_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+
+                        <style>
+                            .all_border {
+                            border-bottom:1px solid black;
+                            text-align: left;
+                            text-transform: ;
+                            font-size: 15px;
+                            padding-left: 3px;
+                            vertical-align:middle;
+                            }
+
+                            .all_border_a {
+                            border-bottom:2px solid black;
+                            text-align: left;
+
+                            text-transform: ;
+                            font-size: 15px;
+                            padding-left: 3px;
+                            vertical-align:middle;
+                            }
+
+
+                            .top_heading_container {
+                            border-top:2px solid black;
+                            text-align:center;
+                            margin-bottom:20px;
+                            }
+                            .top_heading_container h2 {
+                            border-bottom:1px solid black;
+                            width:22%;
+                            margin-left:38%;
+
+                            }
+                            .all_th {
+                            font-size:15px;
+                            text-align:left;
+                             font-weight: bold;
+                            }
+                            }
+                            .all_td {
+                            font-size:15px;
+                            text-transform:capitalize;
+                            }
+                        </style>
+
+                        <table width="100%">
+                            <tr width="50%">
+                                <th width="5%" class="all_th">From Godown :</th>
+                                <td width="20%" class="all_td">
+                                    <span style="font-size:12; padding-left:5px;font-weight:normal"
+                                          t-field="o.location_id"/>
+                                </td>
+                                <th width="20%" class="all_th">Ref. No:
+                                    <span style="font-size:10;font-weight:normal" t-field="o.name"/>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="all_th">To Godown :</th>
+                                <td class="all_td">
+
+                                    <span style="font-size:12; padding-left:5px;font-weight:normal"
+                                          t-field="o.location_dest_id"/>
+                                </td>
+                                <th width="10%" class="all_th">Date :
+                                    <span style="font-size:10;font-weight:normal" t-field="o.scheduled_date"/>
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th class="all_th">Details :</th>
+                                <td class="all_td">
+
+                                                                        <span style="font-size:10;font-weight:normal; text-transform:uppercase;"
+                                                                              t-field="o.note"/>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <br/>
+                        <table width="100%" style="border-top:2px solid black; ">
+                            <thead class="all_border_a">
+                                <tr>
+                                    <th width="5%" class="all_border_a" style="text-align:left;">Sr#</th>
+                                    <th width="25%" class="all_border_a">Item Name</th>
+                                    <th width="8%" class="all_border_a">Art No.</th>
+                                    <th width="8%" class="all_border_a">Finish</th>
+                                    <th width="5%" class="all_border_a">Unite</th>
+                                    <th width="8%" class="all_border_a">To.Stk</th>
+                                    <th width="7%" class="all_border_a">Rate</th>
+                                    <th width="8%" class="all_border_a">Qty</th>
+                                    <th width="3%" class="all_border_a" style="text-align:right;">Value</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <t t-set="count_id" t-value="0"/>
+                                <t t-set="total_quantity" t-value="0"/>
+                                <t t-set="total_amount" t-value="0"/>
+
+
+                                <t t-foreach="o.move_line_ids_without_package" t-as="line">
+                                    <tr>
+                                        <t t-set="count_id" t-value="count_id+1"/>
+                                        <td class="all_border">
+                                            <t t-esc="count_id"/>
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.product_id.name"/>
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.product_id.article_no"/>
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.product_id.finish_no"/>
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.product_uom_id"/>
+
+                                        </td>
+                                        <td class="all_border">
+                                            <!--                                                <span t-field="line.quantity"/>-->
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.product_id.standard_price"/>
+                                        </td>
+                                        <td class="all_border">
+                                            <span t-field="line.qty_done"/>
+                                        </td>
+                                        <td class="all_border" style="text-align:right;">
+                                            <t t-set="amount_price"
+                                               t-value="(line.qty_done * line.product_id.standard_price)"/>
+                                            <t t-esc="amount_price"/>
+                                        </td>
+                                        <t t-set="total_quantity" t-value="total_quantity+line.qty_done"/>
+                                        <t t-set="total_amount" t-value="total_amount+amount_price"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+
+                        <table width="100%" style="margin-top:-px; border-collapse:separate; border-spacing:10px;">
+                            <tr>
+                                <td width="70%"
+                                    style="padding-right:60px; text-align: right; font-size:14px; margin-top:10px; ">
+                                    Total :
+                                </td>
+                                <td width="5%"
+                                    style="font-weight:bold; padding-left:35px; text-align:right; font-size:14px; margin-top:10px; border-bottom:1px solid black;">
+                                    <t t-esc="total_quantity"/>
+
+                                </td>
+
+                                <td width="10%"
+                                    style="font-weight:bold; padding-left:5px; text-align:right; font-size:14px; margin-top:10px;  border-bottom:1px solid black; ">
+                                    <t t-esc="total_amount"/>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table width="100%" style="margin-top:20px;">
+                            <tbody>
+                                <tr width="100%">
+                                    <td width="33%" style="padding-left:30px; margin-right:30px;">
+                                        ______________________
+                                    </td>
+                                    <td width="33%" class="text-right " style="padding-right:70px;">
+                                        ______________________
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table width="100%">
+                            <tbody>
+                                <tr width="100%">
+                                    <td width="33%" class="text-left" style="padding-left:55px; font-weight:bold;">
+                                        ISSUED BY
+                                    </td>
+                                    <td width="23%" class="text-right" style="padding-right:90px;font-weight:bold;">
+                                        RECEIVED BY
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container">
+                           <div class="col-12" style="padding-left:25px;margin-top:20px;font-size:15px">
+                        Create On:
+                        <span t-field="o.create_date" style="font-size:15px"/>
+                        Create By:
+                        <span t-field="o.create_uid.name" style="font-size:15px"/>
+                        Modified on
+                        <span t-field="o.write_date" style="font-size:15px"/>
+                        Modified By:
+                        <span t-field="o.write_uid.name" style="font-size:15px"/>
+                    </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

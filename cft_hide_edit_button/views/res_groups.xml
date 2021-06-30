@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_edit_button_hide_groups" model="ir.ui.view">
+			<field name="name">res.groups.form.inherit</field>
+			<field name="model">res.groups</field>
+			<field name="inherit_id"
+				ref="base.view_groups_form" />
+			<field name="arch" type="xml">
+				<notebook position="inside">
+					<page string="Hide Edit Button" attrs="{'invisible':[('is_hide_edit_group','=',False)]}">
+						<field name="is_hide_edit_group" invisible="1"></field>
+						<group colspan="4">
+							<field name="hide_edit_objects" nolabel="1"/>
+						</group>
+					</page>
+				</notebook>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="view_sale_order_form_inherit_" model="ir.ui.view">
+            <field name="name">sale.order.line.inherit.smc</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page/field[@name='order_line']/tree/field[@name='tax_id']" position="after">
+                    <field name="discount_amount"/>
+                    <field name="final_amount" invisible="1"/>
+                </xpath>
+
+<!--                <xpath expr="//page/field[@name='order_line']//tree//control//create[@name='add_note_control']" position="after">-->
+<!--                    <create name="section_prod" string="Add Section"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="section_product_name">
+            <field name="name">section.product.name</field>
+            <field name="model">section.product</field>
+            <field name="arch" type="xml">
+                <form string="Add Sections">
+                    <field name="name"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

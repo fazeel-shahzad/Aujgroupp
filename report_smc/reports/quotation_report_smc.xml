@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="quotation_smc_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <table style="width:100%;">
+                    <t t-if="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-if="not o or not 'company_id' in o">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                    <tr>
+                        <td>
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                 style="height: 75px;width75px; margin-left:0%;"
+                                 alt="Logo"/>
+                        </td>
+                        <td style="text-align:left; font-size:30px;">
+                            <strong>QUOTATION</strong>
+                        </td>
+                        <td style="text-align:left;margin-left:20px;">
+                            <strong>Head Office:</strong>
+                            <br/>
+                            <t t-esc="company.street"/><br></br>
+                            Tel:<t t-esc="company.phone"/>
+                            <br/>
+                            <strong><t t-esc="o.branch_id.name"/></strong>
+                            <br/>
+                            <t t-esc="o.branch_id.address"/><br></br>
+                            Tel:<t t-esc="o.branch_id.telephone"/><br></br>
+                              <t t-esc="company.website"/>,Email:<t t-esc="company.website"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            <strong>Reference # :</strong>
+                            <span t-field="o.name"/>
+                            <br/>
+                            <strong>Customer :</strong>
+                            <span t-if="o.partner_id.name" t-field="o.partner_id.name"/>
+                            <br/>
+                            <strong>Address :</strong>
+                            <span t-if="o.partner_id.street" t-field="o.partner_id.street"/>
+                            <br/>
+                            <strong>Contact :</strong>
+                            <span t-if="o.partner_id.phone" t-field="o.partner_id.phone"/>
+                            <br/>
+                            <t><strong>CNIC :</strong> <span t-if="o.partner_id.no_cnic" t-field="o.partner_id.no_cnic"/></t>
+
+
+                        </td>
+                        <td width="50%">
+                            <strong style="margin-left:50%">Date :</strong>
+                            <span t-esc="datetime.datetime.strptime(str(datetime.datetime.date(o.create_date)),'%Y-%m-%d').strftime('%d-%b-%Y')"/>
+                            <br/>
+                            <strong style="margin-left:50%">Validity :</strong>
+                            <span t-if="o.expected_date"
+                                  t-esc="datetime.datetime.strptime(str(datetime.datetime.date(o.expected_date)),'%Y-%m-%d').strftime('%d-%b-%Y')"/>
+
+                            <strong style="margin-left:50%">NTN :</strong>
+                            <span t-if="o.partner_id.ntn" t-field="o.partner_id.ntn"/>
+
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <!--style="border: 1px solid black;"-->
+                <table style="width:100%; border-spacing: 0 25px;">
+
+                    <tr>
+                        <th style="border : 1px solid black;border-right:none;" class="text-left">Sr.</th>
+                        <th style="text-align:left;border : 1px solid black;border-left:none;border-right:none;"
+                            colspan="2">Item Description
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:none;">Qty
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:none;">Rate
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:none;">
+                            Amount
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:none;">Dis%
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:none;">
+                            D.Amt
+                        </th>
+                        <th style="text-align:right;border : 1px solid black;border-left:none;border-right:1px solid black; padding-right:30px;">
+                            Aft
+                            D.Amt
+                        </th>
+                    </tr>
+
+                    <t t-set="i" t-value="1"/>
+                    <tbody>
+                        <t t-set="count_id" t-value="0"/>
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t t-foreach="o.order_line" t-as="sale_line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + sale_line.price_subtotal"
+                               groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + sale_line.price_total"
+                               groups="account.group_show_line_subtotals_tax_included"/>
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if sale_line.display_type == 'line_section' else 'font-italic o_line_note' if sale_line.display_type == 'line_note' else ''">
+                                <t t-if="not sale_line.display_type">
+                                    <td style="border:1px solid black;">
+                                        <t t-if="sale_line" t-esc="i"/>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </td>
+                                    <td style="border:1px solid black;border-right:none;">
+                                        <img t-if="sale_line.product_id.image_1920"
+                                             t-att-src="image_data_uri(sale_line.product_id.image_1920)"
+                                             class="float-left"
+                                             height="50" width="50" alt="Logo"/>
+                                    </td>
+                                    <td style="border:1px solid black;border-left:none;">
+                                        <t t-esc="sale_line.product_id.name"/>
+                                        <br/>
+                                        <strong>Article:</strong>
+                                        <span t-field="sale_line.product_id.article_no"/>
+                                        <br/>
+                                        <strong>Finish:</strong>
+                                        <span t-field="sale_line.product_id.finish_no"/>
+                                        <br/>
+                                        <strong>Unit:</strong>
+                                        <span t-field="sale_line.product_uom"/>
+                                        <br/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-esc="sale_line.product_uom_qty"/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-esc="sale_line.price_unit"/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-set="tot_amount"
+                                           t-value="(sale_line.product_uom_qty * sale_line.product_id.lst_price)"/>
+                                        <t t-esc="tot_amount"/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-esc="sale_line.discount"/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-esc="sale_line.discount_amount"/>
+                                    </td>
+                                    <td class="text-right" style="border:1px solid black;">
+                                        <t t-esc="sale_line.final_amount"/>
+                                    </td>
+                                </t>
+                                <t t-if="sale_line.display_type == 'line_section'">
+                                    <td class="div_tb"
+                                        style="padding:0px; height:0%; background-color: black; color: white; text-align:left; text-transform:uppercase;font-weight:bold; padding-left:40px;"
+                                        name="td_section_line" colspan="99">
+                                        <span t-field="sale_line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-if="sale_line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99" class="div_tb"
+                                        style="padding:0px; height:0%;">
+                                        <span t-field="sale_line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <t t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section')">
+                                <tr class=" text-right" style="padding:0;">
+
+                                    <td name="td_section_subtota1l" colspan="99" style="padding:0;">
+                                        <strong style="padding-right:240px; font-size:13px;" class="mr16">
+                                            Subtotal:
+                                        </strong>
+                                        <span style="padding-right:25px;"
+                                              t-esc="current_subtotal"
+                                              t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+
+                        </t>
+                    </tbody>
+                </table>
+                <table width="100%">
+                    <tbody>
+<!--                        <tr width="100%">-->
+<!--                            <td width="80%" style="text-align:right; font-weight:bold;">Grand Total:</td>-->
+<!--                            <td width="20%" style="padding-left:30px; border-bottom:1px solid black;">-->
+<!--                                <t t-set="grand_total"-->
+<!--                                   t-value="(o.amount_untaxed)"/>-->
+<!--                                <t t-esc="grand_total" t-options='{"widget": "float", "precision": 0}'/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                        <tr width="100%">
+                            <td width="70%" style="text-align:right; font-weight:bold;">Net Payable:</td>
+                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;">
+                                <t t-set="net_payable"
+                                   t-value="(o.amount_untaxed)"/>
+                                <t t-esc="net_payable"/>
+                            </td>
+                        </tr>
+                        <!--                        <tr width="100%">-->
+                        <!--                            <td width="70%" style="text-align:right; font-weight:bold;">Freight:</td>-->
+                        <!--                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;">-->
+                        <!--                                No value-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <tr width="100%">
+                            <td width="70%" style="text-align:right; font-weight:bold;">Tax:</td>
+                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;">
+                                <span t-field="o.amount_tax"/>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="70%" style="text-align:right;"></td>
+                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;">
+
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="70%" style="text-align:right; font-weight:bold;">Balance:</td>
+                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;">
+
+                                <t t-esc="o.amount_total"/>
+                            </td>
+
+                        </tr>
+                        <tr width="100%">
+                            <td width="70%" style="text-align:right;"></td>
+                            <td width="30%" style="padding-left:30px; border-bottom:1px solid black;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table width="35%">
+                    <tbody>
+                        <tr width="100%">
+                            <td width="20%" style="font-weight:bold;">
+                                Terms And Condition
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="20%">
+                                <span t-field="o.note"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div style="margin-left:-100px;">
+                    <!--                    <p t-field="o.note"/>-->
+                    <div class="oe_structure"/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table style="text-align:center; width:100%;">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                <t t-esc="o.user_id.name"/>
+                                <br/>
+                                <hr style="width:30%;text-align:center;"/>
+                            </td>
+                            <td style="text-align:center">
+                                <br/>
+                                <hr style="width:50%;text-align:center;"/>
+                            </td>
+                            <td style="text-align:center">
+                                <br/>
+                                <hr style="width:50%;text-align:center;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                <strong>SALE CONSULTANT</strong>
+                            </td>
+                            <td style="text-align:center">
+                                <strong>APPROVED BY</strong>
+                            </td>
+                            <td style="text-align:center">
+                                <strong>CUSTOMER</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                <strong>
+                                    <t t-esc="o.user_id.email"/>
+                                </strong>
+                            </td>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:right"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                <strong>
+                                    <t t-esc="o.user_id.phone"/>
+                                </strong>
+                            </td>
+                            <td style="text-align:center"></td>
+                            <td style="text-align:right"></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-12" style="padding-left:25px;margin-top:20px;">
+
+                    Create On:
+                    <span t-field="o.create_date"/>
+                    Create By:
+                    <span t-field="o.user_id.name"/>
+                    Modified on
+                    <span t-field="o.write_date"/>
+                    Modified By:
+                    <span t-field="o.write_uid.name"/>
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

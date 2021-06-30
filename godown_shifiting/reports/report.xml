@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <report
+                id="godown_report"
+                string="Godown Shifting Report"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                name="godown_shifiting.godown_shifiting_id"
+                file="godown_shifiting.godown_shifiting_id"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_select_products_form" model="ir.ui.view">
+        <field name="name">select.products.form</field>
+        <field name="model">select.products</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <script>-->
+                $(document).ready(function(){
+                    $('.modal-dialog').css({'width': '100%', 'height': '100%', 'margin':'0 0 0 34px'});
+                $('.modal-content').css({'height': '100%', 'width':'120%'});
+                $('.modal-body').css({'height': '100%'});
+                });
+            </script>
+            <form string="Select Products">
+                <group string="Products">
+                    <field name="product_ids" nolabel="1" >
+                        <tree editable="bottom">
+                            <field name="name" readonly="1"/>
+                            <field name="article_no" readonly="1"/>
+                            <field name="finish_no" readonly="1"/>
+                            <field name="sqm_box" readonly="1"/>
+                            <field name="sqft_box" readonly="1"/>
+                            <field name="rft_box" readonly="1"/>
+                            <field name="pcs_box" readonly="1"/>
+                            <field name="qty_available" readonly="1"/>
+                            <field name="available_qty" readonly="1"/>
+                            <field name="reserved_qty" readonly="1"/>
+                            <field name="quantity" />
+                            <field name="lst_price" readonly="1"/>
+                            <field name="virtual_available" readonly="1"/>
+                            <field name="uom_id" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="select_products" string="Add" type="object" class="oe_highlight" />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_select_products_view">
+        <field name="name">Select Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">select.products</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_select_products_view_form">
+        <field name="act_window_id" ref="act_open_select_products_view" />
+        <field name="sequence" eval="10" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_select_products_form" />
+    </record>
+
+</odoo>

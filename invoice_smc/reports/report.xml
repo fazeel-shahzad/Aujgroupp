@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+         <report
+                id="invoice_report"
+                string="Invoice With Discount"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="invoice_smc.invoice_smc_without_id"
+                file="invoice_smc.invoice_smc_without_id"/>
+
+         <report
+                id="invoice_report_id"
+                string="Invoice Without Discount  "
+                model="account.move"
+                report_type="qweb-pdf"
+                name="invoice_smc.invoice_smc_without_discount_id"
+                file="invoice_smc.invoice_smc_without_discount_id"/>
+
+    </data>
+</odoo>

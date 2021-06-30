@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_server_lock_commission" model="ir.actions.server">
+            <field name="name">Lock Commissions</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_sale_order_commission" />
+            <field name="binding_model_id" ref="model_sale_order_commission" />
+            <field name="state">code</field>
+            <field name="code">records.action_lock_commission()</field>
+            <field name="groups_id" eval="[(4, ref('user_sales_commission.group_user_commission_manager'))]" />
+        </record>
+        <record id="action_server_reset_commission" model="ir.actions.server">
+            <field name="name">Reset Commissions</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_sale_order_commission" />
+            <field name="binding_model_id" ref="model_sale_order_commission" />
+            <field name="state">code</field>
+            <field name="code">records.action_reset_commission()</field>
+            <field name="groups_id" eval="[(4, ref('user_sales_commission.group_user_commission_manager'))]" />
+        </record>
+
+
+        <record id="sale_commission_view_search" model="ir.ui.view">
+            <field name="name">sale.commission.view.search</field>
+            <field name="model">sale.order.commission</field>
+            <field name="arch" type="xml">
+                <search string="Search Sales Commission">
+                    <field name="commission_structure_id"/>
+                    <field name="salesperson"/>
+                    <field name="sale_order_ids"/>
+                    <field name="state"/>
+                    <group string="Group By">
+                        <filter string="Commission Structure" name="group_by_commission_structure_id"
+                                context="{'group_by': 'commission_structure_id'}"/>
+                        <filter string="Salesperson" name="group_by_salesperson"
+                                context="{'group_by': 'salesperson'}"/>
+                        <filter string="State" name="state"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="sale_order_commission_form_view" model="ir.ui.view">
+            <field name="name">sale.order.commission.form</field>
+            <field name="model">sale.order.commission</field>
+            <field name="arch" type="xml">
+                <form string="Commissions" create="false" edit="false">
+                    <header>
+                        <button name="action_lock_commission" states="draft"
+                            string="Lock" type="object" class="oe_highlight" groups="user_sales_commission.group_user_commission_manager"/>
+                        <button name="action_reset_commission" states="locked"
+                            string="Reset To Draft" type="object" class="oe_highlight" groups="user_sales_commission.group_user_commission_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,locked" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_sales"
+                                    class="oe_stat_button"
+                                    icon="fa-chain">
+                                Sales
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="create_date"/>
+                                <field name="salesperson" readonly="1"/>
+                                <field name="sale_order_ids" readonly="1" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="commission_structure_id" readonly="1"/>
+                                <field name="net_amount"/>
+                                <field name="net_commission"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="General Calculation">
+                                <group>
+                                    <field name="general_amount"/>
+                                    <field name="deduct_amount"/>
+                                    <field name="general_cal"/>
+                                    <field name="general_commission"/>
+                                </group>
+                            </page>
+                            <page string="Special Calculation">
+                                <field name="special_commission_line_ids">
+                                    <tree>
+                                        <field name="product_id"/>
+                                        <field name="qty_sold"/>
+                                        <field name="amount"/>
+                                        <field name="cal"/>
+                                        <field name="commission"/>
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2">
+                                        <field name="special_amount"/>
+                                        <field name="special_commission"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_order_commission_tree_view" model="ir.ui.view">
+            <field name="name">sale.order.commission.tree</field>
+            <field name="model">sale.order.commission</field>
+            <field name="arch" type="xml">
+                <tree string="Commissions" create="false" edit="false">
+                    <field name="salesperson"/>
+                    <field name="create_date"/>
+                    <field name="commission_structure_id"/>
+                    <field name="net_amount"/>
+                    <field name="net_commission"/>
+                    <field name="sale_order_ids" widget="many2many_tags"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_order_commission_action" model="ir.actions.act_window">
+            <field name="name">Sale order commission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.commission</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Sales Commissions
+                </p>
+                <p>
+                    User Sales Commission Details
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

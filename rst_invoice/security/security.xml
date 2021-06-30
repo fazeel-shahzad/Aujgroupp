@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+<!--        <record id="account.account_move_see_all" model="ir.rule">-->
+<!--&lt;!&ndash;              <field name="domain_force">[('invoice_user_id','=',user.id),('state','=','posted')]</field>&ndash;&gt;-->
+<!--               <field name="active" eval="False"/>-->
+<!--        </record>-->
+<!--    <data>-->
+        <record model="res.groups" id="group_own_invoce_custom">
+            <field name="name">Restrict Invoice</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+            <field name="comment">salesperson's invoice</field>
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--            <field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+        </record>
+
+        <record id="invoice_rule_view_own_inv" model="ir.rule">
+            <field name="name">view personal invoice</field>
+            <field name="model_id" ref="account.model_account_move" />
+            <field name="domain_force">[('invoice_user_id','=',user.id),('state','=','posted')]</field>
+            <field name="groups" eval="[(4, ref('rst_invoice.group_own_invoce_custom'))]"/>
+
+        </record>
+
+
+         <record model="res.groups" id="group_invoice_in_sale">
+            <field name="name">Show Menu Invoice in Sales</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+<!--            <field name="comment"></field>-->
+<!--             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+         </record>
+
+
+
+
+
+<!--        <record id="account.account_move_see_all" model="ir.rule">-->
+<!--&lt;!&ndash;              <field name="domain_force">[('invoice_user_id','=',user.id),('state','=','posted')]</field>&ndash;&gt;-->
+<!--               <field name="active" eval="False"/>-->
+<!--        </record>-->
+<!--           <function name="write" model="ir.model.data">-->
+<!--         &lt;!&ndash; get the record if from data base &ndash;&gt;-->
+<!--                <function name="search" model="ir.model.data">-->
+<!--                    <value-->
+<!--                      eval="[('module', '=', 'account'), ('name', '=', 'account_move_see_all')]"-->
+<!--                      />-->
+<!--                </function>-->
+<!--               &lt;!&ndash; remove noupdate &ndash;&gt;-->
+<!--                <value eval="{'noupdate': False}" />-->
+<!--         </function>-->
+
+<!--       <record id="account.account_move_see_all" model="ir.rule">-->
+<!--        <field name="name">All Journal Entries</field>-->
+<!--        <field ref="model_account_move" name="model_id"/>-->
+<!--        <field name="domain_force">[('invoice_user_id','=',user.id),('state','=','posted')]</field>-->
+<!--        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>-->
+<!--           <field name="active" eval="False"/>-->
+<!--      </record>-->
+
+
+
+<!--         <function name="write" model="ir.model.data">-->
+
+<!--                <function name="search" model="ir.model.data">-->
+<!--                    <value-->
+<!--                      eval="[('module', '=', 'account'), ('name', '=', 'account_move_see_all')]"-->
+<!--                      />-->
+<!--                </function>-->
+<!--               &lt;!&ndash; reset noupdate &ndash;&gt;-->
+<!--                <value eval="{'noupdate': True}" />-->
+<!--         </function>-->
+
+<!--    </data>-->
+</odoo>

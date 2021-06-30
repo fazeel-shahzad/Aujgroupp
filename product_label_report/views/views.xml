@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="paper_format_product_label_inh" model="report.paperformat">
+            <field name="name">Stock Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">35</field>
+            <field name="page_width">60</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="product.report_product_template_label" model="ir.actions.report">
+            <field name="name">Product Label (PDF)</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">product.report_producttemplatelabel</field>
+            <field name="report_file">product.report_producttemplatelabel</field>
+            <field name="print_report_name">'Products Labels - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="product_label_report.paper_format_product_label_inh"/>
+        </record>
+
+        <template id="custom_report_simple_label" inherit_id="product.report_simple_label">
+            <xpath expr="//div" position="replace">
+                <div style="width: 100%; display: inline-table; border: 0px solid black;">
+                    <!--                <table class="table table-bordered mb-0" style="border: 2px solid black;">-->
+                    <table class="table mb-0" style="border:1px solid black; table-layout: fixed;">
+
+                        <tr style="border:1px solid black;white-space: nowrap;">
+                            <!--                        <td class="table-active text-left" style="height: 4rem;">-->
+                            <td class="text-left" style="border:1px solid black; border-right:none; width:30%; ">
+                                <div name="left-upper-side"
+                                     style="margin-left:-12px; margin-right:10px; padding-right:10px;" class="col-1">
+                                    <img src="/product_label_report/static/logo.jpeg"
+                                         style="max-height: 35px; padding-left:-5px; margin-left:-6px;"
+                                         class="float-left" alt="Logo"/>
+<!--                                    t-att-src="image_data_uri(res_company.logo)"-->
+                                    <!--                                <img t-if="product.company_id.logo" t-att-src="image_data_uri(product.company_id.logo)" style="max-height: 45px;" alt="Logo"/>-->
+                                    <!--                                 <strong t-field="product.display_name"/>-->
+                                </div>
+                                <!--                            <strong t-field="product.display_name"/>-->
+                                <!--                          <strong t-field="product.system_code"/>-->
+
+                            </td>
+
+                            <td colspan="2" class="text-right"  style="border:1px solid black; border-left:none; padding-left:15px;width:70%;">
+                                <t t-if="product.barcode">
+                                    <img alt="Barcode" t-if="len(product.barcode) == 13"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', quote_plus(product.barcode or ''), 350, 50)"
+                                         style="width:100%; margin-left:10px;"/>
+                                    <img alt="Barcode" t-elif="len(product.barcode) == 8"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', quote_plus(product.barcode or ''), 350, 50)"
+                                         style="width:100%;  margin-left:10px;"/>
+
+                                    <img alt="Barcode" t-else=""
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', quote_plus(product.barcode or ''), 350, 50)"
+                                         style="width:100%;  margin-left:10px;"/>
+                                    <div style="font-size:12px;margin-right:20px;" t-field="product.barcode"/>
+                                </t>
+                                <t t-else="">
+
+                                    <span class="text-muted">No barcode available</span>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr style="border:1px solid black;font-size:8px; white-space:wrap;">
+                            <!--                            <td style="border:1px solid black; width:2px; text-align:right;padding-top:-30px;">-->
+                            <td style="border:1px solid black; width:1px; text-align:center; padding:0px; margin:0px;">
+                                <div style="display:inline-block; padding:0px; margin:0px ; ">
+                                    <!--                                    <strong style="padding-left:-10px;margin-left:-10px; margin-top:-30px;">Description:</strong>-->
+                                    <strong >Description:</strong>
+                                </div>
+                                <!--                           <div style="display:inline-block;"> <span t-esc="product.name"/></div>-->
+                                <!--                            <strong>Description:</strong>-->
+                                <!--                            <strong t-field="product.lst_price" t-options="{'widget': 'monetary', 'display_currency': product.company_id.currency_id}"/>-->
+                            </td>
+
+                            <!--                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding-top:-30px;">-->
+                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding:0px; margin:0px ">
+                                <div style="display:inline-block; padding:0px; margin:0px ;padding-left:2px;">
+                                    <!--                                    <span style="padding-top:-30px; margin-left:-10px; margin-top:-30px;" t-esc="product.name"/>-->
+                                    <span t-esc="product.name"/>
+                                </div>
+                            </td>
+                            <!--                            <td style="text-align:left; border:1px solid black; border-left:none">-->
+                            <!--                            </td>-->
+                        </tr>
+<!--                        &lt;!&ndash;                        for test&ndash;&gt;-->
+                        <tr style="border:1px solid black;font-size:8px; white-space:wrap; height:1px;">
+                            <!--                            <td style="border:1px solid black; width:2px; text-align:right;padding-top:-30px;">-->
+                            <td style="border:1px solid black; width:2px; text-align:center; padding:0px; margin:0px;  padding-left:1px;">
+                                <div style="display:inline-block; padding:0px; margin:0px ">
+                                    <!--                                    <strong style="padding-left:-10px;margin-left:-10px; margin-top:-30px;">Description:</strong>-->
+                                <strong style="">Article:</strong>
+                                </div>
+                                <!--                           <div style="display:inline-block;"> <span t-esc="product.name"/></div>-->
+                                <!--                            <strong>Description:</strong>-->
+                                <!--                            <strong t-field="product.lst_price" t-options="{'widget': 'monetary', 'display_currency': product.company_id.currency_id}"/>-->
+                            </td>
+
+                            <!--                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding-top:-30px;">-->
+                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding:0px; margin:0px; padding-left:1px; ">
+                                <div style="display:inline-block; padding:0px; margin:0px;padding-left:2px; ">
+                                    <!--                                    <span style="padding-top:-30px; margin-left:-10px; margin-top:-30px;" t-esc="product.name"/>-->
+                               <span style="" t-esc="product.article_no"/>
+                                </div>
+                            </td>
+                            <!--                            <td style="text-align:left; border:1px solid black; border-left:none">-->
+                            <!--                            </td>-->
+                        </tr>
+                        <tr style="border:1px solid black;font-size:8px; white-space:wrap; height:1px;">
+                            <!--                            <td style="border:1px solid black; width:2px; text-align:right;padding-top:-30px;">-->
+                            <td style="border:1px solid black; width:2px; text-align:center; padding:0px; margin:0px; padding-left:1px;">
+                                <div style="display:inline-block; padding:0px; margin:0px ">
+                                    <!--                                    <strong style="padding-left:-10px;margin-left:-10px; margin-top:-30px;">Description:</strong>-->
+                                    <strong style="">Finish:</strong>
+                                </div>
+                                <!--                           <div style="display:inline-block;"> <span t-esc="product.name"/></div>-->
+                                <!--                            <strong>Description:</strong>-->
+                                <!--                            <strong t-field="product.lst_price" t-options="{'widget': 'monetary', 'display_currency': product.company_id.currency_id}"/>-->
+                            </td>
+
+                            <!--                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding-top:-30px;">-->
+                            <td colspan="2" style="border:1px solid black; border-right:none; text-align:left; padding:0px; margin:0px ">
+                                <div style="display:inline-block; padding:0px; margin:0px;padding-left:2px; ">
+                                    <!--                                    <span style="padding-top:-30px; margin-left:-10px; margin-top:-30px;" t-esc="product.name"/>-->
+                                    <span style="" t-esc="product.finish_no"/>
+                                </div>
+                            </td>
+                            <!--                            <td style="text-align:left; border:1px solid black; border-left:none">-->
+                            <!--                            </td>-->
+                        </tr>
+                        <tr style="height:1px; border:1px solid black; font-size:8px;  white-space: nowrap;">
+                            <td style="border:1px solid black; width:2px;text-align:center;  padding:0px; margin:0px;">
+                                <div style="display:inline-block; ">
+                                    <strong>Unit:</strong>
+                                </div>
+
+                            </td>
+                            <td style="border:1px solid black; text-align:left; padding:0px; margin:0px;">
+                                <div style="display:inline-block;  padding:0px; margin:0px; padding-left:2px;">
+                                    <span t-esc="product.uom_id.name"/>
+                                </div>
+                                <!--                              <div style="display:inline-block; border:1px solid black;"> <span t-esc="product.pcs_box"/></div>-->
+                            </td>
+                            <td style="border:1px solid black; text-align:left;  padding:0px; margin:0px;">
+                                <div style="display:inline-block;  padding:0px; margin:0px;padding-left:2px;">
+                                    <span t-esc="product.pcs_box"/>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr style=" border:1px solid black; font-size:9px;">
+                            <td style=" border:1px solid black; width:2px; text-align:center; padding:0px; margin:0px;padding-left:1px; ">
+                                <div style="display:inline-block; ">
+                                    <strong>Price:</strong>
+                                </div>
+
+                            </td>
+
+                            <td style="border:1px solid black; border-right:none;padding:0px; margin:0px; text-align:left; ">
+                                <!--                              <div style="display:inline-block;"> <span t-esc="product.uom_id.name"/></div>-->
+                                <div style="display:inline-block;padding-left:2px;">
+                                    <span>Per PCS</span>
+                                </div>
+                                <!--                              <div style="display:inline-block; border:1px solid black;"> <span t-esc="product.pcs_box"/></div>-->
+                            </td>
+                            <td style="border:1px solid black; padding:0px; margin:0px; border-left:none; text-align:right;">
+                                <div style="display:inline-block; padding-right:2px;">
+                                    <span t-esc="product.list_price"/>
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+                </div>
+            </xpath>
+        </template>
+
+
+
+    </data>
+</odoo>

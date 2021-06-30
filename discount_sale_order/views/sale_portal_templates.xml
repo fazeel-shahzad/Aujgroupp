@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <template id="sale_order_portal_content_inherit" inherit_id="sale.sale_order_portal_content">
+            <xpath expr="//table[@id='sales_order_table']//thead//tr//th[@t-if='display_discount']" position="replace">
+                <th t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
+                    <span>Disc Type</span>
+                </th>
+                <th t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
+                    <span>Disc</span>
+                </th>
+            </xpath>
+
+            <xpath expr="//table[@id='sales_order_table']//tbody//tr//td[@t-if='display_discount']" position="replace">
+                <td t-if="display_discount and line.discount_type" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
+                    <strong t-if="line.discount &gt; 0" class="text-info">
+                        <t t-if="line.discount_type == 'percent'">Percent</t>
+                        <t t-if="line.discount_type == 'fixed'">Fixed</t>
+                    </strong>
+                </td>
+                <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}">
+                    <strong t-if="line.discount &gt; 0" class="text-info">
+                        <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount"/>
+                    </strong>
+                </td>
+            </xpath>
+
+            <xpath expr="//table[@id='sales_order_table']//tbody//tr//td//div[@t-if='line.discount']" position="replace">
+                <div t-if="line.discount and line.discount_type != 'fixed'">
+                    <t t-esc="(1-line.discount / 100.0) * line.price_unit" t-options='{"widget": "float", "decimal_precision": "Product Price"}'/>
+                </div>
+                <div t-if="line.discount and line.discount_type == 'fixed'">
+                    <t t-esc="line.price_unit - (line.discount / line.product_uom_qty)" t-options='{"widget": "float", "decimal_precision": "Product Price"}'/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="sale_order_portal_content_totals_table_inherit" inherit_id="sale.sale_order_portal_content_totals_table">
+            <xpath expr="//table//tr//td//span[@data-id='total_amount']//..//.." position="before">
+                <t t-if="sale_order.total_global_discount">
+                    <tr class="border-black">
+                        <td>
+                            <span>Global Discount</span>
+                        </td>
+                        <td class="text-right">
+                            <span data-id="total_global_discount" t-field="sale_order.total_global_discount" t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="sale_order.total_discount">
+                    <tr class="border-black">
+                        <td>
+                            <strong>Total Discount</strong>
+                        </td>
+                        <td class="text-right">
+                            <span data-id="total_discount" t-field="sale_order.total_discount" t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

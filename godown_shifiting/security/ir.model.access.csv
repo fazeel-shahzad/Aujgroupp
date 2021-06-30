@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_godown_shifiting_godown_shifiting,godown_shifiting.godown_shifiting,model_godown_shifiting_godown_shifiting,base.group_user,1,1,1,1

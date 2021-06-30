@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_partner_form_inh" model="ir.ui.view">
+		<field name="name">res.partner.form</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//page[@name='sales_purchases']/group/group/field[@name='user_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+			<xpath expr="//field[@name='property_stock_customer']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+			<xpath expr="//field[@name='property_stock_supplier']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+		</field>
+	</record>
+
+	<record id="view_product_template_form_inh" model="ir.ui.view">
+		<field name="name">product.template.form</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_only_form_view"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='attribute_line_ids']//tree/field[@name='attribute_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='taxes_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='categ_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='responsible_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='property_stock_production']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+
+		</field>
+	</record>
+
+	<record id="view_product_product_form_inh" model="ir.ui.view">
+		<field name="name">product.product.form</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='categ_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='property_stock_production']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+		</field>
+	</record>
+
+    <record id="view_sale_order_form_inh" model="ir.ui.view">
+		<field name="name">sale.order.form</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='partner_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='user_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='team_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+            </xpath>
+
+			<xpath expr="//field[@name='order_line']//tree/field[@name='product_id']" position="attributes">
+				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>
+			</xpath>
+<!--			<xpath expr="//field[@name='sale_order_option_ids']//tree/field[@name='product_id']" position="attributes">-->
+<!--				<attribute name="options">{'no_create': True, 'no_edit' : True}</attribute>-->
+<!--			</xpath>-->
+
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,54 @@
+<odoo>
+
+    <record id="view_sale_order_form_price_inh" model="ir.ui.view">
+		<field name="name">sale.order.form.inh</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="groups_id" eval="[(4, ref('smc_service_charges.group_readonly_unit_price_user'))]"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='order_line']//tree//field[@name='product_uom']" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</xpath>
+
+		</field>
+	</record>
+
+    <record id="sale_order_inherit_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header/button[@name='action_draft']" position="after">
+                <button string="Add Service Charges" type="object" name="add_products" attrs="{'invisible':['|',('state','=','sale'), ('is_service_charges_added','=',True)]}"/>
+                <button string="Remove Service Charges" type="object" name="remove_service_products" attrs="{'invisible':['|',('state','=','sale'), ('is_service_charges_added','=',False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="is_service_charges_added" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="after">
+				<field name="is_service_product"/>
+			</xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="attributes">
+				<attribute name="attrs">{'readonly':[('is_service_product', '=', True)]}</attribute>
+			</xpath>
+
+        </field>
+    </record>
+
+    <record id="product_product_inherit_form" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="priority" eval="3"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="is_installation_charges"/>
+                <field name="installation_charges"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

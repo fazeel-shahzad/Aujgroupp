@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="vendor_invoices_tree">
+            <field name="name">Vendor Invoice Tree View</field>
+            <field name="model">vendor.invoices</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" width="5.88%" />
+                    <field name="branch" width="5.88%"/>
+                    <field name="branch_code" width="5.88%"/>
+                    <field name="architect" width="5.88%"/>
+                    <field name="sale_consultant" width="5.88%"/>
+                    <field name="sale_consultant_code" width="5.88%"/>
+                    <field name="customer_name" width="5.88%"/>
+                    <field name="customer_code" width="5.88%"/>
+                    <field name="product_name" width="5.88%"/>
+                    <field name="article" width="5.88%"/>
+                    <field name="finish" width="5.88%"/>
+                    <field name="quantity" width="5.88%"/>
+                    <field name="unit_price" width="5.88%"/>
+                    <field name="discount" width="5.88%"/>
+                    <field name="tax" width="5.88%"/>
+                    <field name="uom" width="5.88%"/>
+                    <field name="sub_total" width="5.88%"/>
+
+                    <field name="order_date" width="5.88%"/>
+                    <field name="invoice_amount" width="5.88%"/>
+                    <field name="transaction_date" width="5.88%"/>
+                    <field name="pending_amount" width="5.88%"/>
+
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="vendor_invoice_info">
+            <field name="name">Vendor Invoice Form View</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <div class="oe_button_box" name="button_box">
+                    <button name="SmartButton" string="Customer History" type="object" class="oe_stat_button" icon="fa-archive"></button>
+                </div>
+
+            </field></record>
+
+        <record model="ir.ui.view" id="vendor_invoice_forms">
+            <field name="name">Customer Invoice Form View</field>
+            <field name="model">vendor.invoices</field>
+            <field name="arch" type="xml">
+                <form string="Customer Invoice Form">
+                    <sheet>
+                        <group>
+                            <group string="Consultant Details">
+                                <field name="customer_name"/>
+                                <field name="customer_code"/>
+                                <field name="sale_consultant"/>
+                                <field name="sale_consultant_code"/>
+                            </group>
+
+                            <group string="Branch Details">
+                                <field name="name"/>
+                                <field name="branch"/>
+                                <field name="branch_code"/>
+                                <field name="architect"/>
+
+                            </group>
+
+                            <group string="Product Details">
+                                <field name="product_name" width="5.88%"/>
+                                <field name="article" width="5.88%"/>
+                                <field name="finish" width="5.88%"/>
+                                <field name="quantity" width="5.88%"/>
+                            </group>
+
+                            <group>
+                                <field name="unit_price" width="5.88%"/>
+                                <field name="discount" width="5.88%"/>
+                                <field name="tax" width="5.88%"/>
+                                <field name="uom" width="5.88%"/>
+                                <field name="sub_total" width="5.88%"/>
+                            </group>
+                            <group string="Order Details">
+                                <field name="order_date"/>
+                                <field name="invoice_amount"/>
+                                <field name="transaction_date"/>
+                                <field name="pending_amount"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="vendor_invoices_action_window">
+            <field name="name">Customer History</field>
+            <field name="res_model">vendor.invoices</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Customer History" id="vendor_invoice_menu_roots"/>
+        <menuitem name="Customer History" id="vendors_invoice_menu_1" groups="account.group_account_manager" parent="vendor_invoice_menu_roots" action="vendor_invoices_action_window"/>
+    </data>
+</odoo>

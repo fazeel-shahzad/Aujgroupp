@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <record id="inherit_sale_order_line_tree_view" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[hasclass('oe_subtotal_footer')]" position="replace"/>
+                <xpath expr="//group[@name='note_group']" position="before">
+                    <group>
+                        <group>
+                            <field name="global_discount_type" groups="discount_account_invoice.group_order_global_discount" class="oe_inline" attrs="{'required': [('global_order_discount', '>', 0.0)], 'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+                            <field name="global_order_discount" groups="discount_account_invoice.group_order_global_discount" class="oe_inline" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_discount" widget='monetary' groups="product.group_discount_per_so_line,discount_account_invoice.group_order_global_discount" options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="amount_total" />
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']//form//div[@name='discount']" position="replace">
+                    <div name="discount" groups="product.group_discount_per_so_line">
+                        <field name="discount" class="oe_inline"/>
+                    </div>
+                    <label for="discount_type" groups="product.group_discount_per_so_line"/>
+                    <div name="discount_type" groups="product.group_discount_per_so_line">
+                        <field name="discount_type" class="oe_inline"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']//tree//field[@name='discount']" position="replace">
+                    <field name="discount_type" groups="product.group_discount_per_so_line" attrs="{'required': [('discount', '>', 0.0)]}" optional="show"/>
+                    <field name="discount" groups="product.group_discount_per_so_line" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

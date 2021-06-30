@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+         <record id="view_payment_wizard_form_branch_inherit_" model="ir.ui.view">
+            <field name="name">view.paymentwizard.form.branch.inherit</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group/group[@name='group1']/field[@name='partner_bank_id']" position="after">
+                     <field name="type"  invisible="1"/>
+                     <field name="cheques_payment" attrs="{'invisible': [('type', '=', 'cash')]}" />
+                     <field name="online_credit_payment" attrs="{'invisible': [('type', '=', 'cash')]}"  />
+                     <field name="corporate_sale" />
+                     <field name="other_receipt" />
+                     <field name="branch_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="create_branch_report_wizard_form" model="ir.ui.view">
+            <field name="name">Wizard Form View</field>
+            <field name="model">branch.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Branch Report">
+<!--                     <script>-->
+<!--            $(document).ready(function(){-->
+<!--                $('.modal-dialog').css({'width': '100%', 'height': '100%', 'margin':'0 0 0 34px'});-->
+<!--                $('.modal-content').css({'height': '100%', 'width':'120%'});-->
+<!--                $('.modal-body').css({'height': '100%'});-->
+
+<!--                   &lt;!&ndash; $('.ui-dialog').css({'width': '680px'});&ndash;&gt;-->
+<!--                   &lt;!&ndash; $('.oe_form_sheet_width').css({'MAXwidth': '550px'});&ndash;&gt;-->
+<!--            });-->
+<!--        </script>-->
+                    <group>
+                        <field name="branch"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="print_pdf_action" type="object" string="pdf Report" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+       <record id="create_branch_report_wizard" model="ir.actions.act_window">
+           <field name="name">Create Branch Report</field>
+           <field name="type">ir.actions.act_window</field>
+           <field name="res_model">branch.wizard</field>
+           <field name="view_mode">form</field>
+           <field name="view_id" ref="create_branch_report_wizard_form"/>
+           <field name="target">new</field>
+       </record>
+
+
+          <menuitem id="branch_report_menu" name="Daily Cash Statement Report" parent="account.account_account_menu" action="create_branch_report_wizard"  sequence="15"/>
+
+
+    </data>
+</odoo>

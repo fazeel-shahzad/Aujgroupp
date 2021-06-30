@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <template id="invoice_smc_without_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <style>
+                            .all_border {
+                            border:1px solid black;
+                            text-align: center;
+
+                            text-transform: ;
+                            font-size: 15px;
+                            padding-left: 5px;
+                            vertical-align:middle;
+                            }
+                            .p1{
+                            margin-top:-20px;
+                            font-size:15px;
+                            font-weight:700;
+
+                            }
+                            span{
+                            margin-top:-20px;
+                            font-size:15px;
+                            font-weight:normal;
+                            }
+                            .p2{
+                            margin-top:-20px;
+                            font-size:12px;
+                            padding-right:100px;
+
+
+                            }
+                            .pcen{
+                            float:right;
+                            font-width:bold;
+                            }
+                            .r1{
+                            border:1px solid
+                            }
+                            .div_headings {
+                            border:1px solid;
+                            text-align: center;
+                            font-size:15px;
+                            margin-top:2em;
+                            vertical-align:middle;
+                            }
+                            .div_tb {
+                            border:1px solid black;
+                            text-align: center;
+                            font-size:15px;
+                            }
+                            table tr{
+                            }
+
+                        </style>
+                        <div style="font-size:30px; font-weight: bold;" align="center">
+                            <strong>INVOICE</strong>
+                        </div>
+
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <p class="p1">Invoice No.
+                                            :
+                                            <span t-field="o.name" style="padding-left:45px;"/>
+                                        </p>
+                                        <p class="p1">Invoice Date
+                                            :
+                                            <span t-field="o.invoice_date" style="padding-left:35px;"/>
+                                        </p>
+                                        <p class="p1">Customer
+                                            :
+                                            <span t-field="o.partner_id" style="padding-left:55px;"/>
+                                        </p>
+                                        <p class="p1">Shipping Address:
+                                            <span t-field="o.partner_id.street" style="padding-left:5px;"/>
+                                        </p>
+                                        <p class="p1">Detail
+                                            :
+                                            <span t-field="o.freight" style="padding-left:80px;"/>
+                                        </p>
+                                        <p class="p1"> Do # :
+                                            <span t-field="o.delivery_order" style="padding-left:88px;"/></p>
+                                        <p class="p1"> CNIC # :
+                                            <span t-field="o.partner_id.no_cnic" style="padding-left:76px;"/>
+                                        </p>
+                                        <p class="p1">NTN # :
+                                            <span t-field="o.partner_id.ntn" style="padding-left:80px;"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="p1">Branch :
+                                            <span t-field="o.create_user.branch_id.name"/><br/>
+                                            <t t-if="o.create_user.branch_id.address"><span style="margin-left:58px" t-field="o.create_user.branch_id.address"/><br/></t>
+                                            <t t-if="o.create_user.branch_id.telephone"><span style="margin-left:58px" t-field="o.create_user.branch_id.telephone"/><br/></t>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-set="total_amount_gross" t-value="0"/>
+                            <t t-set="total_discount_amount" t-value="0"/>
+                            <div class="container" width="100%">
+                                <table width="100%">
+
+                                    <tr style="font-size:15px;text-align:center;">
+                                        <th style="text-align:center;border : 1px solid black;" width="5%">
+                                            <strong>Sr</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="25%">
+                                            <strong>Item Description</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Article</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Finish</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" class="text-center div_headings" width="8%">
+                                            <strong>Unit</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Qty</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Rate</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Disc%</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" class="text-center div_headings" width="8%">
+                                            <strong>Amount</strong>
+                                        </th>
+                                        <th style="border : 1px solid black;" width="8%">
+                                            <strong>Net Amt</strong>
+
+                                        </th>
+                                    </tr>
+
+                                    <tbody style="border : 1px solid black;">
+                                        <t t-set="count_id" t-value="0"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                        <t t-set="current_qty" t-value="0"/>
+                                        <t t-set="total_quantity" t-value="0"/>
+                                        <t t-set="total_amount" t-value="0"/>
+                                        <t t-set="after_dic" t-value="0"/>
+
+                                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                                            <t t-set="total_amount_gross" t-value="total_amount_gross + (line.price_unit * line.quantity)"/>
+                                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                            <t t-if="line.product_id.type != 'service'">
+                                                <t t-set="current_qty" t-value="current_qty + line.quantity"/>
+                                            </t>
+
+                                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''" style="text-align:center; border: 1px solid black;"/>
+                                            <t t-if="not line.display_type">
+                                                <t t-set="count_id" t-value="count_id+1"/>
+
+                                                <td class="all_border">
+                                                    <t class="div_tb" t-esc="count_id"/>
+                                                </td>
+                                                <td style="text-align: left;" class="all_border">
+                                                    <span t-field="line.product_id.name"/>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.product_id.article_no"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.product_id.finish_no"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.product_uom_id"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.quantity"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.price_unit"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-if="line.product_id.type != 'service'">
+                                                        <span t-field="line.discount"/>
+                                                    </t>
+                                                </td>
+                                                <td class="all_border">
+                                                    <t t-set="amount_price" t-value="(line.price_unit * line.quantity)"/>
+                                                    <!--                                                    <t t-if="line.product_id.type != 'service'">-->
+                                                    <span t-esc="amount_price" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                                    <!--                                                    </t>-->
+                                                </td>
+                                                <td class="all_border">
+                                                    <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>
+                                                </td>
+                                                <t t-if="line.product_id.type != 'service'">
+                                                    <t t-set="total_quantity" t-value="total_quantity+line.quantity"/>
+                                                </t>
+                                                <t t-set="total_amount" t-value="total_amount+amount_price"/>
+                                                <t t-set="after_dic" t-value="after_dic+line.price_subtotal"/>
+                                            </t>
+
+                                            <t t-if="line.display_type == 'line_section'">
+                                                <td class="div_tb" style="padding:0px; height:0%; background-color: black; color: white; text-align:left; text-transform:uppercase;font-weight:bold; padding-left:35px;border:1px solid black;" name="td_section_line" colspan="99">
+                                                    <span t-field="line.name"/>
+                                                </td>
+                                                <t t-set="current_section" t-value="line"/>
+                                                <t t-set="current_subtotal" t-value="0"/>
+                                                <t t-set="current_qty" t-value="0"/>
+                                            </t>
+                                            <t t-if="line.display_type == 'line_note'">
+                                                <td name="td_note_line" colspan="99" class="div_tb" style="padding:0px; height:0%;">
+                                                    <span t-field="line.name"/>
+                                                </td>
+                                            </t>
+
+                                            <div>
+                                                <t t-if="current_section and (line_last or o.invoice_line_ids[line_index+1].display_type == 'line_section')">
+                                                    <tr class=" text-right" style="padding:0;">
+                                                        <tr class="text-right" style="padding:0; border : 1px solid black;">
+                                                            <td/>
+                                                            <td/>
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                            <td style="text-align:right">
+                                                                <span>
+                                                                    <b>SubTotal: </b>
+                                                                </span>
+                                                            </td>
+
+                                                            <td style="text-align:center">
+                                                                <t t-if="current_qty != 0">
+                                                                    <b><t t-esc="current_qty" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></b>
+                                                                </t>
+                                                            </td>
+                                                            <td/>
+                                                            <td>
+
+                                                            </td>
+                                                            <td/>
+
+                                                            <td style="text-align:center; border-right:1px solid black;">
+                                                                <b><t t-esc="current_subtotal" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></b>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tr>
+                                                </t>
+                                            </div>
+                                            <t t-set="total_discount_amount" t-value="(total_discount_amount + ((line.discount * (line.price_unit * line.quantity))/100))"/>                                        </t>
+                                        <tr>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+
+
+                                            <td class="font-weight-bold" style="text-align:right;"><strong style="font-size:15px;">Total :
+                                            </strong></td>
+
+
+                                            <td style="text-align:center;" class="font-weight-bold">
+
+                                                <strong><span style="text-align:center;" t-esc="total_quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></strong>
+                                            </td>
+                                            <td/>
+                                            <td/>
+                                            <td style="text-align:center;" class="font-weight-bold">
+                                                <strong> <span style="text-align:center;" t-esc="total_amount" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></strong>
+                                            </td>
+                                            <td style="text-align:center; border-right:1px solid black;" class="font-weight-bold">
+                                                <strong>  <span style="text-align:center;" t-esc="after_dic" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/></strong>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <!--<table class="table table-bordered table-sm">-->
+                                <!--    <tbody>-->
+                                <!--        <tr>-->
+
+
+                                <!--          <td><strong style="font-size:15px;">Total :-->
+                                <!--                </strong></td>-->
+                                <!--                   <td></td>-->
+
+                                <!--            <td style="text-align:center">-->
+
+                                <!--                <span  t-esc="total_quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>-->
+                                <!--            </td>-->
+                                <!--               <td></td>-->
+                                <!--            <td style="text-align:center">-->
+                                <!--                <span  t-esc="total_amount" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>-->
+                                <!--             </td>-->
+                                <!--             <td style="text-align:center">-->
+                                <!--                <span  t-esc="after_dic" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 0}"/>-->
+                                <!--            </td>-->
+                                <!--        </tr>-->
+                                <!--    </tbody>-->
+                                <!--</table>-->
+                                <div class="container" style="margin-top:20px;">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:13px;">
+                                        <div class="col-6" style="font-size:14px;text-align:right; ">
+                                            <p style="font-weight:bold; ">Gross Total :</p>
+                                        </div>
+                                        <div class="col-3" style="margin-top:-7px;">
+                                            <p style="text-align:right;">
+                                                <span t-esc="total_amount_gross"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container" style="margin-top:20px;">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:13px;">
+                                        <div class="col-6" style="font-size:14px;text-align:right; ">
+                                            <p style="font-weight:bold; ">Discount :</p>
+                                        </div>
+                                        <div class="col-3" style="margin-top:-7px;">
+                                            <p style="text-align:right;">
+                                                <span t-esc="total_discount_amount"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container" style="margin-top:20px;">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:13px;">
+                                        <div class="col-6" style="font-size:14px;text-align:right; ">
+                                            <p style="font-weight:bold; ">Net Payable :</p>
+                                        </div>
+                                        <div class="col-3" style="margin-top:-7px;">
+                                            <p style="text-align:right;">
+                                                <span t-field="o.amount_untaxed"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:10px;">
+                                        <div class="col-3" style="font-size:13px;text-align:right;">
+                                            <p style="font-weight:bold;">Tax 17.0 % :</p>
+                                        </div>
+                                        <div class="col-3" style="margin-top:-7px;">
+                                            <p style="text-align:right;">
+                                                <span t-raw="o.amount_tax"/>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:10px;">
+                                        <div class="col-3" style="font-size:13px;text-align:right;">
+                                            <p style="font-weight:bold;">Second Discount:</p>
+                                        </div>
+                                        <div class="col-3" style="margin-top:-7px;">
+                                            <p style="text-align:right;">
+                                                <span t-raw="o.second_discount"/>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:15px;">
+                                        <div class="col-3" style="font-size:13px;text-align:right; padding-right:88px; ">
+                                            <p style="font-weight:bold;">Balance :</p>
+                                        </div>
+                                        <div class="col-2" style="margin-top:-7px;border-bottom:1px solid lightgrey; border-top:1px solid white;lightgrey-right:1px solid white;border-left:1px solid white;">
+                                            <p style="text-align:right; font-weight:bold; margin-top:-1px;">
+                                                <span t-field="o.amount_total"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container" style="margin-top:-22px;">
+                                    <div class="row justify-content-end" style="height:11px;margin-bottom:15px;">
+                                        <div class="col-2" style="font-size:13px;text-align:right; padding-right:110px; ">
+                                            <p style="font-weight:bold;"/>
+                                        </div>
+                                        <div class="col-2" style="margin-top:-7px;border-bottom:1px solid black; border-top:1px solid white;border-right:1px solid white;border-left:1px solid white;">
+                                            <p style="text-align:right; font-weight:bold; margin-top:-2px;">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<p style="page-break-after: always;"/>-->
+                            <div class="container" style="page-break-inside: avoid;">
+                                <div>
+                                    <div class="col-12" style="padding-left:0px; margin-left:-10px;">
+                                        <p style="font-weight:bold;color:black; font-size:15px;">Terms And Condition</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span t-field="o.narration"/>
+                                </div>
+                            </div>
+
+                            <div style="page-break-inside: avoid;">
+
+                                <br/>
+                                <div class="container row" style="margin-top:4em;margin-left:2em; font-size:15px;">
+                                    <div class="col-4">
+                                        <t t-esc="o.create_uid.name"/>
+                                        _________________________<br/>
+
+                                        <strong>Sales Consultant</strong><br/>
+                                        <strong> <t t-esc="o.create_uid.email"/></strong><br/>
+                                        <strong><t t-esc="o.create_uid.phone"/></strong>
+                                    </div>
+                                    <div class="col-4">
+                                        <br/>
+                                        _________________________<br/>
+                                        <strong>Manager</strong>
+                                    </div>
+                                    <div class="col-4">
+                                        <br/>
+                                        _________________________<br/>
+                                        <strong>Customer</strong>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="padding-left:25px;margin-top:20px;font-size:13px" align="center">
+                                    Create On:
+                                    <span t-field="o.create_date" style="font-size:15px"/>
+                                    Create By:
+                                    <span t-field="o.create_uid.name" style="font-size:15px"/>
+                                    Modified on
+                                    <span t-field="o.write_date" style="font-size:15px"/>
+                                    Modified By:
+                                    <span t-field="o.write_uid.name" style="font-size:15px"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="report_smc.list">
+      <field name="name">report_smc list</field>
+      <field name="model">report_smc.report_smc</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="report_smc.action_window">
+      <field name="name">report_smc window</field>
+      <field name="res_model">report_smc.report_smc</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="report_smc.action_server">
+      <field name="name">report_smc server</field>
+      <field name="model_id" ref="model_report_smc_report_smc"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="report_smc" id="report_smc.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="report_smc.menu_1" parent="report_smc.menu_root"/>
+    <menuitem name="Menu 2" id="report_smc.menu_2" parent="report_smc.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="report_smc.menu_1_list" parent="report_smc.menu_1"
+              action="report_smc.action_window"/>
+    <menuitem name="Server to list" id="report_smc" parent="report_smc.menu_2"
+              action="report_smc.action_server"/>
+-->
+  </data>
+</odoo>

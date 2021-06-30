@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL : <https://store.webkul.com/license.html/>" -->
+<odoo>
+    <data>
+        <template id="report_so_inherit" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[hasclass('page')]//table//thead//tr//th[@name='th_discount']" position="replace">
+                <th t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                    <span>Disc. Type</span>
+                </th>
+                <th t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                    <span>Disc.</span>
+                </th>
+            </xpath>
+            <xpath expr="//tbody[hasclass('sale_tbody')]//tr//td[@t-if='display_discount']" position="before">
+                <td t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                    <span t-field="line.discount_type"/>
+                </td>
+            </xpath>
+            <xpath expr="//div[hasclass('clearfix')]//div//div//table//tr[hasclass('o_total')]" position="before">
+                <tr t-if="doc.total_global_discount > 0.0" class="border-black">
+                    <td>
+                        <span>Global Discount</span>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="doc.total_global_discount" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                    </td>
+                </tr>
+                <tr t-if="doc.total_discount > 0.0">
+                    <td>
+                        <strong>Total Discount</strong>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="doc.total_discount" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                    </td>
+                </tr>
+            </xpath>
+        </template>
+    </data>
+</odoo>

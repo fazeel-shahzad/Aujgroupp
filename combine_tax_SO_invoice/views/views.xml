@@ -1,0 +1,21 @@
+<odoo>
+
+
+     <record id="view_sale_order_form__button_inh" model="ir.ui.view">
+		<field name="name">sale.order.form</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//header/button[@name='action_draft']" position="after">
+				<button string="Add Sale Tax" type="object" class="oe_highlight" name="action_apply_taxes" attrs="{'invisible':['|',('is_sale_taxes_added','=', True), ('state', '=','sale')]}"/>
+				<button string="Remove Sale Tax" type="object" class="oe_highlight" name="action_remove_taxes" attrs="{'invisible':['|',('is_sale_taxes_added','=', False), ('state', '=','sale')]}"/>
+            </xpath>
+
+			<xpath expr="//field[@name='tag_ids']" position="after">
+				<field name="is_sale_taxes_added" invisible="1"/>
+            </xpath>
+
+		</field>
+	</record>
+
+</odoo>

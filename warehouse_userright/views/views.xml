@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+        <record id="view_stock_picking_form_inh" model="ir.ui.view">
+            <field name="name">stock.picking.form.inh</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="driver_id"/>
+                    <field name="mobile"/>
+                    <field name="vehicle_no"/>
+                </xpath>
+                <xpath expr="//field[@name='owner_id']" position="after">
+                    <field name="note_del"/>
+                </xpath>
+                <xpath expr="//field[@name='group_id']" position="after">
+                    <field name="x_css"/>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']//tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="sum">product_uom_qty</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']//tree/field[@name='forecast_availability']" position="attributes">
+                    <attribute name="sum">forecast_availability</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']//tree/field[@name='quantity_done']" position="attributes">
+                    <attribute name="sum">quantity_done</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_stock_picking_group_form_inh" model="ir.ui.view">
+            <field name="name">stock.picking.form.inh</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="groups_id" eval="[(4, ref('warehouse_userright.group_remove_create_button'))]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_assign']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='stock_whatsapp']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_get_approvals']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@class='o_btn_validate']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reserve_do']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_scrap']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', '=', 'confirmed')]}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

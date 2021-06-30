@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+
+          <!--field credit card on journal entry form-->
+        <record id="view_move_form_inherit_branch_credit_card" model="ir.ui.view">
+            <field name="name">view.move.form.inherit.branch.credit_card_chk</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group/field[@name='payment_reference']" position="after">
+                    <!-- Add your fields or attributes here -->
+<!--                        <field name="cred_card_check"/>-->
+<!--                        <field name="credit_card_check"/>-->
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+          <record id="paperformat_branch_report" model="report.paperformat">
+            <field name="name">European A4 for branch Report</field>
+            <field name="default" eval="False" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">15</field>
+
+            <field name="dpi">90</field>
+        </record>
+
+
+
+
+
+
+
+        <report
+                id="report_branch_id"
+                model="account.payment"
+                report_type="qweb-pdf"
+                string="Branch Report"
+                name="branch_report.branch_report_id"
+                file="branch_report.branch_report_id"
+                paperformat="paperformat_branch_report"
+        />
+    </data>
+</odoo>

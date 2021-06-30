@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    <record id="res_partner_form_inherited_field_add" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.form.inherited.field.add</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--             <xpath expr="//form/sheet/group/group/field[@name='mobile']" position="after">-->
+<!--                 -->
+<!--                    <field name="first_name" />-->
+<!--                    <field name="qualification" />-->
+<!--                    <field name="standard" />-->
+<!--                   <field name="contact_id" />-->
+<!--                    <field name="extra_11" />-->
+<!--                   <field name="extra_21" />-->
+<!--                   <field name="extra_31" />-->
+<!--                    <field name="firmatario" />-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

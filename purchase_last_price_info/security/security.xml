@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="group_show_price_supplier" model="res.groups">
+            <field name="name">Show last Price, Supplier and Date</field>
+            <field name="category_id" ref="base.module_category_inventory_purchase"/>
+        </record>
+
+    </data>
+</odoo>

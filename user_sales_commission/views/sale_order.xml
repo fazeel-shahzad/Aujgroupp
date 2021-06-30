@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="sale_search_view_inherited" model="ir.ui.view">
+            <field name="name">sale.search.view.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                    <separator/>
+                    <filter string="Pending Commission" name="pending_commission"
+                            domain="[('is_commission_created','=',False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

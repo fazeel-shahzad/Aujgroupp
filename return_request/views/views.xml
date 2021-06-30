@@ -1,0 +1,98 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="return_request_list">
+      <field name="name">Return Request Tree View</field>
+      <field name="model">returns.bash</field>
+      <field name="arch" type="xml">
+          <tree>
+            <field name="partner_id" />
+            <field name="contact_person_id" />
+            <field name="address" />
+            <field name="date"/>
+            <field name="state" string="Status" widget="badge" decoration-muted="state == 'user'" decoration-danger="state == 'rejected'" decoration-warning="state in ('manager', 'director')" decoration-success="state in ('done', 'approved')"/>
+          </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="return_request_form">
+      <field name="name">Return Request Form View</field>
+      <field name="model">returns.bash</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="action_confirmed" type="object" groups="return_request.group_request_user" string="Confirm" states="user"  class="oe_highlight"/>
+            <button name="action_manager_approval" type="object" groups="return_request.group_request_manager" string="Approve" states="manager"  class="oe_highlight"/>
+            <button name="action_approve" type="object" string="Approve" states="director" groups="return_request.group_request_director" class="oe_highlight"/>
+            <button name="action_validate" type="object" string="Validate" attrs="{'invisible': [('state', 'in', 'done')]}" groups="return_request.group_store_user"  class="oe_highlight"/>
+            <button name="action_reject" type="object" string="Reject" groups="return_request.group_request_director, return_request.group_request_manager, return_request.group_request_user" states="director,manager,user"/>
+            <button name="action_draft" type="object" string="Reset" states="rejected"/>
+            <button name="action_second_approval_from_manager" groups="return_request.group_store_user" type="object" string="Approval from Manager" attrs="{'invisible': ['|','|',('is_check_qty', '=', False), ('is_second_approved', '=', True), ('state', 'not in', 'approved')]}" class="oe_highlight"/>
+            <field name="state" widget="statusbar" statusbar_visible="user,manager,director,approved,done"/>
+          </header>
+          <sheet>
+
+            <group string="Return Request">
+              <group>
+                <field name="partner_id" options="{'no_open': True, 'no_create_edit': True}" required="1"/>
+                <field name="contact_person_id" options="{'no_open': True, 'no_create_edit': True}"/>
+                <field name="address"/>
+                <field name="is_check_qty" invisible="1"/>
+                <field name="is_second_approved" invisible="1"/>
+                <field name="is_sent_for_second_approval" invisible="1"/>
+              </group>
+              <group>
+                <field name="date"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Return Info">
+                <field name="request_lines">
+                  <tree editable="bottom">
+                    <field name="invoice_date" />
+                    <field name="invoice_id" required="1" attrs="{'readonly': [('state', 'not in', 'user')]}"/>
+                    <field name="product_id" options="{'no_open': True, 'no_create_edit': True}" required="1" attrs="{'readonly': [('state', 'not in', 'user')]}"/>
+                    <field name="art"/>
+                    <field name="finish_no"/>
+                    <field name="previous_return_quantity" readonly="1" force_save="1"/>
+                    <field name="sold_quantity"/>
+                    <field name="return_quantity" attrs="{'readonly': [('state', 'not in', 'user')]}"/>
+                    <field name="recieved_qty" attrs="{'readonly': [('state', 'not in', 'approved')]}" />
+                    <field name="unit_price" readonly="1"/>
+                    <field name="discount_qty" readonly="1"/>
+                    <field name="total" />
+                    <field name="reason_of_return"/>
+                    <field name="state" invisible="1"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+            <div class="col-12 text-right">
+              <group>
+                <group>
+                  <group>
+                    <field name="net_total" widget="monetary"/>
+                  </group>
+                </group>
+              </group>
+            </div>
+          </sheet>
+          <div class="oe_chatter">
+              <field name="message_follower_ids"/>
+              <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="return_request_action_window">
+      <field name="name">Return Request window</field>
+      <field name="res_model">returns.bash</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Return Request" id="return_request_menu_root"  sequence="3"/>
+    <menuitem name="Return Request" id="return_request_menu_1" parent="return_request_menu_root" action="return_request_action_window"/>
+
+  </data>
+</odoo>

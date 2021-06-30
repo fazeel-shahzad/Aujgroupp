@@ -1,0 +1,70 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="forecasted_quantity.list">
+      <field name="name">Add Forecasted Quantity</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='product_qty']" position="before">
+          <field name="forecast_qty"/>
+        </xpath>
+      </field>
+    </record>
+
+
+<!--                 <record id="inherit_employee_admin" model="ir.ui.view">-->
+<!--                    <field name="name">Add Checkbox To Admin</field>-->
+<!--                    <field name="model">hr.department</field>-->
+<!--                    <field name="inherit_id" ref="hr.department.dep_ps" />-->
+<!--                    <field name="arch" type="xml">-->
+<!--                        <xpath expr="//field[@name='name']" position="">-->
+<!--                            <field name="boolean_name"/>-->
+<!--                        </xpath>-->
+<!--                    </field>-->
+<!--                 </record>-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="forecasted_quantity.action_window">
+      <field name="name">forecasted_quantity window</field>
+      <field name="res_model">forecasted_quantity.forecasted_quantity</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="forecasted_quantity.action_server">
+      <field name="name">forecasted_quantity server</field>
+      <field name="model_id" ref="model_forecasted_quantity_forecasted_quantity"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="forecasted_quantity" id="forecasted_quantity.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="forecasted_quantity.menu_1" parent="forecasted_quantity.menu_root"/>
+    <menuitem name="Menu 2" id="forecasted_quantity.menu_2" parent="forecasted_quantity.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="forecasted_quantity.menu_1_list" parent="forecasted_quantity.menu_1"
+              action="forecasted_quantity.action_window"/>
+    <menuitem name="Server to list" id="forecasted_quantity" parent="forecasted_quantity.menu_2"
+              action="forecasted_quantity.action_server"/>
+-->
+  </data>
+</odoo>

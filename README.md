@@ -1,1 +1,1 @@
-# Aujgroupp
+# SMC
